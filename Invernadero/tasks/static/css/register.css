@@ -1,0 +1,157 @@
+/* static/css/register.css */
+body {
+    background-color: #A9B7A3;
+    background-image: url('../img/planta-login.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+form {
+    background-color: #FDFCF9;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+    width: 400px;
+    max-width: 90%;
+    box-sizing: border-box;
+    position: relative; 
+}
+
+h1 {
+    text-align: center;
+    color: #3C5A40;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+h2 {
+    text-align: center;
+    color: #3C5A40;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.form-row {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    color: #4F4F4F;
+    font-size: 0.95rem;
+    min-width: 0;
+}
+
+.form-group label {
+    margin-bottom: 0.4rem;
+    font-weight: 500;
+}
+
+input {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #ffffff;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+input:focus {
+    outline: none;
+    border-color: #3C5A40;
+    box-shadow: 0 0 5px rgba(60, 90, 64, 0.2);
+}
+
+button {
+    width: 100%;
+    padding: 0.7rem;
+    background-color: #C47C4A;
+    color: #FDFCF9;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #a96337;
+}
+
+.login-text {
+    text-align: center;
+    margin-top: 1.5rem;
+    color: #4F4F4F;
+    font-size: 0.9rem;
+}
+
+.login-text a {
+    color: #3C5A40;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-text a:hover {
+    text-decoration: underline;
+}
+
+
+.back-link {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8); 
+    transition: background-color 0.3s ease;
+}
+
+.back-link:hover {
+    background-color: rgba(255, 255, 255, 1); 
+}
+
+.back-link svg {
+    width: 20px;
+    height: 20px;
+}
+
+
+@media (max-width: 500px) {
+    .form-row {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+
+    .form-group {
+        flex: none;
+        width: 100%;
+    }
+}

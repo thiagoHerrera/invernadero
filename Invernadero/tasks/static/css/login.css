@@ -1,0 +1,83 @@
+/* static/css/login.css */
+body {
+    background-color: #A9B7A3; 
+    background-image: url('../img/planta-login.png'); 
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
+    font-family: 'Segoe UI', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+form {
+    background-color: #F3EFE5;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    width: 300px;
+}
+
+h1 {
+    text-align: center;
+    color: #3C5A40;
+    margin-bottom: 2rem;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+h2 {
+    text-align: center;
+    color: #3C5A40;
+    margin-bottom: 2rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+    display: flex;
+    flex-direction: column;
+    color: #3C3C3C;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"] {
+    padding: 0.5rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #FDFCF9;
+    font-size: 1rem;
+}
+
+button {
+    width: 100%;
+    padding: 0.6rem;
+    background-color: #B76E46;
+    color: #F3EFE5;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #a05f3f;
+}
+
+a {
+    color: #2E4D32;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+
