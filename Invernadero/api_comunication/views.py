@@ -1,7 +1,7 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
-
+from django.shortcuts import render 
 
 @api_view(['POST'])
 def sensors(request):
@@ -19,6 +19,7 @@ def sensors(request):
         return Response({'error': 'Faltan datos de sensores'}, status=status.HTTP_400_BAD_REQUEST)
 
     #responder a la esp32
-    return Response({'mensaje': 'Datos recibidos correctamente'}, status=status.HTTP_200_OK)
-    
+    Response({'mensaje': 'Datos recibidos correctamente'}, status=status.HTTP_200_OK)
+    return render(request, 'index.html', {'sensor1': sensor1, 'sensor2': sensor2, 'sensor3': sensor3})
+    #AL momento de ingresar el JSON en la vista de sensores, se debe poner con comillas dobles ""
 
