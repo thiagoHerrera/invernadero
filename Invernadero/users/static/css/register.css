@@ -1,16 +1,26 @@
-/* static/css/register.css */
 body {
-    background-color: #A9B7A3;
-    background-image: url('../img/planta-login.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
     font-family: 'Segoe UI', sans-serif;
+    background-color: #f4faf5;
+    background-image: url("/static/img/fondologin.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
+    position: relative;
+}
+
+.plantita {
+    position: absolute;
+    top: 4.5%;
+    left: 42%;
+    transform: translateX(-50%);
+    height: 50px;
+    width: 50px;
+    z-index: 1;
 }
 
 .container {
@@ -21,46 +31,35 @@ body {
 }
 
 form {
-    background-color: #FDFCF9;
-    padding: 2.5rem;
-    border-radius: 12px;
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
-    width: 400px;
+    background-color: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 300px;
     max-width: 90%;
     box-sizing: border-box;
-    position: relative; 
+    position: relative;
+    z-index: 2;
 }
 
 h1 {
-    text-align: center;
-    color: #3C5A40;
-    margin-bottom: 2rem;
-    font-size: 1.8rem;
-    font-weight: 600;
+    color: #2f7a4e;
+    font-size: 24px;
+    margin-bottom: 0.5rem;
 }
 
 h2 {
-    text-align: center;
-    color: #3C5A40;
-    margin-bottom: 2rem;
-    font-size: 1.8rem;
-    font-weight: 600;
-}
-
-.form-row {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.2rem;
-    flex-wrap: wrap;
+    color: #3f8c5d;
+    font-size: 18px;
+    margin-bottom: 1.5rem;
 }
 
 .form-group {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    color: #4F4F4F;
-    font-size: 0.95rem;
-    min-width: 0;
+    margin-bottom: 1rem;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
 }
 
 .form-group label {
@@ -69,14 +68,14 @@ h2 {
 }
 
 input {
-    padding: 0.6rem;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    background-color: #ffffff;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-    box-sizing: border-box;
     width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #bcd9c7;
+    border-radius: 8px;
+    background-color: #eaf4ed;
+    margin-top: 4px;
+    box-sizing: border-box;
+    font-size: 1rem;
 }
 
 input:focus {
@@ -87,38 +86,36 @@ input:focus {
 
 button {
     width: 100%;
-    padding: 0.7rem;
-    background-color: #C47C4A;
-    color: #FDFCF9;
+    padding: 0.6rem;
+    background-color: #2f7a4e;
+    color: white;
     border: none;
     border-radius: 8px;
-    font-size: 1rem;
-    font-weight: 500;
+    font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #a96337;
+    background-color: #256440;
 }
 
 .login-text {
+    margin-top: 1rem;
+    font-size: 13px;
+    color: #555;
     text-align: center;
-    margin-top: 1.5rem;
-    color: #4F4F4F;
-    font-size: 0.9rem;
 }
 
 .login-text a {
-    color: #3C5A40;
+    color: #2f7a4e;
     text-decoration: none;
-    font-weight: 500;
+    font-weight: bold;
 }
 
 .login-text a:hover {
     text-decoration: underline;
 }
-
 
 .back-link {
     position: absolute;
@@ -130,12 +127,12 @@ button:hover {
     width: 32px;
     height: 32px;
     border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.8); 
+    background-color: rgba(255, 255, 255, 0.8);
     transition: background-color 0.3s ease;
 }
 
 .back-link:hover {
-    background-color: rgba(255, 255, 255, 1); 
+    background-color: rgba(255, 255, 255, 1);
 }
 
 .back-link svg {
@@ -143,15 +140,85 @@ button:hover {
     height: 20px;
 }
 
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .plantita {
+        top: 5%;
+        left: 50%;
+        height: 40px;
+        width: 40px;
+    }
 
-@media (max-width: 500px) {
-    .form-row {
-        flex-direction: column;
-        gap: 0.5rem;
+    form {
+        width: 80%;
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 20px;
+    }
+
+    h2 {
+        font-size: 16px;
+        margin-bottom: 1rem;
     }
 
     .form-group {
-        flex: none;
-        width: 100%;
+        font-size: 12px;
+    }
+
+    input {
+        padding: 0.4rem;
+        font-size: 0.9rem;
+    }
+
+    button {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .login-text {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 500px) {
+    .plantita {
+        top: 3%;
+        left: 50%;
+        height: 30px;
+        width: 30px;
+    }
+
+    form {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 18px;
+    }
+
+    h2 {
+        font-size: 14px;
+        margin-bottom: 0.8rem;
+    }
+
+    .form-group {
+        font-size: 11px;
+    }
+
+    input {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+    }
+
+    button {
+        padding: 0.4rem;
+        font-size: 0.8rem;
+    }
+
+    .login-text {
+        font-size: 11px;
     }
 }

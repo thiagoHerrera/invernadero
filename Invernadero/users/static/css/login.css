@@ -1,83 +1,182 @@
-/* static/css/login.css */
 body {
-    background-color: #A9B7A3; 
-    background-image: url('../img/planta-login.png'); 
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
+    margin: 0;
+    padding: 0;
     font-family: 'Segoe UI', sans-serif;
+    background-color: #f4faf5;
+    background-image: url("/static/img/fondologin.png");
+    background-repeat: no-repeat;
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
-    margin: 0;
+    position: relative;
+}
+
+.plantita {
+    position: absolute;
+    top: 15%;
+    left: 40%;
+    transform: translateX(-50%);
+    height: 50px;
+    width: 50px;
+    z-index: 1;
 }
 
 form {
-    background-color: #F3EFE5;
+    background-color: white;
     padding: 2rem;
-    border-radius: 10px;
+    border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-align: center;
     width: 300px;
+    position: relative;
+    z-index: 2;
 }
 
-h1 {
-    text-align: center;
-    color: #3C5A40;
-    margin-bottom: 2rem;
-    font-size: 1.8rem;
-    font-weight: 600;
+form h1 {
+    color: #2f7a4e;
+    font-size: 24px;
+    margin-bottom: 0.5rem;
 }
 
-h2 {
-    text-align: center;
-    color: #3C5A40;
-    margin-bottom: 2rem;
-    font-size: 1.3rem;
-    font-weight: 600;
+form h2 {
+    color: #3f8c5d;
+    font-size: 18px;
+    margin-bottom: 1.5rem;
 }
 
 .form-group {
     margin-bottom: 1rem;
-    display: flex;
-    flex-direction: column;
-    color: #3C3C3C;
+    text-align: left;
+    font-size: 14px;
+    color: #333;
 }
 
 input[type="text"],
-input[type="password"],
-input[type="email"] {
+input[type="password"] {
+    width: 100%;
     padding: 0.5rem;
-    border: 1px solid #ccc;
+    border: 1px solid #bcd9c7;
     border-radius: 8px;
-    background-color: #FDFCF9;
-    font-size: 1rem;
+    background-color: #eaf4ed;
+    margin-top: 4px;
+    box-sizing: border-box;
 }
 
-button {
+button[type="submit"] {
     width: 100%;
     padding: 0.6rem;
-    background-color: #B76E46;
-    color: #F3EFE5;
+    background-color: #2f7a4e;
+    color: white;
     border: none;
     border-radius: 8px;
-    font-size: 1rem;
+    font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
-button:hover {
-    background-color: #a05f3f;
+button[type="submit"]:hover {
+    background-color: #256440;
 }
 
-a {
-    color: #2E4D32;
+.register-text {
+    margin-top: 1rem;
+    font-size: 13px;
+    color: #555;
+}
+
+.register-text a {
+    color: #2f7a4e;
     text-decoration: none;
-    font-size: 0.9rem;
+    font-weight: bold;
 }
 
-a:hover {
+.register-text a:hover {
     text-decoration: underline;
 }
 
+/* Media Queries para Responsividad */
+@media (max-width: 768px) {
+    .plantita {
+        top: 10%;
+        left: 50%;
+        height: 40px;
+        width: 40px;
+    }
 
+    form {
+        width: 80%;
+        padding: 1.5rem;
+    }
+
+    form h1 {
+        font-size: 20px;
+    }
+
+    form h2 {
+        font-size: 16px;
+        margin-bottom: 1rem;
+    }
+
+    .form-group {
+        font-size: 12px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 0.4rem;
+        font-size: 0.9rem;
+    }
+
+    button[type="submit"] {
+        padding: 0.5rem;
+        font-size: 0.9rem;
+    }
+
+    .register-text {
+        font-size: 12px;
+    }
+}
+
+@media (max-width: 500px) {
+    .plantita {
+        top: 5%;
+        left: 50%;
+        height: 30px;
+        width: 30px;
+    }
+
+    form {
+        width: 90%;
+        padding: 1rem;
+    }
+
+    form h1 {
+        font-size: 18px;
+    }
+
+    form h2 {
+        font-size: 14px;
+        margin-bottom: 0.8rem;
+    }
+
+    .form-group {
+        font-size: 11px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 0.3rem;
+        font-size: 0.8rem;
+    }
+
+    button[type="submit"] {
+        padding: 0.4rem;
+        font-size: 0.8rem;
+    }
+
+    .register-text {
+        font-size: 11px;
+    }
+}

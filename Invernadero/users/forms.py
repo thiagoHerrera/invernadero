@@ -5,16 +5,16 @@ from django.contrib.auth.models import User
 class RegisterForm(UserCreationForm):
     username = forms.CharField(
         max_length=150,
-        widget=forms.TextInput(attrs={'placeholder': 'Username'})
+        widget=forms.TextInput(attrs={'placeholder': ''})
     )
     email = forms.EmailField(
-        widget=forms.EmailInput(attrs={'placeholder': 'Email'})
+        widget=forms.EmailInput(attrs={'placeholder': ''})
     )
     password1 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'placeholder': 'Password'})
+        widget=forms.PasswordInput(attrs={'placeholder': ''})
     )
     password2 = forms.CharField(
-        widget=forms.PasswordInput(attrs={'placeholder': 'Confirm Password'}) 
+        widget=forms.PasswordInput(attrs={'placeholder': ''}) 
     )
 
     class Meta:
