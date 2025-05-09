@@ -15,8 +15,8 @@ body {
 
 .plantita {
     position: absolute;
-    top: 4.5%;
-    left: 42%;
+    top: -8.4%;
+    left: 24%;
     transform: translateX(-50%);
     height: 50px;
     width: 50px;
@@ -36,7 +36,7 @@ form {
     border-radius: 15px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     text-align: center;
-    width: 300px;
+    width: 320px;
     max-width: 90%;
     box-sizing: border-box;
     position: relative;
@@ -45,7 +45,7 @@ form {
 
 h1 {
     color: #2f7a4e;
-    font-size: 24px;
+    font-size: 26px;
     margin-bottom: 0.5rem;
 }
 
@@ -63,6 +63,7 @@ h2 {
 }
 
 .form-group label {
+    display: block;
     margin-bottom: 0.4rem;
     font-weight: 500;
 }
@@ -94,6 +95,7 @@ button {
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 0.5rem;
 }
 
 button:hover {
@@ -117,41 +119,12 @@ button:hover {
     text-decoration: underline;
 }
 
-.back-link {
-    position: absolute;
-    top: 1rem;
-    left: 1rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background-color: rgba(255, 255, 255, 0.8);
-    transition: background-color 0.3s ease;
-}
-
-.back-link:hover {
-    background-color: rgba(255, 255, 255, 1);
-}
-
-.back-link svg {
-    width: 20px;
-    height: 20px;
-}
-
-/* Media Queries para Responsividad */
+/* Media Queries para dispositivos móviles */
 @media (max-width: 768px) {
     .plantita {
-        top: 5%;
-        left: 50%;
-        height: 40px;
-        width: 40px;
-    }
-
-    form {
-        width: 80%;
-        padding: 1.5rem;
+        width: 50px;
+        height: 50px;
+        left: 27%;
     }
 
     h1 {
@@ -160,39 +133,30 @@ button:hover {
 
     h2 {
         font-size: 16px;
-        margin-bottom: 1rem;
     }
 
-    .form-group {
-        font-size: 12px;
-    }
-
-    input {
-        padding: 0.4rem;
-        font-size: 0.9rem;
+    .form-group input {
+        font-size: 0.95rem;
     }
 
     button {
-        padding: 0.5rem;
-        font-size: 0.9rem;
+        font-size: 0.95rem;
     }
 
-    .login-text {
+    .register-text {
         font-size: 12px;
     }
 }
 
-@media (max-width: 500px) {
-    .plantita {
-        top: 3%;
-        left: 50%;
-        height: 30px;
-        width: 30px;
+@media (max-width: 480px) {
+    form {
+        padding: 1rem;
     }
 
-    form {
-        width: 90%;
-        padding: 1rem;
+    .plantita {
+        width: 55px;
+        height: 55px;
+        top: -55px;
     }
 
     h1 {
@@ -201,24 +165,17 @@ button:hover {
 
     h2 {
         font-size: 14px;
-        margin-bottom: 0.8rem;
     }
 
-    .form-group {
-        font-size: 11px;
-    }
-
-    input {
-        padding: 0.3rem;
-        font-size: 0.8rem;
+    .form-group input {
+        font-size: 0.85rem;
     }
 
     button {
-        padding: 0.4rem;
-        font-size: 0.8rem;
+        font-size: 0.85rem;
     }
 
-    .login-text {
+    .register-text {
         font-size: 11px;
     }
 }
