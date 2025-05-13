@@ -36,10 +36,10 @@
             Contraseña:
             <input type="password" id="password" name="password" required>
         </div>
-        <button type="submit">Sign in</button>
+        <button type="submit">Iniciar Sesión</button>
         <p class="register-text">No tienes cuenta? <a href="{% url 'signup' %}">Registrarse</a></p>
         <!-- Enlace para recuperación de contraseña -->
-        <a href="{% url 'password_reset' %}" class="enlace-registro">¿Olvidaste tu contraseña?</a>
+        <a class="password-text" href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
     </form>
 </body>
 </html>

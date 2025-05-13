@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'rest_framework',
     'users',
+    'Verificacion2FA',
+    'Authentication',
     'api_comunication',
     'django_otp',
     'django_otp.plugins.otp_totp',
