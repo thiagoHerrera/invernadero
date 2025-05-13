@@ -6,7 +6,8 @@ class Parameters(models.Model):
     hume = models.CharField(max_length=20)
     hume_floor = models.CharField(max_length=20)
     temperature = models.CharField(max_length=20)
-    light = models.CharField(max_length=20)
+    light = models.CharField(max_length=20, default="0")
+
     
 class GrenHouse(models.Model):
     nombre = models.CharField(max_length=100)
