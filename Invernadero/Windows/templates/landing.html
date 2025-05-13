@@ -1,0 +1,76 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FloraCore - Home</title>
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">FloraCore</div>
+    <nav class="menu">
+      <a href="#features">Funciones</a>
+      <a href="#equipment">Equipos</a>
+      <a href="#contact">Contáctanos</a>
+    </nav>
+    <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>¡Bienvenido a FloraCore!</h1>
+      <p>¿Querés adentrarte al mundo del cultivo y no tenés un espacio adecuado?<br>
+      Te presentamos FloraCore, tu invernadero inteligente para cualquier tipo de ambiente.</p>
+      <button>Más información</button>
+    </div>
+    <img src="{% static 'img/1erfoto.jpg' %}" alt="Tablet en cultivo">
+  </section>
+
+  <!-- FUNCIONES -->
+  <section class="features" id="features">
+    <h2>Algunas de sus Características</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="{% static 'img/2daimg.png' %}" alt="Cambio Climático">
+        <h3>Cambio Climático</h3>
+        <p>La planta que se cultive no se va a ver afectada por el cambio climático.</p>
+      </div>
+      <div class="card">
+        <img src="{% static 'img/3erimg.jpg' %}" alt="Cambio de Temporada">
+        <h3>Cambio De Temporada</h3>
+        <p>El cambio de temporada de diferentes plantas o cultivos no va a afectar.</p>
+      </div>
+      <div class="card">
+        <img src="{% static 'img/4taimg.jpg' %}" alt="Autonomía">
+        <h3>Autonomía</h3>
+        <p>No va a haber preocupación al olvidarse de hacerle mantenimiento al cultivo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- EQUIPOS -->
+  <section class="about-section" id="equipment">
+    <div class="about-text">
+      <h2>Equipos FloraCore</h2>
+      <p>Nuestros dispositivos permiten controlar temperatura, humedad y riego de forma automática, adaptándose al tipo de planta y al entorno.</p>
+      <button>Ver Equipos</button>
+    </div>
+    <div class="about-image">
+      <img src="{% static 'img/5img.jpg' %}" alt="Tablet mostrando sensores">
+    </div>
+  </section>
+
+
+  <!-- CONTACTO -->
+  <footer id="contact">
+    <p>¿Tenés dudas? <a href="FloraCore2025@gmail.com">Contactanos aquí</a></p>
+    <p>Copyright © 2025 FloraCore</p>
+  </footer>
+
+</body>
+</html>

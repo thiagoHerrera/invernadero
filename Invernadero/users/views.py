@@ -4,13 +4,6 @@ from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from users.forms import RegisterForm
 
-
-def home(request):
-    return render(request, 'home.html')
-
-def landing(request):
-    return render(request, 'landing.html')
-
 def signup(request):
     if request.method == 'POST':
         print(request.POST.get('password1'))
