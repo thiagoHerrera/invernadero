@@ -1,17 +1,27 @@
 #include <WiFi.h>
 #include <HTTPClient.h>
+#include "DHT.h"
 
-// Reemplazar con tu red Wi-Fi
-const char* ssid = "Cereza";
-const char* password = "robotica";
+// Wi-Fi
+const char* ssid = "Telecentro-eaa3";
+const char* password = "M3NNCHMGHM6P";
 
-// URL de tu API en el servidor Django
-const char* serverUrl = "http://192.168.1.60:8000/api/sensors";
+// API URL
+const char* serverUrl = "http://192.168.0.12:8000/api/sensors/";
+
+// Pines
+#define DHTPIN 15
+#define DHTTYPE DHT11
+#define SOIL_PIN 34     // Sensor de humedad de suelo
+#define LIGHT_PIN 35    // Sensor de luminosidad (LDR)
+
+DHT dht(DHTPIN, DHTTYPE);
 
 void setup() {
   Serial.begin(115200);
-  WiFi.begin(ssid, password);
+  dht.begin();
 
+  WiFi.begin(ssid, password);
   Serial.print("Conectando a Wi-Fi");
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
@@ -24,18 +34,40 @@ void loop() {
   if (WiFi.status() == WL_CONNECTED) {
     HTTPClient http;
 
-    http.begin(serverUrl);
-    http.addHeader("Content-Type", "application/json");
+    // Leer sensores
+    float temperatura = dht.readTemperature();
+    float humedad = dht.readHumidity();
+    int humedad_suelo_raw = analogRead(SOIL_PIN);      // 0 a 4095
+    int luz_raw = analogRead(LIGHT_PIN);               // 0 a 4095
 
-    // Simulando lectura de sensores (podés cambiarlo por lectura real)
-    float temperatura = 25.5;
-    float humedad = 60.0;
-    float humedad_suelo = 70.3;
+    // Verificar que no falle el DHT11
+    if (isnan(temperatura) || isnan(humedad)) {
+      Serial.println("Error al leer DHT11");
+      delay(5000);
+      return;
+    }
 
-    // Cuerpo del POST en formato JSON (corregido)
+    // Convertir humedad de suelo a porcentaje (opcional, depende del sensor)
+    float humedad_suelo = map(humedad_suelo_raw, 4095, 1500, 0, 100);
+    humedad_suelo = constrain(humedad_suelo, 0, 100);
+
+    // Convertir luz (opcional)
+    float luminosidad = map(luz_raw, 0, 4095, 100, 0); // 100% = luz fuerte, 0% = oscuridad
+
+    // Mostrar en consola
+    Serial.println("Temperatura: " + String(temperatura));
+    Serial.println("Humedad: " + String(humedad));
+    Serial.println("Humedad suelo: " + String(humedad_suelo));
+    Serial.println("Luminosidad: " + String(luminosidad));
+
+    // JSON para POST
     String jsonData = "{\"temperatura\": " + String(temperatura, 1) +
                       ", \"humedad\": " + String(humedad, 1) +
-                      ", \"humedad_suelo\": " + String(humedad_suelo, 1) + "}";
+                      ", \"humedad_suelo\": " + String(humedad_suelo, 1) +
+                      ", \"luz\": " + String(luminosidad, 1) + "}";
+
+    http.begin(serverUrl);
+    http.addHeader("Content-Type", "application/json");
 
     int httpResponseCode = http.POST(jsonData);
 
@@ -54,5 +86,5 @@ void loop() {
     Serial.println("WiFi no conectado");
   }
 
-  delay(10000); // Espera 10 segundos antes del próximo envío
+  delay(10000); // 10 segundos
 }
