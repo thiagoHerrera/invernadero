@@ -119,6 +119,14 @@ button:hover {
     text-decoration: underline;
 }
 
+/* Estilo para los mensajes de error */
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+
 /* Media Queries para dispositivos móviles */
 @media (max-width: 768px) {
     .plantita {

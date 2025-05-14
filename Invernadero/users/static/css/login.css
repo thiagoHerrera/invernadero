@@ -117,6 +117,23 @@ button:hover {
     text-decoration: underline;
 }
 
+a.back-link {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+}
+
+/* Estilo para los mensajes de error */
+.error {
+    color: red;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
 
 
 /* Media Queries */

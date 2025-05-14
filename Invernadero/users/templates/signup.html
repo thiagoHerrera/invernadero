@@ -50,6 +50,10 @@
             </div>
 
             <button type="submit">Registrarse</button>
+            <!-- Aquí mostramos el mensaje de error si existe -->
+            {% if error %}
+                <p class="error">{{ error }}</p>
+            {% endif %}
 
             <p class="login-text">¿Ya tienes una cuenta? <a href="{% url 'signin' %}">Iniciar sesión</a></p>
         </form>

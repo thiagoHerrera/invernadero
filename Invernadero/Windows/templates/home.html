@@ -1,1 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FloraCore - Inicio</title>
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="#" class="logo">FloraCore</a>
+    <div class="menu">
+      <a href="#"><i class="fas fa-user"></i> Perfil</a>
+      <a href="#"><i class="fas fa-image"></i> Histo. de Cultivo</a>
+      <a href="#"><i class="fas fa-bell"></i> Notificaciones</a>
+      <a href="#"><i class="fas fa-chart-line"></i> Estadísticas</a>
+      <a href="#"><i class="fas fa-question-circle"></i> Ayuda/Soporte</a>
+    </div>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button class="user-btn" type="submit">Cerrar sesión</button>
+    </form>
+  </nav>
+
+  <!-- HERO INICIO -->
+  <section class="hero">
+    <div class="hero-text">
+      <h1>¡Hola {{ user.username }}!</h1>
+      <p>Bienvenido de nuevo a tu invernadero inteligente. Aquí puedes controlar y monitorear el estado de tus cultivos.</p>
+      <button onclick="location.href='#estadisticas'">Ver estadísticas</button>
+    </div>
+    <img src="{% static 'img/invernadero-home.png' %}" alt="Ilustración invernadero">
+  </section>
+
+  <!-- SECCIÓN INFO -->
+  <section class="features">
+    <h2>¿Qué puedes hacer hoy?</h2>
+    <div class="cards">
+      <div class="card">
+        <img src="{% static 'img/perfil.jpg' %}" alt="Perfil">
+        <h3>Perfil</h3>
+        <p>Consulta y edita tu información personal y tus configuraciones.</p>
+      </div>
+      <div class="card">
+        <img src="{% static 'img/historial.jpg' %}" alt="Historial">
+        <h3>Historial de Cultivo</h3>
+        <p>Revisa el crecimiento y cuidado de tus plantas a lo largo del tiempo.</p>
+      </div>
+      <div class="card">
+        <img src="{% static 'img/notificaciones.jpg' %}" alt="Notificaciones">
+        <h3>Notificaciones</h3>
+        <p>Recibe alertas sobre riego, luz y temperatura.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 FloraCore. Todos los derechos reservados.
+  </footer>
+</body>
+</html>
 
