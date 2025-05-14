@@ -1,11 +1,33 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estadisticas - FloraCore</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Equipos - FloraCore</title>
+  <link rel="stylesheet" href="{% static 'css/estadisticas.css' %}" />
 </head>
 <body>
-    
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">📊 FloraCore Dashboard</div>
+    <nav class="menu">
+      <a href="{% url 'landing' %}">Inicio</a>
+      <a href="{% url 'funciones' %}">Funciones</a>
+      <a href="{% url 'contacto' %}">Contáctanos</a>
+      <a href="{% url 'estadisticas' %}">Estadisticas</a>
+    </nav>
+    <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+  </header>
+
+   <iframe width="600" height="450" src="https://lookerstudio.google.com/embed/reporting/b4d86fe6-7883-4739-a1a0-ddf6cc9398e5/page/knUKF" frameborder="0" style="border:0" allowfullscreen sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox"></iframe>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>¿Tenés dudas? <a href="mailto:FloraCore2025@gmail.com">Escribinos</a> | © 2025 FloraCore</p>
+  </footer>
+
 </body>
 </html>
+
+  
