@@ -1,0 +1,144 @@
+/* === RESET GENERAL === */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+    background-color: #f6f7f5;
+    color: #2c2c2c;
+}
+
+/* === NAVBAR === */
+.navbar {
+    background-color: #ffffff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 3rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar .logo {
+    font-weight: bold;
+    color: #2a7e56;
+    font-size: 1.6rem;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.navbar .logo:hover {
+    color: #1e5c3e;
+}
+
+.navbar .menu {
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar .menu a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar .menu a:hover {
+    color: #2a7e56;
+}
+
+.navbar .menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #2a7e56;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.navbar .menu a:hover::after {
+    transform: scaleX(1);
+}
+
+.navbar .user-btn {
+    background-color: #036b0c;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .user-btn:hover {
+    background-color: #256b4a;
+}
+
+/* === SECCIÓN CONTACTO === */
+.contacto {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+.contacto h1 {
+    font-size: 2rem;
+    color: #2a7e56;
+    margin-bottom: 1.5rem;
+}
+
+.contacto h2 {
+    font-size: 1.5rem;
+    color: #2a7e56;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+.contacto p {
+    margin-bottom: 1.5rem;
+}
+
+.contacto ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.contacto li {
+    margin-bottom: 1rem;
+}
+
+.contacto a {
+    color: #036b0c;
+    text-decoration: none;
+}
+
+.contacto a:hover {
+    text-decoration: underline;
+}
+
+.contacto-info ul {
+    margin-top: 1rem;
+}
+
+/* === FOOTER === */
+footer {
+    background-color: #f6f7f5;
+    text-align: center;
+    padding: 1rem;
+    color: #555;
+    font-size: 0.9rem;
+    border-top: 1px solid #ccc;
+}

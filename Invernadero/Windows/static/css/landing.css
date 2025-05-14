@@ -18,13 +18,22 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 3rem;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    position: sticky;
+    top: 0;
+    z-index: 100;
 }
 
 .navbar .logo {
     font-weight: bold;
     color: #2a7e56;
-    font-size: 1.5rem;
+    font-size: 1.6rem;
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.navbar .logo:hover {
+    color: #1e5c3e;
 }
 
 .navbar .menu {
@@ -36,21 +45,49 @@ body {
     text-decoration: none;
     color: #333;
     font-weight: 500;
+    position: relative;
+    transition: color 0.3s ease;
+}
+
+.navbar .menu a:hover {
+    color: #2a7e56;
+}
+
+.navbar .menu a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    height: 2px;
+    width: 100%;
+    background-color: #2a7e56;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+}
+
+.navbar .menu a:hover::after {
+    transform: scaleX(1);
 }
 
 .navbar .user-btn {
-    background-color: #2a7e56;
+    background-color: #036b0c;
     color: #fff;
     padding: 0.5rem 1rem;
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     font-weight: 600;
     cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navbar .user-btn:hover {
+    background-color: #256b4a;
 }
 
 /* === HERO === */
 .hero {
-    background-color: #2a7e56;
+    background-color: #036b0c;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -75,12 +112,17 @@ body {
 
 .hero button {
     background-color: #ffffff;
-    color: #2a7e56;
+    color: #036b0c;
     border: none;
     padding: 0.6rem 1.2rem;
     font-weight: 600;
     border-radius: 6px;
     cursor: pointer;
+}
+
+.hero button:hover {
+    background-color: #6e9171;
+    color: white;
 }
 
 .hero img {
@@ -153,13 +195,17 @@ body {
 }
 
 .about-text button {
-    background-color: #2a7e56;
+    background-color: #036b0c;
     color: white;
     border: none;
     padding: 0.6rem 1.2rem;
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
+}
+
+.about-text button:hover {
+    background-color: #6e9171;
 }
 
 .about-image img {
@@ -178,3 +224,81 @@ footer {
     color: #555;
     border-top: 1px solid #ccc;
 }
+
+/* === ANIMACIONES === */
+
+/* Animación de entrada de la hero section */
+.hero {
+    animation: fadeIn 1s ease-out;
+}
+
+/* Animación de las tarjetas en la sección características */
+.card {
+    animation: fadeInUp 0.8s ease-out;
+}
+
+/* Animación de las tarjetas en la sección equipos */
+.about-section {
+    animation: fadeInUp 1s ease-out;
+}
+
+.about-image img {
+    animation: slideInLeft 1s ease-out;
+}
+
+/* Animación al hacer hover sobre el botón de la navbar */
+.navbar .user-btn:hover {
+    animation: scaleUp 0.3s ease-out;
+}
+
+/* Animación de los enlaces del menú de la navbar */
+.navbar .menu a:hover {
+    animation: textGlow 0.6s ease-out;
+}
+
+/* Animación de desvanecimiento suave para elementos al entrar */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+/* Animación de tarjetas de las características y equipos (desplazamiento y opacidad) */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Animación de imagen en la sección "About" (desliza desde la izquierda) */
+@keyframes slideInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-50px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Animación de escala para el botón de la navbar */
+@keyframes scaleUp {
+    from {
+        transform: scale(1);
+    }
+    to {
+        transform: scale(1.1);
+    }
+}
+
+
+

@@ -13,9 +13,9 @@
   <header class="navbar">
     <div class="logo">FloraCore</div>
     <nav class="menu">
-      <a href="#features">Funciones</a>
-      <a href="#equipment">Equipos</a>
-      <a href="#contact">Contáctanos</a>
+      <a href="{%url 'funciones' %}">Funciones</a>
+      <a href="{%url 'equipos' %}">Equipos</a>
+      <a href="{%url 'contacto' %}">Contáctanos</a>
     </nav>
     <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
   </header>
@@ -26,7 +26,7 @@
       <h1>¡Bienvenido a FloraCore!</h1>
       <p>¿Querés adentrarte al mundo del cultivo y no tenés un espacio adecuado?<br>
       Te presentamos FloraCore, tu invernadero inteligente para cualquier tipo de ambiente.</p>
-      <button>Más información</button>
+      <button onclick="window.location.href='{% url 'info' %}'">Más información</button>
     </div>
     <img src="{% static 'img/1erfoto.jpg' %}" alt="Tablet en cultivo">
   </section>
@@ -58,7 +58,7 @@
     <div class="about-text">
       <h2>Equipos FloraCore</h2>
       <p>Nuestros dispositivos permiten controlar temperatura, humedad y riego de forma automática, adaptándose al tipo de planta y al entorno.</p>
-      <button>Ver Equipos</button>
+      <button onclick="window.location.href='{% url 'equipos' %}'">Ver Equipos</button>
     </div>
     <div class="about-image">
       <img src="{% static 'img/5img.jpg' %}" alt="Tablet mostrando sensores">

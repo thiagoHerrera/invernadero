@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contáctanos - FloraCore</title>
+  <link rel="stylesheet" href="{% static 'css/contacto.css' %}">
+</head>
+<body>
+
+  <header class="navbar">
+    <div><a class="logo" href="{% url 'landing' %}">FloraCore</a></div>
+    <nav class="menu">
+      <a href="{% url 'landing' %}">Inicio</a>
+      <a href="{% url 'equipos' %}">Equipos</a>
+      <a href="{% url 'funciones' %}">Funciones</a>
+    </nav>
+    <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+  </header>
+
+  <main class="contacto">
+    <h1>Contáctanos</h1>
+    <p>¡Gracias por tu interés en nuestro proyecto! Somos un grupo de estudiantes de la Escuela Técnica N°3 Roberto Arlt, en Tortuguitas, Buenos Aires, Argentina. Estamos trabajando en el proyecto <strong>FloraCore</strong>, un invernadero inteligente que facilita el cuidado de tus plantas.</p>
+
+    <section class="equipo">
+      <h2>Conoce a nuestro equipo</h2>
+      <p>Nosotros somos:</p>
+      <ul>
+        <li><strong>Walter Casarino</strong> – Encargado del Frontend (Maquetación y diseño de la interfaz)</li>
+        <li><strong>Bautista Insaurralde</strong> – Encargado del Backend y parte del Frontend (Funcionalidades, seguridad de la página, diseño)</li>
+        <li><strong>Thiago Herrera</strong> – Parte del Backend (Desarrollo de funcionalidades de la página)</li>
+        <li><strong>Manuel Gonzales</strong> – Encargado del Backend (Desarrollo de APIs, código de sensores, base de datos)</li>
+        <li><strong>Santiago Gómez</strong> – Encargado de Hardware y Funciones de los Sensores (Armado del invernadero y sensores)</li>
+      </ul>
+    </section>
+
+    <section class="contacto-info">
+      <h2>¿Cómo contactarnos?</h2>
+      <p>Si tienes alguna pregunta o quieres saber más sobre FloraCore, puedes ponerte en contacto con nosotros a través de los siguientes medios:</p>
+      <ul>
+        <li><strong>Correo electrónico:</strong> <a href="mailto:FloraCore2025@gmail.com">FloraCore2025@gmail.com</a></li>
+        <li><strong>Redes sociales:</strong>
+          <ul>
+            <li><a href="#">Facebook: FloraCore</a></li>
+            <li><a href="https://www.instagram.com/floracore_off/">Instagram: @floracore_off</a></li>
+          </ul>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 FloraCore - Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>
+

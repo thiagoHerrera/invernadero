@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Funciones - FloraCore</title>
+  <link rel="stylesheet" href="{% static 'css/funciones.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+  <header class="navbar">
+    <div><a class="logo" href="{% url 'landing'%}">FloraCore</a></div>
+    <nav class="menu">
+      <a href="{% url 'landing' %}">Inicio</a>
+      <a href="{% url 'equipos' %}">Equipos</a>
+      <a href="{% url 'contacto' %}">Contáctanos</a>
+    </nav>
+    <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+  </header>
+
+  <main class="funciones">
+    <h1>¿Cómo Funciona FloraCore?</h1>
+    <p class="intro">FloraCore es un invernadero inteligente que utiliza tecnología de sensores y control automatizado para cuidar tus plantas sin necesidad de conocimientos previos o tiempo libre.</p>
+
+    <div class="funciones-grid">
+      <section class="bloque">
+        <i class="fas fa-microchip icono"></i>
+        <h2>¿Qué usamos?</h2>
+        <ul>
+          <li>Sensores de humedad del suelo y del ambiente</li>
+          <li>Sensores de temperatura interna y externa</li>
+          <li>Sensores de luz para detectar la necesidad de iluminación</li>
+          <li>Sensores de ventilación para renovar el aire</li>
+          <li>Microcontrolador ST32 que procesa los datos y ejecuta acciones</li>
+        </ul>
+      </section>
+
+      <section class="bloque">
+        <i class="fas fa-gears icono"></i>
+        <h2>¿Cómo funciona?</h2>
+        <p>Los sensores monitorean continuamente las condiciones del entorno y del cultivo. El microcontrolador ST32, programado mediante Arduino IDE, interpreta esta información y activa automáticamente:</p>
+        <ul>
+          <li>El riego si la planta necesita agua</li>
+          <li>La ventilación si el aire está viciado o caliente</li>
+          <li>La iluminación si hay poca luz solar</li>
+          <li>Alertas si detecta que la planta necesita ser trasplantada, como en el caso de un árbol</li>
+        </ul>
+      </section>
+
+      <section class="bloque">
+        <i class="fas fa-seedling icono"></i>
+        <h2>¿Cuál es el objetivo?</h2>
+        <p>Buscamos fomentar los espacios verdes y ayudar a personas que no tienen tiempo o conocimientos para cuidar plantas. FloraCore permite que cualquier persona pueda tener un cultivo sano y adaptado, incluso en ambientes difíciles o cerrados. ¡Hasta podés cuidar un árbol!</p>
+      </section>
+    </div>
+  </main>
+
+  <footer>
+    <p>© 2025 FloraCore - Todos los derechos reservados</p>
+  </footer>
+
+</body>
+</html>

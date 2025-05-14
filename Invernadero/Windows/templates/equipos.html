@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipos - FloraCore</title>
+  <link rel="stylesheet" href="{% static 'css/equipos.css' %}">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <header class="navbar">
+    <div class="logo">FloraCore</div>
+    <nav class="menu">
+      <a href="{% url 'landing' %}">Inicio</a>
+      <a href="{% url 'funciones' %}">Funciones</a>
+      <a href="{% url 'contacto' %}">Contáctanos</a>
+    </nav>
+    <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+  </header>
+
+  <!-- SECCIÓN EQUIPOS -->
+  <section class="main-section">
+    <h1>Conocé nuestros Equipos</h1>
+    <p>FloraCore cuenta con una variedad de dispositivos diseñados para automatizar y facilitar el cuidado de tus cultivos. A continuación, te mostramos algunos de nuestros equipos principales:</p>
+
+    <div class="equipment-grid">
+      <div class="equipment-card">
+        <img src="{% static 'img/sensor de humedad.jpeg' %}" alt="Sensor de humedad">
+        <h3>Sensor de Humedad del Suelo</h3>
+        <p>Detecta el nivel de humedad de la tierra y activa el sistema de riego cuando es necesario, asegurando un riego óptimo.</p>
+      </div>
+
+      <div class="equipment-card">
+        <img src="{% static 'img/sensortemperatura.jpeg' %}" alt="Sensor de temperatura">
+        <h3>Sensor de Temperatura y Humedad Ambiental</h3>
+        <p>Monitorea el entorno y activa la ventilación o calefacción según el tipo de planta y sus necesidades.</p>
+      </div>
+
+      <div class="equipment-card">
+        <img src="{% static 'img/microcontrolador.jpeg' %}" alt="Microcontrolador ST32">
+        <h3>Microcontrolador ST32</h3>
+        <p>El cerebro del invernadero. Ejecuta nuestro software programado con Arduino IDE, gestionando todos los sensores y actuadores.</p>
+      </div>
+
+      <div class="equipment-card">
+        <img src="{% static 'img/Ventilador.jpg' %}" alt="Ventilador de extracción">
+        <h3>Ventilación Inteligente</h3>
+        <p>Sistema de ventilación automática que regula el flujo de aire para mantener condiciones óptimas.</p>
+      </div>
+
+      <div class="equipment-card">
+        <img src="{% static 'img/led.jpeg' %}" alt="Luces LED para cultivo">
+        <h3>Iluminación LED</h3>
+        <p>Luces LED reguladas automáticamente para compensar la falta de luz solar, ideal para espacios cerrados.</p>
+      </div>
+
+      <div class="equipment-card">
+        <img src="{% static 'img/bombadeagua.jpg' %}" alt="Sistema de riego">
+        <h3>Sistema de Riego</h3>
+        <p>Distribuye agua en función de los datos de los sensores, ahorrando agua y cuidando tu cultivo.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>¿Tenés dudas? <a href="mailto:FloraCore2025@gmail.com">Contactanos aquí</a></p>
+    <p>© 2025 FloraCore</p>
+  </footer>
+
+</body>
+</html>
