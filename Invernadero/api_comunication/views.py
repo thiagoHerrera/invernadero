@@ -26,8 +26,23 @@ def sensors(request):
         temperature=temperatura
     )
 
-    return Response({'mensaje': 'Datos guardados correctamente'}, status=status.HTTP_201_CREATED)
+    # Determinar acciones
+    try:
+        temperatura = float(temperatura)
+        humedad_suelo = float(humedad_suelo)
+    except ValueError:
+        return Response({'error': 'Datos inválidos'}, status=status.HTTP_400_BAD_REQUEST)
 
+    bomba = humedad_suelo < 30
+    ventilador = temperatura > 28
+
+    # Devolver acciones al ESP32
+    return Response({
+        'mensaje': 'Datos guardados correctamente',
+        'bomba': bomba,
+        'ventilador': ventilador
+    }, status=status.HTTP_201_CREATED)
+    
 def get_latest_parameters(request):
     ultimo = Parameters.objects.last()
 
