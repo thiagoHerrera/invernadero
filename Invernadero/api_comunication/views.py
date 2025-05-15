@@ -15,7 +15,7 @@ def sensors(request):
     humedad = request.data.get('humedad')
     humedad_suelo = request.data.get('humedad_suelo')
     luz = request.data.get('luz')
-    
+
     if temperatura is None or humedad is None or humedad_suelo is None or luz is None:
         return Response({'error': 'Faltan datos'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -39,7 +39,6 @@ def sensors(request):
         
 def get_latest_parameters(request):
     ultimo = Parameters.objects.last()
-
     if ultimo is None:
         return Response({'error': 'No hay datos disponibles'}, status=status.HTTP_404_NOT_FOUND)
 
