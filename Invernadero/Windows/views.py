@@ -4,26 +4,37 @@ from users.models import Parameters
 
 @login_required
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'post-login/home.html')
 
 def landing(request):
-    return render(request, 'landing.html')
+    return render(request, 'pre-login/landing.html')
 
 def equipo(request):
-    return render(request, 'equipos.html')
+    return render(request, 'pre-login/equipos.html')
 
 def contacto(request):
-    return render(request, 'contacto.html')
+    return render(request, 'pre-login/contacto.html')
 
 def funciones(request):
-    return render(request, 'funciones.html')
+    return render(request, 'pre-login/funciones.html')
 
 def info(request):
-    return render(request, 'info.html')
+    return render(request, 'pre-login/info.html')
 
 def estadisticas(request):
-    return render(request, 'estadisticas.html')
+    return render(request, 'post-login/estadisticas.html')
 # Create your views here.
+
+def perfil(request):
+    return render(request, 'post-login/perfil.html')
+
+def planta(request):
+    return render(request, 'post-login/mi_planta.html')
+
+def notificaciones(request):
+    return render(request, 'post-login/notificaciones.html')
+
+
 
 def get_latest_parameters(request):
     ultimo = Parameters.objects.last()
@@ -41,4 +52,4 @@ def get_latest_parameters(request):
         'humedad_suelo': ultimo.hume_floor,
     }
 
-    return render(request, 'estadisticas.html', data)
+    return render(request, 'post-login/estadisticas.html', data)

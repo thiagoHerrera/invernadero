@@ -1,0 +1,306 @@
+/* === RESET GENERAL === */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background-color: #f6f7f5;
+  color: #2c2c2c;
+}
+
+/* === NAVBAR === */
+.navbar {
+  background-color: #ffffff;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar .logo {
+  font-weight: bold;
+  color: #2a7e56;
+  font-size: 1.6rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.navbar .logo:hover {
+  color: #1e5c3e;
+}
+
+.navbar .menu {
+  display: flex;
+  gap: 2rem;
+}
+
+.navbar .menu a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.navbar .menu a:hover {
+  color: #2a7e56;
+}
+
+.navbar .menu a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: #2a7e56;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.navbar .menu a:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar .user-btn {
+  background-color: #036b0c;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.navbar .user-btn:hover {
+  background-color: #256b4a;
+  animation: scaleUp 0.3s ease-out;
+}
+
+/* === HERO MI PLANTA === */
+.hero.mi-planta-hero {
+  background-color: #036b0c;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+  animation: fadeIn 1s ease-out;
+}
+
+.hero-text {
+  max-width: 500px;
+}
+
+.hero.mi-planta-hero h1 {
+  font-size: 2.4rem;
+  margin-bottom: 1rem;
+}
+
+.hero.mi-planta-hero p {
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+
+.hero.mi-planta-hero img {
+  max-width: 320px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  object-fit: cover;
+  animation: slideInLeft 1s ease-out;
+  box-shadow: 0 8px 15px rgba(0,0,0,0.15);
+}
+
+/* === SECCIÓN INFO PLANTA === */
+.planta-info {
+  display: flex;
+  justify-content: space-around;
+  gap: 3rem;
+  padding: 3rem 2rem;
+  background-color: #d7ded7;
+  flex-wrap: wrap;
+  animation: fadeInUp 1s ease-out;
+}
+
+.info-left, .info-right {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  flex: 1 1 350px;
+  min-width: 320px;
+}
+
+.info-left h2, .info-right h2 {
+  color: #2a7e56;
+  margin-bottom: 1.5rem;
+  font-size: 1.6rem;
+  border-bottom: 2px solid #2a7e56;
+  padding-bottom: 0.5rem;
+}
+
+.info-left ul {
+  list-style: none;
+}
+
+.info-left li {
+  font-size: 1rem;
+  margin-bottom: 0.9rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.info-left li strong {
+  color: #036b0c;
+  width: 130px;
+  flex-shrink: 0;
+}
+
+/* === CARDS DE ESTADO === */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(140px,1fr));
+  gap: 1.5rem;
+}
+
+.card {
+  background-color: #f6f7f5;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  text-align: center;
+  animation: fadeInUp 0.8s ease-out;
+  transition: transform 0.2s ease;
+  cursor: default;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+}
+
+.card h3 {
+  color: #036b0c;
+  margin-bottom: 0.8rem;
+  font-size: 1.1rem;
+}
+
+.card p {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2c2c2c;
+}
+
+/* === HISTORIAL & ALERTAS === */
+.historial {
+  padding: 2.5rem 3rem;
+  background-color: white;
+  margin: 2rem auto;
+  max-width: 900px;
+  border-radius: 12px;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+  animation: fadeInUp 1s ease-out;
+}
+
+.historial h2 {
+  color: #2a7e56;
+  font-size: 1.6rem;
+  margin-bottom: 1rem;
+  border-bottom: 2px solid #2a7e56;
+  padding-bottom: 0.4rem;
+}
+
+.historial-box ul {
+  list-style: none;
+  max-height: 180px;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+
+.historial-box ul li {
+  padding: 0.8rem 0;
+  font-size: 1rem;
+  border-bottom: 1px solid #ccc;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: #555;
+}
+
+.historial-box ul li i {
+  color: #036b0c;
+  min-width: 22px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.hero.mi-planta-hero img {
+  width: 100%;
+  max-width: 250px;  /* ↓ Bajamos el tamaño máximo */
+  height: auto;
+  border-radius: 12px;
+  animation: slideInLeft 1s ease-out;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  object-fit: contain;
+}
+
+
+/* === FOOTER === */
+footer {
+  background-color: #ffffff;
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: #555;
+  border-top: 1px solid #ccc;
+  margin-top: 3rem;
+}
+
+/* === ANIMACIONES === */
+@keyframes fadeIn {
+  from {opacity: 0;}
+  to {opacity: 1;}
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleUp {
+  from {transform: scale(1);}
+  to {transform: scale(1.1);}
+}

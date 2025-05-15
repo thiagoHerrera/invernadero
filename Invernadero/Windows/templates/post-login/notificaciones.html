@@ -1,0 +1,79 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Notificaciones - FloraCore</title>
+  <link rel="stylesheet" href="{% static 'css/notificaciones.css' %}">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="{% url 'home' %}" class="logo">FloraCore</a>
+    <div class="menu">
+      <a href="{% url 'perfil' %}"><i class="fas fa-user"></i> Perfil</a>
+      <a href="{%url 'planta'%}"><i class="fas fa-image"></i> Mi Planta</a>
+      <a href="{%url 'estadisticas' %}"><i class="fas fa-chart-line"></i> Estadísticas</a>
+      <a href="#"><i class="fas fa-question-circle"></i> Ayuda/Soporte</a>
+    </div>
+    <button class="user-btn">Cerrar sesión</button>
+  </nav>
+
+  <section class="hero perfil-hero">
+    <div class="hero-text">
+      <h1>Centro de Notificaciones</h1>
+      <p>Mantenete al tanto del estado de tu planta y del sistema inteligente de monitoreo.</p>
+    </div>
+    <img src="{% static 'img/plantita.jpg' %}" alt="Planta" class="planta-img">
+  </section>
+
+  <section class="notificaciones">
+    <h2>Últimas notificaciones</h2>
+    <div class="noti-lista">
+      <div class="noti-card">
+        <span class="icono">🌡️</span>
+        <div class="contenido">
+          <p><strong>¡Temperatura elevada!</strong> Abriendo ventilación automática.</p>
+          <span class="hora">hace 3 minutos</span>
+        </div>
+      </div>
+
+      <div class="noti-card">
+        <span class="icono">💧</span>
+        <div class="contenido">
+          <p><strong>Tierra seca.</strong> Riego programado en 10 minutos.</p>
+          <span class="hora">hace 15 minutos</span>
+        </div>
+      </div>
+
+      <div class="noti-card">
+        <span class="icono">🔌</span>
+        <div class="contenido">
+          <p><strong>Sensor desconectado.</strong> Revisá la conexión del sensor de humedad.</p>
+          <span class="hora">hace 2 horas</span>
+        </div>
+      </div>
+
+      <div class="noti-card">
+        <span class="icono">✅</span>
+        <div class="contenido">
+          <p><strong>Estado actual:</strong> Tu planta está saludable.</p>
+          <span class="hora">hace 4 horas</span>
+        </div>
+      </div>
+
+      <div class="noti-card">
+        <span class="icono">📅</span>
+        <div class="contenido">
+          <p><strong>Riego automático realizado.</strong> Hoy a las 09:00 hs.</p>
+          <span class="hora">hace 6 horas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2025 FloraCore. Todos los derechos reservados.</p>
+  </footer>
+</body>
+</html>

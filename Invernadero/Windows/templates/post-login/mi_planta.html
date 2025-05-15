@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mi Planta - FloraCore</title>
+  <link rel="stylesheet" href="{% static 'css/mi_planta.css' %}">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="{% url 'home'%}" class="logo">FloraCore</a>
+  <div class="menu">
+      <a href="{% url 'perfil' %}"><i class="fas fa-user"></i> Perfil</a>
+      <a href="{%url 'notificaciones' %}"><i class="fas fa-bell"></i> Notificaciones</a>
+      <a href="{%url 'estadisticas' %}"><i class="fas fa-chart-line"></i> Estadísticas</a>
+      <a href="#"><i class="fas fa-question-circle"></i> Ayuda/Soporte</a>
+  </div>
+  <form action="{% url 'logout' %}" method="post">
+    {% csrf_token %}
+    <button class="user-btn" type="submit">Cerrar sesión</button>
+  </form>
+</nav>
+
+<!-- HERO -->
+<section class="hero mi-planta-hero">
+  <div class="hero-text">
+    <h1>Hola, esta es tu planta 🌿</h1>
+    <p>Bienvenido al panel inteligente donde podés ver cómo evoluciona tu planta día a día.</p>
+  </div>
+  <img src="{% static 'img/plantita.jpg' %}" alt="Foto de tu planta" />
+</section>
+
+<!-- INFO PLANTA -->
+<section class="planta-info">
+  <div class="info-left">
+    <h2>Información General</h2>
+    <ul>
+      <li><strong>🌱 Tipo de planta:</strong> Albahaca</li>
+      <li><strong>📍 Ubicación:</strong> Invernadero #2 - Sector Este</li>
+      <li><strong>📅 Fecha de plantación:</strong> 03/04/2025</li>
+      <li><strong>🔁 Último riego:</strong> Hace 4 horas</li>
+      <li><strong>⚙️ Modo:</strong> Automático (IA activada)</li>
+    </ul>
+  </div>
+  <div class="info-right">
+    <h2>Estado Actual</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>Humedad del Suelo</h3>
+        <p>75%</p>
+      </div>
+      <div class="card">
+        <h3>Temperatura</h3>
+        <p>23°C</p>
+      </div>
+      <div class="card">
+        <h3>Luz Recibida</h3>
+        <p>Alta</p>
+      </div>
+      <div class="card">
+        <h3>Nivel de Agua</h3>
+        <p>Suficiente</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HISTORIAL Y ALERTAS -->
+<section class="historial">
+  <h2>Historial & Alertas</h2>
+  <div class="historial-box">
+    <ul>
+      <li><i class="fas fa-tint"></i> [09:30] Sistema de riego automático activado.</li>
+      <li><i class="fas fa-thermometer-half"></i> [08:15] Temperatura óptima mantenida.</li>
+      <li><i class="fas fa-sun"></i> [07:00] Luz natural detectada: intensidad alta.</li>
+      <li><i class="fas fa-fan"></i> [06:45] Ventilación activada </li>
+    </ul>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  &copy; 2025 FloraCore. Todos los derechos reservados.
+</footer>
+
+</body>
+</html>

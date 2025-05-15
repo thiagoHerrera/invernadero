@@ -1,0 +1,71 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perfil - FloraCore</title>
+  <link rel="stylesheet" href="{% static 'css/perfil.css' %}">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="{% url 'home'%}" class="logo">FloraCore</a>
+    <div class="menu">
+      <a href="{%url 'planta'%}"><i class="fas fa-image"></i> Mi Planta</a>
+      <a href="{%url 'notificaciones' %}"><i class="fas fa-bell"></i> Notificaciones</a>
+      <a href="{%url 'estadisticas' %}"><i class="fas fa-chart-line"></i> Estadísticas</a>
+      <a href="#"><i class="fas fa-question-circle"></i> Ayuda/Soporte</a>
+    </div>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button class="user-btn" type="submit">Cerrar sesión</button>
+    </form>
+  </nav>
+
+  <!-- PERFIL -->
+  <section class="hero perfil-hero">
+    <div class="hero-text">
+      <h1>Perfil de {{ user.username }}</h1>
+      <p>Configurá tus datos personales, preferencias del invernadero y más.</p>
+    </div>
+    <img src="{% static 'img/user-home.webp' %}" alt="Perfil usuario">
+  </section>
+
+  <!-- INFO DEL PERFIL -->
+  <section class="features">
+    <div class="cards perfil-cards">
+      <!-- Datos del usuario -->
+      <div class="card">
+        <h3><i class="fas fa-id-card"></i> Información personal</h3>
+        <p><strong>Usuario:</strong> {{ user.username }}</p>
+        <p><strong>Email:</strong> {{ user.email }}</p>
+        <p><strong>Miembro desde:</strong> {{ user.date_joined|date:"d/m/Y" }}</p>
+      </div>
+
+      <!-- Preferencias -->
+      <div class="card">
+        <h3><i class="fas fa-cogs"></i> Preferencias del invernadero</h3>
+        <p><strong>Modo riego:</strong> Automático</p>
+        <p><strong>Umbral de humedad:</strong> 40%</p>
+        <p><strong>Ventilación:</strong> Activada a > 30°C</p>
+        <button>Editar configuración</button>
+      </div>
+
+      <!-- Seguridad -->
+      <div class="card">
+        <h3><i class="fas fa-lock"></i> Seguridad</h3>
+        <p><strong>Contraseña:</strong> *********</p>
+        <p><strong>2FA:</strong> Activado</p>
+        <button>Cambiar contraseña</button>
+        <button>Gestionar 2FA</button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 GreenHouse. Todos los derechos reservados.
+  </footer>
+</body>
+</html>
