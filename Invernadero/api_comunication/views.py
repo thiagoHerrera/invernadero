@@ -36,7 +36,19 @@ def sensors(request):
         acciones['ventiladores'] = 1
     if humedad_suelo < 40:
         acciones['riego'] = 1
-        
+        # Verificar comandos manuales desde el frontend
+    comando_riego = request.data.get('comando_riego')
+    comando_ventiladores = request.data.get('comando_ventiladores')
+
+    if comando_riego is not None:
+        acciones['riego'] = int(comando_riego)
+        print("se acciono el riego")
+    if comando_ventiladores is not None:
+        acciones['ventiladores'] = int(comando_ventiladores)
+        print("se acciono ventilador")
+
+    return Response(acciones, status=status.HTTP_201_CREATED)
+    
 def get_latest_parameters(request):
     ultimo = Parameters.objects.last()
     if ultimo is None:
