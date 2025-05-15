@@ -10,8 +10,8 @@
 <body>
 
   <!-- NAVBAR -->
-  <header class="navbar"><
-    <div class="logo">FloraCsore</div>
+  <header class="navbar">
+    <div><a class="logo" href="{% url 'landing'%}">FloraCore</a></div>
     <nav class="menu">
      <a href="{%url 'funciones' %}">Funciones</a>
      <a href="{%url 'equipos' %}">Equipos</a>
@@ -40,8 +40,8 @@
       </div>
 
       <div class="equipment-card">
-        <img src="{% static 'img/microcontrolador.jpeg' %}" alt="Microcontrolador ST32">
-        <h3>Microcontrolador ST32</h3>
+        <img src="{% static 'img/esp32.jpg' %}" alt="Microcontrolador ESP32">
+        <h3>Microcontrolador ESP32</h3>
         <p>El cerebro del invernadero. Ejecuta nuestro software programado con Arduino IDE, gestionando todos los sensores y actuadores.</p>
       </div>
 

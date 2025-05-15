@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from users.models import Parameters
 
 @login_required
 def home(request):
@@ -23,3 +24,21 @@ def info(request):
 def estadisticas(request):
     return render(request, 'estadisticas.html')
 # Create your views here.
+
+def get_latest_parameters(request):
+    ultimo = Parameters.objects.last()
+
+    if ultimo is None:
+        return render(request, 'estadisticas.html', {
+            'temperatura': 'No disponible',
+            'humedad': 'No disponible',
+            'humedad_suelo': 'No disponible',
+        })
+
+    data = {
+        'temperatura': ultimo.temperature,
+        'humedad': ultimo.hume,
+        'humedad_suelo': ultimo.hume_floor,
+    }
+
+    return render(request, 'estadisticas.html', data)

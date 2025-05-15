@@ -10,7 +10,7 @@
 <body>
   <!-- NAVBAR -->
   <header class="navbar">
-    <div class="logo">FloraCore</div>
+    <div><a class="logo" href="{% url 'landing'%}">FloraCore</a></div>
     <nav class="menu">
       <a href="{% url 'landing' %}">Inicio</a>
       <a href="{% url 'funciones' %}">Funciones</a>
@@ -26,11 +26,28 @@
     <p class="subtitulo">Visualizá en tiempo real los datos de tus sensores en el invernadero inteligente</p>
 
     <div class="dashboard-container">
-      <iframe src="https://lookerstudio.google.com/embed/reporting/b4d86fe6-7883-4739-a1a0-ddf6cc9398e5/page/knUKF"
-        frameborder="0"
-        allowfullscreen
-        sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+  <div class="datos-sensores">
+    <h2>Últimos datos de sensores</h2>
+    <div class="sensor-card">
+      <p><strong>🌡️ Temperatura:</strong> {{ temperatura }} °C</p>
+      <p><strong>💧 Humedad Ambiente:</strong> {{ humedad }} %</p>
+      <p><strong>🌱 Humedad del Suelo:</strong> {{ humedad_suelo }} %</p>
     </div>
+  </div>
+<div class="iframe-wrapper">
+  <h2>📊 Registros históricos</h2>
+  <p class="iframe-descripcion">Visualizá los últimos registros de tus sensores de tu invernadero inteligente.</p>
+  <div class="iframe-card">
+    <iframe 
+      src="https://lookerstudio.google.com/embed/reporting/b4d86fe6-7883-4739-a1a0-ddf6cc9398e5/page/knUKF" 
+      frameborder="0" 
+      allowfullscreen 
+      sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+    </iframe>
+  </div>
+</div>
+
+
   </section>
 
   <!-- FOOTER -->
