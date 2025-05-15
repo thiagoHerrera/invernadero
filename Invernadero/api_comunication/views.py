@@ -15,7 +15,7 @@ def sensors(request):
     humedad = request.data.get('humedad')
     humedad_suelo = request.data.get('humedad_suelo')
     luz = request.data.get('luz')
-    
+
     if temperatura is None or humedad is None or humedad_suelo is None or luz is None:
         return Response({'error': 'Faltan datos'}, status=status.HTTP_400_BAD_REQUEST)
 
@@ -25,27 +25,20 @@ def sensors(request):
         hume_floor=humedad_suelo,
         temperature=temperatura
     )
-
-    # Determinar acciones
-    try:
-        temperatura = float(temperatura)
-        humedad_suelo = float(humedad_suelo)
-    except ValueError:
-        return Response({'error': 'Datos inválidos'}, status=status.HTTP_400_BAD_REQUEST)
-
-    bomba = humedad_suelo < 30
-    ventilador = temperatura > 28
-
-    # Devolver acciones al ESP32
-    return Response({
-        'mensaje': 'Datos guardados correctamente',
-        'bomba': bomba,
-        'ventilador': ventilador
-    }, status=status.HTTP_201_CREATED)
+    acciones = {
+        'riego' : 0,
+        'ventiladores' : 0,
+        'tiempo' : 5000,
+        'mensaje': 'Datos guardados correctamente'
+    }
     
+    if temperatura > 28:
+        acciones['ventiladores'] = 1
+    if humedad_suelo < 40:
+        acciones['riego'] = 1
+        
 def get_latest_parameters(request):
     ultimo = Parameters.objects.last()
-
     if ultimo is None:
         return Response({'error': 'No hay datos disponibles'}, status=status.HTTP_404_NOT_FOUND)
 
