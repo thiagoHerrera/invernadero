@@ -19,4 +19,7 @@ def funciones(request):
 
 def info(request):
     return render(request, 'info.html')
+
+def estadisticas(request):
+    return render(request, 'estadisticas.html')
 # Create your views here.
