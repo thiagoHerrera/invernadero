@@ -15,7 +15,9 @@
     <nav class="menu">
       <a href="{% url 'landing' %}">Inicio</a>
       <a href="{% url 'funciones' %}">Funciones</a>
+      <a href="{% url 'equipos' %}">Equipos</a>
       <a href="{% url 'contacto' %}">Contáctanos</a>
+      <a href="{% url 'estadisticas' %}">Estadisticas</a>
     </nav>
     <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
   </header>
@@ -39,8 +41,8 @@
       </div>
 
       <div class="equipment-card">
-        <img src="{% static 'img/microcontrolador.jpeg' %}" alt="Microcontrolador ST32">
-        <h3>Microcontrolador ST32</h3>
+        <img src="{% static 'img/esp32.jpg' %}" alt="Microcontrolador ESP32">
+        <h3>Microcontrolador ESP32</h3>
         <p>El cerebro del invernadero. Ejecuta nuestro software programado con Arduino IDE, gestionando todos los sensores y actuadores.</p>
       </div>
 

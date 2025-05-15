@@ -13,9 +13,11 @@
   <header class="navbar">
     <div><a class="logo" href="{% url 'landing'%}">FloraCore</a></div>
     <nav class="menu">
-      <a href="{% url 'landing' %}">Inicio</a>
+     <a href="{% url 'landing' %}">Inicio</a>
+      <a href="{% url 'funciones' %}">Funciones</a>
       <a href="{% url 'equipos' %}">Equipos</a>
       <a href="{% url 'contacto' %}">Contáctanos</a>
+      <a href="{% url 'estadisticas' %}">Estadisticas</a>
     </nav>
     <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
   </header>
