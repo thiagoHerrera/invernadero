@@ -16,7 +16,7 @@ const char* serverUrl = "http://192.168.0.12:8000/api/sensors/";
 #define SOIL_PIN 34
 #define LIGHT_PIN 35
 
-// Pines actuadores
+// Pines reles
 #define PIN_BOMBA 26
 #define PIN_VENTILADOR 27
 
