@@ -1,0 +1,17 @@
+<h2>Subí una foto de tu planta</h2>
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <input type="file" name="foto" required>
+  <button type="submit">Diagnosticar</button>
+</form>
+
+{% if resultado %}
+    <h3>Resultado del diagnóstico:</h3>
+    {% for suggestion in diseases %}
+        <p><strong>Nombre:</strong> {{ suggestion.name }}</p>
+        <p><strong>Descripción:</strong> {{ suggestion.description.short }}</p>
+        <p><strong>Tratamiento:</strong> {{ suggestion.treatment.chemical }} / {{ suggestion.treatment.biological }}</p>
+    {% empty %}
+        <p>No se detectaron enfermedades.</p>
+    {% endfor %}
+{% endif %}

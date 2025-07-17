@@ -8,5 +8,6 @@ urlpatterns = [
     path('api/', include('api_comunication.urls')),
     path('Verificion2FA/', include('Verificacion2FA.urls')),
     path('ResetPassword/', include('Authentication.urls')),
-    path('', include('Windows.urls'))
+    path('', include('Windows.urls')),
+     path('diagnostico/', include('diagnostico.urls')),
 ]
