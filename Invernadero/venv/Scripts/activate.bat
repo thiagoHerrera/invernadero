@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\alumnos\Desktop\repo-git\invernadero\invernadero\venv
+set VIRTUAL_ENV=C:\Users\Alumnos\Desktop\invernadero\Invernadero\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
