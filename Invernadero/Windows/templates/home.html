@@ -18,6 +18,7 @@
       <a href="#"><i class="fas fa-bell"></i> Notificaciones</a>
       <a href="#"><i class="fas fa-chart-line"></i> Estadísticas</a>
       <a href="#"><i class="fas fa-question-circle"></i> Ayuda/Soporte</a>
+      <a href="{% url 'subir_imagen'%}"><i class="fas fa-question-circle"></i> Diagnostico IA</a>
     </div>
     <form action="{% url 'logout' %}" method="post">
       {% csrf_token %}

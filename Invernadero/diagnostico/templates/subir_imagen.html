@@ -1,17 +1,118 @@
-<h2>Subí una foto de tu planta</h2>
-<form method="POST" enctype="multipart/form-data">
-  {% csrf_token %}
-  <input type="file" name="foto" required>
-  <button type="submit">Diagnosticar</button>
-</form>
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FloraCore - Diagnóstico IA</title>
+  <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    /* Estilo para la sección de diagnóstico */
+    .diagnostico-section {
+        padding: 3rem 2rem;
+        text-align: center;
+        background-color: #d7ded7;
+        min-height: 70vh;
+    }
+    .diagnostico-section input[type="file"] {
+    display: block;
+    margin: 0 auto 1rem auto;
+    padding: 0.6rem 1rem;
+    border-radius: 12px;
+    border: 1px solid #036b0c;
+    background-color: #f4f9f4;
+    cursor: pointer;
+    font-size: 0.95rem;
+    transition: 0.3s;
+    }
 
-{% if resultado %}
-    <h3>Resultado del diagnóstico:</h3>
-    {% for suggestion in diseases %}
-        <p><strong>Nombre:</strong> {{ suggestion.name }}</p>
-        <p><strong>Descripción:</strong> {{ suggestion.description.short }}</p>
-        <p><strong>Tratamiento:</strong> {{ suggestion.treatment.chemical }} / {{ suggestion.treatment.biological }}</p>
-    {% empty %}
-        <p>No se detectaron enfermedades.</p>
-    {% endfor %}
-{% endif %}
+    .diagnostico-section input[type="file"]:hover {
+        background-color: #e1f0e1;
+        border-color: #028100;
+    }
+
+    .diagnostico-section button {
+        background-color: #036b0c;
+        color: white;
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: 0.3s;
+    }
+
+    .diagnostico-section button:hover {
+        background-color: #028100;
+    }
+    .diagnostico-section h2 { font-size: 1.8rem; margin-bottom: 1.5rem; color: #036b0c; }
+    .diagnostico-section input[type="file"] { padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc; margin-bottom: 1rem; }
+    .diagnostico-section button { background-color: #036b0c; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; font-weight: 600; }
+    .diagnostico-section button:hover { background-color: #6e9171; }
+    .resultado-diagnostico-mejorado { display: flex; gap: 2rem; background-color: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); max-width: 800px; margin: 2rem auto; align-items: center; animation: fadeInUp 0.8s ease-out; }
+    .resultado-imagen img { max-width: 250px; border-radius: 12px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+    .resultado-info h3 { color: #036b0c; margin-bottom: 1rem; }
+    .resultado-info p { margin-bottom: 0.8rem; font-size: 1rem; line-height: 1.4; }
+    .resultado-info strong { color: #2a7e56; }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+    <a href="{% url 'landing' %}" class="logo">FloraCore</a>
+    <div class="menu">
+      <a href="#"><i class="fas fa-user"></i> Perfil</a>
+      <a href="#"><i class="fas fa-image"></i> Histo. de Cultivo</a>
+      <a href="#"><i class="fas fa-bell"></i> Notificaciones</a>
+      <a href="#"><i class="fas fa-chart-line"></i> Estadísticas</a>
+      <a href="#"><i class="fas fa-question-circle"></i> Ayuda/Soporte</a>
+      <a href="{% url 'subir_imagen'%}"><i class="fas fa-microscope"></i> Diagnóstico IA</a>
+    </div>
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button class="user-btn" type="submit">Cerrar sesión</button>
+    </form>
+  </nav>
+
+  <!-- SECCIÓN DIAGNÓSTICO -->
+  <section class="diagnostico-section">
+    <h2>Subí una foto de tu planta</h2>
+    <form method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+      <input type="file" name="foto" required>
+      <br>
+      <button type="submit">Diagnosticar</button>
+    </form>
+
+    {% if disease or imagen_url %}
+    <div class="resultado-diagnostico-mejorado">
+        {% if imagen_url %}
+        <div class="resultado-imagen">
+            <img src="{{ imagen_url }}" alt="Planta diagnosticada">
+        </div>
+        {% endif %}
+        {% if disease %}
+        <div class="resultado-info">
+            <h3>Resultado del diagnóstico</h3>
+            <p><strong>Nombre:</strong> {{ disease.name }}</p>
+            <p><strong>Descripción:</strong> {{ disease.description.short }}</p>
+            <p><strong>Tratamiento:</strong> {{ disease.treatment.chemical }} / {{ disease.treatment.biological }}</p>
+        </div>
+        {% endif %}
+    </div>
+    {% else %}
+    <p>No se detectaron enfermedades.</p>
+    {% endif %}
+
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    &copy; 2025 FloraCore. Todos los derechos reservados.
+  </footer>
+
+</body>
+</html>
