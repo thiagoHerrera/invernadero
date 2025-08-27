@@ -22,6 +22,7 @@ body {
     position: sticky;
     top: 0;
     z-index: 100;
+    flex-direction: row;
 }
 
 .navbar .logo {
@@ -37,8 +38,11 @@ body {
 }
 
 .navbar .menu {
+    width: 75%;
     display: flex;
     gap: 2rem;
+    flex-wrap: nowrap;
+    align-items: center;
 }
 
 .navbar .menu a {
@@ -71,7 +75,7 @@ body {
 }
 
 .navbar .user-btn {
-    background-color: #036b0c;
+    background-color: #778899;
     color: #fff;
     padding: 0.5rem 1rem;
     border: none;
@@ -83,6 +87,7 @@ body {
 
 .navbar .user-btn:hover {
     background-color: #256b4a;
+    animation: scaleUp 0.3s ease-out;
 }
 
 /* === HERO === */
@@ -95,6 +100,7 @@ body {
     padding: 3rem;
     flex-wrap: wrap;
     gap: 2rem;
+    animation: fadeIn 1s ease-out;
 }
 
 .hero-text {
@@ -118,6 +124,7 @@ body {
     font-weight: 600;
     border-radius: 6px;
     cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .hero button:hover {
@@ -159,6 +166,7 @@ body {
     width: 250px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
+    animation: fadeInUp 0.8s ease-out;
 }
 
 .card img {
@@ -178,6 +186,7 @@ body {
     background-color: #fefbf8;
     gap: 2rem;
     flex-wrap: wrap;
+    animation: fadeInUp 1s ease-out;
 }
 
 .about-text {
@@ -213,6 +222,7 @@ body {
     width: 100%;
     border-radius: 12px;
     object-fit: cover;
+    animation: slideInLeft 1s ease-out;
 }
 
 /* === FOOTER === */
@@ -226,79 +236,113 @@ footer {
 }
 
 /* === ANIMACIONES === */
-
-/* Animación de entrada de la hero section */
-.hero {
-    animation: fadeIn 1s ease-out;
-}
-
-/* Animación de las tarjetas en la sección características */
-.card {
-    animation: fadeInUp 0.8s ease-out;
-}
-
-/* Animación de las tarjetas en la sección equipos */
-.about-section {
-    animation: fadeInUp 1s ease-out;
-}
-
-.about-image img {
-    animation: slideInLeft 1s ease-out;
-}
-
-/* Animación al hacer hover sobre el botón de la navbar */
-.navbar .user-btn:hover {
-    animation: scaleUp 0.3s ease-out;
-}
-
-/* Animación de los enlaces del menú de la navbar */
-.navbar .menu a:hover {
-    animation: textGlow 0.6s ease-out;
-}
-
-/* Animación de desvanecimiento suave para elementos al entrar */
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+    from { opacity: 0; }
+    to { opacity: 1; }
 }
 
-/* Animación de tarjetas de las características y equipos (desplazamiento y opacidad) */
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
-/* Animación de imagen en la sección "About" (desliza desde la izquierda) */
 @keyframes slideInLeft {
-    from {
-        opacity: 0;
-        transform: translateX(-50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(0);
-    }
+    from { opacity: 0; transform: translateX(-50px); }
+    to { opacity: 1; transform: translateX(0); }
 }
 
-/* Animación de escala para el botón de la navbar */
 @keyframes scaleUp {
-    from {
-        transform: scale(1);
+    from { transform: scale(1); }
+    to { transform: scale(1.1); }
+}
+
+/* === RESPONSIVE === */
+/* === RESPONSIVE MOVIL === */
+@media (max-width: 767px) {
+    /* Navbar vertical con logo arriba */
+    .navbar {
+        flex-direction: column;      /* apila logo y menú */
+        align-items: center;         /* centra elementos */
+        padding: 1rem;
+        width: 100%;
     }
-    to {
-        transform: scale(1.1);
+
+    /* Logo centrado arriba */
+    .navbar .logo {
+        order: 1;                   /* logo primero */
+        margin-bottom: 1rem;
+        text-align: center;
+        font-size: 1.5rem;
+    }
+
+    /* Menú ocupa todo el ancho */
+    .navbar .menu {
+        order: 2;                   /* menú después del logo */
+        display: flex;
+        flex-direction: column;     /* apila los enlaces verticalmente */
+        width: 100%;                /* ocupa todo el ancho */
+        gap: 0;
+        background-color: #ffffff;
+        padding: 0.5rem 0;
+        border-top: 1px solid #ccc;
+    }
+
+    .navbar .menu a {
+        padding: 0.8rem 1rem;
+        text-align: center;
+        width: 100%;
+        border-bottom: 1px solid #eee;
+    }
+
+    .navbar .user-btn {
+        order: 3;                   /* botón debajo del menú */
+        margin-top: 0.5rem;
+        width: 90%;
+        text-align: center;
     }
 }
 
 
+ 
+     /* Ocultar el menú en pantallas pequeñas inicialmente */
+
+    /* Mostrar el menú al hacer clic en el botón hamburguesa */
+    .navbar .menu.active {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        background-color: #ffffff;
+        padding: 0.5rem 0;
+        border-top: 1px solid #ccc;
+    }
+
+   
+
+    /* Ocultar el botón hamburguesa en pantallas más grandes */
+    .menu-toggle {
+        display: none;
+    }
+.spbt{
+    display:flex; justify-content: space-between; align-items: center; width:100%;
+    
+}   
+
+
+@media screen and (orientation: portrait){
+         .navbar .menu {
+        display: none;
+    }
+     .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+
+    .navbar{
+        flex-direction: column;
+
+    }
+}
 

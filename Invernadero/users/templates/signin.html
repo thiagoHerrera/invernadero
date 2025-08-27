@@ -35,14 +35,24 @@
         <h1>GreenHouse</h1>
         <h2>Inicio de Sesión</h2>
         {% csrf_token %}
+        
         <div class="form-group">
             Nombre de Usuario:
-            <input type="text" id="username" name="username" required>
+            {{ form.username }}
+            {% if form.username.errors %}
+                <p class="error">{{ form.username.errors.0 }}</p>
+            {% endif %}
         </div>
+
         <div class="form-group">
             Contraseña:
-            <input type="password" id="password" name="password" required>
+            {{ form.password }}
+            {% if form.password.errors %}
+                <p class="error">{{ form.password.errors.0 }}</p>
+            {% endif %}
         </div>
+
+
         <button type="submit">Iniciar Sesión</button>
         {% if error %}
             <p class="error">{{ error }}</p>
