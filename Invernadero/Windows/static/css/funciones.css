@@ -37,9 +37,14 @@ body {
 }
 
 .navbar .menu {
+    flex: 1;
     display: flex;
     gap: 2rem;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-end;
 }
+
 
 .navbar .menu a {
     text-decoration: none;
@@ -161,4 +166,41 @@ footer {
   color: #555;
   border-top: 1px solid #ccc;
   margin-top: 4rem;
+}
+
+/* === RESPONSIVE PARA MENÚ MÓVIL === */
+.spbt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.navbar .menu.active {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #ffffff;
+    padding: 0.5rem 0;
+    border-top: 1px solid #ccc;
+}
+
+@media screen and (orientation: portrait) {
+    .navbar .menu {
+        display: none;
+    }
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+    .navbar {
+        flex-direction: column;
+    }
 }

@@ -31,6 +31,7 @@ body {
     font-size: 1.6rem;
     transition: color 0.3s ease;
     text-decoration: none;
+    flex-shrink: 0;
 }
 
 .navbar .logo:hover {
@@ -38,11 +39,12 @@ body {
 }
 
 .navbar .menu {
-    width: 75%;
+    flex: 1;
     display: flex;
     gap: 2rem;
     flex-wrap: nowrap;
     align-items: center;
+    justify-content: flex-end;
 }
 
 .navbar .menu a {
@@ -83,6 +85,7 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    text-wrap: nowrap;s
 }
 
 .navbar .user-btn:hover {

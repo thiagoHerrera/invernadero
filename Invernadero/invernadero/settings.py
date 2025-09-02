@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'django_otp',
     'django_otp.plugins.otp_totp',
     'django_otp.plugins.otp_static',
-    'widget_tweaks',
     'two_factor',
     'qrcode',
     'Windows',
@@ -80,6 +79,14 @@ TEMPLATES = [
         },
     },
 ]
+
+# Password reset template settings
+PASSWORD_RESET_TEMPLATES = {
+    'password_reset': 'registration/password_reset.html',
+    'password_reset_done': 'registration/password_reset_done.html',
+    'password_reset_confirm': 'registration/password_reset_confirm.html',
+    'password_reset_complete': 'registration/password_reset_complete.html',
+}
 
 WSGI_APPLICATION = 'invernadero.wsgi.application'
 
@@ -125,6 +132,18 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+# Email configuration
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'your-email@gmail.com'
+# EMAIL_HOST_PASSWORD = 'your-password'
+
+# Password reset settings
+PASSWORD_RESET_TIMEOUT = 259200  # 3 days in seconds
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/

@@ -10,15 +10,20 @@
 <body>
 
   <header class="navbar">
-    <div><a class="logo" href="{% url 'landing' %}">FloraCore</a></div>
-    <nav class="menu">
+  <section class="spbt">
+  <button class="menu-toggle" id="menuToggle">&#9776;</button>
+    <div class="logo">FloraCore</div>
+    </section>
+    <nav class="menu" id="navMenu">
       <a href="{% url 'landing' %}">Inicio</a>
       <a href="{% url 'funciones' %}">Funciones</a>
       <a href="{% url 'equipos' %}">Equipos</a>
       <a href="{% url 'contacto' %}">Contáctanos</a>
       <a href="{% url 'estadisticas' %}">Estadisticas</a>
+       <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
     </nav>
-    <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+
+
   </header>
 
   <main class="contacto">
@@ -52,10 +57,21 @@
     </section>
   </main>
 
-  <footer>
-    <p>© 2025 FloraCore - Todos los derechos reservados</p>
+  <footer id="contact">
+    <p>¿Tenés dudas? <a href="mailto:FloraCore2025@gmail.com">Contactanos aquí</a></p>
+    <p>Copyright © 2025 FloraCore</p>
   </footer>
 
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+    });
+</script>
 </body>
 </html>
 

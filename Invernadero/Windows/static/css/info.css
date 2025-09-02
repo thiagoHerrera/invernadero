@@ -147,3 +147,41 @@ footer {
         font-size: 1rem;
     }
 }
+
+/* === RESPONSIVE PARA MENÚ MÓVIL === */
+.spbt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.navbar .menu.active {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    background-color: #036b0c;
+    padding: 0.5rem 0;
+    border-top: 1px solid #ccc;
+}
+
+@media screen and (orientation: portrait) {
+    .navbar .menu {
+        display: none;
+    }
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: white;
+    }
+    .navbar {
+        flex-direction: column;
+    }
+}
