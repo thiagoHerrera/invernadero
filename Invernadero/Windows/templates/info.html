@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Información del Proyecto - FloraCore</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/info.css' %}">
 </head>
 <body>
@@ -21,21 +22,24 @@
       <a href="{% url 'contacto' %}">Contáctanos</a>
       <a href="{% url 'estadisticas' %}">Estadisticas</a>
       <hr >
-       <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       {% if not user.is_authenticated %}
+       <button class="user-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       <button class="register-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+       {% endif %}
     </nav>
 
 
   </header>
 
-  <main class="project-info">
-    <h2>¿Qué es FloraCore?</h2>
-    <p>FloraCore es un innovador invernadero inteligente que utiliza sensores avanzados y un microcontrolador ESP32 para automatizar el cuidado de plantas. Ideal para quienes no tienen tiempo o experiencia en jardinería, FloraCore permite que cualquier persona pueda cuidar sus plantas de manera eficiente, incluso en entornos cerrados o urbanos.</p>
-    
-    <h2>¿Cómo Funciona?</h2>
-    <p>FloraCore utiliza una red de sensores que monitorean las condiciones del aire, la temperatura, la humedad y la luz, así como el estado del suelo. Estos datos son procesados por un microcontrolador ESP32, que toma decisiones automáticas, como activar el riego, la ventilación o la iluminación, según sea necesario.</p>
-    
-    <h2>Objetivo</h2>
-    <p>El principal objetivo de FloraCore es facilitar el cultivo autónomo de plantas en cualquier ambiente, asegurando que se mantengan en condiciones óptimas. Esto hace posible que personas sin tiempo o conocimiento en jardinería puedan cuidar plantas, incluso árboles, sin esfuerzo.</p>
+  <main class="project-info animate-on-scroll">
+    <h2 class="animate-fade-in animate-delay-200"><i class="fas fa-leaf text-green-500 mr-3"></i>¿Qué es FloraCore?</h2>
+    <p class="animate-fade-in animate-delay-400">FloraCore es un innovador invernadero inteligente que utiliza sensores avanzados y un microcontrolador ESP32 para automatizar el cuidado de plantas. Ideal para quienes no tienen tiempo o experiencia en jardinería, FloraCore permite que cualquier persona pueda cuidar sus plantas de manera eficiente, incluso en entornos cerrados o urbanos.</p>
+
+    <h2 class="animate-fade-in animate-delay-600"><i class="fas fa-question-circle text-blue-500 mr-3"></i>¿Cómo Funciona?</h2>
+    <p class="animate-fade-in animate-delay-800">FloraCore utiliza una red de sensores que monitorean las condiciones del aire, la temperatura, la humedad y la luz, así como el estado del suelo. Estos datos son procesados por un microcontrolador ESP32, que toma decisiones automáticas, como activar el riego, la ventilación o la iluminación, según sea necesario.</p>
+
+    <h2 class="animate-fade-in animate-delay-1000"><i class="fas fa-bullseye text-purple-500 mr-3"></i>Objetivo</h2>
+    <p class="animate-fade-in animate-delay-1200">El principal objetivo de FloraCore es facilitar el cultivo autónomo de plantas en cualquier ambiente, asegurando que se mantengan en condiciones óptimas. Esto hace posible que personas sin tiempo o conocimiento en jardinería puedan cuidar plantas, incluso árboles, sin esfuerzo.</p>
   </main>
 
   <footer id="contact">
@@ -43,6 +47,7 @@
     <p>Copyright © 2025 FloraCore</p>
   </footer>
 
+    <script src="{% static 'js/animaciones.js' %}"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const menuToggle = document.getElementById('menuToggle');

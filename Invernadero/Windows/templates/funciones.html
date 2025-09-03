@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Funciones - FloraCore</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/funciones.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
@@ -22,20 +23,23 @@
       <a href="{% url 'contacto' %}">Contáctanos</a>
       <a href="{% url 'estadisticas' %}">Estadisticas</a>
       <hr >
-       <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       {% if not user.is_authenticated %}
+       <button class="user-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       <button class="register-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+       {% endif %}
     </nav>
 
 
   </header>
 
-  <main class="funciones">
-    <h1>¿Cómo Funciona FloraCore?</h1>
-    <p class="intro">FloraCore es un invernadero inteligente que utiliza tecnología de sensores y control automatizado para cuidar tus plantas sin necesidad de conocimientos previos o tiempo libre.</p>
+  <main class="funciones animate-on-scroll">
+    <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-cog text-blue-600 mr-3"></i>¿Cómo Funciona FloraCore?</h1>
+    <p class="intro animate-fade-in animate-delay-400">FloraCore es un invernadero inteligente que utiliza tecnología de sensores y control automatizado para cuidar tus plantas sin necesidad de conocimientos previos o tiempo libre.</p>
 
     <div class="funciones-grid">
-      <section class="bloque">
-        <i class="fas fa-microchip icono"></i>
-        <h2>¿Qué usamos?</h2>
+      <section class="bloque animate-on-scroll hover:scale-105 transition-all duration-300">
+        <i class="fas fa-microchip icono animate-bounce hover:animate-pulse"></i>
+        <h2><i class="fas fa-tools text-orange-500 mr-2"></i>¿Qué usamos?</h2>
         <ul>
           <li>Sensores de humedad del suelo y del ambiente</li>
           <li>Sensores de temperatura interna y externa</li>
@@ -45,9 +49,9 @@
         </ul>
       </section>
 
-      <section class="bloque">
-        <i class="fas fa-gears icono"></i>
-        <h2>¿Cómo funciona?</h2>
+      <section class="bloque animate-on-scroll hover:scale-105 transition-all duration-300">
+        <i class="fas fa-gears icono animate-bounce hover:animate-pulse"></i>
+        <h2><i class="fas fa-play-circle text-green-500 mr-2"></i>¿Cómo funciona?</h2>
         <p>Los sensores monitorean continuamente las condiciones del entorno y del cultivo. El microcontrolador ESP32, programado mediante Arduino IDE, interpreta esta información y activa automáticamente:</p>
         <ul>
           <li>El riego si la planta necesita agua</li>
@@ -57,9 +61,9 @@
         </ul>
       </section>
 
-      <section class="bloque">
-        <i class="fas fa-seedling icono"></i>
-        <h2>¿Cuál es el objetivo?</h2>
+      <section class="bloque animate-on-scroll hover:scale-105 transition-all duration-300">
+        <i class="fas fa-seedling icono animate-bounce hover:animate-pulse"></i>
+        <h2><i class="fas fa-target text-red-500 mr-2"></i>¿Cuál es el objetivo?</h2>
         <p>Buscamos fomentar los espacios verdes y ayudar a personas que no tienen tiempo o conocimientos para cuidar plantas. FloraCore permite que cualquier persona pueda tener un cultivo sano y adaptado, incluso en ambientes difíciles o cerrados. ¡Hasta podés cuidar un árbol!</p>
       </section>
     </div>
@@ -70,6 +74,7 @@
     <p>Copyright © 2025 FloraCore</p>
   </footer>
 
+    <script src="{% static 'js/animaciones.js' %}"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const menuToggle = document.getElementById('menuToggle');

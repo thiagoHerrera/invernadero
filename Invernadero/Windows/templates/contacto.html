@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Contáctanos - FloraCore</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/contacto.css' %}">
 </head>
 <body>
@@ -15,25 +16,28 @@
     <div class="logo">FloraCore</div>
     </section>
     <nav class="menu" id="navMenu">
-      <a href="{% url 'landing' %}">Inicio</a>
-      <a href="{% url 'funciones' %}">Funciones</a>
-      <a href="{% url 'equipos' %}">Equipos</a>
-      <a href="{% url 'contacto' %}">Contáctanos</a>
-      <a href="{% url 'estadisticas' %}">Estadisticas</a>
-       <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+      <a href="{% url 'landing' %}"><i class="fas fa-home mr-2"></i>Inicio</a>
+      <a href="{% url 'funciones' %}"><i class="fas fa-cog mr-2"></i>Funciones</a>
+      <a href="{% url 'equipos' %}"><i class="fas fa-microchip mr-2"></i>Equipos</a>
+      <a href="{% url 'contacto' %}"><i class="fas fa-envelope mr-2"></i>Contáctanos</a>
+      <a href="{% url 'estadisticas' %}"><i class="fas fa-chart-bar mr-2"></i>Estadisticas</a>
+       {% if not user.is_authenticated %}
+       <button class="user-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       <button class="register-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+       {% endif %}
     </nav>
 
 
   </header>
 
-  <main class="contacto">
-    <h1>Contáctanos</h1>
-    <p>¡Gracias por tu interés en nuestro proyecto! Somos un grupo de estudiantes de la Escuela Técnica N°3 Roberto Arlt, en Tortuguitas, Buenos Aires, Argentina. Estamos trabajando en el proyecto <strong>FloraCore</strong>, un invernadero inteligente que facilita el cuidado de tus plantas.</p>
+  <main class="contacto animate-on-scroll">
+    <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-envelope text-blue-600 mr-3"></i>Contáctanos</h1>
+    <p class="animate-fade-in animate-delay-400">¡Gracias por tu interés en nuestro proyecto! Somos un grupo de estudiantes de la Escuela Técnica N°3 Roberto Arlt, en Tortuguitas, Buenos Aires, Argentina. Estamos trabajando en el proyecto <strong>FloraCore</strong>, un invernadero inteligente que facilita el cuidado de tus plantas.</p>
 
-    <section class="equipo">
-      <h2>Conoce a nuestro equipo</h2>
-      <p>Nosotros somos:</p>
-      <ul>
+    <section class="equipo animate-on-scroll">
+      <h2 class="animate-fade-in animate-delay-600">Conoce a nuestro equipo</h2>
+      <p class="animate-fade-in animate-delay-800">Nosotros somos:</p>
+      <ul class="animate-fade-in animate-delay-1000">
         <li><strong>Walter Casarino</strong> – Encargado del Frontend (Maquetación y diseño de la interfaz)</li>
         <li><strong>Bautista Insaurralde</strong> – Encargado del Backend y parte del Frontend (Funcionalidades, seguridad de la página, diseño)</li>
         <li><strong>Thiago Herrera</strong> – Encargado de IA y parte del Backend (Desarrollo de funcionalidades de la página, creacion de IA y base de datos)</li>
@@ -42,15 +46,15 @@
       </ul>
     </section>
 
-    <section class="contacto-info">
-      <h2>¿Cómo contactarnos?</h2>
-      <p>Si tienes alguna pregunta o quieres saber más sobre FloraCore, puedes ponerte en contacto con nosotros a través de los siguientes medios:</p>
-      <ul>
-        <li><strong>Correo electrónico:</strong> <a href="mailto:FloraCore2025@gmail.com">FloraCore2025@gmail.com</a></li>
+    <section class="contacto-info animate-on-scroll">
+      <h2 class="animate-fade-in animate-delay-1200">¿Cómo contactarnos?</h2>
+      <p class="animate-fade-in animate-delay-1400">Si tienes alguna pregunta o quieres saber más sobre FloraCore, puedes ponerte en contacto con nosotros a través de los siguientes medios:</p>
+      <ul class="animate-fade-in animate-delay-1600">
+        <li><strong>Correo electrónico:</strong> <a href="mailto:FloraCore2025@gmail.com" class="hover:text-green-600 transition-colors duration-300">FloraCore2025@gmail.com</a></li>
         <li><strong>Redes sociales:</strong>
           <ul>
-            <li><a href="#">Facebook: FloraCore</a></li>
-            <li><a href="https://www.instagram.com/floracore_off/">Instagram: @floracore_off</a></li>
+            <li><a href="#" class="hover:text-green-600 transition-colors duration-300">Facebook: FloraCore</a></li>
+            <li><a href="https://www.instagram.com/floracore_off/" class="hover:text-green-600 transition-colors duration-300">Instagram: @floracore_off</a></li>
           </ul>
         </li>
       </ul>
@@ -62,6 +66,7 @@
     <p>Copyright © 2025 FloraCore</p>
   </footer>
 
+    <script src="{% static 'js/animaciones.js' %}"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const menuToggle = document.getElementById('menuToggle');

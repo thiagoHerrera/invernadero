@@ -5,23 +5,27 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FloraCore - Home</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/landing.css' %}">
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <header class="navbar">
+  <header class="navbar animate-fade-in-down animate-duration-1000">
   <section class="spbt">
-  <button class="menu-toggle" id="menuToggle">&#9776;</button>
-    <div class="logo">FloraCore</div>
+  <button class="menu-toggle hover:scale-110 transition-transform duration-300" id="menuToggle">&#9776;</button>
+    <div class="logo hover:text-green-600 transition-colors duration-300">FloraCore</div>
     </section>
     <nav class="menu" id="navMenu">
-      <a href="{% url 'landing' %}">Inicio</a>
-      <a href="{% url 'funciones' %}">Funciones</a>
-      <a href="{% url 'equipos' %}">Equipos</a>
-      <a href="{% url 'contacto' %}">Contáctanos</a>
-      <a href="{% url 'estadisticas' %}">Estadisticas</a>
-       <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+      <a href="{% url 'landing' %}" class="hover:scale-105 transition-all duration-300">Inicio</a>
+      <a href="{% url 'funciones' %}" class="hover:scale-105 transition-all duration-300">Funciones</a>
+      <a href="{% url 'equipos' %}" class="hover:scale-105 transition-all duration-300">Equipos</a>
+      <a href="{% url 'contacto' %}" class="hover:scale-105 transition-all duration-300">Contáctanos</a>
+      <a href="{% url 'estadisticas' %}" class="hover:scale-105 transition-all duration-300">Estadisticas</a>
+       {% if not user.is_authenticated %}
+       <button class="user-btn hover:scale-105 transition-all duration-300 animate-pulse" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       <button class="register-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+       {% endif %}
     </nav>
  
     
@@ -29,61 +33,63 @@
 {% comment %} 
   <!-- HERO -->
 
-  <button class="user-btn" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+  <button class="user-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+  <button class="register-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
   </header> {% endcomment %}
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-text">
-      <h1>¡Bienvenido a FloraCore!</h1>
-      <p>¿Querés adentrarte al mundo del cultivo y no tenés un espacio adecuado?<br>
+  <section class="hero animate-fade-in animate-duration-1500">
+    <div class="hero-text animate-slide-in-left animate-duration-1000">
+      <h1 class="animate-fade-in animate-delay-300">¡Bienvenido a FloraCore!</h1>
+      <p class="animate-fade-in animate-delay-500">¿Querés adentrarte al mundo del cultivo y no tenés un espacio adecuado?<br>
       Te presentamos FloraCore, tu invernadero inteligente para cualquier tipo de ambiente.</p>
       <button onclick="window.location.href='{% url 'info' %}'">Más información</button>
     </div>
-    <img src="{% static 'img/1erfoto.jpg' %}" alt="Tablet en cultivo">
+    <img src="{% static 'img/1erfoto.jpg' %}" alt="Tablet en cultivo" class="animate-slide-in-right animate-duration-1000">
   </section>
 
   <!-- FUNCIONES -->
-  <section class="features" id="features">
-    <h2>Algunas de sus Características</h2>
+  <section class="features animate-on-scroll" id="features">
+    <h2 class="animate-fade-in animate-delay-200"><i class="fas fa-star text-yellow-500 mr-3"></i>Algunas de sus Características</h2>
     <div class="cards">
-      <div class="card">
-        <img src="{% static 'img/2daimg.png' %}" alt="Cambio Climático">
-        <h3>Cambio Climático</h3>
+      <div class="card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
+        <img src="{% static 'img/2daimg.png' %}" alt="Cambio Climático" class="hover:scale-110 transition-transform duration-300">
+        <h3><i class="fas fa-cloud-sun text-blue-500 mr-2"></i>Cambio Climático</h3>
         <p>La planta que se cultive no se va a ver afectada por el cambio climático.</p>
       </div>
-      <div class="card">
-        <img src="{% static 'img/3erimg.jpg' %}" alt="Cambio de Temporada">
-        <h3>Cambio De Temporada</h3>
+      <div class="card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
+        <img src="{% static 'img/3erimg.jpg' %}" alt="Cambio de Temporada" class="hover:scale-110 transition-transform duration-300">
+        <h3><i class="fas fa-calendar-alt text-green-500 mr-2"></i>Cambio De Temporada</h3>
         <p>El cambio de temporada de diferentes plantas o cultivos no va a afectar.</p>
       </div>
-      <div class="card">
-        <img src="{% static 'img/4taimg.jpg' %}" alt="Autonomía">
-        <h3>Autonomía</h3>
+      <div class="card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
+        <img src="{% static 'img/4taimg.jpg' %}" alt="Autonomía" class="hover:scale-110 transition-transform duration-300">
+        <h3><i class="fas fa-robot text-purple-500 mr-2"></i>Autonomía</h3>
         <p>No va a haber preocupación al olvidarse de hacerle mantenimiento al cultivo.</p>
       </div>
     </div>
   </section>
 
   <!-- EQUIPOS -->
-  <section class="about-section" id="equipment">
-    <div class="about-text">
-      <h2>Equipos FloraCore</h2>
+  <section class="about-section animate-on-scroll" id="equipment">
+    <div class="about-text animate-slide-in-left animate-duration-1000">
+      <h2><i class="fas fa-cogs text-orange-500 mr-3"></i>Equipos FloraCore</h2>
       <p>Nuestros dispositivos permiten controlar temperatura, humedad y riego de forma automática, adaptándose al tipo de planta y al entorno.</p>
-      <button onclick="window.location.href='{% url 'equipos' %}'">Ver Equipos</button>
+      <button onclick="window.location.href='{% url 'equipos' %}'" class="hover:scale-110 transition-all duration-300 animate-pulse">Ver Equipos</button>
     </div>
-    <div class="about-image">
-      <img src="{% static 'img/5img.jpg' %}" alt="Tablet mostrando sensores">
+    <div class="about-image animate-slide-in-right animate-duration-1000">
+      <img src="{% static 'img/5img.jpg' %}" alt="Tablet mostrando sensores" class="hover:scale-105 transition-transform duration-300">
     </div>
   </section>
 
 
   <!-- CONTACTO -->
-  <footer id="contact">
-    <p>¿Tenés dudas? <a href="FloraCore2025@gmail.com">Contactanos aquí</a></p>
+  <footer id="contact" class="animate-on-scroll">
+    <p><i class="fas fa-envelope text-blue-500 mr-2"></i>¿Tenés dudas? <a href="mailto:FloraCore2025@gmail.com" class="hover:text-green-600 transition-colors duration-300">Contactanos aquí</a></p>
     <p>Copyright © 2025 FloraCore</p>
   </footer>
 
+    <script src="{% static 'js/animaciones.js' %}"></script>
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const menuToggle = document.getElementById('menuToggle');
