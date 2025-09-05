@@ -1,5 +1,5 @@
 from django.urls import path
-from .views import landing, home, equipo, contacto, funciones, info, get_latest_parameters
+from .views import landing, home, equipo, contacto, funciones, info, historialcultivo
 
 
 urlpatterns = [
@@ -9,6 +9,6 @@ urlpatterns = [
     path('contacto/', contacto, name="contacto"),
     path('funciones/', funciones, name="funciones"),
     path('informacion/', info, name="info"),
-    path('estadisticas/', get_latest_parameters, name='estadisticas'),
+    path('historialcultivo/', historialcultivo, name='historialcultivo'),
 
 ]

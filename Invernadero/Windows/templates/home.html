@@ -14,10 +14,10 @@
     <a href="#" class="logo">FloraCore</a>
     <div class="menu">
       <a href="#"><i class="fas fa-user"></i> Perfil</a>
-      <a href="#"><i class="fas fa-image"></i> Histo. de Cultivo</a>
       <a href="#"><i class="fas fa-bell"></i> Notificaciones</a>
       <a href="#"><i class="fas fa-chart-line"></i> Estadísticas</a>
       <a href="#"><i class="fas fa-question-circle"></i> Ayuda/Soporte</a>
+      <a href="{% url 'historialcultivo'%}"><i class="fas fa-image"></i> Histo. de Cultivo</a>
       <a href="{% url 'subir_imagen'%}"><i class="fas fa-question-circle"></i> Diagnostico IA</a>
     </div>
     <form action="{% url 'logout' %}" method="post">
@@ -33,7 +33,7 @@
       <p>Bienvenido de nuevo a tu invernadero inteligente. Aquí puedes controlar y monitorear el estado de tus cultivos.</p>
       <button onclick="location.href='#estadisticas'">Ver estadísticas</button>
     </div>
-    <img src="{% static 'img/invernadero-home.png' %}" alt="Ilustración invernadero">
+    <img src="{% static 'img/invernadero-home.jpg' %}" alt="Ilustración invernadero">
   </section>
 
   <!-- SECCIÓN INFO -->
@@ -46,12 +46,12 @@
         <p>Consulta y edita tu información personal y tus configuraciones.</p>
       </div>
       <div class="card">
-        <img src="{% static 'img/historial.jpg' %}" alt="Historial">
+        <img src="{% static 'img/historial.png' %}" alt="Historial">
         <h3>Historial de Cultivo</h3>
         <p>Revisa el crecimiento y cuidado de tus plantas a lo largo del tiempo.</p>
       </div>
       <div class="card">
-        <img src="{% static 'img/notificaciones.jpg' %}" alt="Notificaciones">
+        <img src="{% static 'img/notificaciones.png' %}" alt="Notificaciones">
         <h3>Notificaciones</h3>
         <p>Recibe alertas sobre riego, luz y temperatura.</p>
       </div>

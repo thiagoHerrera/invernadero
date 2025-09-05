@@ -42,6 +42,8 @@
         font-weight: 600;
         font-size: 1rem;
         transition: 0.3s;
+        margin-top: 10px;
+        margin-bottom: 15px
     }
 
     .diagnostico-section button:hover {
@@ -62,13 +64,13 @@
 
   <!-- NAVBAR -->
   <nav class="navbar">
-    <a href="{% url 'landing' %}" class="logo">FloraCore</a>
+    <a href="{% url 'home' %}" class="logo">FloraCore</a>
     <div class="menu">
       <a href="#"><i class="fas fa-user"></i> Perfil</a>
-      <a href="#"><i class="fas fa-image"></i> Histo. de Cultivo</a>
       <a href="#"><i class="fas fa-bell"></i> Notificaciones</a>
       <a href="#"><i class="fas fa-chart-line"></i> Estadísticas</a>
       <a href="#"><i class="fas fa-question-circle"></i> Ayuda/Soporte</a>
+      <a href="{%url 'historialcultivo'%}"><i class="fas fa-image"></i> Histo. de Cultivo</a>
       <a href="{% url 'subir_imagen'%}"><i class="fas fa-microscope"></i> Diagnóstico IA</a>
     </div>
     <form action="{% url 'logout' %}" method="post">
@@ -76,6 +78,7 @@
       <button class="user-btn" type="submit">Cerrar sesión</button>
     </form>
   </nav>
+  
 
   <!-- SECCIÓN DIAGNÓSTICO -->
   <section class="diagnostico-section">
@@ -86,6 +89,10 @@
       <br>
       <button type="submit">Diagnosticar</button>
     </form>
+
+          
+    
+
 
     {% if disease or imagen_url %}
     <div class="resultado-diagnostico-mejorado">

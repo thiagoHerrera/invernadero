@@ -20,10 +20,8 @@ def funciones(request):
 
 def info(request):
     return render(request, 'info.html')
-# Create your views here.
 
-
-def get_latest_parameters(request):
+def historialcultivo(request):
     ultimo = Parameters.objects.last()
 
     if ultimo is None:
@@ -39,4 +37,6 @@ def get_latest_parameters(request):
         'humedad_suelo': ultimo.hume_floor,
     }
 
-    return render(request, 'estadisticas.html', data)
+    return render(request, 'historial-cultivo.html', data)
+
+
