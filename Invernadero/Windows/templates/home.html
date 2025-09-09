@@ -23,11 +23,11 @@
     {% if user.is_authenticated %}
     <form action="{% url 'logout' %}" method="post">
       {% csrf_token %}
-      <button class="user-btn hover:scale-105 transition-all duration-300 animate-pulse" type="submit">Cerrar sesión</button>
+      <button class="user-btn hover:scale-105 transition-all duration-300" type="submit">Cerrar sesión</button>
     </form>
     {% else %}
-    <button class="user-btn hover:scale-105 transition-all duration-300 animate-pulse" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
-    <button class="register-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+    <button class="user-btn hover:scale-105 transition-all duration-300" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+    <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
     {% endif %}
   </nav>
 

@@ -24,8 +24,8 @@
       <a href="{% url 'estadisticas' %}">Estadisticas</a>
       <hr >
        {% if not user.is_authenticated %}
-       <button class="user-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
-       <button class="register-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+       <button class="user-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
        {% endif %}
     </nav>
 

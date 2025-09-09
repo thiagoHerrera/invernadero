@@ -1,220 +1,201 @@
-/* === RESET GENERAL === */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+/* Importar estilos base */
+@import url('base.css');
 
 body {
-    background-color: #f6f7f5;
-    color: #2c2c2c;
+     background-color: var(--light-green);
+     color: var(--text-primary);
 }
 
-/* === NAVBAR === */
-.navbar {
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 3rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.navbar .logo {
-    font-weight: bold;
-    color: #2a7e56;
-    font-size: 1.6rem;
-    transition: color 0.3s ease;
-    text-decoration: none;
-}
-
-.navbar .logo:hover {
-    color: #1e5c3e;
-}
-
-.navbar .menu {
-    display: flex;
-}
-.navbar .menu {
-    flex: 1;
-    display: flex;
-    gap: 2rem;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.navbar .menu a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-.navbar .menu a:hover {
-    color: #2a7e56;
-}
-
-.navbar .menu a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    background-color: #2a7e56;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-}
-
-.navbar .menu a:hover::after {
-    transform: scaleX(1);
-}
-
+/* Navbar usando base.css */
 .navbar .user-btn {
-    background-color: #036b0c;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+     background-color: var(--secondary-green);
 }
 
 .navbar .user-btn:hover {
-    background-color: #256b4a;
+     background-color: var(--hover-green);
 }
 
 /* === SECCIÓN EQUIPOS === */
 .main-section {
-    padding: 3rem 2rem;
-    max-width: 1200px;
-    margin: auto;
+     padding: 3rem 2rem;
+     max-width: 1200px;
+     margin: auto;
 }
 
 .main-section h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    color: #2a7e56;
-    text-align: center;
+     font-size: 2rem;
+     margin-bottom: 1rem;
+     color: var(--primary-green);
+     text-align: center;
 }
 
 .main-section p {
-    margin-bottom: 2rem;
-    text-align: center;
-    line-height: 1.5;
+     margin-bottom: 2rem;
+     text-align: center;
+     line-height: 1.5;
+     color: var(--text-secondary);
 }
 
 .equipment-grid {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
-    justify-content: center;
+     display: flex;
+     flex-wrap: wrap;
+     gap: 2rem;
+     justify-content: center;
 }
 
 .equipment-card {
-    background-color: white;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    padding: 1.5rem;
-    width: 280px;
-    text-align: center;
+     background-color: var(--white);
+     border-radius: 12px;
+     box-shadow: 0 2px 8px var(--shadow);
+     padding: 1.5rem;
+     width: 280px;
+     text-align: center;
 }
 
 .equipment-card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 1rem;
+     width: 100%;
+     height: 180px;
+     object-fit: cover;
+     border-radius: 10px;
+     margin-bottom: 1rem;
 }
 
 .equipment-card h3 {
-    color: #2a7e56;
-    font-size: 1.1rem;
-    margin-bottom: 0.5rem;
+     color: var(--primary-green);
+     font-size: 1.1rem;
+     margin-bottom: 0.5rem;
 }
 
 .equipment-card p {
-    font-size: 0.95rem;
-    color: #444;
+     font-size: 0.95rem;
+     color: var(--text-secondary);
 }
 
-/* === FOOTER === */
+/* === FOOTER usando base.css === */
 footer {
-    background-color: #ffffff;
-    text-align: center;
-    padding: 1rem;
-    font-size: 0.9rem;
-    color: #555;
-    border-top: 1px solid #ccc;
-    margin-top: 4rem;
+     margin-top: 4rem;
 }
 
-/* === ANIMACIONES PARA EQUIPOS === */
+/* === NUEVAS ANIMACIONES ÚNICAS PARA EQUIPOS === */
+
+/* Animación de entrada escalonada */
 .equipment-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    animation: fadeInUp 0.8s ease;
+     opacity: 0;
+     transform: translateX(-50px) rotate(-5deg);
+     transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
+.equipment-card.card-1 { animation: slideInLeftRotate 0.8s ease-out 0.1s forwards; }
+.equipment-card.card-2 { animation: slideInLeftRotate 0.8s ease-out 0.3s forwards; }
+.equipment-card.card-3 { animation: slideInLeftRotate 0.8s ease-out 0.5s forwards; }
+.equipment-card.card-4 { animation: slideInRightRotate 0.8s ease-out 0.1s forwards; }
+.equipment-card.card-5 { animation: slideInRightRotate 0.8s ease-out 0.3s forwards; }
+.equipment-card.card-6 { animation: slideInRightRotate 0.8s ease-out 0.5s forwards; }
+
+/* Hover effect con borde verde */
 .equipment-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+     transform: translateY(-5px);
+     box-shadow: 0 15px 35px rgba(42, 126, 86, 0.3), 0 0 20px rgba(42, 126, 86, 0.1);
+     border: 2px solid var(--primary-green);
 }
 
-/* Animación al aparecer */
-@keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Imagen sin overlays */
+.card-image-container img {
+     /* Sin overlays ni efectos adicionales */
 }
 
 /* === RESPONSIVE PARA MENÚ MÓVIL === */
 .spbt {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     width: 100%;
 }
 
 .menu-toggle {
-    display: none;
+     display: none;
 }
 
 .navbar .menu.active {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: #ffffff;
-    padding: 0.5rem 0;
-    border-top: 1px solid #ccc;
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+     background-color: var(--white);
+     padding: 0.5rem 0;
+     border-top: 1px solid var(--border-color);
 }
 
 @media screen and (orientation: portrait) {
-    .navbar .menu {
-        display: none;
+     .navbar .menu {
+         display: none;
+     }
+
+     .menu-toggle {
+         display: block;
+         background: none;
+         border: none;
+         font-size: 1.5rem;
+         cursor: pointer;
+     }
+
+     .navbar {
+         flex-direction: column;
+     }
+}
+
+/* === DEFINICIONES DE ANIMACIONES ÚNICAS === */
+@keyframes slideInLeftRotate {
+    from {
+         opacity: 0;
+         transform: translateX(-100px) rotate(-10deg) scale(0.8);
     }
-    .menu-toggle {
-        display: block;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
+    to {
+         opacity: 1;
+         transform: translateX(0) rotate(0deg) scale(1);
     }
-    .navbar {
-        flex-direction: column;
+}
+
+@keyframes slideInRightRotate {
+    from {
+         opacity: 0;
+         transform: translateX(100px) rotate(10deg) scale(0.8);
     }
+    to {
+         opacity: 1;
+         transform: translateX(0) rotate(0deg) scale(1);
+    }
+}
+
+@keyframes borderGlow {
+    0% { box-shadow: 0 0 5px rgba(42, 126, 86, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(42, 126, 86, 0.4), 0 0 30px rgba(42, 126, 86, 0.2); }
+    100% { box-shadow: 0 0 5px rgba(42, 126, 86, 0.2); }
+}
+
+/* Estilos adicionales para mejor UX */
+.equipment-title {
+    font-size: 2.5rem;
+    color: var(--primary-green);
+    text-align: center;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.equipment-description {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.card-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
 }
 

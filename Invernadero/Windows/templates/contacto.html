@@ -22,8 +22,8 @@
       <a href="{% url 'contacto' %}"><i class="fas fa-envelope mr-2"></i>Contáctanos</a>
       <a href="{% url 'estadisticas' %}"><i class="fas fa-chart-bar mr-2"></i>Estadisticas</a>
        {% if not user.is_authenticated %}
-       <button class="user-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
-       <button class="register-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+       <button class="user-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
        {% endif %}
     </nav>
 
@@ -31,33 +31,82 @@
   </header>
 
   <main class="contacto animate-on-scroll">
-    <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-envelope text-blue-600 mr-3"></i>Contáctanos</h1>
-    <p class="animate-fade-in animate-delay-400">¡Gracias por tu interés en nuestro proyecto! Somos un grupo de estudiantes de la Escuela Técnica N°3 Roberto Arlt, en Tortuguitas, Buenos Aires, Argentina. Estamos trabajando en el proyecto <strong>FloraCore</strong>, un invernadero inteligente que facilita el cuidado de tus plantas.</p>
+    <div class="contacto-header">
+      <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-envelope text-blue-600 mr-3"></i>Contáctanos</h1>
+      <p class="animate-fade-in animate-delay-400">¡Gracias por tu interés en nuestro proyecto! Somos un grupo de estudiantes apasionados de la Escuela Técnica N°3 Roberto Arlt, trabajando en <strong>FloraCore</strong>, un invernadero inteligente que revoluciona el cuidado de plantas.</p>
+    </div>
 
     <section class="equipo animate-on-scroll">
-      <h2 class="animate-fade-in animate-delay-600">Conoce a nuestro equipo</h2>
-      <p class="animate-fade-in animate-delay-800">Nosotros somos:</p>
-      <ul class="animate-fade-in animate-delay-1000">
-        <li><strong>Walter Casarino</strong> – Encargado del Frontend (Maquetación y diseño de la interfaz)</li>
-        <li><strong>Bautista Insaurralde</strong> – Encargado del Backend y parte del Frontend (Funcionalidades, seguridad de la página, diseño)</li>
-        <li><strong>Thiago Herrera</strong> – Encargado de IA y parte del Backend (Desarrollo de funcionalidades de la página, creacion de IA y base de datos)</li>
-        <li><strong>Manuel Gonzales</strong> – Encargado del Backend (Desarrollo de APIs, código de sensores, base de datos)</li>
-        <li><strong>Santiago Gómez</strong> – Encargado de Hardware y Funciones de los Sensores (Armado del invernadero y sensores)</li>
-      </ul>
+      <h2 class="animate-fade-in animate-delay-600"><i class="fas fa-users text-green-600 mr-3"></i>Conoce a nuestro equipo</h2>
+      <div class="equipo-grid">
+        <div class="equipo-card animate-on-scroll">
+          <div class="equipo-icon">
+            <i class="fas fa-code text-blue-500"></i>
+          </div>
+          <h3>Walter Casarino</h3>
+          <p>Frontend Developer</p>
+          <span>Maquetación y diseño de interfaz</span>
+        </div>
+        <div class="equipo-card animate-on-scroll">
+          <div class="equipo-icon">
+            <i class="fas fa-server text-purple-500"></i>
+          </div>
+          <h3>Bautista Insaurralde</h3>
+          <p>Backend Developer</p>
+          <span>Funcionalidades y seguridad</span>
+        </div>
+        <div class="equipo-card animate-on-scroll">
+          <div class="equipo-icon">
+            <i class="fas fa-brain text-orange-500"></i>
+          </div>
+          <h3>Thiago Herrera</h3>
+          <p>AI Developer</p>
+          <span>Inteligencia artificial y base de datos</span>
+        </div>
+        <div class="equipo-card animate-on-scroll">
+          <div class="equipo-icon">
+            <i class="fas fa-database text-red-500"></i>
+          </div>
+          <h3>Manuel Gonzales</h3>
+          <p>Backend Developer</p>
+          <span>APIs y código de sensores</span>
+        </div>
+        <div class="equipo-card animate-on-scroll">
+          <div class="equipo-icon">
+            <i class="fas fa-cogs text-green-500"></i>
+          </div>
+          <h3>Santiago Gómez</h3>
+          <p>Hardware Engineer</p>
+          <span>Armado del invernadero y sensores</span>
+        </div>
+      </div>
     </section>
 
     <section class="contacto-info animate-on-scroll">
-      <h2 class="animate-fade-in animate-delay-1200">¿Cómo contactarnos?</h2>
-      <p class="animate-fade-in animate-delay-1400">Si tienes alguna pregunta o quieres saber más sobre FloraCore, puedes ponerte en contacto con nosotros a través de los siguientes medios:</p>
-      <ul class="animate-fade-in animate-delay-1600">
-        <li><strong>Correo electrónico:</strong> <a href="mailto:FloraCore2025@gmail.com" class="hover:text-green-600 transition-colors duration-300">FloraCore2025@gmail.com</a></li>
-        <li><strong>Redes sociales:</strong>
-          <ul>
-            <li><a href="#" class="hover:text-green-600 transition-colors duration-300">Facebook: FloraCore</a></li>
-            <li><a href="https://www.instagram.com/floracore_off/" class="hover:text-green-600 transition-colors duration-300">Instagram: @floracore_off</a></li>
-          </ul>
-        </li>
-      </ul>
+      <h2 class="animate-fade-in animate-delay-1200"><i class="fas fa-paper-plane text-green-600 mr-3"></i>¿Cómo contactarnos?</h2>
+      <div class="contacto-grid">
+        <div class="contacto-card animate-on-scroll">
+          <div class="contacto-icon">
+            <i class="fas fa-envelope text-blue-500"></i>
+          </div>
+          <h3>Email</h3>
+          <a href="mailto:FloraCore2025@gmail.com" class="contacto-link">FloraCore2025@gmail.com</a>
+        </div>
+        <div class="contacto-card animate-on-scroll">
+          <div class="contacto-icon">
+            <i class="fab fa-instagram text-pink-500"></i>
+          </div>
+          <h3>Instagram</h3>
+          <a href="https://www.instagram.com/floracore_off/" class="contacto-link" target="_blank">@floracore_off</a>
+        </div>
+        <div class="contacto-card animate-on-scroll">
+          <div class="contacto-icon">
+            <i class="fas fa-map-marker-alt text-red-500"></i>
+          </div>
+          <h3>Ubicación</h3>
+          <p>Escuela Técnica N°3 Roberto Arlt<br>Tortuguitas, Buenos Aires, Argentina</p>
+        </div>
+      </div>
     </section>
   </main>
 

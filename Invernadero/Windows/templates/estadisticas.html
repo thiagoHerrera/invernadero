@@ -23,8 +23,8 @@
       <a href="{% url 'estadisticas' %}"><i class="fas fa-chart-bar mr-2"></i>Estadisticas</a>
       <hr >
        {% if not user.is_authenticated %}
-       <button class="user-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
-       <button class="register-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+       <button class="user-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
        {% endif %}
     </nav>
 
@@ -33,32 +33,61 @@
 
   <!-- CONTENIDO PRINCIPAL -->
   <section class="dashboard-section animate-on-scroll">
-    <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-chart-bar text-green-600 mr-3"></i>Estadísticas de Cultivo</h1>
-    <p class="subtitulo animate-fade-in animate-delay-400">Visualizá en tiempo real los datos de tus sensores en el invernadero inteligente</p>
+    <div class="dashboard-header">
+      <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-chart-bar text-green-600 mr-3"></i>Estadísticas de Cultivo</h1>
+      <p class="subtitulo animate-fade-in animate-delay-400">Visualizá en tiempo real los datos de tus sensores en el invernadero inteligente</p>
+    </div>
 
     <div class="dashboard-container">
-  <div class="datos-sensores animate-on-scroll">
-    <h2 class="animate-fade-in animate-delay-600">Últimos datos de sensores</h2>
-    <div class="sensor-card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-      <p><strong>🌡️ Temperatura:</strong> {{ temperatura }} °C</p>
-      <p><strong>💧 Humedad Ambiente:</strong> {{ humedad }} %</p>
-      <p><strong>🌱 Humedad del Suelo:</strong> {{ humedad_suelo }} %</p>
+      <div class="datos-sensores animate-on-scroll">
+        <h2 class="animate-fade-in animate-delay-600"><i class="fas fa-tachometer-alt text-blue-500 mr-2"></i>Últimos datos de sensores</h2>
+        <div class="sensores-grid">
+          <div class="sensor-card animate-on-scroll">
+            <div class="sensor-icon">
+              <i class="fas fa-thermometer-half text-red-500"></i>
+            </div>
+            <div class="sensor-info">
+              <h3>Temperatura</h3>
+              <p class="sensor-value">{{ temperatura }} °C</p>
+              <span class="sensor-status">Óptima</span>
+            </div>
+          </div>
+          <div class="sensor-card animate-on-scroll">
+            <div class="sensor-icon">
+              <i class="fas fa-tint text-blue-500"></i>
+            </div>
+            <div class="sensor-info">
+              <h3>Humedad Ambiente</h3>
+              <p class="sensor-value">{{ humedad }} %</p>
+              <span class="sensor-status">Buena</span>
+            </div>
+          </div>
+          <div class="sensor-card animate-on-scroll">
+            <div class="sensor-icon">
+              <i class="fas fa-seedling text-green-500"></i>
+            </div>
+            <div class="sensor-info">
+              <h3>Humedad del Suelo</h3>
+              <p class="sensor-value">{{ humedad_suelo }} %</p>
+              <span class="sensor-status">Excelente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="iframe-wrapper animate-on-scroll">
+        <h2 class="animate-fade-in animate-delay-800"><i class="fas fa-chart-line text-purple-500 mr-2"></i>Registros históricos</h2>
+        <p class="iframe-descripcion animate-fade-in animate-delay-1000">Visualizá los últimos registros de tus sensores de tu invernadero inteligente.</p>
+        <div class="iframe-card animate-on-scroll">
+          <iframe
+            src="https://lookerstudio.google.com/embed/reporting/b4d86fe6-7883-4739-a1a0-ddf6cc9398e5/page/knUKF"
+            frameborder="0"
+            allowfullscreen
+            sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+          </iframe>
+        </div>
+      </div>
     </div>
-  </div>
-<div class="iframe-wrapper animate-on-scroll">
-  <h2 class="animate-fade-in animate-delay-800">📊 Registros históricos</h2>
-  <p class="iframe-descripcion animate-fade-in animate-delay-1000">Visualizá los últimos registros de tus sensores de tu invernadero inteligente.</p>
-  <div class="iframe-card animate-on-scroll hover:scale-105 transition-all duration-300">
-    <iframe
-      src="https://lookerstudio.google.com/embed/reporting/b4d86fe6-7883-4739-a1a0-ddf6cc9398e5/page/knUKF"
-      frameborder="0"
-      allowfullscreen
-      sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
-    </iframe>
-  </div>
-</div>
-
-
   </section>
 
   <!-- FOOTER -->

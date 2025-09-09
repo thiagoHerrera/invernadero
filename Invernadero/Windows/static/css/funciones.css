@@ -1,206 +1,127 @@
-/* === RESET GENERAL === */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', sans-serif;
-}
+/* Importar estilos base */
+@import url('base.css');
 
 body {
-  background-color: #f6f7f5;
-  color: #2c2c2c;
+   background-color: var(--light-green);
+   color: var(--text-primary);
 }
 
-/* === NAVBAR === */
-.navbar {
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 3rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.navbar .logo {
-    font-weight: bold;
-    color: #2a7e56;
-    font-size: 1.6rem;
-    transition: color 0.3s ease;
-    text-decoration: none;
-}
-
-.navbar .logo:hover {
-    color: #1e5c3e;
-}
-
-.navbar .menu {
-    flex: 1;
-    display: flex;
-    gap: 2rem;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-
-.navbar .menu a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-.navbar .menu a:hover {
-    color: #2a7e56;
-}
-
-.navbar .menu a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    background-color: #2a7e56;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-}
-
-.navbar .menu a:hover::after {
-    transform: scaleX(1);
-}
-
+/* Navbar usando base.css */
 .navbar .user-btn {
-    background-color: #036b0c;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+     background-color: var(--secondary-green);
 }
 
 .navbar .user-btn:hover {
-    background-color: #256b4a;
+     background-color: var(--hover-green);
 }
 
 /* === FUNCIONES === */
 .funciones {
-  padding: 4rem 2rem;
-  max-width: 1100px;
-  margin: auto;
-  text-align: center;
+   padding: 4rem 2rem;
+   max-width: 1100px;
+   margin: auto;
+   text-align: center;
 }
 
 .funciones h1 {
-  font-size: 2.5rem;
-  color: #2a7e56;
-  margin-bottom: 1rem;
+   font-size: 2.5rem;
+   color: var(--primary-green);
+   margin-bottom: 1rem;
 }
 
 .funciones .intro {
-  font-size: 1.1rem;
-  margin-bottom: 2.5rem;
-  color: #444;
+   font-size: 1.1rem;
+   margin-bottom: 2.5rem;
+   color: var(--text-secondary);
 }
 
 .funciones-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
+   display: grid;
+   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+   gap: 2rem;
 }
 
 .bloque {
-  background: #fff;
-  border-radius: 16px;
-  padding: 2rem;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  text-align: left;
-  transition: all 0.3s ease;
+   background: var(--white);
+   border-radius: 16px;
+   padding: 2rem;
+   box-shadow: 0 6px 20px var(--shadow);
+   text-align: left;
+   transition: all 0.3s ease;
 }
 
 .bloque:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.12);
+   transform: translateY(-6px);
+   box-shadow: 0 12px 28px var(--shadow-hover);
 }
 
 .bloque h2 {
-  color: #2a7e56;
-  margin-bottom: 1rem;
+   color: var(--primary-green);
+   margin-bottom: 1rem;
 }
 
 .bloque p {
-  color: #333;
-  margin-bottom: 1rem;
-  line-height: 1.6;
+   color: var(--text-primary);
+   margin-bottom: 1rem;
+   line-height: 1.6;
 }
 
 .bloque ul {
-  list-style: none;
-  padding-left: 1rem;
+   list-style: none;
+   padding-left: 1rem;
 }
 
 .bloque ul li::before {
-  content: "🌿 ";
+   content: "🌿 ";
 }
 
 .icono {
-  font-size: 2rem;
-  color: #2a7e56;
-  margin-bottom: 0.5rem;
-  display: inline-block;
+   font-size: 2rem;
+   color: var(--primary-green);
+   margin-bottom: 0.5rem;
+   display: inline-block;
 }
 
-/* === FOOTER === */
+/* === FOOTER usando base.css === */
 footer {
-  background-color: #ffffff;
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
-  color: #555;
-  border-top: 1px solid #ccc;
-  margin-top: 4rem;
+   margin-top: 4rem;
 }
 
 /* === RESPONSIVE PARA MENÚ MÓVIL === */
 .spbt {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     width: 100%;
 }
 
 .menu-toggle {
-    display: none;
+     display: none;
 }
 
 .navbar .menu.active {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: #ffffff;
-    padding: 0.5rem 0;
-    border-top: 1px solid #ccc;
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+     background-color: var(--white);
+     padding: 0.5rem 0;
+     border-top: 1px solid var(--border-color);
 }
 
 @media screen and (orientation: portrait) {
-    .navbar .menu {
-        display: none;
-    }
-    .menu-toggle {
-        display: block;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
-    .navbar {
-        flex-direction: column;
-    }
+     .navbar .menu {
+         display: none;
+     }
+
+     .menu-toggle {
+         display: block;
+         background: none;
+         border: none;
+         font-size: 1.5rem;
+         cursor: pointer;
+     }
+
+     .navbar {
+         flex-direction: column;
+     }
 }

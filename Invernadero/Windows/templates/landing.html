@@ -23,8 +23,8 @@
       <a href="{% url 'contacto' %}" class="hover:scale-105 transition-all duration-300">Contáctanos</a>
       <a href="{% url 'estadisticas' %}" class="hover:scale-105 transition-all duration-300">Estadisticas</a>
        {% if not user.is_authenticated %}
-       <button class="user-btn hover:scale-105 transition-all duration-300 animate-pulse" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
-       <button class="register-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+       <button class="user-btn hover:scale-105 transition-all duration-300" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
        {% endif %}
     </nav>
  
@@ -38,14 +38,19 @@
   </header> {% endcomment %}
 
   <!-- HERO -->
-  <section class="hero animate-fade-in animate-duration-1500">
+  <section class="hero animate-fade-in animate-duration-1500" style="background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('{% static 'img/1erimg.jpeg' %}'); background-size: cover; background-position: center; background-attachment: fixed;">
     <div class="hero-text animate-slide-in-left animate-duration-1000">
-      <h1 class="animate-fade-in animate-delay-300">¡Bienvenido a FloraCore!</h1>
-      <p class="animate-fade-in animate-delay-500">¿Querés adentrarte al mundo del cultivo y no tenés un espacio adecuado?<br>
+      <h1 class="animate-fade-in animate-delay-300" style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">¡Bienvenido a FloraCore!</h1>
+      <p class="animate-fade-in animate-delay-500" style="color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">¿Querés adentrarte al mundo del cultivo y no tenés un espacio adecuado?<br>
       Te presentamos FloraCore, tu invernadero inteligente para cualquier tipo de ambiente.</p>
-      <button onclick="window.location.href='{% url 'info' %}'">Más información</button>
+      <button onclick="window.location.href='{% url 'info' %}'" style="background-color: rgba(255,255,255,0.9); color: var(--secondary-green); border: 2px solid white;">Más información</button>
     </div>
-    <img src="{% static 'img/1erfoto.jpg' %}" alt="Tablet en cultivo" class="animate-slide-in-right animate-duration-1000">
+    <div class="hero-image animate-slide-in-right animate-duration-1000">
+      <div style="background-color: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 20px; border: 1px solid rgba(255,255,255,0.2);">
+        <i class="fas fa-leaf" style="font-size: 3rem; color: white; display: block; text-align: center; margin-bottom: 10px;"></i>
+        <p style="color: white; text-align: center; font-weight: bold;">Tecnología Verde</p>
+      </div>
+    </div>
   </section>
 
   <!-- FUNCIONES -->
@@ -75,7 +80,7 @@
     <div class="about-text animate-slide-in-left animate-duration-1000">
       <h2><i class="fas fa-cogs text-orange-500 mr-3"></i>Equipos FloraCore</h2>
       <p>Nuestros dispositivos permiten controlar temperatura, humedad y riego de forma automática, adaptándose al tipo de planta y al entorno.</p>
-      <button onclick="window.location.href='{% url 'equipos' %}'" class="hover:scale-110 transition-all duration-300 animate-pulse">Ver Equipos</button>
+      <button onclick="window.location.href='{% url 'equipos' %}'" class="hover:scale-110 transition-all duration-300">Ver Equipos</button>
     </div>
     <div class="about-image animate-slide-in-right animate-duration-1000">
       <img src="{% static 'img/5img.jpg' %}" alt="Tablet mostrando sensores" class="hover:scale-105 transition-transform duration-300">

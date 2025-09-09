@@ -76,17 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
         icon.classList.add('transition-transform', 'duration-300', 'hover:animate-bounce');
     });
 
-    // Animaciones para botones mejoradas
-    const buttons = document.querySelectorAll('button, .user-btn');
-    buttons.forEach(button => {
-        button.classList.add('transition-all', 'duration-300');
-        button.addEventListener('mouseenter', () => {
-            button.classList.add('animate-pulse');
-        });
-        button.addEventListener('mouseleave', () => {
-            button.classList.remove('animate-pulse');
-        });
-    });
 
     // Animación para navbar al cargar página
     const navbar = document.querySelector('.navbar');

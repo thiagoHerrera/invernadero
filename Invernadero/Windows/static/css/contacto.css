@@ -1,14 +1,9 @@
-/* === RESET GENERAL === */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+/* Importar estilos base */
+@import url('base.css');
 
 body {
-    background-color: #f6f7f5;
-    color: #2c2c2c;
+     background-color: var(--light-green);
+     color: var(--text-primary);
 }
 
 /* === NAVBAR === */
@@ -74,18 +69,18 @@ body {
 }
 
 .navbar .user-btn {
-    background-color: #036b0c;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+     background-color: var(--secondary-green);
+     color: var(--white);
+     padding: 0.5rem 1rem;
+     border: none;
+     border-radius: 10px;
+     font-weight: 600;
+     cursor: pointer;
+     transition: background-color 0.3s ease;
 }
 
 .navbar .user-btn:hover {
-    background-color: #256b4a;
+     background-color: var(--hover-green);
 }
 
 /* === SECCIÓN CONTACTO === */
@@ -98,20 +93,21 @@ body {
 }
 
 .contacto h1 {
-    font-size: 2rem;
-    color: #2a7e56;
-    margin-bottom: 1.5rem;
+     font-size: 2rem;
+     color: var(--primary-green);
+     margin-bottom: 1.5rem;
 }
 
 .contacto h2 {
-    font-size: 1.5rem;
-    color: #2a7e56;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
+     font-size: 1.5rem;
+     color: var(--primary-green);
+     margin-top: 2rem;
+     margin-bottom: 1rem;
 }
 
 .contacto p {
-    margin-bottom: 1.5rem;
+     margin-bottom: 1.5rem;
+     color: var(--text-secondary);
 }
 
 .contacto ul {
@@ -124,26 +120,176 @@ body {
 }
 
 .contacto a {
-    color: #036b0c;
-    text-decoration: none;
+     color: var(--secondary-green);
+     text-decoration: none;
 }
 
 .contacto a:hover {
-    text-decoration: underline;
+     text-decoration: underline;
 }
 
 .contacto-info ul {
-    margin-top: 1rem;
+     margin-top: 1rem;
 }
 
-/* === FOOTER === */
+/* === NUEVOS ESTILOS PARA CONTACTO === */
+.contacto-header {
+     text-align: center;
+     margin-bottom: 4rem;
+}
+
+.contacto h1 {
+     font-size: 2.5rem;
+     color: var(--primary-green);
+     margin-bottom: 1.5rem;
+     text-align: center;
+}
+
+.contacto h2 {
+     font-size: 2rem;
+     color: var(--primary-green);
+     margin-bottom: 2rem;
+     text-align: center;
+}
+
+.contacto p {
+     margin-bottom: 1.5rem;
+     color: var(--text-secondary);
+     text-align: center;
+     max-width: 600px;
+     margin-left: auto;
+     margin-right: auto;
+}
+
+/* === EQUIPO GRID === */
+.equipo {
+     margin-bottom: 4rem;
+}
+
+.equipo-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+     gap: 2rem;
+     margin-top: 2rem;
+}
+
+.equipo-card {
+     background: var(--white);
+     border-radius: 15px;
+     padding: 2rem;
+     box-shadow: 0 8px 25px var(--shadow);
+     text-align: center;
+     transition: all 0.3s ease;
+     border: 1px solid var(--border-color);
+}
+
+.equipo-card:hover {
+     transform: translateY(-10px);
+     box-shadow: 0 15px 35px var(--shadow-hover);
+}
+
+.equipo-icon {
+     width: 80px;
+     height: 80px;
+     background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin: 0 auto 1.5rem;
+     font-size: 2rem;
+     color: var(--white);
+}
+
+.equipo-card h3 {
+     color: var(--primary-green);
+     margin-bottom: 0.5rem;
+     font-size: 1.2rem;
+}
+
+.equipo-card p {
+     color: var(--text-secondary);
+     font-weight: 600;
+     margin-bottom: 0.5rem;
+}
+
+.equipo-card span {
+     color: var(--text-muted);
+     font-size: 0.9rem;
+}
+
+/* === CONTACTO GRID === */
+.contacto-info {
+     margin-bottom: 4rem;
+}
+
+.contacto-grid {
+     display: grid;
+     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+     gap: 2rem;
+     margin-top: 2rem;
+}
+
+.contacto-card {
+     background: var(--white);
+     border-radius: 15px;
+     padding: 2rem;
+     box-shadow: 0 8px 25px var(--shadow);
+     text-align: center;
+     transition: all 0.3s ease;
+     border: 1px solid var(--border-color);
+}
+
+.contacto-card:hover {
+     transform: translateY(-10px);
+     box-shadow: 0 15px 35px var(--shadow-hover);
+}
+
+.contacto-icon {
+     width: 70px;
+     height: 70px;
+     background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+     border-radius: 50%;
+     display: flex;
+     align-items: center;
+     justify-content: center;
+     margin: 0 auto 1.5rem;
+     font-size: 1.8rem;
+     color: var(--white);
+}
+
+.contacto-card h3 {
+     color: var(--primary-green);
+     margin-bottom: 1rem;
+     font-size: 1.2rem;
+}
+
+.contacto-link {
+     color: var(--secondary-green);
+     text-decoration: none;
+     font-weight: 600;
+     font-size: 1rem;
+     transition: color 0.3s ease;
+}
+
+.contacto-link:hover {
+     color: var(--primary-green);
+     text-decoration: underline;
+}
+
+.contacto-card p {
+     color: var(--text-secondary);
+     line-height: 1.5;
+}
+
+/* === FOOTER usando base.css === */
 footer {
-    background-color: #f6f7f5;
-    text-align: center;
-    padding: 1rem;
-    color: #555;
-    font-size: 0.9rem;
-    border-top: 1px solid #ccc;
+     background-color: var(--light-green);
+     text-align: center;
+     padding: 1rem;
+     color: var(--text-secondary);
+     font-size: 0.9rem;
+     border-top: 1px solid var(--border-color);
 }
 
 /* === RESPONSIVE PARA MENÚ MÓVIL === */
@@ -159,12 +305,12 @@ footer {
 }
 
 .navbar .menu.active {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: #ffffff;
-    padding: 0.5rem 0;
-    border-top: 1px solid #ccc;
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+     background-color: var(--white);
+     padding: 0.5rem 0;
+     border-top: 1px solid var(--border-color);
 }
 
 @media screen and (orientation: portrait) {

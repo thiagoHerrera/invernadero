@@ -24,8 +24,8 @@
       <a href="{% url 'estadisticas' %}">Estadisticas</a>
       <hr >
        {% if not user.is_authenticated %}
-       <button class="user-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
-       <button class="register-btn hover:scale-105 transition-all duration-300 animate-pulse whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+       <button class="user-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
        {% endif %}
     </nav>
 
@@ -33,43 +33,55 @@
   </header>
 
   <!-- SECCIÓN EQUIPOS -->
-  <section class="main-section animate-on-scroll">
-    <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-microchip text-blue-600 mr-3"></i>Conocé nuestros Equipos</h1>
-    <p class="animate-fade-in animate-delay-400">FloraCore cuenta con una variedad de dispositivos diseñados para automatizar y facilitar el cuidado de tus cultivos. A continuación, te mostramos algunos de nuestros equipos principales:</p>
+  <section class="main-section">
+    <h1 class="equipment-title"><i class="fas fa-microchip text-blue-600 mr-3"></i>Conocé nuestros Equipos</h1>
+    <p class="equipment-description">FloraCore cuenta con una variedad de dispositivos diseñados para automatizar y facilitar el cuidado de tus cultivos. A continuación, te mostramos algunos de nuestros equipos principales:</p>
 
     <div class="equipment-grid">
-      <div class="equipment-card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/sensor de humedad.jpeg' %}" alt="Sensor de humedad" class="hover:scale-110 transition-transform duration-300">
+      <div class="equipment-card card-1">
+        <div class="card-image-container">
+          <img src="{% static 'img/sensor de humedad.jpeg' %}" alt="Sensor de humedad">
+        </div>
         <h3>Sensor de Humedad del Suelo</h3>
         <p>Detecta el nivel de humedad de la tierra y activa el sistema de riego cuando es necesario, asegurando un riego óptimo.</p>
       </div>
 
-      <div class="equipment-card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/sensortemperatura.jpeg' %}" alt="Sensor de temperatura" class="hover:scale-110 transition-transform duration-300">
+      <div class="equipment-card card-2">
+        <div class="card-image-container">
+          <img src="{% static 'img/sensortemperatura.jpeg' %}" alt="Sensor de temperatura">
+        </div>
         <h3>Sensor de Temperatura y Humedad Ambiental</h3>
         <p>Monitorea el entorno y activa la ventilación o calefacción según el tipo de planta y sus necesidades.</p>
       </div>
 
-      <div class="equipment-card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/esp32.jpg' %}" alt="Microcontrolador ESP32" class="hover:scale-110 transition-transform duration-300">
+      <div class="equipment-card card-3">
+        <div class="card-image-container">
+          <img src="{% static 'img/esp32.jpg' %}" alt="Microcontrolador ESP32">
+        </div>
         <h3>Microcontrolador ESP32</h3>
         <p>El cerebro del invernadero. Ejecuta nuestro software programado con Arduino IDE, gestionando todos los sensores y actuadores.</p>
       </div>
 
-      <div class="equipment-card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/Ventilador.jpg' %}" alt="Ventilador de extracción" class="hover:scale-110 transition-transform duration-300">
+      <div class="equipment-card card-4">
+        <div class="card-image-container">
+          <img src="{% static 'img/Ventilador.jpg' %}" alt="Ventilador de extracción">
+        </div>
         <h3>Ventilación Inteligente</h3>
         <p>Sistema de ventilación automática que regula el flujo de aire para mantener condiciones óptimas.</p>
       </div>
 
-      <div class="equipment-card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/led.jpeg' %}" alt="Luces LED para cultivo" class="hover:scale-110 transition-transform duration-300">
+      <div class="equipment-card card-5">
+        <div class="card-image-container">
+          <img src="{% static 'img/led.jpeg' %}" alt="Luces LED para cultivo">
+        </div>
         <h3>Iluminación LED</h3>
         <p>Luces LED reguladas automáticamente para compensar la falta de luz solar, ideal para espacios cerrados.</p>
       </div>
 
-      <div class="equipment-card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/bombadeagua.jpg' %}" alt="Sistema de riego" class="hover:scale-110 transition-transform duration-300">
+      <div class="equipment-card card-6">
+        <div class="card-image-container">
+          <img src="{% static 'img/bombadeagua.jpg' %}" alt="Sistema de riego">
+        </div>
         <h3>Sistema de Riego</h3>
         <p>Distribuye agua en función de los datos de los sensores, ahorrando agua y cuidando tu cultivo.</p>
       </div>

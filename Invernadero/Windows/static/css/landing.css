@@ -1,167 +1,79 @@
-/* === RESET GENERAL === */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+/* Importar estilos base */
+@import url('base.css');
 
 /* === BASE BODY STYLES === */
 body {
-    background-color: #f6f7f5;
-    color: #2c2c2c;
-    position: relative;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
+     background-color: var(--light-green);
+     color: var(--text-primary);
+     position: relative;
+     overflow-x: hidden;
+     margin: 0;
+     padding: 0;
+     min-height: 100vh;
 }
 
 
-/* === NAVBAR === */
-.navbar {
-    background-color: #ffffff;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 3rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    flex-direction: row;
-}
-
-.navbar .logo {
-    font-weight: bold;
-    color: #2a7e56;
-    font-size: 1.6rem;
-    transition: color 0.3s ease;
-    text-decoration: none;
-    flex-shrink: 0;
-}
-
-.navbar .logo:hover {
-    color: #1e5c3e;
-}
-
-.navbar .menu {
-    flex: 1;
-    display: flex;
-    gap: 2rem;
-    flex-wrap: nowrap;
-    align-items: center;
-    justify-content: flex-end;
-}
-
-.navbar .menu a {
-    text-decoration: none;
-    color: #333;
-    font-weight: 500;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-.navbar .menu a:hover {
-    color: #2a7e56;
-}
-
-.navbar .menu a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    background-color: #2a7e56;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-}
-
-.navbar .menu a:hover::after {
-    transform: scaleX(1);
-}
-
+/* === OVERRIDE NAVBAR (usando base.css) === */
 .navbar .user-btn {
-    background-color: #2a7e56;
-    color: #fff;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    flex-shrink: 0;
+     background-color: var(--secondary-green);
 }
 
 .navbar .user-btn:hover {
-    background-color: #1e5c3e;
-    transform: scale(1.05);
+     background-color: var(--hover-green);
 }
 
 .navbar .register-btn {
-    background-color: transparent;
-    color: #2a7e56;
-    padding: 0.5rem 1rem;
-    border: 2px solid #2a7e56;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    flex-shrink: 0;
-    margin-left: 0.5rem;
+     border-color: var(--primary-green);
+     color: var(--primary-green);
 }
 
 .navbar .register-btn:hover {
-    background-color: #2a7e56;
-    color: #fff;
-    transform: scale(1.05);
-    border-color: #1e5c3e;
+     background-color: var(--primary-green);
+     border-color: var(--hover-green);
 }
 
 /* === HERO === */
 .hero {
-    background-color: #036b0c;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 3rem;
-    flex-wrap: wrap;
-    gap: 2rem;
-    animation: fadeIn 1s ease-out;
+     background-color: var(--secondary-green);
+     color: var(--white);
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 3rem;
+     flex-wrap: wrap;
+     gap: 2rem;
+     animation: fadeIn 1s ease-out;
 }
 
 .hero-text {
-    max-width: 500px;
+     max-width: 500px;
 }
 
 .hero h1 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
+     font-size: 2rem;
+     margin-bottom: 1rem;
+     color: var(--white);
 }
 
 .hero p {
-    margin-bottom: 1.5rem;
+     margin-bottom: 1.5rem;
+     color: var(--white);
 }
 
 .hero button {
-    background-color: #ffffff;
-    color: #036b0c;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    font-weight: 600;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, color 0.3s ease;
+     background-color: var(--white);
+     color: var(--secondary-green);
+     border: none;
+     padding: 0.6rem 1.2rem;
+     font-weight: 600;
+     border-radius: 6px;
+     cursor: pointer;
+     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 .hero button:hover {
-    background-color: #6e9171;
-    color: white;
+     background-color: var(--hover-green);
+     color: var(--white);
 }
 
 .hero img {
@@ -174,79 +86,82 @@ body {
 
 /* === SECCIÓN CARACTERÍSTICAS === */
 .features {
-    background-color: #d7ded7;
-    padding: 3rem 2rem;
-    text-align: center;
+     background-color: var(--medium-green);
+     padding: 3rem 2rem;
+     text-align: center;
 }
 
 .features h2 {
-    font-size: 1.5rem;
-    margin-bottom: 2rem;
+     font-size: 1.5rem;
+     margin-bottom: 2rem;
+     color: var(--secondary-green);
 }
 
 .cards {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex-wrap: wrap;
+     display: flex;
+     justify-content: center;
+     gap: 2rem;
+     flex-wrap: wrap;
 }
 
 .card {
-    background-color: white;
-    border-radius: 12px;
-    padding: 1.5rem;
-    width: 250px;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    animation: fadeInUp 0.8s ease-out;
+     background-color: var(--white);
+     border-radius: 12px;
+     padding: 1.5rem;
+     width: 250px;
+     box-shadow: 0 2px 8px var(--shadow);
+     text-align: center;
+     animation: fadeInUp 0.8s ease-out;
 }
 
 .card img {
-    width: 100%;
-    height: 180px;
-    object-fit: cover;
-    border-radius: 10px;
-    margin-bottom: 1rem;
+     width: 100%;
+     height: 180px;
+     object-fit: cover;
+     border-radius: 10px;
+     margin-bottom: 1rem;
 }
 
 /* === SECCIÓN EQUIPOS === */
 .about-section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 3rem 2rem;
-    background-color: #fefbf8;
-    gap: 2rem;
-    flex-wrap: wrap;
-    animation: fadeInUp 1s ease-out;
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     padding: 3rem 2rem;
+     background-color: var(--light-bg);
+     gap: 2rem;
+     flex-wrap: wrap;
+     animation: fadeInUp 1s ease-out;
 }
 
 .about-text {
-    max-width: 500px;
+     max-width: 500px;
 }
 
 .about-text h2 {
-    font-size: 1.5rem;
-    color: #222;
-    margin-bottom: 1rem;
+     font-size: 1.5rem;
+     color: var(--text-primary);
+     margin-bottom: 1rem;
 }
 
 .about-text p {
-    margin-bottom: 1.5rem;
+     margin-bottom: 1.5rem;
+     color: var(--text-secondary);
 }
 
 .about-text button {
-    background-color: #036b0c;
-    color: white;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
+     background-color: var(--secondary-green);
+     color: var(--white);
+     border: none;
+     padding: 0.6rem 1.2rem;
+     border-radius: 6px;
+     cursor: pointer;
+     font-weight: 600;
+     transition: background-color 0.3s ease;
 }
 
 .about-text button:hover {
-    background-color: #6e9171;
+     background-color: var(--hover-green);
 }
 
 .about-image img {
@@ -257,207 +172,73 @@ body {
     animation: slideInLeft 1s ease-out;
 }
 
-/* === FOOTER === */
+/* === FOOTER (usando base.css) === */
 footer {
-    background-color: #ffffff;
-    text-align: center;
-    padding: 1rem;
-    font-size: 0.9rem;
-    color: #555;
-    border-top: 1px solid #ccc;
+     background-color: var(--white);
+     text-align: center;
+     padding: 1rem;
+     font-size: 0.9rem;
+     color: var(--text-secondary);
+     border-top: 1px solid var(--border-color);
 }
 
-/* === ANIMACIONES === */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
+/* === ANIMACIONES ADICIONALES === */
 @keyframes slideInLeft {
-    from { opacity: 0; transform: translateX(-50px); }
-    to { opacity: 1; transform: translateX(0); }
+     from { opacity: 0; transform: translateX(-50px); }
+     to { opacity: 1; transform: translateX(0); }
 }
 
 @keyframes slideInRight {
-    from { opacity: 0; transform: translateX(50px); }
-    to { opacity: 1; transform: translateX(0); }
+     from { opacity: 0; transform: translateX(50px); }
+     to { opacity: 1; transform: translateX(0); }
 }
 
-@keyframes scaleUp {
-    from { transform: scale(1); }
-    to { transform: scale(1.1); }
-}
-
-
-@keyframes bounce {
-    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-    40% { transform: translateY(-10px); }
-    60% { transform: translateY(-5px); }
-}
-
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.05); }
-    100% { transform: scale(1); }
-}
-
-/* === CLASES DE UTILIDAD PARA ANIMACIONES === */
-.animate-fade-in { animation: fadeIn 1s ease-out; }
-.animate-fade-in-up { animation: fadeInUp 0.8s ease-out; }
 .animate-slide-in-left { animation: slideInLeft 1s ease-out; }
 .animate-slide-in-right { animation: slideInRight 1s ease-out; }
-.animate-scale-up { animation: scaleUp 0.3s ease-out; }
-.animate-bounce { animation: bounce 1s infinite; }
-.animate-pulse { animation: pulse 2s infinite; }
-
-/* Duraciones de animación */
-.animate-duration-300 { animation-duration: 0.3s; }
-.animate-duration-500 { animation-duration: 0.5s; }
-.animate-duration-800 { animation-duration: 0.8s; }
-.animate-duration-1000 { animation-duration: 1s; }
-.animate-duration-1500 { animation-duration: 1.5s; }
-
-/* Delays de animación */
-.animate-delay-200 { animation-delay: 0.2s; }
-.animate-delay-300 { animation-delay: 0.3s; }
-.animate-delay-400 { animation-delay: 0.4s; }
-.animate-delay-500 { animation-delay: 0.5s; }
-.animate-delay-600 { animation-delay: 0.6s; }
-.animate-delay-800 { animation-delay: 0.8s; }
-.animate-delay-1000 { animation-delay: 1s; }
-.animate-delay-1200 { animation-delay: 1.2s; }
-.animate-delay-1400 { animation-delay: 1.4s; }
-.animate-delay-1600 { animation-delay: 1.6s; }
-
-/* Estados de animación */
-.opacity-0 { opacity: 0; }
-.opacity-100 { opacity: 1; }
-
-/* Transiciones mejoradas */
-.transition-all { transition: all 0.3s ease; }
-.transition-colors { transition: color 0.3s ease; }
-.transition-transform { transition: transform 0.3s ease; }
-.duration-300 { transition-duration: 0.3s; }
 
 /* Efectos hover adicionales */
-.card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
-}
-
 .equipment-card:hover {
-    transform: scale(1.05);
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+     transform: scale(1.05);
+     box-shadow: 0 10px 15px -3px var(--shadow), 0 4px 6px -2px var(--shadow);
+     transition: all 0.3s ease;
 }
 
-button:hover {
-    transform: scale(1.05);
-    transition: transform 0.3s ease;
+/* === RESPONSIVE ADICIONAL === */
+.spbt {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     width: 100%;
 }
 
-/* === RESPONSIVE === */
-/* === RESPONSIVE MOVIL === */
-@media (max-width: 767px) {
-    /* Navbar vertical con logo arriba */
-    .navbar {
-        flex-direction: column;      /* apila logo y menú */
-        align-items: center;         /* centra elementos */
-        padding: 1rem;
-        width: 100%;
-    }
-
-    /* Logo centrado arriba */
-    .navbar .logo {
-        order: 1;                   /* logo primero */
-        margin-bottom: 1rem;
-        text-align: center;
-        font-size: 1.5rem;
-    }
-
-    /* Menú ocupa todo el ancho */
-    .navbar .menu {
-        order: 2;                   /* menú después del logo */
-        display: flex;
-        flex-direction: column;     /* apila los enlaces verticalmente */
-        width: 100%;                /* ocupa todo el ancho */
-        gap: 0;
-        background-color: #ffffff;
-        padding: 0.5rem 0;
-        border-top: 1px solid #ccc;
-    }
-
-    .navbar .menu a {
-        padding: 0.8rem 1rem;
-        text-align: center;
-        width: 100%;
-        border-bottom: 1px solid #eee;
-    }
-
-    .navbar .user-btn {
-        order: 3;                   /* botón debajo del menú */
-        margin-top: 0.5rem;
-        width: 90%;
-        text-align: center;
-    }
-
-    .navbar .register-btn {
-        order: 4;                   /* botón de registro debajo del iniciar sesión */
-        margin-top: 0.5rem;
-        width: 90%;
-        text-align: center;
-        margin-left: 0;
-    }
+.menu-toggle {
+     display: none;
 }
 
+.navbar .menu.active {
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+     background-color: var(--white);
+     padding: 0.5rem 0;
+     border-top: 1px solid var(--border-color);
+}
 
- 
-     /* Ocultar el menú en pantallas pequeñas inicialmente */
+@media screen and (orientation: portrait) {
+     .navbar .menu {
+         display: none;
+     }
 
-    /* Mostrar el menú al hacer clic en el botón hamburguesa */
-    .navbar .menu.active {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        background-color: #ffffff;
-        padding: 0.5rem 0;
-        border-top: 1px solid #ccc;
-    }
-
-   
-
-    /* Ocultar el botón hamburguesa en pantallas más grandes */
-    .menu-toggle {
-        display: none;
-    }
-.spbt{
-    display:flex; justify-content: space-between; align-items: center; width:100%;
-    
-}   
-
-
-@media screen and (orientation: portrait){
-         .navbar .menu {
-        display: none;
-    }
      .menu-toggle {
-        display: block;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-    }
+         display: block;
+         background: none;
+         border: none;
+         font-size: 1.5rem;
+         cursor: pointer;
+     }
 
-    .navbar{
-        flex-direction: column;
-
-    }
+     .navbar {
+         flex-direction: column;
+     }
 }
 

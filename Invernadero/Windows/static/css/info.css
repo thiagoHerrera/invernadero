@@ -1,89 +1,19 @@
-/* === RESET GENERAL === */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', sans-serif;
-}
+/* Importar estilos base */
+@import url('base.css');
 
 body {
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
+     background-color: var(--light-bg);
+     color: var(--text-primary);
+     line-height: 1.6;
 }
 
-/* === NAVBAR === */
-.navbar {
-    background-color: #036b0c;
-    color: white;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 3rem;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-.navbar .logo {
-    font-weight: bold;
-    color: white;
-    font-size: 1.6rem;
-    text-decoration: none;
-}
-
-.navbar .logo:hover {
-    color: #e9e9e9;
-}
-
-.navbar .menu {
-    display: flex;
-    gap: 2rem;
-}
-
-.navbar .menu a {
-    text-decoration: none;
-    color: white;
-    font-weight: 500;
-    position: relative;
-    transition: color 0.3s ease;
-}
-
-.navbar .menu a:hover {
-    color: #e9e9e9;
-}
-
-.navbar .menu a::after {
-    content: '';
-    position: absolute;
-    bottom: -5px;
-    left: 0;
-    height: 2px;
-    width: 100%;
-    background-color: #e9e9e9;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s ease;
-}
-
-.navbar .menu a:hover::after {
-    transform: scaleX(1);
-}
-
+/* Navbar usando base.css */
 .navbar .user-btn {
-    background-color: #e9e9e9;
-    color: #036b0c;
-    padding: 0.5rem 1rem;
-    border: none;
-    border-radius: 10px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+     background-color: var(--secondary-green);
 }
 
 .navbar .user-btn:hover {
-    background-color: #ffffff;
+     background-color: var(--hover-green);
 }
 
 /* === SECCIÓN DE INFORMACIÓN DEL PROYECTO === */
@@ -94,27 +24,22 @@ body {
 }
 
 .project-info h2 {
-    font-size: 2rem;
-    color: #036b0c;
-    margin-bottom: 1rem;
+     font-size: 2rem;
+     color: var(--secondary-green);
+     margin-bottom: 1rem;
 }
 
 .project-info p {
-    font-size: 1.1rem;
-    color: #555;
-    margin-bottom: 1.5rem;
-    text-align: justify;
-    line-height: 1.8;
+     font-size: 1.1rem;
+     color: var(--text-secondary);
+     margin-bottom: 1.5rem;
+     text-align: justify;
+     line-height: 1.8;
 }
 
-/* === FOOTER === */
+/* === FOOTER usando base.css === */
 footer {
-    background-color: #036b0c;
-    color: white;
-    text-align: center;
-    padding: 1rem;
-    font-size: 1rem;
-    margin-top: 3rem;
+     margin-top: 3rem;
 }
 
 /* === ESTILOS PARA DISPOSITIVOS MÓVILES === */
@@ -161,12 +86,12 @@ footer {
 }
 
 .navbar .menu.active {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: #036b0c;
-    padding: 0.5rem 0;
-    border-top: 1px solid #ccc;
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+     background-color: var(--secondary-green);
+     padding: 0.5rem 0;
+     border-top: 1px solid var(--border-color);
 }
 
 @media screen and (orientation: portrait) {
