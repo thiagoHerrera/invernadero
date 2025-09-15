@@ -8,14 +8,7 @@ echo "Starting Django application..."
 echo "DJANGO_ENV: $DJANGO_ENV"
 echo "DEBUG: $DEBUG"
 echo "PORT: $PORT"
-
-# Configure ALLOWED_HOSTS dynamically for Render
-if [ -n "$RENDER_EXTERNAL_URL" ]; then
-    # Extract domain from Render URL (remove https://)
-    RENDER_DOMAIN=$(echo $RENDER_EXTERNAL_URL | sed 's|https://||')
-    export ALLOWED_HOSTS="$RENDER_DOMAIN"
-    echo "ALLOWED_HOSTS configured: $ALLOWED_HOSTS"
-fi
+echo "ALLOWED_HOSTS: $ALLOWED_HOSTS"
 
 # Change to the correct directory
 cd Invernadero || exit 1

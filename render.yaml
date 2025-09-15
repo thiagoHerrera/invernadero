@@ -11,6 +11,11 @@ services:
         generateValue: true
       - key: DEBUG
         value: "False"
+      - key: ALLOWED_HOSTS
+        fromService:
+          type: web
+          name: invernadero-django
+          property: host
       - key: DB_NAME
         fromDatabase:
           name: invernadero-db
