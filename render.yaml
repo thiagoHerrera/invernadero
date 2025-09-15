@@ -1,0 +1,43 @@
+services:
+  - type: web
+    name: invernadero
+    runtime: python3
+    buildCommand: pip install -r requirements.txt
+    startCommand: sh start.sh
+    envVars:
+      - key: DJANGO_ENV
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEBUG
+        value: false
+      - key: ALLOWED_HOSTS
+        fromService:
+          type: web
+          name: invernadero
+          property: host
+      - key: DB_NAME
+        fromDatabase:
+          name: invernadero-db
+          property: database
+      - key: DB_USER
+        fromDatabase:
+          name: invernadero-db
+          property: user
+      - key: DB_PASSWORD
+        fromDatabase:
+          name: invernadero-db
+          property: password
+      - key: DB_HOST
+        fromDatabase:
+          name: invernadero-db
+          property: host
+      - key: DB_PORT
+        fromDatabase:
+          name: invernadero-db
+          property: port
+
+databases:
+  - name: invernadero-db
+    databaseName: invernadero
+    user: invernadero_user
