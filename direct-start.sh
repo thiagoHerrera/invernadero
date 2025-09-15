@@ -14,6 +14,18 @@ pip install -r requirements.txt
 export DJANGO_ENV=production
 export DEBUG=False
 
+# Configure ALLOWED_HOSTS dynamically for Render
+if [ -n "$RENDER_EXTERNAL_URL" ]; then
+    # Extract domain from Render URL (remove https://)
+    RENDER_DOMAIN=$(echo $RENDER_EXTERNAL_URL | sed 's|https://||')
+    export ALLOWED_HOSTS="$RENDER_DOMAIN,localhost,127.0.0.1"
+    echo "ALLOWED_HOSTS configured: $ALLOWED_HOSTS"
+else
+    # Fallback for other platforms
+    export ALLOWED_HOSTS="localhost,127.0.0.1,0.0.0.0"
+    echo "ALLOWED_HOSTS fallback: $ALLOWED_HOSTS"
+fi
+
 # Create necessary directories
 mkdir -p Invernadero/staticfiles
 mkdir -p Invernadero/media
