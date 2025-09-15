@@ -203,6 +203,24 @@ LANGUAGE_CODE=es-mx
 
 ## 🐛 Solución de Problemas Comunes
 
+### Error: "py: command not found"
+**Síntomas**: Render ejecuta `py manage.py runserver` y falla porque `py` no existe
+**Solución**:
+1. **Verifica que Render use `render.yaml`**:
+   - Asegúrate de que `render.yaml` esté en la raíz del repositorio
+   - Si Render no lo detecta, elimina el servicio y crea uno nuevo
+   - O usa `render-deploy.yaml` como alternativa
+
+2. **Configuración manual en Render**:
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `bash start.sh`
+   - Asegúrate de que `start.sh` tenga permisos de ejecución
+
+3. **Variables de entorno requeridas**:
+   - `DJANGO_ENV=production`
+   - `DEBUG=False`
+   - Configurar base de datos PostgreSQL
+
 ### Error: "Build Failed"
 **Síntomas**: El despliegue falla durante la construcción
 **Solución**:

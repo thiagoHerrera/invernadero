@@ -99,6 +99,30 @@ python Invernadero/manage.py runserver
 5. Ejecuta migraciones: `cd Invernadero && python manage.py migrate`
 6. Ejecuta servidor: `python manage.py runserver`
 
+### 🚨 Solución de Problemas de Despliegue
+
+Si encuentras el error `"py: command not found"` en Render:
+
+#### Opción 1: Recrear el Servicio
+1. Elimina el servicio web actual en Render
+2. Crea un nuevo servicio web conectando el mismo repositorio
+3. Render debería detectar automáticamente `render.yaml`
+
+#### Opción 2: Configuración Manual
+Si Render no detecta `render.yaml`, configura manualmente:
+- **Build Command**: `pip install -r requirements.txt`
+- **Start Command**: `bash start.sh`
+
+#### Opción 3: Usar Script Alternativo
+- Usa `render-deploy.yaml` en lugar de `render.yaml`
+- O usa `render-manual.sh` como start command: `bash render-manual.sh`
+
+#### Verificación
+Después de aplicar cualquier solución:
+1. Revisa los logs en Render Dashboard
+2. Verifica que las variables de entorno estén configuradas
+3. Confirma que la base de datos PostgreSQL esté conectada
+
 ### Contribución
 
 1. Fork el proyecto
