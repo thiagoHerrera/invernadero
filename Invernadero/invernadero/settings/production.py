@@ -3,6 +3,9 @@ from .base import *
 # Production settings
 DEBUG = False
 
+# ALLOWED_HOSTS for production
+ALLOWED_HOSTS = config('ALLOWED_HOSTS', default='floracore.onrender.com').split(',')
+
 # Security settings for production
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
