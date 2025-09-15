@@ -3,7 +3,7 @@ services:
     name: invernadero-django
     runtime: python3
     buildCommand: "pip install -r requirements.txt"
-    startCommand: "bash direct-start.sh"
+    startCommand: "bash start.sh"
     envVars:
       - key: DJANGO_ENV
         value: production
@@ -11,11 +11,6 @@ services:
         generateValue: true
       - key: DEBUG
         value: "False"
-      - key: ALLOWED_HOSTS
-        fromService:
-          type: web
-          name: invernadero-django
-          property: host
       - key: DB_NAME
         fromDatabase:
           name: invernadero-db
