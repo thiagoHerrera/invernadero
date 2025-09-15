@@ -46,12 +46,12 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(element);
     });
 
-    // Animaciones específicas para cards con stagger
+    // Animaciones específicas para cards con stagger reducido
     const cards = document.querySelectorAll('.card, .equipment-card');
     cards.forEach((card, index) => {
         card.classList.add('animate-on-scroll');
         card.dataset.animation = 'animate-fade-in-up';
-        card.dataset.delay = index * 200; // Delay escalonado
+        card.dataset.delay = index * 100; // Delay escalonado reducido
     });
 
     // Animaciones para secciones
@@ -70,10 +70,10 @@ document.addEventListener('DOMContentLoaded', function() {
         footer.dataset.animation = 'animate-fade-in-up';
     }
 
-    // Animaciones para iconos (bounce on hover)
+    // Animaciones para iconos (removido bounce contraproducente)
     const icons = document.querySelectorAll('.icono, .fas, .far, .fab');
     icons.forEach(icon => {
-        icon.classList.add('transition-transform', 'duration-300', 'hover:animate-bounce');
+        icon.classList.add('transition-transform', 'duration-300');
     });
 
 
@@ -105,34 +105,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Ejecutar animaciones iniciales
     initialAnimations();
 
-    // Función para parallax en backgrounds
-    function parallaxEffect() {
-        const parallaxElements = document.querySelectorAll('.parallax-bg');
-
-        if (parallaxElements.length > 0) {
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const rate = scrolled * 0.5;
-
-                parallaxElements.forEach(element => {
-                    element.style.transform = `translateY(${rate}px)`;
-                });
-            });
-        }
-
-        // Parallax para imágenes hero
-        const heroImage = document.querySelector('.hero img');
-        if (heroImage) {
-            window.addEventListener('scroll', () => {
-                const scrolled = window.pageYOffset;
-                const rate = scrolled * -0.3;
-                heroImage.style.transform = `translateY(${rate}px)`;
-            });
-        }
-    }
-
-    // Activar parallax
-    parallaxEffect();
+    // Parallax removido por ser contraproducente para rendimiento
 });
 
 // Función para animaciones de carga de página
