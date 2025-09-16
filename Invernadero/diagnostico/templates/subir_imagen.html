@@ -16,15 +16,15 @@
         min-height: 70vh;
     }
     .diagnostico-section input[type="file"] {
-    display: block;
-    margin: 0 auto 1rem auto;
-    padding: 0.6rem 1rem;
-    border-radius: 12px;
-    border: 1px solid #036b0c;
-    background-color: #f4f9f4;
-    cursor: pointer;
-    font-size: 0.95rem;
-    transition: 0.3s;
+        display: block;
+        margin: 0 auto 1rem auto;
+        padding: 0.6rem 1rem;
+        border-radius: 12px;
+        border: 1px solid #036b0c;
+        background-color: #f4f9f4;
+        cursor: pointer;
+        font-size: 0.95rem;
+        transition: 0.3s;
     }
 
     .diagnostico-section input[type="file"]:hover {
@@ -48,9 +48,6 @@
         background-color: #028100;
     }
     .diagnostico-section h2 { font-size: 1.8rem; margin-bottom: 1.5rem; color: #036b0c; }
-    .diagnostico-section input[type="file"] { padding: 0.5rem; border-radius: 6px; border: 1px solid #ccc; margin-bottom: 1rem; }
-    .diagnostico-section button { background-color: #036b0c; color: white; border: none; padding: 0.6rem 1.2rem; border-radius: 6px; cursor: pointer; font-weight: 600; }
-    .diagnostico-section button:hover { background-color: #6e9171; }
     .resultado-diagnostico-mejorado { display: flex; gap: 2rem; background-color: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); max-width: 800px; margin: 2rem auto; align-items: center; animation: fadeInUp 0.8s ease-out; }
     .resultado-imagen img { max-width: 250px; border-radius: 12px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
     .resultado-info h3 { color: #036b0c; margin-bottom: 1rem; }
@@ -79,10 +76,11 @@
 
   <!-- SECCIÓN DIAGNÓSTICO -->
   <section class="diagnostico-section">
-    <h2>Subí una foto de tu planta</h2>
-    <form method="POST" enctype="multipart/form-data">
+    <h2>Subí una foto de tu planta o sacala con la cámara</h2>
+    <form method="POST" action="{% url 'subir_imagen' %}" enctype="multipart/form-data">
       {% csrf_token %}
-      <input type="file" name="foto" required>
+      <!-- Input con soporte de cámara -->
+      <input type="file" name="foto" accept="image/*" capture="environment" required>
       <br>
       <button type="submit">Diagnosticar</button>
     </form>
