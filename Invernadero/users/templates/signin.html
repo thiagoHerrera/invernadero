@@ -13,8 +13,10 @@
 
         <!-- Parte derecha con formulario -->
         <form action="{% url 'signin' %}" method="POST" class="form-login">
+            <img src="../static/img/liana2.png" class="flora" alt="">
             {% csrf_token %}
-            <img src="../static/img/liana.png" class="flora" alt="">
+
+            
            
 
             <h2>Inicio de Sesión</h2>
