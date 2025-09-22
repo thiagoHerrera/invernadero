@@ -13,7 +13,8 @@
 
         <!-- Parte derecha con formulario -->
         <form action="{% url 'signin' %}" method="POST" class="form-login">
-            <img src="https://raw.githubusercontent.com/Waal69/evaluacion/refs/heads/main/img/adios.jpg" class="flora" alt="">
+            <img src="{% static 'img/nashe.png' %}" class="flora" alt="Liana">
+
             {% csrf_token %}
 
             

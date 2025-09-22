@@ -170,9 +170,12 @@
     transform: skew(-15deg);
 
 }
-.flora{
+.flora {
     position: fixed;
-    mix-blend-mode:multiply;
-    transform: rotate(105deg);
-    left: 11%;
-    max-height: 130vh;}
+    mix-blend-mode: multiply;
+    transform: rotate(107deg);
+    left: 15%;
+    max-height: 130vh;
+    height: 335px;
+    top: 330px;   /* 🔹 la bajás 50px, podés cambiar el valor */
+}
