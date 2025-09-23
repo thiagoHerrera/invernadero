@@ -76,6 +76,7 @@ def sensors(request):
     return Response(acciones, status=status.HTTP_201_CREATED)
 
 
+@api_view(['GET'])
 def get_latest_parameters(request):
     """
     Vista que obtiene el último registro guardado en la base de datos
