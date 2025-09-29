@@ -1,181 +1,201 @@
-/* body {
+/* Base y Tipografía */
+:root {
+    --color-forest: #0B5345; /* Verde Bosque (Título, Botón) */
+    --color-moss: #34A853;   /* Verde Musgo (Acentos) */
+    --color-off-white: #FAFAFA; /* Fondo general del body */
+    --color-cream: #FFFDF8; /* Fondo más cremoso para la sección de login */
+    --color-gray: #757575; /* Texto secundario */
+}
+
+/* Reset y Contenedor Principal */
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+
+body {
     width: 100%;
-    overflow: hidden auto;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-off-white); 
+    display: flex;
 }
 
 .container {
     display: flex;
-    height: 100vh;
-    background: url('../img/03.jpeg') no-repeat center center;
-    background-size: cover;
+    width: 100%;
+    height: 100vh; 
+    overflow: hidden; 
 }
 
-.descripcion {
-    flex: 0 0 60%!important;
+/* Panel Decorativo Izquierdo (60%) */
+.panel-decorativo {
+    flex: 0 0 60%;
     position: relative;
+    
+    /* Imagen de fondo de la izquierda (el color verde claro) */
+    background: url('../img/fondologin.png') no-repeat center center;
+    background-size: cover; 
+    
+    display: flex; 
+    align-items: flex-start; 
+    padding: 30px 40px; 
 }
-*/
+
+.logo-text {
+    font-size: 1.8rem; /* Un poco más pequeño y sutil */
+    font-weight: 700;
+    color: var(--color-forest);
+    opacity: 0.9;
+}
+
+/* Formulario de Login (40%) */
 .form-login {
-    flex: 0 0 40%!important;
+    flex: 0 0 40%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 0 20px;
-    background-color: #fff;
-    position: relative;
-}
-
-.form-login h2 {
-    margin-bottom: 20px;
-}
-/*
-.form {
-    width: 100%;
-    max-width: 300px;
-    display: flex;
-    flex-direction: column;
-    border-radius: 20px;
-    margin: 20px;
-    box-shadow: 0 20px 25px -10px rgba(8, 91, 44, 0.733);
     padding: 20px;
-    background: #fff;
+    
+    /* Fondo Cremoso para la sección derecha */
+    background-color: var(--color-cream);
+    
+    position: relative;
+    z-index: 10;
 }
 
-.form input, 
-.form .form-group input {
-    height: 40px;
-    margin: 10px 0;
-    border-radius: 10px;
-    border: 1px solid #ccc;
-    padding: 0 10px;
-    background-color: #fff;
+.titulo-principal {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--color-forest);
+    margin-bottom: 30px;
+    text-align: center;
 }
 
-.btn-login {
-    background-color: rgb(0, 110, 0);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    border: none;
-    height: 40px;
-    border-radius: 10px;
-    margin-top: 15px;
-}
-
-.descripcion::before {
-    content: '';
-    position: absolute;
-    background-color: #fff;
-    height: 100%;
-    top: 0;
-    right: -85%;
+/* Contenido del Formulario (Flotante) */
+.form-content {
     width: 100%;
-    transform: skew(-15deg);
-}
-
-.flora {
-    position: fixed;
-    mix-blend-mode: multiply;
-    transform: rotate(105deg);
-    left: 11%;
-    max-height: 130vh;
-}
-
-.opciones {
-    margin-top: 15px;
+    max-width: 380px; 
+    padding: 0; 
+    
+    background-color: transparent; 
+    box-shadow: none; 
+    
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 20px;
 }
 
-.opciones a {
-    font-size: 14px;
-    color: #2f7a4e;
-    text-decoration: none;
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
-.opciones a:hover {
-    text-decoration: underline;
+/* Labels */
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-forest);
 }
 
-.error {
-    color: red;
-    font-size: 14px;
-} */
-
-
- body{
-        padding:0; margin:0; box-sizing: border-box; width: 100%; overflow:hidden auto; }
-        .container{
-            display: flex;
-            height: 100vh;
-             background: url('../img/fondologin.png') no-repeat center center;
-            background-size: cover;
-            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-        }
-        .descripcion{
-            flex: 0 0 60%!important;
-            flex: 1;
-            position: relative;
-           
-        }
-        /* .form-login{
-            flex: 0 0 40%!important;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0 20 0 0px;
-            background-color: rgb(255, 255, 255);
-            position: relative;
-        }
-        .form-login h2{
-            margin-bottom: 20px;
-        }   */
-        .form{
-            height: 50vh;
-            width: 100%;
-            max-width: 300px;
-            display: flex;
-            flex-direction: column;
-            background-color: rgba(62, 208, 40, 0.539);
-            border-radius: 20px;
-            margin: 20px;
-            box-shadow: 0 20px 25px -10px rgba(8, 91, 44, 0.733);
-            
-            }
-
-            .form input{
-                height: 40px;
-                margin: 20px;
-                border-radius: 10px;
-                border: none;
-                padding: 0 10px;
-                background-color: white;
-            }
-.descripcion::before{
-    content: '';
-    position: absolute;
-      background-color: rgb(255, 255, 255);
-    height: 100%;
-    top: 0; 
-    right: -85%;
+/* Campos de Input (username, password) */
+.form-content input[type="text"],
+.form-content input[type="password"] {
     width: 100%;
-    transform: skew(-15deg);
-
+    height: 48px;
+    padding: 0 15px;
+    border-radius: 8px;
+    border: 2px solid transparent; 
+    background-color: #ffffff;
+    font-size: 1rem;
+    transition: border-color 0.3s;
 }
+
+.form-content input[type="text"]:focus,
+.form-content input[type="password"]:focus {
+    outline: none;
+    border-color: var(--color-moss); 
+    box-shadow: 0 0 5px rgba(52, 168, 83, 0.5);
+}
+
+/* Botón de Ingresar */
+.btn-login {
+    width: 100%;
+    height: 50px;
+    margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-forest);
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+.btn-login:hover {
+    background-color: #1a6a57; 
+}
+
+.btn-login:active {
+    transform: scale(0.99);
+}
+
+/* Mensajes de Error */
+.error, .error-general {
+    color: #c93d3d; 
+    font-size: 0.85rem;
+    margin-top: -10px;
+}
+
+.error-general {
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(201, 61, 61, 0.1);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Opciones Secundarias */
+.opciones {
+    margin-top: 25px;
+    font-size: 0.8rem; /* Un poco más pequeño */
+    display: flex;
+    gap: 10px;
+    color: var(--color-gray);
+    justify-content: center;
+}
+
+.link-opcion {
+    color: var(--color-gray);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s;
+}
+
+.link-opcion:hover {
+    color: var(--color-moss); 
+}
+
+/* Estilo de la Liana - Corregido como un divisor vertical centrado */
 .flora {
-    position: fixed;
-    mix-blend-mode: multiply;
-    transform: rotate(107deg);
-    left: 15%;
-    max-height: 130vh;
-    height: 335px;
-    top: 330px;   /* 🔹 la bajás 50px, podés cambiar el valor */
+    position: absolute; 
+    
+    /* Quitamos todas las transformaciones que distorsionaban */
+    transform: translateY(-50%); /* Solo centrado vertical */
+    
+    /* Restauramos el tamaño natural de la imagen */
+    height: auto; 
+    width: 50px; /* Tamaño más manejable */
+    
+    /* Posicionamiento para que se vea perfectamente en el borde */
+    left: -25px; 
+    top: 50%; /* Centrado verticalmente */
+    
+    mix-blend-mode: multiply; 
+    z-index: 5;
+    object-fit: contain; /* Para que la imagen no se recorte ni se estire */
 }
