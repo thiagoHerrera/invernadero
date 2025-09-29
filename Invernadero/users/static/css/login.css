@@ -185,17 +185,18 @@ body {
     position: absolute; 
     
     /* Quitamos todas las transformaciones que distorsionaban */
-    transform: translateY(-50%); /* Solo centrado vertical */
-    
+   
     /* Restauramos el tamaño natural de la imagen */
-    height: auto; 
-    width: 50px; /* Tamaño más manejable */
+    height: 250px; 
+   
     
     /* Posicionamiento para que se vea perfectamente en el borde */
-    left: -25px; 
+    left: 270px; 
     top: 50%; /* Centrado verticalmente */
     
     mix-blend-mode: multiply; 
-    z-index: 5;
-    object-fit: contain; /* Para que la imagen no se recorte ni se estire */
+    z-index: 10;
+    
+    transform: rotate(90deg);
+    width: 1350px;
 }
