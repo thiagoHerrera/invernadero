@@ -1,216 +1,201 @@
+/* Base y Tipografía */
+:root {
+    --color-forest: #0B5345; /* Verde Bosque (Título, Botón) */
+    --color-moss: #34A853;   /* Verde Musgo (Acentos) */
+    --color-off-white: #FAFAFA; /* Fondo general del body */
+    --color-cream: #FFFDF8; /* Fondo más cremoso para la sección de login */
+    --color-gray: #757575; /* Texto secundario */
+}
+
+/* Reset y Contenedor Principal */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
 body {
-     margin: 0;
-     padding: 0;
-     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-     background-color: var(--light-green);
-     background-image: url("/static/img/fondologin.png");
-     background-repeat: no-repeat;
-     background-size: cover;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     height: 100vh;
-     flex-direction: column;
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-off-white); 
+    display: flex;
 }
 
 .container {
-    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 1rem;
-    box-sizing: border-box;
+    width: 100%;
+    height: 100vh; 
+    overflow: hidden; 
 }
 
-form {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 90%;
-    max-width: 360px;
-    box-sizing: border-box;
+/* Panel Decorativo Izquierdo (60%) */
+.panel-decorativo {
+    flex: 0 0 60%;
     position: relative;
-    animation: fadeIn 0.6s ease-in-out;
+    
+    /* Imagen de fondo de la izquierda (el color verde claro) */
+    background: url('../img/fondologin.png') no-repeat center center;
+    background-size: cover; 
+    
+    display: flex; 
+    align-items: flex-start; 
+    padding: 30px 40px; 
 }
 
-.plantita {
-    position: absolute;
-    top: -60px;
-    left: 25%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 60px;
+.logo-text {
+    font-size: 1.8rem; /* Un poco más pequeño y sutil */
+    font-weight: 700;
+    color: var(--color-forest);
+    opacity: 0.9;
 }
 
-.plantita svg {
-    width: 100%;
-    height: 100%;
-}
-
-h1 {
-     color: var(--primary-green);
-     font-size: 24px;
-     margin-top: 2.5rem;
-     margin-bottom: 0.5rem;
-}
-
-h2 {
-     color: var(--accent-green);
-     font-size: 18px;
-     margin-bottom: 1.5rem;
-}
-
-a.password_reset {
-     color: var(--dark-green);
-}
-
-
-.form-group {
-    margin-bottom: 1rem;
-    text-align: left;
-    font-size: 14px;
-    color: #333;
-}
-
-.form-group input {
-     width: 100%;
-     padding: 0.5rem;
-     border: 1px solid var(--border-color);
-     border-radius: 8px;
-     background-color: #eaf4ed;
-     font-size: 1rem;
-     box-sizing: border-box;
-     transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-button {
-     width: 100%;
-     padding: 0.6rem;
-     background-color: var(--primary-green);
-     color: var(--white);
-     border: none;
-     border-radius: 8px;
-     font-weight: bold;
-     cursor: pointer;
-     transition: background-color 0.3s ease;
-     margin-top: 1rem;
-}
-
-button:hover {
-     background-color: var(--dark-green);
-}
-
-.register-text {
-     margin-top: 1rem;
-     font-size: 13px;
-     color: var(--text-secondary);
-}
-
-.register-text a {
-     color: var(--primary-green);
-     text-decoration: none;
-     font-weight: bold;
-}
-
-.register-text a:hover {
-    text-decoration: underline;
-}
-
-a.back-link {
-    position: absolute;
-    top: 10px;
-    left: 10px;
+/* Formulario de Login (40%) */
+.form-login {
+    flex: 0 0 40%;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    padding: 20px;
+    
+    /* Fondo Cremoso para la sección derecha */
+    background-color: var(--color-cream);
+    
+    position: relative;
     z-index: 10;
 }
 
-/* Estilo para los mensajes de error */
-.error {
-    color: red;
-    font-size: 14px;
+.titulo-principal {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--color-forest);
+    margin-bottom: 30px;
+    text-align: center;
+}
+
+/* Contenido del Formulario (Flotante) */
+.form-content {
+    width: 100%;
+    max-width: 380px; 
+    padding: 0; 
+    
+    background-color: transparent; 
+    box-shadow: none; 
+    
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+/* Labels */
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-forest);
+}
+
+/* Campos de Input (username, password) */
+.form-content input[type="text"],
+.form-content input[type="password"] {
+    width: 100%;
+    height: 48px;
+    padding: 0 15px;
+    border-radius: 8px;
+    border: 2px solid transparent; 
+    background-color: #ffffff;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.form-content input[type="text"]:focus,
+.form-content input[type="password"]:focus {
+    outline: none;
+    border-color: var(--color-moss); 
+    box-shadow: 0 0 5px rgba(52, 168, 83, 0.5);
+}
+
+/* Botón de Ingresar */
+.btn-login {
+    width: 100%;
+    height: 50px;
     margin-top: 10px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-forest);
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
 }
 
-
-
-/* Media Queries */
-@media (max-width: 768px) {
-    body {
-        height: auto;
-        padding: 2rem;
-    }
-
-    .container {
-        flex-direction: column;
-        padding: 1rem;
-    }
-
-    form {
-        max-width: 100%;
-        width: 90%;
-        padding: 1.5rem;
-    }
-
-    h1 {
-        font-size: 22px;
-        margin-top: 1.5rem;
-    }
-
-    h2 {
-        font-size: 16px;
-    }
-
-    .plantita {
-        width: 50px;
-        height: 50px;
-        top: -50px;
-    }
-
-    .form-group input {
-        padding: 0.4rem;
-    }
-
-    button {
-        padding: 0.5rem;
-    }
-
-    .register-text {
-        font-size: 12px;
-    }
+.btn-login:hover {
+    background-color: #1a6a57; 
 }
 
-@media (max-width: 480px) {
-    body {
-        padding: 1rem;
-    }
+.btn-login:active {
+    transform: scale(0.99);
+}
 
-    form {
-        padding: 1.2rem;
-        width: 90%;
-        max-width: 100%;
-    }
+/* Mensajes de Error */
+.error, .error-general {
+    color: #c93d3d; 
+    font-size: 0.85rem;
+    margin-top: -10px;
+}
 
-    h1 {
-        font-size: 20px;
-    }
+.error-general {
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(201, 61, 61, 0.1);
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
 
-    h2 {
-        font-size: 14px;
-    }
+/* Opciones Secundarias */
+.opciones {
+    margin-top: 25px;
+    font-size: 0.8rem; /* Un poco más pequeño */
+    display: flex;
+    gap: 10px;
+    color: var(--color-gray);
+    justify-content: center;
+}
 
-    .form-group input {
-        padding: 0.3rem;
-    }
+.link-opcion {
+    color: var(--color-gray);
+    text-decoration: none;
+    font-weight: 400;
+    transition: color 0.3s;
+}
 
-    button {
-        padding: 0.5rem;
-    }
+.link-opcion:hover {
+    color: var(--color-moss); 
+}
 
-    .register-text {
-        font-size: 11px;
-    }
+/* Estilo de la Liana - Corregido como un divisor vertical centrado */
+.flora {
+    position: absolute; 
+    
+    /* Quitamos todas las transformaciones que distorsionaban */
+    transform: translateY(-50%); /* Solo centrado vertical */
+    
+    /* Restauramos el tamaño natural de la imagen */
+    height: auto; 
+    width: 50px; /* Tamaño más manejable */
+    
+    /* Posicionamiento para que se vea perfectamente en el borde */
+    left: -25px; 
+    top: 50%; /* Centrado verticalmente */
+    
+    mix-blend-mode: multiply; 
+    z-index: 5;
+    object-fit: contain; /* Para que la imagen no se recorte ni se estire */
 }

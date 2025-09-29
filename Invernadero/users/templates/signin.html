@@ -3,64 +3,55 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>GreenHouse - Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenHouse - Inicio de Sesión</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
+    <div class="container">
+        <section class="panel-decorativo">
+             <div class="logo-text">GreenHouse</div>
+        </section>
 
-    <a href="{% url 'landing' %}" class="back-link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="#2f7a4e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M19 12H5"></path>
-            <path d="M12 19l-7-7 7-7"></path>
-        </svg>
-    </a>
+        <form action="{% url 'signin' %}" method="POST" class="form-login">
+            
+            {% csrf_token %}
+            
+            <h1 class="titulo-principal">Inicio de Sesión</h1>
 
-    <form action="{% url 'signin' %}" method="POST">
-        {% csrf_token %}
+            <img src="{% static 'img/nashe.png' %}" class="flora" alt="Liana decorativa">
+            
+            <div class="form-content">
+                {% if error %}
+                    <p class="error-general">{{ error }}</p>
+                {% endif %}
 
-        <div class="plantita">
-            <!-- SVG de la plantita -->
-            <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" 
-                 xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">
-                <path style="fill:#A2CE86;" d="M287.635,250.097c-0.541-19.805,4.441-40.438,14.41-59.669
-                c10.157-19.593,25.307-37.283,43.815-51.152c18.508-13.868,39.738-23.443,61.396-27.689
-                c21.256-4.166,42.459-3.155,61.314,2.926c4.1,1.322,6.921,5.086,7.039,9.392c0.541,19.805-4.442,40.438-14.41,59.669
-                c-3.304,6.375-7.135,12.545-11.44,18.45c-8.928,12.247-19.888,23.345-32.375,32.702c-18.508,13.868-39.738,23.443-61.396,27.689
-                c-21.256,4.166-42.459,3.155-61.314-2.926C290.574,258.167,287.753,254.403,287.635,250.097z"/>
-                <path style="fill:#489B6D;" d="M473.913,118.568c1.03,1.551,1.642,3.389,1.696,5.339c0.541,19.805-4.442,40.438-14.41,59.669
-                c-3.304,6.375-7.135,12.545-11.44,18.45c-8.928,12.247-19.888,23.345-32.375,32.702c-18.508,13.868-39.738,23.443-61.396,27.689
-                c-21.256,4.166-42.459,3.155-61.314-2.926c-1.93-0.622-3.57-1.79-4.784-3.295L473.913,118.568z"/>
-                <!-- resto de paths del SVG -->
-            </svg>
-        </div>
+                <div class="form-group">
+                    <label for="{{ form.username.id_for_label }}">Username:</label>
+                    {{ form.username }}
+                    {% if form.username.errors %}
+                        <p class="error">{{ form.username.errors.0 }}</p>
+                    {% endif %}
+                </div>
 
-        <h1>GreenHouse</h1>
-        <h2>Inicio de Sesión</h2>
-        
-        <div class="form-group">
-            Nombre de Usuario:
-            {{ form.username }}
-            {% if form.username.errors %}
-                <p class="error">{{ form.username.errors.0 }}</p>
-            {% endif %}
-        </div>
+                <div class="form-group">
+                    <label for="{{ form.password.id_for_label }}">Password:</label>
+                    {{ form.password }}
+                    {% if form.password.errors %}
+                        <p class="error">{{ form.password.errors.0 }}</p>
+                    {% endif %}
+                </div>
 
-        <div class="form-group">
-            Contraseña:
-            {{ form.password }}
-            {% if form.password.errors %}
-                <p class="error">{{ form.password.errors.0 }}</p>
-            {% endif %}
-        </div>
+                <input type="submit" value="Ingresar" class="btn-login">
+            </div>
 
-        <button type="submit">Iniciar Sesión</button>
-
-        {% if error %}
-            <p class="error">{{ error }}</p>
-        {% endif %}
-
-        <p class="register-text">¿No tienes cuenta? <a href="{% url 'signup' %}">Registrarse</a></p>
-        <a class="password_reset" href="{% url 'password_reset' %}">¿Olvidaste tu contraseña?</a>
-    </form>
+            <div class="opciones">
+                <a href="{% url 'password_reset' %}" class="link-opcion">¿Olvidaste tu contraseña?</a>
+                <span>|</span>
+                <a href="{% url 'signup' %}" class="link-opcion">Crear una cuenta</a>
+            </div>
+        </form>
+    </div>
 </body>
 </html>
