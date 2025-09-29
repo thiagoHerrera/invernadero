@@ -131,14 +131,15 @@ dmypy.json
 # IDE
 .vscode/
 .idea/
-
-# Static files
-staticfiles/
-static/
-
-# Media files
-media/
+*.swp
+*.swo
+*~
 
 # OS
 .DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
 Thumbs.db
