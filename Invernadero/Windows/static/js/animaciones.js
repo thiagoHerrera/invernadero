@@ -12,6 +12,11 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 const element = entry.target;
 
+                // Verificar si ya se ha animado
+                if (element.classList.contains('has-animated')) {
+                    return; // Ya animado, no hacer nada
+                }
+
                 // Agregar clases de animación basadas en data attributes
                 const animationType = element.dataset.animation || 'animate-fade-in';
                 const delay = element.dataset.delay || '0';
@@ -22,15 +27,16 @@ document.addEventListener('DOMContentLoaded', function() {
                         element.classList.add(animationType);
                         element.classList.add('animate-duration-1000');
                         element.classList.remove('opacity-0');
+                        element.classList.add('has-animated'); // Marcar como animado
                     }, delay);
                 } else {
                     element.classList.add(animationType);
                     element.classList.add('animate-duration-1000');
                     element.classList.remove('opacity-0');
+                    element.classList.add('has-animated'); // Marcar como animado
                 }
 
-                // Dejar de observar el elemento después de animarlo
-                observer.unobserve(element);
+                // No dejar de observar, para que se anime si no se animó antes
             }
         });
     }

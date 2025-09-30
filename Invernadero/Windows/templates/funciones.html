@@ -8,69 +8,163 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/funciones.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body { background: linear-gradient(135deg, #f4faf5 0%, #d7ded7 100%); }
+    .hero-funciones { background: linear-gradient(135deg, #036b0c, #2a7e56); padding: 4rem 2rem; text-align: center; color: white; position: relative; overflow: hidden; }
+    .hero-funciones::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,50 Q50,20 80,50 T140,50" stroke="rgba(255,255,255,0.1)" fill="none" stroke-width="2"/><circle cx="30" cy="30" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="70" cy="70" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>'); }
+    .hero-funciones h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; position: relative; z-index: 1; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    .hero-funciones p { font-size: 1.2rem; max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .funciones-container { background: white; margin: -3rem 2rem 3rem; border-radius: 30px; padding: 3rem; box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+    .funciones-container::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #036b0c, #2a7e56); border-radius: 30px 30px 0 0; }
+    .intro-section { text-align: center; margin-bottom: 3rem; }
+    .intro-section h2 { font-size: 2.5rem; font-weight: 900; color: #036b0c; margin-bottom: 1rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+    .intro-section p { font-size: 1.1rem; color: #333; font-weight: 500; line-height: 1.6; max-width: 900px; margin: 0 auto; }
+    .funciones-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 3rem; margin-top: 3rem; max-width: 1200px; margin-left: auto; margin-right: auto; }
+    .funcion-card { background: linear-gradient(145deg, #f4faf5, white); border-radius: 25px; padding: 2.5rem; box-shadow: 0 15px 35px rgba(0,0,0,0.1); position: relative; overflow: hidden; transition: all 0.3s ease; }
+    .funcion-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #036b0c, #2a7e56); }
+    .funcion-card:hover { transform: translateY(-5px); box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+    .funcion-icon { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #036b0c, #2a7e56); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; margin: 0 auto 1.5rem; }
+    .funcion-title { font-size: 1.6rem; font-weight: 800; color: #036b0c; margin-bottom: 1rem; text-align: center; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+    .funcion-description { color: #333; font-size: 1rem; font-weight: 500; line-height: 1.6; text-align: center; }
+    .funcion-list { list-style: none; padding: 0; margin-top: 1.5rem; }
+    .funcion-list li { color: #333; font-size: 1rem; font-weight: 500; margin-bottom: 0.8rem; padding-left: 1.5rem; position: relative; }
+    .funcion-list li::before { content: '✓'; position: absolute; left: 0; color: #036b0c; font-weight: 700; }
+    .tech-showcase { background: linear-gradient(135deg, #d7ded7, #f4faf5); padding: 3rem 2rem; margin: 3rem -3rem -3rem; border-radius: 0 0 30px 30px; }
+    .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 800px; margin: 0 auto; }
+    @media (max-width: 768px) {
+      .hero-funciones h1 { font-size: 2.5rem; }
+      .hero-funciones p { font-size: 1rem; }
+      .funciones-container { margin: -2rem 1rem 2rem; padding: 2rem 1rem; }
+      .funciones-grid { grid-template-columns: 1fr; }
+      .tech-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 480px) {
+      .hero-funciones h1 { font-size: 2rem; }
+      .tech-grid { grid-template-columns: 1fr; }
+      .intro-section h2 { font-size: 2rem; }
+    }
+    .tech-item { text-align: center; padding: 1.5rem; background: white; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .tech-icon { font-size: 2.5rem; color: #036b0c; margin-bottom: 1rem; }
+    .tech-title { font-weight: 700; color: #036b0c; margin-bottom: 0.5rem; }
+    .tech-description { color: #555; font-size: 0.9rem; }
+  </style>
 </head>
 <body>
 
-  <header class="navbar">
+  <header class="navbar animate-fade-in-down animate-duration-1000">
   <section class="spbt">
-  <button class="menu-toggle" id="menuToggle">&#9776;</button>
-    <div class="logo">FloraCore</div>
+  <button class="menu-toggle hover:scale-110 transition-transform duration-300" id="menuToggle">&#9776;</button>
+    <div class="logo hover:text-green-600 transition-colors duration-300">FloraCore</div>
     </section>
     <nav class="menu" id="navMenu">
-      <a href="{% url 'landing' %}">Inicio</a>
-      <a href="{% url 'funciones' %}">Funciones</a>
-      <a href="{% url 'equipos' %}">Equipos</a>
-      <a href="{% url 'contacto' %}">Contáctanos</a>
-      <a href="{% url 'estadisticas' %}">Estadisticas</a>
-      <hr >
-       {% if not user.is_authenticated %}
-       <button class="user-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
-       <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
-       {% endif %}
+      <a href="{% url 'landing' %}" class="hover:scale-105 transition-all duration-300">Inicio</a>
+      <a href="{% url 'funciones' %}" class="hover:scale-105 transition-all duration-300">Funciones</a>
+      <a href="{% url 'contacto' %}" class="hover:scale-105 transition-all duration-300">Contáctanos</a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'estadisticas' %}" class="hover:scale-105 transition-all duration-300">Estadísticas</a>
+      <a href="{% url 'subir_imagen'%}" class="hover:scale-105 transition-all duration-300">Diagnóstico IA</a>
+      <form action="{% url 'logout' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button class="user-btn hover:scale-105 transition-all duration-300" type="submit">Cerrar sesión</button>
+      </form>
+      {% else %}
+      <button class="user-btn hover:scale-105 transition-all duration-300" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+      <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+      {% endif %}
     </nav>
-
-
   </header>
 
-  <main class="funciones animate-on-scroll">
-    <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-cog text-blue-600 mr-3"></i>¿Cómo Funciona FloraCore?</h1>
-    <p class="intro animate-fade-in animate-delay-400">FloraCore es un invernadero inteligente que utiliza tecnología de sensores y control automatizado para cuidar tus plantas sin necesidad de conocimientos previos o tiempo libre.</p>
+  <!-- HERO SECTION -->
+  <section class="hero-funciones animate-fade-in animate-duration-1500">
+    <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-cogs mr-4"></i>¿Cómo Funciona FloraCore?</h1>
+    <p class="animate-fade-in animate-delay-400">Descubre la tecnología inteligente que revoluciona el cuidado de plantas con automatización avanzada y sensores de precisión</p>
+  </section>
+
+  <!-- MAIN CONTAINER -->
+  <div class="funciones-container animate-on-scroll">
+    <div class="intro-section">
+      <h2><i class="fas fa-leaf text-green-500 mr-3"></i>Sistema Inteligente Integral</h2>
+      <p>FloraCore es un invernadero inteligente que utiliza tecnología de sensores avanzados y control automatizado para cuidar tus plantas sin necesidad de conocimientos previos o tiempo libre. Nuestro sistema se adapta a cualquier tipo de ambiente y planta.</p>
+    </div>
 
     <div class="funciones-grid">
-      <section class="bloque animate-on-scroll hover:scale-105 transition-all duration-300">
-        <i class="fas fa-microchip icono animate-bounce hover:animate-pulse"></i>
-        <h2><i class="fas fa-tools text-orange-500 mr-2"></i>¿Qué usamos?</h2>
-        <ul>
-          <li>Sensores de humedad del suelo y del ambiente</li>
+      <div class="funcion-card animate-on-scroll">
+        <div class="funcion-icon">
+          <i class="fas fa-microchip"></i>
+        </div>
+        <h3 class="funcion-title">¿Qué Tecnología Usamos?</h3>
+        <p class="funcion-description">Componentes de alta tecnología que trabajan en conjunto para crear el ecosistema perfecto:</p>
+        <ul class="funcion-list">
+          <li>Sensores de humedad del suelo y ambiente de precisión</li>
           <li>Sensores de temperatura interna y externa</li>
-          <li>Sensores de luz para detectar la necesidad de iluminación</li>
-          <li>Sensores de ventilación para renovar el aire</li>
-          <li>Microcontrolador ESP32 que procesa los datos y ejecuta acciones</li>
+          <li>Sensores de luz para iluminación automática</li>
+          <li>Sensores de ventilación para renovación de aire</li>
+          <li>Microcontrolador ESP32 con conectividad WiFi</li>
         </ul>
-      </section>
+      </div>
 
-      <section class="bloque animate-on-scroll hover:scale-105 transition-all duration-300">
-        <i class="fas fa-gears icono animate-bounce hover:animate-pulse"></i>
-        <h2><i class="fas fa-play-circle text-green-500 mr-2"></i>¿Cómo funciona?</h2>
-        <p>Los sensores monitorean continuamente las condiciones del entorno y del cultivo. El microcontrolador ESP32, programado mediante Arduino IDE, interpreta esta información y activa automáticamente:</p>
-        <ul>
-          <li>El riego si la planta necesita agua</li>
-          <li>La ventilación si el aire está viciado o caliente</li>
-          <li>La iluminación si hay poca luz solar</li>
-          <li>Alertas si detecta que la planta necesita ser trasplantada, como en el caso de un árbol</li>
+      <div class="funcion-card animate-on-scroll">
+        <div class="funcion-icon">
+          <i class="fas fa-gears"></i>
+        </div>
+        <h3 class="funcion-title">¿Cómo Funciona el Sistema?</h3>
+        <p class="funcion-description">Proceso automatizado inteligente que garantiza el cuidado óptimo:</p>
+        <ul class="funcion-list">
+          <li>Monitoreo continuo de condiciones ambientales</li>
+          <li>Procesamiento de datos en tiempo real</li>
+          <li>Activación automática del sistema de riego</li>
+          <li>Control inteligente de ventilación y temperatura</li>
+          <li>Ajuste automático de iluminación LED</li>
+          <li>Alertas predictivas para mantenimiento</li>
         </ul>
-      </section>
+      </div>
 
-      <section class="bloque animate-on-scroll hover:scale-105 transition-all duration-300">
-        <i class="fas fa-seedling icono animate-bounce hover:animate-pulse"></i>
-        <h2><i class="fas fa-target text-red-500 mr-2"></i>¿Cuál es el objetivo?</h2>
-        <p>Buscamos fomentar los espacios verdes y ayudar a personas que no tienen tiempo o conocimientos para cuidar plantas. FloraCore permite que cualquier persona pueda tener un cultivo sano y adaptado, incluso en ambientes difíciles o cerrados. ¡Hasta podés cuidar un árbol!</p>
-      </section>
+      <div class="funcion-card animate-on-scroll">
+        <div class="funcion-icon">
+          <i class="fas fa-seedling"></i>
+        </div>
+        <h3 class="funcion-title">¿Cuál es Nuestro Objetivo?</h3>
+        <p class="funcion-description">Democratizar la agricultura inteligente y promover espacios verdes:</p>
+        <ul class="funcion-list">
+          <li>Facilitar el cultivo para personas sin experiencia</li>
+          <li>Optimizar el tiempo dedicado al cuidado de plantas</li>
+          <li>Adaptar cultivos a cualquier ambiente o espacio</li>
+          <li>Fomentar la sostenibilidad y espacios verdes</li>
+          <li>Permitir el cultivo de árboles en interiores</li>
+        </ul>
+      </div>
     </div>
-  </main>
 
-  <footer id="contact">
-    <p>¿Tenés dudas? <a href="mailto:FloraCore2025@gmail.com">Contactanos aquí</a></p>
+    <!-- TECH SHOWCASE -->
+    <div class="tech-showcase">
+      <h3 style="text-align: center; font-size: 2rem; font-weight: 700; color: #036b0c; margin-bottom: 2rem;"><i class="fas fa-rocket mr-3"></i>Tecnología de Vanguardia</h3>
+      <div class="tech-grid">
+        <div class="tech-item animate-on-scroll">
+          <div class="tech-icon"><i class="fas fa-wifi"></i></div>
+          <div class="tech-title">IoT Conectado</div>
+          <div class="tech-description">Conectividad WiFi para monitoreo remoto</div>
+        </div>
+        <div class="tech-item animate-on-scroll">
+          <div class="tech-icon"><i class="fas fa-leaf"></i></div>
+          <div class="tech-title">Eco-Friendly</div>
+          <div class="tech-description">Tecnología sostenible y eficiente</div>
+        </div>
+        <div class="tech-item animate-on-scroll">
+          <div class="tech-icon"><i class="fas fa-brain"></i></div>
+          <div class="tech-title">IA Integrada</div>
+          <div class="tech-description">Algoritmos inteligentes de decisión</div>
+        </div>
+        <div class="tech-item animate-on-scroll">
+          <div class="tech-icon"><i class="fas fa-mobile-alt"></i></div>
+          <div class="tech-title">Control Móvil</div>
+          <div class="tech-description">Gestión desde cualquier dispositivo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer id="contact" class="animate-on-scroll">
+    <p><i class="fas fa-cogs text-blue-500 mr-2"></i>Tecnología que hace crecer el futuro</p>
     <p>Copyright © 2025 FloraCore</p>
   </footer>
 

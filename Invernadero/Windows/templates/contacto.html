@@ -7,112 +7,182 @@
   <title>Contáctanos - FloraCore</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/contacto.css' %}">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body { background: linear-gradient(135deg, #f4faf5 0%, #d7ded7 100%); }
+    .hero-contact { background: linear-gradient(135deg, #036b0c, #2a7e56); padding: 4rem 2rem; text-align: center; color: white; position: relative; overflow: hidden; }
+    .hero-contact::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 Q30,10 40,20 T60,20" stroke="rgba(255,255,255,0.1)" fill="none"/><circle cx="80" cy="30" r="3" fill="rgba(255,255,255,0.1)"/></svg>'); }
+    .hero-contact h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; position: relative; z-index: 1; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    .hero-contact p { font-size: 1.2rem; max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
+    .team-showcase { background: white; margin: -3rem 2rem 3rem; border-radius: 30px; padding: 3rem; box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
+    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-top: 2rem; max-width: 1200px; margin-left: auto; margin-right: auto; }
+    .team-member { background: linear-gradient(145deg, #f4faf5, white); border-radius: 20px; padding: 2rem; text-align: center; position: relative; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .team-member::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #036b0c, #2a7e56); }
+    .member-avatar { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #036b0c, #2a7e56); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: white; position: relative; }
+    .member-avatar::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; background: linear-gradient(135deg, #2a7e56, #036b0c); z-index: -1; }
+    .member-name { font-size: 1.5rem; font-weight: 800; color: #036b0c; margin-bottom: 0.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+    .member-role { color: #2a7e56; font-weight: 600; margin-bottom: 1rem; font-size: 1rem; }
+    .member-description { color: #333; font-size: 1rem; line-height: 1.6; font-weight: 500; }
+    .contact-section { padding: 3rem 2rem; max-width: 1200px; margin: 0 auto; }
+    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto; }
+    .contact-method { background: white; border-radius: 25px; padding: 3rem 2rem; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.1); position: relative; overflow: hidden; }
+    .contact-method::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #036b0c, #2a7e56); }
+    .contact-icon { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #036b0c, #2a7e56); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; }
+    .contact-title { font-size: 1.5rem; font-weight: 800; color: #036b0c; margin-bottom: 1rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+    .contact-info { color: #2a7e56; font-size: 1.1rem; font-weight: 600; }
+    .contact-description { color: #333; margin-top: 0.5rem; font-size: 1rem; font-weight: 500; }
+    .social-section { background: linear-gradient(135deg, #d7ded7, #f4faf5); padding: 3rem 2rem; margin: 2rem; border-radius: 25px; text-align: center; }
+    .social-links { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; }
+    .social-link { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #036b0c, #2a7e56); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; text-decoration: none; transition: all 0.3s ease; }
+    .social-link:hover { transform: scale(1.1) rotate(5deg); }
+    @media (max-width: 768px) { 
+      .hero-contact h1 { font-size: 2.5rem; }
+      .hero-contact p { font-size: 1rem; }
+      .team-showcase { margin: -2rem 1rem 2rem; padding: 2rem 1rem; }
+      .team-grid { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .social-section { margin: 2rem 1rem; }
+    }
+    @media (max-width: 480px) {
+      .hero-contact h1 { font-size: 2rem; }
+      .social-links { flex-wrap: wrap; }
+    }
+  </style>
 </head>
 <body>
 
-  <header class="navbar">
+  <header class="navbar animate-fade-in-down animate-duration-1000">
   <section class="spbt">
-  <button class="menu-toggle" id="menuToggle">&#9776;</button>
-    <div class="logo">FloraCore</div>
+  <button class="menu-toggle hover:scale-110 transition-transform duration-300" id="menuToggle">&#9776;</button>
+    <div class="logo hover:text-green-600 transition-colors duration-300">FloraCore</div>
     </section>
     <nav class="menu" id="navMenu">
-      <a href="{% url 'landing' %}"><i class="fas fa-home mr-2"></i>Inicio</a>
-      <a href="{% url 'funciones' %}"><i class="fas fa-cog mr-2"></i>Funciones</a>
-      <a href="{% url 'equipos' %}"><i class="fas fa-microchip mr-2"></i>Equipos</a>
-      <a href="{% url 'contacto' %}"><i class="fas fa-envelope mr-2"></i>Contáctanos</a>
-      <a href="{% url 'estadisticas' %}"><i class="fas fa-chart-bar mr-2"></i>Estadisticas</a>
-       {% if not user.is_authenticated %}
-       <button class="user-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
-       <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
-       {% endif %}
+      <a href="{% url 'landing' %}" class="hover:scale-105 transition-all duration-300">Inicio</a>
+      <a href="{% url 'funciones' %}" class="hover:scale-105 transition-all duration-300">Funciones</a>
+
+      <a href="{% url 'contacto' %}" class="hover:scale-105 transition-all duration-300">Contáctanos</a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'estadisticas' %}" class="hover:scale-105 transition-all duration-300">Estadísticas</a>
+      <a href="{% url 'subir_imagen'%}" class="hover:scale-105 transition-all duration-300">Diagnóstico IA</a>
+      <form action="{% url 'logout' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button class="user-btn hover:scale-105 transition-all duration-300" type="submit">Cerrar sesión</button>
+      </form>
+      {% else %}
+      <button class="user-btn hover:scale-105 transition-all duration-300" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+      <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+      {% endif %}
     </nav>
-
-
   </header>
 
-  <main class="contacto animate-on-scroll">
-    <div class="contacto-header">
-      <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-envelope text-blue-600 mr-3"></i>Contáctanos</h1>
-      <p class="animate-fade-in animate-delay-400">¡Gracias por tu interés en nuestro proyecto! Somos un grupo de estudiantes apasionados de la Escuela Técnica N°3 Roberto Arlt, trabajando en <strong>FloraCore</strong>, un invernadero inteligente que revoluciona el cuidado de plantas.</p>
+  <!-- HERO SECTION -->
+  <section class="hero-contact animate-fade-in animate-duration-1500">
+    <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-users mr-4"></i>Nuestro Equipo</h1>
+    <p class="animate-fade-in animate-delay-400">Conoce a los estudiantes visionarios de la Escuela Técnica N°3 Roberto Arlt que están revolucionando la agricultura con tecnología inteligente</p>
+  </section>
+
+  <!-- TEAM SHOWCASE -->
+  <section class="team-showcase animate-on-scroll">
+    <h2 style="text-align: center; font-size: 2.5rem; font-weight: 800; color: #036b0c; margin-bottom: 1rem;"><i class="fas fa-rocket mr-3"></i>Los Innovadores</h2>
+    <p style="text-align: center; color: #555; font-size: 1.1rem; margin-bottom: 2rem;">Cada miembro aporta su expertise única para crear el futuro de la agricultura</p>
+    
+    <div class="team-grid">
+      <div class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="member-avatar">
+          <i class="fas fa-code"></i>
+        </div>
+        <h3 class="member-name">Walter Casarino</h3>
+        <p class="member-role">Frontend Architect</p>
+        <p class="member-description">Especialista en crear experiencias de usuario excepcionales. Transforma conceptos complejos en interfaces intuitivas y visualmente impactantes que conectan a los usuarios con la tecnología.</p>
+      </div>
+
+      <div class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="member-avatar">
+          <i class="fas fa-server"></i>
+        </div>
+        <h3 class="member-name">Bautista Insaurralde</h3>
+        <p class="member-role">Backend Engineer</p>
+        <p class="member-description">Arquitecto de sistemas robustos y escalables. Diseña la infraestructura que soporta toda la plataforma, garantizando seguridad, rendimiento y confiabilidad en cada operación.</p>
+      </div>
+
+      <div class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="member-avatar">
+          <i class="fas fa-brain"></i>
+        </div>
+        <h3 class="member-name">Thiago Herrera</h3>
+        <p class="member-role">AI Specialist</p>
+        <p class="member-description">Pionero en inteligencia artificial aplicada a la agricultura. Desarrolla algoritmos de machine learning que permiten al sistema tomar decisiones inteligentes y predictivas.</p>
+      </div>
+
+      <div class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="member-avatar">
+          <i class="fas fa-database"></i>
+        </div>
+        <h3 class="member-name">Manuel Gonzales</h3>
+        <p class="member-role">IoT Developer</p>
+        <p class="member-description">Experto en conectividad IoT y programación de microcontroladores. Crea el puente entre el mundo físico y digital, integrando sensores y actuadores de forma seamless.</p>
+      </div>
+
+      <div class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="member-avatar">
+          <i class="fas fa-cogs"></i>
+        </div>
+        <h3 class="member-name">Santiago Gómez</h3>
+        <p class="member-role">Hardware Engineer</p>
+        <p class="member-description">Ingeniero de hardware que materializa las ideas. Diseña, ensambla y optimiza todos los componentes físicos del sistema con precisión y innovación técnica.</p>
+      </div>
     </div>
+  </section>
 
-    <section class="equipo animate-on-scroll">
-      <h2 class="animate-fade-in animate-delay-600"><i class="fas fa-users text-green-600 mr-3"></i>Conoce a nuestro equipo</h2>
-      <div class="equipo-grid">
-        <div class="equipo-card animate-on-scroll">
-          <div class="equipo-icon">
-            <i class="fas fa-code text-blue-500"></i>
-          </div>
-          <h3>Walter Casarino</h3>
-          <p>Frontend Developer</p>
-          <span>Maquetación y diseño de interfaz</span>
+  <!-- CONTACT METHODS -->
+  <section class="contact-section">
+    <h2 style="text-align: center; font-size: 2.5rem; font-weight: 800; color: #036b0c; margin-bottom: 3rem;"><i class="fas fa-paper-plane mr-3"></i>Conecta con Nosotros</h2>
+    
+    <div class="contact-grid">
+      <div class="contact-method animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="contact-icon">
+          <i class="fas fa-envelope"></i>
         </div>
-        <div class="equipo-card animate-on-scroll">
-          <div class="equipo-icon">
-            <i class="fas fa-server text-purple-500"></i>
-          </div>
-          <h3>Bautista Insaurralde</h3>
-          <p>Backend Developer</p>
-          <span>Funcionalidades y seguridad</span>
-        </div>
-        <div class="equipo-card animate-on-scroll">
-          <div class="equipo-icon">
-            <i class="fas fa-brain text-orange-500"></i>
-          </div>
-          <h3>Thiago Herrera</h3>
-          <p>AI Developer</p>
-          <span>Inteligencia artificial y base de datos</span>
-        </div>
-        <div class="equipo-card animate-on-scroll">
-          <div class="equipo-icon">
-            <i class="fas fa-database text-red-500"></i>
-          </div>
-          <h3>Manuel Gonzales</h3>
-          <p>Backend Developer</p>
-          <span>APIs y código de sensores</span>
-        </div>
-        <div class="equipo-card animate-on-scroll">
-          <div class="equipo-icon">
-            <i class="fas fa-cogs text-green-500"></i>
-          </div>
-          <h3>Santiago Gómez</h3>
-          <p>Hardware Engineer</p>
-          <span>Armado del invernadero y sensores</span>
-        </div>
+        <h3 class="contact-title">Email Directo</h3>
+        <p class="contact-info">FloraCore2025@gmail.com</p>
+        <p class="contact-description">Respuesta garantizada en menos de 24 horas. Ideal para consultas técnicas y colaboraciones.</p>
       </div>
-    </section>
 
-    <section class="contacto-info animate-on-scroll">
-      <h2 class="animate-fade-in animate-delay-600"><i class="fas fa-paper-plane text-green-600 mr-3"></i>¿Cómo contactarnos?</h2>
-      <div class="contacto-grid">
-        <div class="contacto-card animate-on-scroll">
-          <div class="contacto-icon">
-            <i class="fas fa-envelope text-blue-500"></i>
-          </div>
-          <h3>Email</h3>
-          <a href="mailto:FloraCore2025@gmail.com" class="contacto-link">FloraCore2025@gmail.com</a>
+      <div class="contact-method animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="contact-icon">
+          <i class="fab fa-instagram"></i>
         </div>
-        <div class="contacto-card animate-on-scroll">
-          <div class="contacto-icon">
-            <i class="fab fa-instagram text-pink-500"></i>
-          </div>
-          <h3>Instagram</h3>
-          <a href="https://www.instagram.com/floracore_off/" class="contacto-link" target="_blank">@floracore_off</a>
-        </div>
-        <div class="contacto-card animate-on-scroll">
-          <div class="contacto-icon">
-            <i class="fas fa-map-marker-alt text-red-500"></i>
-          </div>
-          <h3>Ubicación</h3>
-          <p>Escuela Técnica N°3 Roberto Arlt<br>Tortuguitas, Buenos Aires, Argentina</p>
-        </div>
+        <h3 class="contact-title">Síguenos</h3>
+        <p class="contact-info">@floracore_off</p>
+        <p class="contact-description">Contenido exclusivo, actualizaciones del proyecto y behind-the-scenes de nuestro desarrollo.</p>
       </div>
-    </section>
-  </main>
 
-  <footer id="contact">
-    <p>¿Tenés dudas? <a href="mailto:FloraCore2025@gmail.com">Contactanos aquí</a></p>
-    <p>Copyright © 2025 FloraCore</p>
+      <div class="contact-method animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="contact-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <h3 class="contact-title">Nuestra Base</h3>
+        <p class="contact-info">E.T. N°3 Roberto Arlt</p>
+        <p class="contact-description">Tortuguitas, Buenos Aires, Argentina. Donde la innovación educativa se encuentra con la tecnología.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL SECTION -->
+  <section class="social-section animate-on-scroll">
+    <h3 style="font-size: 1.8rem; font-weight: 700; color: #036b0c; margin-bottom: 1rem;">¡Únete a la Revolución Verde!</h3>
+    <p style="color: #555;">Síguenos en nuestras redes sociales para estar al día con las últimas innovaciones</p>
+    <div class="social-links">
+      <a href="mailto:FloraCore2025@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
+      <a href="https://www.instagram.com/floracore_off/" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+      <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+    </div>
+  </section>
+
+  <footer id="contact" class="animate-on-scroll">
+    <p><i class="fas fa-heart text-red-500 mr-2"></i>Hecho con pasión por el futuro verde</p>
+    <p>Copyright © 2025 FloraCore - Donde la tecnología florece</p>
   </footer>
 
     <script src="{% static 'js/animaciones.js' %}"></script>
@@ -120,7 +190,6 @@
     document.addEventListener('DOMContentLoaded', function() {
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.getElementById('navMenu');
-
         menuToggle.addEventListener('click', function() {
             navMenu.classList.toggle('active');
         });
@@ -128,4 +197,3 @@
 </script>
 </body>
 </html>
-

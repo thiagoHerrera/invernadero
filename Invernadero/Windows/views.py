@@ -2,9 +2,8 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from users.models import Parameters
 
-@login_required
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'landing.html')
 
 def landing(request):
     return render(request, 'landing.html')
@@ -23,6 +22,7 @@ def info(request):
 # Create your views here.
 
 
+@login_required
 def get_latest_parameters(request):
     ultimo = Parameters.objects.last()
 

@@ -7,110 +7,288 @@
   <title>FloraCore - Diagnóstico IA</title>
   <link rel="stylesheet" href="{% static 'css/landing.css' %}">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
   <style>
-    /* Estilo para la sección de diagnóstico */
-    .diagnostico-section {
-        padding: 3rem 2rem;
-        text-align: center;
-        background-color: #d7ded7;
-        min-height: 70vh;
-    }
-    .diagnostico-section input[type="file"] {
-        display: block;
-        margin: 0 auto 1rem auto;
-        padding: 0.6rem 1rem;
-        border-radius: 12px;
-        border: 1px solid #036b0c;
-        background-color: #f4f9f4;
-        cursor: pointer;
-        font-size: 0.95rem;
-        transition: 0.3s;
-    }
-
-    .diagnostico-section input[type="file"]:hover {
-        background-color: #e1f0e1;
-        border-color: #028100;
-    }
-
-    .diagnostico-section button {
-        background-color: #036b0c;
-        color: white;
-        border: none;
-        padding: 0.8rem 2rem;
-        border-radius: 12px;
-        cursor: pointer;
-        font-weight: 600;
-        font-size: 1rem;
-        transition: 0.3s;
-    }
-
-    .diagnostico-section button:hover {
-        background-color: #028100;
-    }
-    .diagnostico-section h2 { font-size: 1.8rem; margin-bottom: 1.5rem; color: #036b0c; }
-    .resultado-diagnostico-mejorado { display: flex; gap: 2rem; background-color: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 12px rgba(0,0,0,0.15); max-width: 800px; margin: 2rem auto; align-items: center; animation: fadeInUp 0.8s ease-out; }
-    .resultado-imagen img { max-width: 250px; border-radius: 12px; object-fit: cover; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .resultado-info h3 { color: #036b0c; margin-bottom: 1rem; }
-    .resultado-info p { margin-bottom: 0.8rem; font-size: 1rem; line-height: 1.4; }
+    body { background: linear-gradient(135deg, #f4faf5 0%, #d7ded7 100%); }
+    .hero-ai { background: linear-gradient(135deg, #036b0c, #2a7e56); padding: 4rem 2rem; text-align: center; color: white; position: relative; overflow: hidden; }
+    .hero-ai::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="1" fill="rgba(255,255,255,0.1)" opacity="0.8"><animate attributeName="opacity" values="0.3;1;0.3" dur="3s" repeatCount="indefinite"/></circle><circle cx="80" cy="40" r="1.5" fill="rgba(255,255,255,0.1)" opacity="0.6"><animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/></circle><circle cx="40" cy="80" r="1" fill="rgba(255,255,255,0.1)" opacity="0.9"><animate attributeName="opacity" values="0.2;1;0.2" dur="4s" repeatCount="indefinite"/></circle></svg>'); }
+    .hero-ai h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; position: relative; z-index: 1; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
+    .hero-ai p { font-size: 1.2rem; max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
+    .ai-indicator { display: inline-flex; align-items: center; gap: 0.5rem; background: rgba(255,255,255,0.2); padding: 0.8rem 1.5rem; border-radius: 25px; margin-top: 1rem; position: relative; z-index: 1; }
+    .ai-pulse { width: 10px; height: 10px; background: #00ff88; border-radius: 50%; animation: aiPulse 2s infinite; }
+    @keyframes aiPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.7; transform: scale(1.2); } }
+    .diagnostico-container { background: white; margin: -3rem 2rem 3rem; border-radius: 30px; padding: 3rem; box-shadow: 0 25px 50px rgba(0,0,0,0.15); position: relative; }
+    .diagnostico-container::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #036b0c, #2a7e56); border-radius: 30px 30px 0 0; }
+    .upload-section { text-align: center; margin-bottom: 3rem; }
+    .upload-area { border: 3px dashed #036b0c; border-radius: 20px; padding: 3rem 2rem; background: linear-gradient(145deg, #f4faf5, white); position: relative; overflow: hidden; transition: all 0.3s ease; }
+    .upload-area::before { content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%; background: radial-gradient(circle, rgba(3,107,12,0.05) 0%, transparent 70%); animation: rotate 20s linear infinite; }
+    @keyframes rotate { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+    .upload-area:hover { border-color: #2a7e56; transform: translateY(-2px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .upload-icon { font-size: 4rem; color: #036b0c; margin-bottom: 1rem; position: relative; z-index: 1; }
+    .upload-text { font-size: 1.3rem; font-weight: 600; color: #036b0c; margin-bottom: 1rem; position: relative; z-index: 1; }
+    .upload-subtitle { color: #555; margin-bottom: 2rem; position: relative; z-index: 1; }
+    .file-input { display: none; }
+    .upload-btn { background: linear-gradient(135deg, #036b0c, #2a7e56); color: white; padding: 1rem 2rem; border: none; border-radius: 25px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; position: relative; z-index: 1; }
+    .upload-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 25px rgba(3,107,12,0.3); }
+    .analyze-btn { background: linear-gradient(135deg, #2a7e56, #036b0c); color: white; padding: 1rem 3rem; border: none; border-radius: 25px; font-size: 1.2rem; font-weight: 700; cursor: pointer; transition: all 0.3s ease; margin-top: 2rem; }
+    .analyze-btn:hover { transform: scale(1.05); box-shadow: 0 15px 35px rgba(42,126,86,0.4); }
+    .ai-features { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 2rem; margin: 3rem 0; }
+    .ai-feature { background: linear-gradient(145deg, #f4faf5, white); padding: 2rem; border-radius: 20px; text-align: center; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .ai-feature-icon { font-size: 2.5rem; color: #036b0c; margin-bottom: 1rem; }
+    .ai-feature h3 { color: #036b0c; font-weight: 800; margin-bottom: 1rem; font-size: 1.2rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+    .ai-feature p { color: #555; font-size: 0.95rem; }
+    .resultado-container { background: linear-gradient(145deg, #f4faf5, white); border-radius: 25px; padding: 2rem; margin-top: 2rem; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+    .resultado-header { text-align: center; margin-bottom: 2rem; }
+    .resultado-content { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; align-items: center; }
+    .resultado-imagen img { width: 100%; max-width: 300px; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
+    .resultado-info { background: white; padding: 2rem; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
+    .resultado-info h3 { color: #036b0c; font-size: 1.5rem; font-weight: 700; margin-bottom: 1rem; }
+    .resultado-info p { color: #333; margin-bottom: 1rem; font-size: 1rem; font-weight: 500; line-height: 1.6; }
     .resultado-info strong { color: #2a7e56; }
+    @media (max-width: 768px) { 
+      .resultado-content { grid-template-columns: 1fr; text-align: center; }
+      .hero-ai h1 { font-size: 2.5rem; }
+      .hero-ai p { font-size: 1rem; }
+      .diagnostico-container { margin: -2rem 1rem 2rem; padding: 2rem 1rem; }
+      .ai-features { grid-template-columns: 1fr; }
+      .upload-area { padding: 2rem 1rem; }
+    }
   </style>
 </head>
 <body>
 
   <!-- NAVBAR -->
-  <nav class="navbar">
-    <a href="{% url 'landing' %}" class="logo">FloraCore</a>
-    <div class="menu">
-      <a href="#"><i class="fas fa-user"></i> Perfil</a>
-      <a href="#"><i class="fas fa-image"></i> Histo. de Cultivo</a>
-      <a href="#"><i class="fas fa-bell"></i> Notificaciones</a>
-      <a href="#"><i class="fas fa-chart-line"></i> Estadísticas</a>
-      <a href="#"><i class="fas fa-question-circle"></i> Ayuda/Soporte</a>
-      <a href="{% url 'subir_imagen'%}"><i class="fas fa-microscope"></i> Diagnóstico IA</a>
+  <header class="navbar animate-fade-in-down animate-duration-1000">
+  <section class="spbt">
+  <button class="menu-toggle hover:scale-110 transition-transform duration-300" id="menuToggle">&#9776;</button>
+    <div class="logo hover:text-green-600 transition-colors duration-300">FloraCore</div>
+    </section>
+    <nav class="menu" id="navMenu">
+      <a href="{% url 'landing' %}" class="hover:scale-105 transition-all duration-300">Inicio</a>
+      <a href="{% url 'funciones' %}" class="hover:scale-105 transition-all duration-300">Funciones</a>
+      <a href="{% url 'contacto' %}" class="hover:scale-105 transition-all duration-300">Contáctanos</a>
+      {% if user.is_authenticated %}
+      <a href="{% url 'estadisticas' %}" class="hover:scale-105 transition-all duration-300">Estadísticas</a>
+      <a href="{% url 'subir_imagen'%}" class="hover:scale-105 transition-all duration-300">Diagnóstico IA</a>
+      <form action="{% url 'logout' %}" method="post" style="display: inline;">
+        {% csrf_token %}
+        <button class="user-btn hover:scale-105 transition-all duration-300" type="submit">Cerrar sesión</button>
+      </form>
+      {% else %}
+      <button class="user-btn hover:scale-105 transition-all duration-300" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+      <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+      {% endif %}
+    </nav>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="hero-ai animate-fade-in animate-duration-1500">
+    <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-brain mr-4"></i>Diagnóstico IA Avanzado</h1>
+    <p class="animate-fade-in animate-delay-400">Inteligencia artificial de última generación para el análisis y diagnóstico preciso de enfermedades en plantas</p>
+    <div class="ai-indicator animate-fade-in animate-delay-600">
+      <div class="ai-pulse"></div>
+      <span style="font-weight: 600;">IA ACTIVA</span>
     </div>
-    <form action="{% url 'logout' %}" method="post">
-      {% csrf_token %}
-      <button class="user-btn" type="submit">Cerrar sesión</button>
-    </form>
-  </nav>
-
-  <!-- SECCIÓN DIAGNÓSTICO -->
-  <section class="diagnostico-section">
-    <h2>Subí una foto de tu planta o sacala con la cámara</h2>
-    <form method="POST" action="{% url 'subir_imagen' %}" enctype="multipart/form-data">
-      {% csrf_token %}
-      <!-- Input con soporte de cámara -->
-      <input type="file" name="foto" accept="image/*" capture="environment" required>
-      <br>
-      <button type="submit">Diagnosticar</button>
-    </form>
-
-    {% if disease or imagen_url %}
-    <div class="resultado-diagnostico-mejorado">
-        {% if imagen_url %}
-        <div class="resultado-imagen">
-            <img src="{{ imagen_url }}" alt="Planta diagnosticada">
-        </div>
-        {% endif %}
-        {% if disease %}
-        <div class="resultado-info">
-            <h3>Resultado del diagnóstico</h3>
-            <p><strong>Nombre:</strong> {{ disease.name }}</p>
-            <p><strong>Descripción:</strong> {{ disease.description.short }}</p>
-            <p><strong>Tratamiento:</strong> {{ disease.treatment.chemical }} / {{ disease.treatment.biological }}</p>
-        </div>
-        {% endif %}
-    </div>
-    {% else %}
-    <p>No se detectaron enfermedades.</p>
-    {% endif %}
-
   </section>
 
+  <!-- MAIN CONTAINER -->
+  <div class="diagnostico-container animate-on-scroll">
+    <div class="upload-section">
+      <h2 style="font-size: 2.5rem; font-weight: 700; color: #036b0c; text-align: center; margin-bottom: 2rem;"><i class="fas fa-microscope mr-3"></i>Análisis Inteligente</h2>
+      
+      <form method="POST" action="{% url 'subir_imagen' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="upload-area" onclick="document.getElementById('file-input').click()">
+          <div class="upload-icon">
+            <i class="fas fa-camera-retro"></i>
+          </div>
+          <div class="upload-text">Captura o Sube una Imagen</div>
+          <div class="upload-subtitle">Toma una foto con la cámara o selecciona una imagen desde tu dispositivo</div>
+          <input type="file" name="foto" accept="image/*" capture="environment" required class="file-input" id="file-input">
+          <button type="button" class="upload-btn" onclick="document.getElementById('file-input').click()">
+            <i class="fas fa-upload mr-2"></i>Seleccionar Imagen
+          </button>
+        </div>
+        <button type="submit" class="analyze-btn">
+          <i class="fas fa-brain mr-2"></i>Analizar con IA
+        </button>
+      </form>
+    </div>
+
+    <!-- AI FEATURES -->
+    <div class="ai-features">
+      <div class="ai-feature animate-on-scroll">
+        <div class="ai-feature-icon">
+          <i class="fas fa-eye"></i>
+        </div>
+        <h3>Visión Computacional</h3>
+        <p>Análisis avanzado de imágenes con algoritmos de deep learning para detectar patrones invisibles al ojo humano</p>
+      </div>
+      <div class="ai-feature animate-on-scroll">
+        <div class="ai-feature-icon">
+          <i class="fas fa-search-plus"></i>
+        </div>
+        <h3>Detección Precisa</h3>
+        <p>Identificación de enfermedades, plagas y deficiencias nutricionales con precisión superior al 95%</p>
+      </div>
+      <div class="ai-feature animate-on-scroll">
+        <div class="ai-feature-icon">
+          <i class="fas fa-lightbulb"></i>
+        </div>
+        <h3>Recomendaciones IA</h3>
+        <p>Sugerencias de tratamiento personalizadas basadas en machine learning y bases de datos especializadas</p>
+      </div>
+    </div>
+
+    <!-- RESULTS SECTION -->
+    {% if disease or imagen_url %}
+    <div class="resultado-container animate-on-scroll">
+      <div class="resultado-header">
+        <h2 style="font-size: 2rem; font-weight: 700; color: #036b0c; margin-bottom: 0.5rem;"><i class="fas fa-check-circle text-green-500 mr-3"></i>Análisis Completado</h2>
+        <p style="color: #555; font-size: 1.1rem;">La IA ha procesado tu imagen y generado el siguiente diagnóstico</p>
+      </div>
+      
+      <div class="resultado-content">
+        {% if imagen_url %}
+        <div class="resultado-imagen">
+          <img src="{{ imagen_url }}" alt="Planta analizada">
+        </div>
+        {% endif %}
+        
+        {% if disease %}
+        <div class="resultado-info">
+          <h3><i class="fas fa-leaf mr-2"></i>{{ disease.name }}</h3>
+          <p><strong>Descripción:</strong> {{ disease.description.short }}</p>
+          {% if disease.treatment.chemical %}
+          <p><strong>Tratamiento Químico:</strong> {{ disease.treatment.chemical }}</p>
+          {% endif %}
+          {% if disease.treatment.biological %}
+          <p><strong>Tratamiento Biológico:</strong> {{ disease.treatment.biological }}</p>
+          {% endif %}
+          <div style="text-align: center; margin-top: 2rem;">
+            <button onclick="window.generatePDF()" class="analyze-btn" style="background: linear-gradient(135deg, #036b0c, #2a7e56); margin: 0;" id="pdfButton">
+              <i class="fas fa-download mr-2"></i>Descargar Informe PDF
+            </button>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% else %}
+    <div style="text-align: center; padding: 2rem; color: #555; font-size: 1.1rem;">
+      <i class="fas fa-robot" style="font-size: 3rem; color: #036b0c; margin-bottom: 1rem;"></i>
+      <p>La IA está lista para analizar tu planta. Sube una imagen para comenzar el diagnóstico.</p>
+    </div>
+    {% endif %}
+  </div>
+
   <!-- FOOTER -->
-  <footer>
-    &copy; 2025 FloraCore. Todos los derechos reservados.
+  <footer class="animate-on-scroll">
+    <p><i class="fas fa-brain text-purple-500 mr-2"></i>Powered by Artificial Intelligence</p>
+    <p>Copyright © 2025 FloraCore - Inteligencia que florece</p>
   </footer>
 
+    <script src="{% static 'js/animaciones.js' %}"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+        });
+
+        // Mostrar nombre del archivo seleccionado
+        document.getElementById('file-input').addEventListener('change', function(e) {
+            if (e.target.files.length > 0) {
+                const fileName = e.target.files[0].name;
+                document.querySelector('.upload-subtitle').textContent = `Archivo seleccionado: ${fileName}`;
+            }
+        });
+    });
+
+    // Función para generar PDF
+    window.generatePDF = async function() {
+        // Datos del diagnóstico
+        const diseaseName = '{{ disease.name|default:"Sin diagnóstico"|escapejs }}';
+        const diseaseDescription = '{{ disease.description.short|default:"No disponible"|escapejs }}';
+        const chemicalTreatment = '{{ disease.treatment.chemical|default:"No disponible"|escapejs }}';
+        const biologicalTreatment = '{{ disease.treatment.biological|default:"No disponible"|escapejs }}';
+        const imageUrl = '{{ imagen_url|default:""|escapejs }}';
+        const fileName = imageUrl ? imageUrl.split('/').pop() : 'planta';
+        const today = new Date().toLocaleDateString('es-ES');
+        
+        // Crear contenido HTML
+        const pdfContent = `
+            <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 800px;">
+                <div style="background: #036b0c; color: white; padding: 20px; margin-bottom: 20px;">
+                    <h1 style="margin: 0;">FloraCore - Diagnóstico IA</h1>
+                    <h2 style="margin: 10px 0 0 0;">Informe de Planta: ${fileName}</h2>
+                    <p style="margin: 5px 0 0 0;">Fecha: ${today}</p>
+                </div>
+                
+                <div style="padding: 20px; background: #f4faf5; margin-bottom: 15px;">
+                    <h3 style="color: #036b0c;">Enfermedad Detectada:</h3>
+                    <p>${diseaseName}</p>
+                </div>
+                
+                <div style="padding: 20px; background: #f4faf5; margin-bottom: 15px;">
+                    <h3 style="color: #036b0c;">Descripción:</h3>
+                    <p>${diseaseDescription}</p>
+                </div>
+                
+                <div style="padding: 20px; background: #f4faf5; margin-bottom: 15px;">
+                    <h3 style="color: #036b0c;">Tratamiento Químico:</h3>
+                    <p>${chemicalTreatment}</p>
+                </div>
+                
+                <div style="padding: 20px; background: #f4faf5; margin-bottom: 20px;">
+                    <h3 style="color: #036b0c;">Tratamiento Biológico:</h3>
+                    <p>${biologicalTreatment}</p>
+                </div>
+                
+                <div style="background: #2a7e56; color: white; padding: 15px; text-align: center;">
+                    <p style="margin: 0;">FloraCore - Email: FloraCore2025@gmail.com</p>
+                    <p style="margin: 0;">Instagram: @floracore_off</p>
+                </div>
+            </div>
+        `;
+        
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = pdfContent;
+        tempDiv.style.position = 'absolute';
+        tempDiv.style.left = '-9999px';
+        document.body.appendChild(tempDiv);
+        
+        html2canvas(tempDiv, { scale: 2, useCORS: true, backgroundColor: '#ffffff' }).then(canvas => {
+            const imgData = canvas.toDataURL('image/png');
+            const pdf = new window.jspdf.jsPDF('p', 'mm', 'a4');
+            const pageWidth = pdf.internal.pageSize.getWidth();
+            const pageHeight = pdf.internal.pageSize.getHeight();
+
+            let imgWidth = pageWidth;
+            let imgHeight = (canvas.height * imgWidth) / canvas.width;
+
+            if (imgHeight > pageHeight) {
+                const ratio = pageHeight / imgHeight;
+                imgWidth = imgWidth * ratio;
+                imgHeight = pageHeight;
+            }
+
+            const x = (pageWidth - imgWidth) / 2;
+            const y = (pageHeight - imgHeight) / 2;
+
+            pdf.addImage(imgData, 'PNG', x, y, imgWidth, imgHeight);
+            pdf.save(`FloraCore_Diagnostico_${fileName}.pdf`);
+
+            document.body.removeChild(tempDiv);
+        }).catch(error => {
+            document.body.removeChild(tempDiv);
+            alert('Error al generar PDF');
+        });
+
+    }
+</script>
 </body>
 </html>
