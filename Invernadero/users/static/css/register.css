@@ -1,190 +1,280 @@
-body {
-     margin: 0;
-     padding: 0;
-     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-     background-color: var(--light-green);
-     background-image: url("/static/img/fondologin.png");
-     background-repeat: no-repeat;
-     background-size: cover;
-     display: flex;
-     justify-content: center;
-     align-items: center;
-     height: 100vh;
-     position: relative;
+/* Base y Tipografía */
+:root {
+    --color-forest: #0B5345; /* Verde Bosque (Título, Botón, Texto principal) */
+    --color-moss: #34A853;   /* Verde Musgo (Acentos, Foco) */
+    --color-light-border: #D8EAD0; /* Borde suave para inputs */
+    --color-off-white: #FAFAFA; /* Fondo general del body */
+    --color-cream: #fff5dc; /* Fondo más cremoso para la sección de registro */
+    --color-gray: #757575; /* Texto secundario */
 }
 
-.plantita {
-    position: absolute;
-    top: -8.4%;
-    left: 24%;
-    transform: translateX(-50%);
-    height: 50px;
-    width: 50px;
-    z-index: 1;
+/* Reset y Contenedor Principal */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--color-off-white); 
+    display: flex;
 }
 
 .container {
     display: flex;
+    width: 100%;
+    height: 100vh; 
+    overflow: hidden; 
+}
+
+/* ------------------------------------------------------------------- */
+/* 1. Panel Decorativo Izquierdo (60%) - FloraCore */
+/* ------------------------------------------------------------------- */
+.panel-decorativo {
+    flex: 0 0 60%;
+    position: relative;
+    
+    /* Imagen de fondo (mantener tu ruta) */
+    background: url('../img/fondologin.png') no-repeat center center;
+    background-size: cover; 
+    
+    /* CAMBIOS CLAVE: Flexbox para centrar y distribuir el contenido */
+    display: flex; 
+    flex-direction: column; /* Apila el contenido verticalmente */
+    justify-content: space-between; /* Empuja el header arriba y el contenido al centro */
+    align-items: center; /* Centra horizontalmente el contenido */
+    
+    padding: 30px 40px; /* Padding general */
+}
+
+/* 1.1 Encabezado de la marca (esquina superior izquierda) */
+.brand-header {
+    width: 100%; 
+    align-self: flex-start; 
+}
+
+.logo-text {
+    font-size: 1.8rem; /* Un poco más pequeño y sutil */
+    font-weight: 700;
+    color: var(--color-forest);
+    opacity: 0.9;
+}
+
+/* 1.2 Contenido Central (Logo y Slogan) */
+.content-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; 
+    text-align: center;
+    padding-bottom: 50px; 
+}
+
+.logo-center {
+    width: 150px; 
+    height: auto;
+    margin-bottom: 20px;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.slogan {
+    font-size: 1.8rem;
+    font-weight: 400; 
+    color: var(--color-forest);
+    opacity: 0.85;
+    max-width: 80%;
+    line-height: 1.3;
+}
+
+/* ------------------------------------------------------------------- */
+/* 2. Liana Divisoria (.flora) */
+/* ------------------------------------------------------------------- */
+.flora {
+    position: absolute; 
+    
+    /* Quitamos todas las transformaciones que distorsionaban */
+   
+    /* Restauramos el tamaño natural de la imagen */
+    height: 250px; 
+   
+    
+    /* Posicionamiento para que se vea perfectamente en el borde */
+    left: 270px; 
+    top: 50%; /* Centrado verticalmente */
+    
+    mix-blend-mode: multiply; 
+    z-index: 10;
+    
+    transform: rotate(90deg);
+    width: 1350px;
+}
+
+/* ------------------------------------------------------------------- */
+/* 3. Formulario de Registro (40%) - Flotante sobre Fondo Crema */
+/* ------------------------------------------------------------------- */
+.form-register {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100%;
-}
-
-form {
-    background-color: white;
-    padding: 2rem;
-    border-radius: 15px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    text-align: center;
-    width: 320px;
-    max-width: 90%;
-    box-sizing: border-box;
+    padding: 20px;
+    
+    /* Fondo Cremoso */
+    background-color: var(--color-cream);
+    
     position: relative;
-    z-index: 2;
+    z-index: 10;
 }
 
-h1 {
-     color: var(--primary-green);
-     font-size: 26px;
-     margin-bottom: 0.5rem;
+.titulo-principal {
+    font-size: 2.2rem;
+    font-weight: 600;
+    color: var(--color-forest);
+    margin-bottom: 20px; /* Reducimos el margen para más espacio */
+    text-align: center;
 }
 
-h2 {
-     color: var(--accent-green);
-     font-size: 18px;
-     margin-bottom: 1.5rem;
+/* Contenido del Formulario */
+.form-content {
+    width: 100%;
+    max-width: 380px; 
+    padding: 0; 
+    background-color: transparent; 
+    box-shadow: none; 
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Reducimos el gap para que quepan más campos */
 }
 
 .form-group {
-    margin-bottom: 1rem;
-    text-align: left;
-    font-size: 14px;
-    color: #333;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
+/* Labels */
 .form-group label {
-    display: block;
-    margin-bottom: 0.4rem;
-    font-weight: 500;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--color-forest);
 }
 
-input {
-     width: 100%;
-     padding: 0.5rem;
-     border: 1px solid var(--border-color);
-     border-radius: 8px;
-     background-color: #eaf4ed;
-     margin-top: 4px;
-     box-sizing: border-box;
-     font-size: 1rem;
-     transition: border-color 0.3s ease, box-shadow 0.3s ease;
+/* Campos de Input */
+.form-content input {
+    width: 100%;
+    height: 40px; /* Campos un poco más pequeños para registro */
+    padding: 0 15px;
+    border-radius: 8px;
+    
+    /* Borde inicial verde claro */
+    border: 1px solid var(--color-light-border); 
+    
+    background-color: #ffffff;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-input:focus {
-     outline: none;
-     border-color: var(--primary-green);
-     box-shadow: 0 0 5px rgba(42, 126, 86, 0.2);
+.form-content input:focus {
+    outline: none;
+    border-color: var(--color-moss); 
+    box-shadow: 0 0 5px rgba(52, 168, 83, 0.5);
 }
 
-button {
-     width: 100%;
-     padding: 0.6rem;
-     background-color: var(--primary-green);
-     color: var(--white);
-     border: none;
-     border-radius: 8px;
-     font-weight: bold;
-     cursor: pointer;
-     transition: background-color 0.3s ease;
-     margin-top: 0.5rem;
+/* Botón de Registro */
+.btn-register {
+    width: 100%;
+    height: 45px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    background-color: var(--color-forest);
+    color: #ffffff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
 }
 
-button:hover {
-     background-color: var(--dark-green);
+.btn-register:hover {
+    background-color: #1e8069; 
 }
 
-.login-text {
-     margin-top: 1rem;
-     font-size: 13px;
-     color: var(--text-secondary);
-     text-align: center;
+.btn-register:active {
+    transform: scale(0.99);
 }
 
-.login-text a {
-     color: var(--primary-green);
-     text-decoration: none;
-     font-weight: bold;
+/* Mensajes de Error */
+.error-general {
+    color: #c93d3d; 
+    font-size: 0.85rem;
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(201, 61, 61, 0.1);
+    border-radius: 5px;
+    margin-bottom: 10px;
 }
 
-.login-text a:hover {
-    text-decoration: underline;
+/* Opciones Secundarias (Link a Login) */
+.opciones {
+    margin-top: 25px;
+    font-size: 0.9rem;
+    display: flex;
+    gap: 10px;
+    color: var(--color-gray);
+    justify-content: center;
 }
 
-/* Estilo para los mensajes de error */
-.error {
-    color: red;
-    font-size: 14px;
-    margin-top: 10px;
+.link-opcion {
+    color: var(--color-forest); /* Hacemos el link de login más visible */
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
 }
 
+.link-opcion:hover {
+    color: var(--color-moss); 
+}
 
-/* Media Queries para dispositivos móviles */
-@media (max-width: 768px) {
-    .plantita {
-        width: 50px;
-        height: 50px;
-        left: 27%;
+/* Media Queries para responsividad (similares a login.css) */
+@media (max-width: 900px) {
+    .panel-decorativo {
+        flex: 0 0 50%;
     }
-
-    h1 {
-        font-size: 20px;
+    .form-register {
+        flex: 0 0 50%;
     }
-
-    h2 {
-        font-size: 16px;
-    }
-
-    .form-group input {
-        font-size: 0.95rem;
-    }
-
-    button {
-        font-size: 0.95rem;
-    }
-
-    .register-text {
-        font-size: 12px;
+    .flora {
+        left: -125px; /* Ajuste la posición de la liana */
     }
 }
 
-@media (max-width: 480px) {
-    form {
-        padding: 1rem;
+@media (max-width: 600px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
     }
-
-    .plantita {
-        width: 55px;
-        height: 55px;
-        top: -55px;
+    .panel-decorativo, .form-register {
+        flex: 0 0 100%;
+        width: 100%;
     }
-
-    h1 {
-        font-size: 18px;
+    .panel-decorativo {
+        height: 30vh;
+        min-height: 200px;
+        padding-bottom: 0;
     }
-
-    h2 {
-        font-size: 14px;
+    .content-center {
+        display: none; /* Ocultamos el logo central para ahorrar espacio en móvil */
     }
-
-    .form-group input {
-        font-size: 0.85rem;
+    .flora {
+        display: none; /* Ocultamos la liana en móvil */
     }
-
-    button {
-        font-size: 0.85rem;
-    }
-
-    .register-text {
-        font-size: 11px;
+    .form-register {
+        padding: 40px 20px;
     }
 }

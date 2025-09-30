@@ -3,10 +3,10 @@
     --color-forest: #0B5345; /* Verde Bosque (Título, Botón) */
     --color-moss: #34A853;   /* Verde Musgo (Acentos) */
     --color-off-white: #FAFAFA; /* Fondo general del body */
-    --color-cream: #FFFDF8; /* Fondo más cremoso para la sección de login */
+    --color-cream: #fff5dc; /* Fondo más cremoso para la sección de login */
     --color-gray: #757575; /* Texto secundario */
 }
-
+/*FFFDF8 variante seccion login
 /* Reset y Contenedor Principal */
 * {
     padding: 0;
@@ -30,17 +30,22 @@ body {
 }
 
 /* Panel Decorativo Izquierdo (60%) */
+/* REEMPLAZA tu actual .panel-decorativo con esto */
 .panel-decorativo {
     flex: 0 0 60%;
     position: relative;
     
-    /* Imagen de fondo de la izquierda (el color verde claro) */
+    /* Imagen de fondo (mantener tu ruta) */
     background: url('../img/fondologin.png') no-repeat center center;
     background-size: cover; 
     
+    /* CAMBIOS CLAVE: Flexbox para centrar y distribuir el contenido */
     display: flex; 
-    align-items: flex-start; 
-    padding: 30px 40px; 
+    flex-direction: column; /* Apila el contenido verticalmente */
+    justify-content: space-between; /* Empuja el header arriba y el contenido al centro */
+    align-items: center; /* Centra horizontalmente el contenido */
+    
+    padding: 30px 40px; /* Padding general */
 }
 
 .logo-text {
@@ -137,7 +142,8 @@ body {
 }
 
 .btn-login:hover {
-    background-color: #1a6a57; 
+    background-color: #1e8069; 
+    /*1a6a57 variante*/
 }
 
 .btn-login:active {
@@ -180,7 +186,7 @@ body {
     color: var(--color-moss); 
 }
 
-/* Estilo de la Liana - Corregido como un divisor vertical centrado */
+
 .flora {
     position: absolute; 
     
@@ -199,4 +205,39 @@ body {
     
     transform: rotate(90deg);
     width: 1350px;
+}
+/* Estilos para el nuevo contenido del panel decorativo */
+
+/* 1. Encabezado de la marca (esquina superior izquierda) */
+.brand-header {
+    width: 100%; /* Ocupa todo el ancho */
+    align-self: flex-start; /* Se alinea a la izquierda dentro del flex container */
+}
+
+/* 2. Contenido Central (Logo y Slogan) */
+.content-center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 1; /* Ocupa el espacio restante para centrarse */
+    text-align: center;
+    padding-bottom: 50px; /* Espacio inferior */
+}
+
+.logo-center {
+    width: 150px; /* Tamaño del logo/imagen central */
+    height: auto;
+    margin-bottom: 20px;
+    /* Efecto sutil para que se destaque del fondo */
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+
+.slogan {
+    font-size: 1.8rem;
+    font-weight: 400; /* Más delgado para ser un slogan */
+    color: var(--color-forest); /* Usando el color definido en :root */
+    opacity: 0.85;
+    max-width: 80%;
+    line-height: 1.3;
 }
