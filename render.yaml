@@ -1,0 +1,11 @@
+services:
+  - type: web
+    name: floracore
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn invernadero.wsgi:application"
+    envVars:
+      - key: DEBUG
+        value: "False"
+      - key: PYTHON_VERSION
+        value: "3.13.4"
