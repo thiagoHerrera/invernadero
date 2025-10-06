@@ -7,47 +7,9 @@
   <title>Contáctanos - FloraCore</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/contacto.css' %}">
+  <link rel="stylesheet" href="{% static 'css/contacto-enhanced.css' %}">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <style>
-    body { background: linear-gradient(135deg, #f4faf5 0%, #d7ded7 100%); }
-    .hero-contact { background: linear-gradient(135deg, #036b0c, #2a7e56); padding: 4rem 2rem; text-align: center; color: white; position: relative; overflow: hidden; }
-    .hero-contact::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 Q30,10 40,20 T60,20" stroke="rgba(255,255,255,0.1)" fill="none"/><circle cx="80" cy="30" r="3" fill="rgba(255,255,255,0.1)"/></svg>'); }
-    .hero-contact h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; position: relative; z-index: 1; text-shadow: 2px 2px 4px rgba(0,0,0,0.3); }
-    .hero-contact p { font-size: 1.2rem; max-width: 900px; margin: 0 auto; position: relative; z-index: 1; }
-    .team-showcase { background: white; margin: -3rem 2rem 3rem; border-radius: 30px; padding: 3rem; box-shadow: 0 25px 50px rgba(0,0,0,0.15); }
-    .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-top: 2rem; max-width: 1200px; margin-left: auto; margin-right: auto; }
-    .team-member { background: linear-gradient(145deg, #f4faf5, white); border-radius: 20px; padding: 2rem; text-align: center; position: relative; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-    .team-member::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px; background: linear-gradient(90deg, #036b0c, #2a7e56); }
-    .member-avatar { width: 100px; height: 100px; border-radius: 50%; background: linear-gradient(135deg, #036b0c, #2a7e56); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; color: white; position: relative; }
-    .member-avatar::after { content: ''; position: absolute; inset: -3px; border-radius: 50%; background: linear-gradient(135deg, #2a7e56, #036b0c); z-index: -1; }
-    .member-name { font-size: 1.5rem; font-weight: 800; color: #036b0c; margin-bottom: 0.5rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-    .member-role { color: #2a7e56; font-weight: 600; margin-bottom: 1rem; font-size: 1rem; }
-    .member-description { color: #333; font-size: 1rem; line-height: 1.6; font-weight: 500; }
-    .contact-section { padding: 3rem 2rem; max-width: 1200px; margin: 0 auto; }
-    .contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; max-width: 1000px; margin: 0 auto; }
-    .contact-method { background: white; border-radius: 25px; padding: 3rem 2rem; text-align: center; box-shadow: 0 15px 35px rgba(0,0,0,0.1); position: relative; overflow: hidden; }
-    .contact-method::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 5px; background: linear-gradient(90deg, #036b0c, #2a7e56); }
-    .contact-icon { width: 80px; height: 80px; border-radius: 50%; background: linear-gradient(135deg, #036b0c, #2a7e56); margin: 0 auto 1.5rem; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white; }
-    .contact-title { font-size: 1.5rem; font-weight: 800; color: #036b0c; margin-bottom: 1rem; text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
-    .contact-info { color: #2a7e56; font-size: 1.1rem; font-weight: 600; }
-    .contact-description { color: #333; margin-top: 0.5rem; font-size: 1rem; font-weight: 500; }
-    .social-section { background: linear-gradient(135deg, #d7ded7, #f4faf5); padding: 3rem 2rem; margin: 2rem; border-radius: 25px; text-align: center; }
-    .social-links { display: flex; justify-content: center; gap: 1rem; margin-top: 2rem; }
-    .social-link { width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, #036b0c, #2a7e56); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem; text-decoration: none; transition: all 0.3s ease; }
-    .social-link:hover { transform: scale(1.1) rotate(5deg); }
-    @media (max-width: 768px) { 
-      .hero-contact h1 { font-size: 2.5rem; }
-      .hero-contact p { font-size: 1rem; }
-      .team-showcase { margin: -2rem 1rem 2rem; padding: 2rem 1rem; }
-      .team-grid { grid-template-columns: 1fr; }
-      .contact-grid { grid-template-columns: 1fr; }
-      .social-section { margin: 2rem 1rem; }
-    }
-    @media (max-width: 480px) {
-      .hero-contact h1 { font-size: 2rem; }
-      .social-links { flex-wrap: wrap; }
-    }
-  </style>
+
 </head>
 <body>
 
@@ -77,101 +39,136 @@
 
   <!-- HERO SECTION -->
   <section class="hero-contact animate-fade-in animate-duration-1500">
-    <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-users mr-4"></i>Nuestro Equipo</h1>
-    <p class="animate-fade-in animate-delay-400">Conoce a los estudiantes visionarios de la Escuela Técnica N°3 Roberto Arlt que están revolucionando la agricultura con tecnología inteligente</p>
+    <h1 class="animate-fade-in animate-delay-200">
+      <i class="fas fa-users" aria-hidden="true"></i>
+      Nuestro Equipo
+    </h1>
+    <p class="animate-fade-in animate-delay-400">
+      Conoce a los estudiantes visionarios de la Escuela Técnica N°3 Roberto Arlt que están revolucionando la agricultura con tecnología inteligente
+    </p>
   </section>
 
   <!-- TEAM SHOWCASE -->
   <section class="team-showcase animate-on-scroll">
-    <h2 style="text-align: center; font-size: 2.5rem; font-weight: 800; color: #036b0c; margin-bottom: 1rem;"><i class="fas fa-rocket mr-3"></i>Los Innovadores</h2>
-    <p style="text-align: center; color: #555; font-size: 1.1rem; margin-bottom: 2rem;">Cada miembro aporta su expertise única para crear el futuro de la agricultura</p>
+    <h2 class="team-title">
+      <i class="fas fa-rocket" aria-hidden="true"></i>
+      Los Innovadores
+    </h2>
+    <p class="team-subtitle">
+      Cada miembro aporta su expertise única para crear el futuro de la agricultura
+    </p>
     
     <div class="team-grid">
-      <div class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="member-avatar">
+      <article class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="member-avatar" aria-hidden="true">
           <i class="fas fa-code"></i>
         </div>
         <h3 class="member-name">Walter Casarino</h3>
         <p class="member-role">Frontend Architect</p>
-        <p class="member-description">Especialista en crear experiencias de usuario excepcionales. Transforma conceptos complejos en interfaces intuitivas y visualmente impactantes que conectan a los usuarios con la tecnología.</p>
-      </div>
+        <p class="member-description">
+          Especialista en crear experiencias de usuario excepcionales. Transforma conceptos complejos en interfaces intuitivas y visualmente impactantes que conectan a los usuarios con la tecnología.
+        </p>
+      </article>
 
-      <div class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="member-avatar">
+      <article class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="member-avatar" aria-hidden="true">
           <i class="fas fa-server"></i>
         </div>
         <h3 class="member-name">Bautista Insaurralde</h3>
         <p class="member-role">Backend Engineer</p>
-        <p class="member-description">Arquitecto de sistemas robustos y escalables. Diseña la infraestructura que soporta toda la plataforma, garantizando seguridad, rendimiento y confiabilidad en cada operación.</p>
-      </div>
+        <p class="member-description">
+          Arquitecto de sistemas robustos y escalables. Diseña la infraestructura que soporta toda la plataforma, garantizando seguridad, rendimiento y confiabilidad en cada operación.
+        </p>
+      </article>
 
-      <div class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="member-avatar">
+      <article class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="member-avatar" aria-hidden="true">
           <i class="fas fa-brain"></i>
         </div>
         <h3 class="member-name">Thiago Herrera</h3>
         <p class="member-role">AI Specialist</p>
-        <p class="member-description">Pionero en inteligencia artificial aplicada a la agricultura. Desarrolla algoritmos de machine learning que permiten al sistema tomar decisiones inteligentes y predictivas.</p>
-      </div>
+        <p class="member-description">
+          Pionero en inteligencia artificial aplicada a la agricultura. Desarrolla algoritmos de machine learning que permiten al sistema tomar decisiones inteligentes y predictivas.
+        </p>
+      </article>
 
-      <div class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="member-avatar">
+      <article class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="member-avatar" aria-hidden="true">
           <i class="fas fa-database"></i>
         </div>
         <h3 class="member-name">Manuel Gonzales</h3>
         <p class="member-role">IoT Developer</p>
-        <p class="member-description">Experto en conectividad IoT y programación de microcontroladores. Crea el puente entre el mundo físico y digital, integrando sensores y actuadores de forma seamless.</p>
-      </div>
+        <p class="member-description">
+          Experto en conectividad IoT y programación de microcontroladores. Crea el puente entre el mundo físico y digital, integrando sensores y actuadores de forma seamless.
+        </p>
+      </article>
 
-      <div class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="member-avatar">
+      <article class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="member-avatar" aria-hidden="true">
           <i class="fas fa-cogs"></i>
         </div>
         <h3 class="member-name">Santiago Gómez</h3>
         <p class="member-role">Hardware Engineer</p>
-        <p class="member-description">Ingeniero de hardware que materializa las ideas. Diseña, ensambla y optimiza todos los componentes físicos del sistema con precisión y innovación técnica.</p>
-      </div>
+        <p class="member-description">
+          Ingeniero de hardware que materializa las ideas. Diseña, ensambla y optimiza todos los componentes físicos del sistema con precisión y innovación técnica.
+        </p>
+      </article>
     </div>
   </section>
 
   <!-- CONTACT METHODS -->
   <section class="contact-section">
-    <h2 style="text-align: center; font-size: 2.5rem; font-weight: 800; color: #036b0c; margin-bottom: 3rem;"><i class="fas fa-paper-plane mr-3"></i>Conecta con Nosotros</h2>
+    <h2 class="contact-title">
+      <i class="fas fa-paper-plane" aria-hidden="true"></i>
+      Conecta con Nosotros
+    </h2>
     
     <div class="contact-grid">
-      <div class="contact-method animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="contact-icon">
+      <article class="contact-method animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="contact-icon" aria-hidden="true">
           <i class="fas fa-envelope"></i>
         </div>
-        <h3 class="contact-title">Email Directo</h3>
-        <p class="contact-info">FloraCore2025@gmail.com</p>
-        <p class="contact-description">Respuesta garantizada en menos de 24 horas. Ideal para consultas técnicas y colaboraciones.</p>
-      </div>
+        <h3 class="contact-method-title">Email Directo</h3>
+        <p class="contact-info">
+          <a href="mailto:FloraCore2025@gmail.com">FloraCore2025@gmail.com</a>
+        </p>
+        <p class="contact-description">
+          Respuesta garantizada en menos de 24 horas. Ideal para consultas técnicas y colaboraciones.
+        </p>
+      </article>
 
-      <div class="contact-method animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="contact-icon">
+      <article class="contact-method animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="contact-icon" aria-hidden="true">
           <i class="fab fa-instagram"></i>
         </div>
-        <h3 class="contact-title">Síguenos</h3>
-        <p class="contact-info">@floracore_off</p>
-        <p class="contact-description">Contenido exclusivo, actualizaciones del proyecto y behind-the-scenes de nuestro desarrollo.</p>
-      </div>
+        <h3 class="contact-method-title">Síguenos</h3>
+        <p class="contact-info">
+          <a href="https://www.instagram.com/floracore_off/" target="_blank" rel="noopener noreferrer">@floracore_off</a>
+        </p>
+        <p class="contact-description">
+          Contenido exclusivo, actualizaciones del proyecto y behind-the-scenes de nuestro desarrollo.
+        </p>
+      </article>
 
-      <div class="contact-method animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="contact-icon">
+      <article class="contact-method animate-on-scroll hover:scale-105 transition-all duration-500">
+        <div class="contact-icon" aria-hidden="true">
           <i class="fas fa-map-marker-alt"></i>
         </div>
-        <h3 class="contact-title">Nuestra Base</h3>
+        <h3 class="contact-method-title">Nuestra Base</h3>
         <p class="contact-info">E.T. N°3 Roberto Arlt</p>
-        <p class="contact-description">Tortuguitas, Buenos Aires, Argentina. Donde la innovación educativa se encuentra con la tecnología.</p>
-      </div>
+        <p class="contact-description">
+          Tortuguitas, Buenos Aires, Argentina. Donde la innovación educativa se encuentra con la tecnología.
+        </p>
+      </article>
     </div>
   </section>
 
   <!-- SOCIAL SECTION -->
   <section class="social-section animate-on-scroll">
-    <h3 style="font-size: 1.8rem; font-weight: 700; color: #036b0c; margin-bottom: 1rem;">¡Únete a la Revolución Verde!</h3>
-    <p style="color: #555;">Síguenos en nuestras redes sociales para estar al día con las últimas innovaciones</p>
+    <h3 class="social-title">¡Únete a la Revolución Verde!</h3>
+    <p class="social-subtitle">
+      Síguenos en nuestras redes sociales para estar al día con las últimas innovaciones
+    </p>
     <div class="social-links">
       <a href="mailto:FloraCore2025@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
       <a href="https://www.instagram.com/floracore_off/" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>

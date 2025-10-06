@@ -1,11 +1,86 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>FloraCore - Perfil de Usuario</title>
+    <link rel="stylesheet" href="{% static 'css/landing.css' %}">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    
+    <header class="navbar">
+        <section class="spbt">
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
+                <span>&#9776;</span>
+            </button>
+            <div class="logo">FloraCore</div>
+        </section>
+        <nav class="menu" id="navMenu">
+            <a href="{% url 'landing' %}">Inicio</a>
+            <a href="{% url 'funciones' %}">Funciones</a>
+            <a href="{% url 'contacto' %}">Contáctanos</a>
+            {% if user.is_authenticated %}
+                <a href="{% url 'estadisticas' %}">Estadísticas</a>
+                <a href="{% url 'subir_imagen' %}">Diagnóstico IA</a>
+                <form action="{% url 'logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button class="user-btn" type="submit">Cerrar sesión</button>
+                </form>
+            {% else %}
+                <a href="{% url 'signin' %}" class="user-btn">Iniciar Sesión</a>
+                <a href="{% url 'signup' %}" class="register-btn">Registrarse</a>
+            {% endif %}
+        </nav>
+    </header>
+
+    <main class="user-profile">
+        <section class="profile-header">
+            <h1>
+                <i class="fas fa-user-circle" aria-hidden="true"></i>
+                Perfil de Usuario
+            </h1>
+            {% if user.is_authenticated %}
+                <p>Bienvenido, {{ user.username }}!</p>
+            {% else %}
+                <p>Debes iniciar sesión para ver tu perfil.</p>
+            {% endif %}
+        </section>
+
+        {% if user.is_authenticated %}
+        <section class="profile-info">
+            <h2>Información Personal</h2>
+            <div class="info-grid">
+                <div class="info-item">
+                    <strong>Usuario:</strong> {{ user.username }}
+                </div>
+                <div class="info-item">
+                    <strong>Email:</strong> {{ user.email|default:"No especificado" }}
+                </div>
+                <div class="info-item">
+                    <strong>Fecha de registro:</strong> {{ user.date_joined|date:"d/m/Y" }}
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+
+    <footer>
+        <p>&copy; 2025 FloraCore. Todos los derechos reservados.</p>
+    </footer>
+
+    <script src="{% static 'js/animaciones.js' %}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const menuToggle = document.getElementById('menuToggle');
+            const navMenu = document.getElementById('navMenu');
+            
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener('click', function() {
+                    navMenu.classList.toggle('active');
+                });
+            }
+        });
+    </script>
 </body>
 </html>

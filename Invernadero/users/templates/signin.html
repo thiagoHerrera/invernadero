@@ -4,34 +4,34 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreenHouse - Inicio de Sesión</title>
+    <title>FloraCore - Inicio de Sesión</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
     <div class="container">
         <section class="panel-decorativo">
-             <div class="logo-text">GreenHouse</div>
+             <div class="logo-text">FloraCore</div>
         </section>
 
-        <form action="{% url 'signin' %}" method="POST" class="form-login">
+        <form action="{% url 'signin' %}" method="POST" class="form-login" novalidate>
             
             {% csrf_token %}
             
             <h1 class="titulo-principal">Inicio de Sesión</h1>
 
-            <img src="{% static 'img/nashe.png' %}" class="flora" alt="Liana decorativa">
+            <img src="{% static 'img/nashe.png' %}" class="flora" alt="Liana decorativa" loading="lazy">
             
             <div class="form-content">
                 {% if error %}
-                    <p class="error-general">{{ error }}</p>
+                    <div class="error-general" role="alert">{{ error }}</div>
                 {% endif %}
 
                 <div class="form-group">
                     <label for="{{ form.username.id_for_label }}">Username:</label>
                     {{ form.username }}
                     {% if form.username.errors %}
-                        <p class="error">{{ form.username.errors.0 }}</p>
+                        <div class="error" role="alert">{{ form.username.errors.0 }}</div>
                     {% endif %}
                 </div>
 
@@ -39,7 +39,7 @@
                     <label for="{{ form.password.id_for_label }}">Password:</label>
                     {{ form.password }}
                     {% if form.password.errors %}
-                        <p class="error">{{ form.password.errors.0 }}</p>
+                        <div class="error" role="alert">{{ form.password.errors.0 }}</div>
                     {% endif %}
                 </div>
 
@@ -48,7 +48,7 @@
 
             <div class="opciones">
                 <a href="{% url 'password_reset' %}" class="link-opcion">¿Olvidaste tu contraseña?</a>
-                <span>|</span>
+                <span class="separator" aria-hidden="true">|</span>
                 <a href="{% url 'signup' %}" class="link-opcion">Crear una cuenta</a>
             </div>
         </form>

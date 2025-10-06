@@ -1,19 +1,16 @@
-
-
-
 {% load static %}
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GreenHouse - Registro</title>
+    <title>FloraCore - Registro</title>
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
 </head>
 <body>
     <div class="container">
-        <form action="{% url 'signup' %}" method="POST">
-            <div class="plantita">
+        <form action="{% url 'signup' %}" method="POST" novalidate>
+            <div class="plantita" aria-hidden="true">
                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" xml:space="preserve">
                     <path style="fill:#A2CE86;" d="M287.635,250.097c-0.541-19.805,4.441-40.438,14.41-59.669c10.157-19.593,25.307-37.283,43.815-51.152c18.508-13.868,39.738-23.443,61.396-27.689c21.256-4.166,42.459-3.155,61.314,2.926c4.1,1.322,6.921,5.086,7.039,9.392c0.541,19.805-4.442,40.438-14.41,59.669c-3.304,6.375-7.135,12.545-11.44,18.45c-8.928,12.247-19.888,23.345-32.375,32.702c-18.508,13.868-39.738,23.443-61.396,27.689c-21.256,4.166-42.459,3.155-61.314-2.926C290.574,258.167,287.753,254.403,287.635,250.097z"/>
                     <path style="fill:#489B6D;" d="M473.913,118.568c1.03,1.551,1.642,3.389,1.696,5.339c0.541,19.805-4.442,40.438-14.41,59.669c-3.304,6.375-7.135,12.545-11.44,18.45c-8.928,12.247-19.888,23.345-32.375,32.702c-18.508,13.868-39.738,23.443-61.396,27.689c-21.256,4.166-42.459,3.155-61.314-2.926c-1.93-0.622-3.57-1.79-4.784-3.295L473.913,118.568z"/>
@@ -28,49 +25,52 @@
                 </svg>
             </div>
             {% csrf_token %}
-            <h1>GreenHouse</h1>
-            <h2>Registro</h2>
+            <h1>FloraCore</h1>
+            <h2>Registro de Usuario</h2>
 
             <div class="form-group">
-                <label for="username">Nombre de Usuario</label>
+                <label for="{{ form.username.id_for_label }}">Nombre de Usuario</label>
                 {{ form.username }}
                 {% if form.username.errors %}
-                    <div class="error">{{ form.username.errors }}</div>
+                    <div class="error" role="alert">{{ form.username.errors.0 }}</div>
                 {% endif %}
             </div>
 
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="{{ form.email.id_for_label }}">Correo Electrónico</label>
                 {{ form.email }}
                 {% if form.email.errors %}
-                    <div class="error">{{ form.email.errors }}</div>
+                    <div class="error" role="alert">{{ form.email.errors.0 }}</div>
                 {% endif %}
             </div>
 
             <div class="form-group">
-                <label for="password1">Contraseña</label>
+                <label for="{{ form.password1.id_for_label }}">Contraseña</label>
                 {{ form.password1 }}
                 {% if form.password1.errors %}
-                    <div class="error">{{ form.password1.errors }}</div>
+                    <div class="error" role="alert">{{ form.password1.errors.0 }}</div>
                 {% endif %}
             </div>
 
             <div class="form-group">
-                <label for="password2">Confirmar Contraseña</label>
+                <label for="{{ form.password2.id_for_label }}">Confirmar Contraseña</label>
                 {{ form.password2 }}
                 {% if form.password2.errors %}
-                    <div class="error">{{ form.password2.errors }}</div>
+                    <div class="error" role="alert">{{ form.password2.errors.0 }}</div>
                 {% endif %}
             </div>
 
-            <button type="submit">Registrarse</button>
+            <button type="submit" class="btn-register">Registrarse</button>
 
             <!-- Error general -->
             {% if error %}
-                <p class="error">{{ error }}</p>
+                <div class="error-general" role="alert">{{ error }}</div>
             {% endif %}
 
-            <p class="login-text">¿Ya tienes una cuenta? <a href="{% url 'signin' %}">Iniciar sesión</a></p>
+            <p class="login-text">
+                ¿Ya tienes una cuenta? 
+                <a href="{% url 'signin' %}" class="login-link">Iniciar sesión</a>
+            </p>
         </form>
     </div>
 </body>

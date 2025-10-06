@@ -1,3 +1,26 @@
-<h2>Enlace inválido</h2>
-<p>Este enlace de activación ya expiró o no es válido.</p>
-<a href="{% url 'register' %}">Registrate de nuevo</a>
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FloraCore - Enlace Inválido</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>FloraCore</h1>
+        <h2>Enlace Inválido</h2>
+        
+        <div class="message-content">
+            <p>Este enlace de activación ya expiró o no es válido.</p>
+            <p>Por favor, solicita un nuevo enlace de activación.</p>
+        </div>
+        
+        <div class="action-links">
+            <a href="{% url 'signup' %}" class="btn-primary">Registrarse de nuevo</a>
+            <a href="{% url 'signin' %}" class="btn-secondary">Iniciar sesión</a>
+        </div>
+    </div>
+</body>
+</html>

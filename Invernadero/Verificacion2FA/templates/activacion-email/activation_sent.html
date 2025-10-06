@@ -1,2 +1,28 @@
-<h2>Revisa tu correo 📬</h2>
-<p>Te enviamos un enlace para activar tu cuenta.</p>
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FloraCore - Email Enviado</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>FloraCore</h1>
+        <h2>
+            <i class="fas fa-envelope" aria-hidden="true"></i>
+            Revisa tu correo
+        </h2>
+        
+        <div class="message-content">
+            <p>Te enviamos un enlace para activar tu cuenta.</p>
+            <p>Revisa tu bandeja de entrada y la carpeta de spam.</p>
+        </div>
+        
+        <div class="action-links">
+            <a href="{% url 'signin' %}" class="btn-primary">Ir al inicio de sesión</a>
+        </div>
+    </div>
+</body>
+</html>
