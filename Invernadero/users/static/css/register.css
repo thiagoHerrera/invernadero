@@ -95,21 +95,20 @@ body {
 /* ------------------------------------------------------------------- */
 .flora {
     position: absolute; 
-    
     /* Quitamos todas las transformaciones que distorsionaban */
-   
+    
     /* Restauramos el tamaño natural de la imagen */
     height: 250px; 
-   
     
+    margin-top: -65px;
     /* Posicionamiento para que se vea perfectamente en el borde */
-    left: 270px; 
+    left: 452px; 
     top: 50%; /* Centrado verticalmente */
     
     mix-blend-mode: multiply; 
     z-index: 10;
     
-    transform: rotate(90deg);
+    transform: rotate(91deg);
     width: 1350px;
 }
 
@@ -240,41 +239,102 @@ body {
     color: var(--color-moss); 
 }
 
-/* Media Queries para responsividad (similares a login.css) */
+/* ------------------------------------------------------------------- */
+/* 4. MEDIA QUERIES (Adaptabilidad para Dispositivos) */
+/* ------------------------------------------------------------------- */
+
+/* Media Query para pantallas medianas (tabletas grandes, hasta 1100px) */
+/* Ajusta la proporción de las dos columnas a 55/45 y reposiciona la liana. */
+@media (max-width: 1100px) {
+    .panel-decorativo {
+        flex: 0 0 55%; /* Panel izquierdo ocupa el 55% del ancho. */
+    }
+    .form-register {
+        flex: 0 0 45%; /* Formulario ocupa el 45% del ancho. */
+    }
+    /* Reposiciona la liana para que quede en el nuevo borde (55%). */
+    .flora {
+        left: 400px; /* Ajuste para el nuevo punto de división. */
+        width: 1200px; 
+    }
+    /* Reducción sutil de elementos grandes. */
+    .logo-text, .slogan {
+        font-size: 1.5rem;
+    }
+    .logo-center {
+        width: 120px;
+    }
+}
+
+/* Media Query para tabletas pequeñas y móviles horizontales (hasta 900px) */
 @media (max-width: 900px) {
+    /* Nueva proporción 50/50. */
     .panel-decorativo {
         flex: 0 0 50%;
     }
     .form-register {
         flex: 0 0 50%;
     }
+    /* Ajuste de la liana para la nueva división 50/50. */
     .flora {
-        left: -125px; /* Ajuste la posición de la liana */
+        left: 300px; /* Se acerca al borde central. */
+        width: 1100px;
     }
 }
 
-@media (max-width: 600px) {
+
+/* Media Query para pantallas pequeñas (teléfonos móviles, hasta 768px de ancho) */
+@media (max-width: 768px) {
+    /* El contenedor principal apila las secciones verticalmente. */
     .container {
         flex-direction: column;
-        height: auto;
+        height: auto; 
         min-height: 100vh;
+        overflow-y: auto; /* Habilita el scroll vertical si el formulario es muy largo. */
     }
+    
+    /* Ambos paneles ocupan el 100% del ancho. */
     .panel-decorativo, .form-register {
         flex: 0 0 100%;
         width: 100%;
     }
+    
+    /* El panel decorativo se convierte en una cabecera más corta para móviles. */
     .panel-decorativo {
-        height: 30vh;
-        min-height: 200px;
-        padding-bottom: 0;
+        height: 25vh; /* Altura fija para el encabezado móvil. */
+        min-height: 180px; 
+        padding: 20px 30px;
+        /* Alinea la marca al inicio. */
+        justify-content: flex-start; 
+        align-items: flex-start;
     }
+    
+    /* Oculta el logo central y el eslogan para ahorrar espacio vital en móvil. */
     .content-center {
-        display: none; /* Ocultamos el logo central para ahorrar espacio en móvil */
+        display: none; 
     }
+    
+    /* Oculta la liana decorativa. */
     .flora {
-        display: none; /* Ocultamos la liana en móvil */
+        display: none; 
     }
+    
+    /* Ajusta el padding del formulario para móviles. */
     .form-register {
         padding: 40px 20px;
+    }
+
+    /* Optimiza el espacio dentro del formulario. */
+    .titulo-principal {
+        font-size: 2.0rem;
+    }
+    .form-content {
+        gap: 12px; 
+    }
+    .btn-register {
+        margin-top: 10px; 
+    }
+    .opciones {
+        margin-top: 20px;
     }
 }
