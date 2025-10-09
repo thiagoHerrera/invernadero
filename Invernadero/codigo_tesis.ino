@@ -1,4 +1,5 @@
 #include <WiFi.h>
+#include <WiFiClientSecure.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include "DHT.h"
@@ -97,8 +98,10 @@ bool datosCambiaron(SensorData current, SensorData last) {
 }
 
 bool enviarDatos(SensorData data) {
+  WiFiClientSecure client;
+  client.setInsecure();
   HTTPClient http;
-  http.begin(serverUrl);
+  http.begin(client, serverUrl);
   http.addHeader("Content-Type", "application/json");
 
   String jsonData = "{\"temperatura\": " + String(data.temperatura, 1) +
