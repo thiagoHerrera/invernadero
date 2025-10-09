@@ -1,19 +1,23 @@
 # Importación de decoradores y clases de DRF (Django REST Framework)
-from rest_framework.decorators import api_view  # Para declarar vistas basadas en funciones que aceptan solicitudes HTTP
+from rest_framework.decorators import api_view, permission_classes  # Para declarar vistas basadas en funciones que aceptan solicitudes HTTP
 from rest_framework.response import Response    # Para enviar respuestas HTTP con datos en formato JSON
 from rest_framework import status               # Para usar códigos de estado HTTP estandarizados
+from rest_framework.permissions import AllowAny
 
 # Importaciones de Django
 from django.shortcuts import render             # (No se utiliza en este archivo pero se importa por defecto)
 from django.utils import timezone
+from django.views.decorators.csrf import csrf_exempt
 import logging
 from datetime import datetime
 
 # Importación del modelo Parameters desde la app users
 from users.models import Parameters, Configuration
-from .serializers import ParametersSerializer
+from .serializers import ParametersSerializer, ConfigurationSerializer
 
 
+@csrf_exempt
+@permission_classes([AllowAny])
 @api_view(['POST'])  # Solo permite solicitudes HTTP POST
 def sensors(request):
     """
@@ -102,6 +106,7 @@ def sensors(request):
     return Response(response_data, status=status.HTTP_201_CREATED)
 
 
+@permission_classes([AllowAny])
 @api_view(['GET'])
 def get_latest_parameters(request):
     """
@@ -134,6 +139,7 @@ def get_latest_parameters(request):
     return Response(data, status=status.HTTP_200_OK)
 
 
+@permission_classes([AllowAny])
 @api_view(['GET'])
 def parameters_history(request):
     """
@@ -146,6 +152,7 @@ def parameters_history(request):
     return Response(serializer.data, status=status.HTTP_200_OK)
 
 
+@permission_classes([AllowAny])
 @api_view(['GET'])
 def parameters_stats(request):
     """
@@ -165,6 +172,7 @@ def parameters_stats(request):
     return Response(data, status=status.HTTP_200_OK)
 
 
+@permission_classes([AllowAny])
 @api_view(['GET', 'PUT'])
 def configuracion(request):
     """
@@ -185,6 +193,7 @@ def configuracion(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@permission_classes([AllowAny])
 @api_view(['POST'])
 def actuadores_manual(request):
     """
