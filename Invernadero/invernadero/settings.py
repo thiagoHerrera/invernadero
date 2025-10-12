@@ -89,23 +89,23 @@ WSGI_APPLICATION = 'invernadero.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-if os.environ.get('DATABASE_URL'):
-    # Configuración para producción (PostgreSQL en Render)
-    DATABASES = {
-        'default': dj_database_url.parse(
-            os.environ.get('DATABASE_URL'),
-            conn_max_age=600,
-            conn_health_checks=True,
-        )
+# Usar SQLite tanto en desarrollo como producción para evitar problemas
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
-else:
-    # Configuración para desarrollo (SQLite)
-    DATABASES = {
-        'default': {
-            'ENGINE': 'django.db.backends.sqlite3',
-            'NAME': BASE_DIR / 'db.sqlite3',
-        }
-    }
+}
+
+# Si necesitas PostgreSQL en el futuro, descomenta esto:
+# if os.environ.get('DATABASE_URL'):
+#     DATABASES = {
+#         'default': dj_database_url.parse(
+#             os.environ.get('DATABASE_URL'),
+#             conn_max_age=600,
+#             conn_health_checks=True,
+#         )
+#     }
 
 
 # Password validation
