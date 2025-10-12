@@ -7,7 +7,16 @@ echo "Instalando dependencias..."
 pip install -r requirements.txt
 
 echo "Ejecutando migraciones..."
+# Crear migraciones para todas las apps
+python manage.py makemigrations users
+python manage.py makemigrations Verificacion2FA
+python manage.py makemigrations Authentication
+python manage.py makemigrations api_comunication
+python manage.py makemigrations Windows
+python manage.py makemigrations diagnostico
 python manage.py makemigrations
+
+# Ejecutar migraciones
 python manage.py migrate --run-syncdb
 
 echo "Creando superusuario..."

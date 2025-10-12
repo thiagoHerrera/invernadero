@@ -78,19 +78,33 @@ services:
 ### 1. Hacer Commit de los Cambios
 ```bash
 git add .
-git commit -m "Fix: Solucionar problemas de despliegue en Render"
+git commit -m "Fix: Configurar base de datos PostgreSQL y solucionar CSS"
 git push origin main
 ```
 
 ### 2. En Render Dashboard
-1. Ve a tu servicio `floracore`
-2. Haz clic en "Manual Deploy" > "Deploy latest commit"
-3. O espera a que se active el auto-deploy
 
-### 3. Verificar Variables de Entorno
-En Render, asegúrate de tener estas variables:
+#### Opción A: Usar render.yaml (Recomendado)
+1. El archivo `render.yaml` creará automáticamente:
+   - Servicio web `floracore`
+   - Base de datos PostgreSQL `floracore-db`
+   - Conexión automática entre ambos
+
+#### Opción B: Configuración Manual
+1. Crear base de datos PostgreSQL:
+   - New > PostgreSQL
+   - Name: `floracore-db`
+   - Plan: Free
+2. Crear/actualizar servicio web:
+   - Conectar al repositorio
+   - Environment: Python 3
+   - Build Command: `./build.sh`
+   - Start Command: `gunicorn invernadero.wsgi:application`
+
+### 3. Variables de Entorno (si usas configuración manual)
 - `DEBUG=False`
 - `DJANGO_SETTINGS_MODULE=invernadero.settings`
+- `DATABASE_URL` (se conecta automáticamente desde la BD PostgreSQL)
 
 ### 4. Monitorear el Deploy
 - Revisa los logs de build para errores
