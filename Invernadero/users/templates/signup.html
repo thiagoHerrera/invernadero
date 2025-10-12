@@ -1,14 +1,13 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FloraCore - Registro</title>
+
+{% block title %}FloraCore - Registro{% endblock %}
+
+{% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/register.css' %}">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-</head>
-<body>
+{% endblock %}
+{% block content %}
     <div class="container">
         <!-- Panel Decorativo Izquierdo -->
         <div class="panel-decorativo">
@@ -77,5 +76,4 @@
             </form>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

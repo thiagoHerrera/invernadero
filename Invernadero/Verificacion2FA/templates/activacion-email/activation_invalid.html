@@ -1,26 +1,33 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FloraCore - Enlace Inválido</title>
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h1>FloraCore</h1>
-        <h2>Enlace Inválido</h2>
-        
-        <div class="message-content">
-            <p>Este enlace de activación ya expiró o no es válido.</p>
-            <p>Por favor, solicita un nuevo enlace de activación.</p>
-        </div>
-        
-        <div class="action-links">
-            <a href="{% url 'signup' %}" class="btn-primary">Registrarse de nuevo</a>
-            <a href="{% url 'signin' %}" class="btn-secondary">Iniciar sesión</a>
+
+{% block title %}FloraCore - Enlace Inválido{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/password_reset.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="reset-page-wrapper">
+        <div class="form-card">
+            <div class="icon-plantita">
+                <i class="fas fa-exclamation-triangle" style="font-size: 3rem; color: #c93d3d;"></i>
+            </div>
+            
+            <h1 class="logo-name">FloraCore</h1>
+            <h2 class="form-title">Enlace Inválido</h2>
+            
+            <div class="form-description">
+                <p>Este enlace de activación ya expiró o no es válido.</p>
+                <p>Por favor, solicita un nuevo enlace de activación.</p>
+            </div>
+            
+            <div style="display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem;">
+                <a href="{% url 'signup' %}" class="btn-submit" style="text-decoration: none; text-align: center; display: block;">Registrarse de nuevo</a>
+                <a href="{% url 'signin' %}" class="secondary-link-text" style="text-align: center; display: block;">Iniciar sesión</a>
+            </div>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

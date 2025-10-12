@@ -166,7 +166,7 @@ body {
 /* Campos de Input */
 .form-content input {
     width: 100%;
-    height: 40px; /* Campos un poco más pequeños para registro */
+    height: 44px; /* Altura más cómoda */
     padding: 0 15px;
     border-radius: 8px;
     
@@ -244,20 +244,19 @@ body {
 /* ------------------------------------------------------------------- */
 
 /* Media Query para pantallas medianas (tabletas grandes, hasta 1100px) */
-/* Ajusta la proporción de las dos columnas a 55/45 y reposiciona la liana. */
 @media (max-width: 1100px) {
     .panel-decorativo {
-        flex: 0 0 55%; /* Panel izquierdo ocupa el 55% del ancho. */
+        flex: 0 0 50%;
     }
     .form-register {
-        flex: 0 0 45%; /* Formulario ocupa el 45% del ancho. */
+        flex: 0 0 50%;
     }
-    /* Reposiciona la liana para que quede en el nuevo borde (55%). */
+    
     .flora {
-        left: 400px; /* Ajuste para el nuevo punto de división. */
-        width: 1200px; 
+        left: 380px;
+        width: 1150px;
     }
-    /* Reducción sutil de elementos grandes. */
+    
     .logo-text, .slogan {
         font-size: 1.5rem;
     }
@@ -268,73 +267,131 @@ body {
 
 /* Media Query para tabletas pequeñas y móviles horizontales (hasta 900px) */
 @media (max-width: 900px) {
-    /* Nueva proporción 50/50. */
     .panel-decorativo {
-        flex: 0 0 50%;
+        flex: 0 0 45%;
     }
     .form-register {
-        flex: 0 0 50%;
+        flex: 0 0 55%;
     }
-    /* Ajuste de la liana para la nueva división 50/50. */
+    
     .flora {
-        left: 300px; /* Se acerca al borde central. */
-        width: 1100px;
+        left: 320px;
+        width: 1050px;
     }
 }
 
 
 /* Media Query para pantallas pequeñas (teléfonos móviles, hasta 768px de ancho) */
 @media (max-width: 768px) {
-    /* El contenedor principal apila las secciones verticalmente. */
+    .container {
+        flex-direction: row; /* Mantener horizontal */
+        height: 100vh;
+    }
+    
+    /* Ajustar proporciones para móvil */
+    .panel-decorativo {
+        flex: 0 0 35%; /* Panel más pequeño */
+        padding: 20px 15px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .form-register {
+        flex: 0 0 65%; /* Formulario más grande */
+        padding: 25px 20px;
+        overflow-y: auto;
+    }
+    
+    /* Ocultar elementos decorativos pero mantener estructura */
+    .content-center {
+        display: none;
+    }
+    
+    .flora {
+        display: none;
+    }
+    
+    .logo-text {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+    
+    .titulo-principal {
+        font-size: 1.8rem;
+        margin-bottom: 18px;
+    }
+    
+    .form-content {
+        gap: 14px;
+        max-width: 100%;
+    }
+    
+    .form-content input {
+        height: 42px;
+        font-size: 0.95rem;
+    }
+    
+    .btn-register {
+        height: 44px;
+        margin-top: 12px;
+    }
+    
+    .opciones {
+        margin-top: 18px;
+        text-align: center;
+        font-size: 0.9rem;
+    }
+}
+
+/* Media Query para pantallas muy pequeñas (hasta 480px) */
+@media (max-width: 480px) {
     .container {
         flex-direction: column;
-        height: auto; 
+        height: auto;
         min-height: 100vh;
-        overflow-y: auto; /* Habilita el scroll vertical si el formulario es muy largo. */
     }
     
-    /* Ambos paneles ocupan el 100% del ancho. */
-    .panel-decorativo, .form-register {
-        flex: 0 0 100%;
-        width: 100%;
-    }
-    
-    /* El panel decorativo se convierte en una cabecera más corta para móviles. */
     .panel-decorativo {
-        height: 25vh; /* Altura fija para el encabezado móvil. */
-        min-height: 180px; 
-        padding: 20px 30px;
-        /* Alinea la marca al inicio. */
-        justify-content: flex-start; 
-        align-items: flex-start;
+        flex: 0 0 auto;
+        height: 120px;
+        padding: 20px;
+        justify-content: center;
+        align-items: center;
     }
     
-    /* Oculta el logo central y el eslogan para ahorrar espacio vital en móvil. */
-    .content-center {
-        display: none; 
-    }
-    
-    /* Oculta la liana decorativa. */
-    .flora {
-        display: none; 
-    }
-    
-    /* Ajusta el padding del formulario para móviles. */
     .form-register {
-        padding: 40px 20px;
+        flex: 1;
+        padding: 25px 20px;
+        justify-content: flex-start;
     }
-
-    /* Optimiza el espacio dentro del formulario. */
+    
     .titulo-principal {
-        font-size: 2.0rem;
+        font-size: 1.7rem;
+        margin-bottom: 20px;
     }
+    
     .form-content {
-        gap: 12px; 
+        gap: 12px;
     }
+    
+    .form-content input {
+        height: 44px;
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+    
     .btn-register {
-        margin-top: 10px; 
+        height: 48px;
+        font-size: 1.1rem;
+        margin-top: 15px;
     }
+    
+    .form-group label {
+        font-size: 0.9rem;
+    }
+    
     .opciones {
+        font-size: 0.9rem;
         margin-top: 20px;
     }
 }

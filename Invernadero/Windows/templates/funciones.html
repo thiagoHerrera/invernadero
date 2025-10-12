@@ -1,10 +1,9 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Funciones - FloraCore</title>
+
+{% block title %}Funciones - FloraCore{% endblock %}
+
+{% block extra_head %}
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/funciones.css' %}">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -48,8 +47,9 @@
     .tech-title { font-weight: 700; color: #036b0c; margin-bottom: 0.5rem; }
     .tech-description { color: #555; font-size: 0.9rem; }
   </style>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
 
   <header class="navbar animate-fade-in-down animate-duration-1000">
   <section class="spbt">
@@ -179,5 +179,4 @@
         });
     });
 </script>
-</body>
-</html>
+{% endblock %}

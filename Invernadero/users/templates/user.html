@@ -1,14 +1,13 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FloraCore - Perfil de Usuario</title>
+
+{% block title %}FloraCore - Perfil de Usuario{% endblock %}
+
+{% block extra_head %}
     <link rel="stylesheet" href="{% static 'css/landing.css' %}">
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-</head>
-<body>
+{% endblock %}
+{% block content %}
     <header class="navbar">
         <section class="spbt">
             <button class="menu-toggle" id="menuToggle" aria-label="Abrir menú">
@@ -68,7 +67,9 @@
     <footer>
         <p>&copy; 2025 FloraCore. Todos los derechos reservados.</p>
     </footer>
+{% endblock %}
 
+{% block extra_js %}
     <script src="{% static 'js/animaciones.js' %}"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -82,5 +83,4 @@
             }
         });
     </script>
-</body>
-</html>
+{% endblock %}

@@ -246,29 +246,28 @@ body {
 /* 7. MEDIA QUERIES (Adaptabilidad para Dispositivos) */
 /* ------------------------------------------------------------------- */
 
-/* Media Query para pantallas medianas (tabletas y algunos portátiles, hasta 992px de ancho) */
+/* Media Query para pantallas medianas (tabletas, hasta 992px de ancho) */
 @media (max-width: 992px) {
-    /* Ajusta la proporción de las dos columnas para pantallas medianas. */
     .panel-decorativo {
-        flex: 0 0 55%; /* El panel izquierdo ocupa el 55% del ancho. */
+        flex: 0 0 45%;
     }
     .form-login {
-        flex: 0 0 45%; /* El formulario derecho ocupa el 45% del ancho. */
+        flex: 0 0 55%;
     }
-    /* Reposiciona la liana debido al cambio en la división de las columnas. */
+    
     .flora {
-        left: 400px; /* Ajusta la posición horizontal de la liana. */
-        width: 1200px; /* Puede que necesite un ligero ajuste para mantener la proporción. */
+        left: 350px;
+        width: 1100px;
     }
-    /* Reduce el tamaño de los textos de la marca y el eslogan para que encajen mejor. */
+    
     .logo-text, .slogan {
         font-size: 1.5rem;
     }
-    /* Reduce el tamaño del logo central. */
+    
     .logo-center {
         width: 120px;
     }
-    /* Reduce el tamaño del título principal del formulario. */
+    
     .titulo-principal {
         font-size: 2.0rem;
     }
@@ -276,58 +275,101 @@ body {
 
 /* Media Query para pantallas pequeñas (teléfonos móviles, hasta 768px de ancho) */
 @media (max-width: 768px) {
-    /* Cambia la dirección del contenedor principal para apilar las secciones verticalmente. */
     .container {
-        flex-direction: column;
-        height: auto; /* Permite que el contenedor crezca verticalmente según el contenido. */
-        min-height: 100vh; /* Asegura que ocupe al menos toda la altura de la ventana. */
-        overflow-y: auto; /* Permite el desplazamiento vertical si el contenido es demasiado largo. */
+        flex-direction: row; /* Mantener horizontal */
+        height: 100vh;
     }
     
-    /* Ambos paneles (decorativo y formulario) ahora ocupan el 100% del ancho. */
-    .panel-decorativo, .form-login {
-        flex: 0 0 100%;
-        width: 100%;
-    }
-    
-    /* El panel decorativo se convierte en una cabecera más corta para móviles. */
+    /* Ajustar proporciones para móvil */
     .panel-decorativo {
-        height: 25vh; /* Altura fija para la cabecera móvil. */
-        min-height: 180px; /* Altura mínima para asegurar visibilidad. */
-        padding: 20px 30px;
-        /* Alinea el texto de la marca al inicio (arriba/izquierda). */
-        justify-content: flex-start; 
-        align-items: flex-start;
-        text-align: left;
+        flex: 0 0 35%; /* Panel más pequeño */
+        padding: 20px 15px;
+        justify-content: center;
+        align-items: center;
     }
     
-    /* Oculta el logo central y el eslogan en pantallas pequeñas para ahorrar espacio. */
-    .content-center {
-        display: none; 
-    }
-    
-    /* Oculta la liana decorativa, ya que no es funcional ni estética en un layout apilado. */
-    .flora {
-        display: none; 
-    }
-    
-    /* Ajusta el padding del formulario para móviles. */
     .form-login {
-        padding: 40px 20px;
-        /* Puedes ajustar el color de fondo si deseas que sea diferente en móvil, 
-           pero lo mantengo según tu solicitud de no cambiar nada si no se especifica. */
-        /* background-color: var(--color-off-white); */
+        flex: 0 0 65%; /* Formulario más grande */
+        padding: 30px 20px;
     }
-    /* Reduce el margen inferior del título principal para optimizar el espacio. */
+    
+    /* Ocultar elementos decorativos pero mantener estructura */
+    .content-center {
+        display: none;
+    }
+    
+    .flora {
+        display: none;
+    }
+    
+    .logo-text {
+        font-size: 1.4rem;
+        text-align: center;
+    }
+    
     .titulo-principal {
+        font-size: 1.8rem;
         margin-bottom: 20px;
     }
-    /* Reduce el espacio entre los grupos de formulario para una vista más compacta. */
+    
     .form-content {
-        gap: 15px; 
+        gap: 18px;
+        max-width: 100%;
     }
-    /* Ajusta el tamaño de fuente de las opciones para mayor legibilidad en pantallas pequeñas. */
+    
     .opciones {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 5px 15px;
+    }
+}
+
+/* Media Query para pantallas muy pequeñas (hasta 480px) */
+@media (max-width: 480px) {
+    .container {
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+    
+    .panel-decorativo {
+        flex: 0 0 auto;
+        height: 120px;
+        padding: 20px;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .form-login {
+        flex: 1;
+        padding: 30px 20px;
+        justify-content: center;
+    }
+    
+    .titulo-principal {
+        font-size: 1.6rem;
+        margin-bottom: 25px;
+    }
+    
+    .form-content input[type="text"],
+    .form-content input[type="password"] {
+        height: 48px;
+        font-size: 1rem;
+    }
+    
+    .btn-login {
+        height: 50px;
+        font-size: 1.1rem;
+    }
+    
+    .opciones {
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
+    }
+    
+    .separator {
+        display: none;
     }
 }

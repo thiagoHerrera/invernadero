@@ -1,14 +1,14 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Información del Proyecto - FloraCore</title>
+
+{% block title %}Información del Proyecto - FloraCore{% endblock %}
+
+{% block extra_head %}
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/info.css' %}">
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
 
   <header class="navbar">
   <section class="spbt">
@@ -58,5 +58,4 @@
         });
     });
 </script>
-</body>
-</html>
+{% endblock %}

@@ -1,15 +1,15 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>FloraCore - Home</title>
+
+{% block title %}FloraCore - Home{% endblock %}
+
+{% block extra_head %}
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/landing.css' %}">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
 
   <!-- NAVBAR -->
   <header class="navbar animate-fade-in-down animate-duration-1000">
@@ -126,5 +126,4 @@
         });
     });
 </script>
-</body>
-</html>
+{% endblock %}

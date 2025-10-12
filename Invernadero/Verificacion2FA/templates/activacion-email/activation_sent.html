@@ -1,28 +1,30 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FloraCore - Email Enviado</title>
-    <link rel="stylesheet" href="{% static 'css/login.css' %}">
-</head>
-<body>
-    <div class="container">
-        <h1>FloraCore</h1>
-        <h2>
-            <i class="fas fa-envelope" aria-hidden="true"></i>
-            Revisa tu correo
-        </h2>
-        
-        <div class="message-content">
-            <p>Te enviamos un enlace para activar tu cuenta.</p>
-            <p>Revisa tu bandeja de entrada y la carpeta de spam.</p>
-        </div>
-        
-        <div class="action-links">
-            <a href="{% url 'signin' %}" class="btn-primary">Ir al inicio de sesión</a>
+
+{% block title %}FloraCore - Email Enviado{% endblock %}
+
+{% block extra_head %}
+    <link rel="stylesheet" href="{% static 'css/password_reset.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block content %}
+    <div class="reset-page-wrapper">
+        <div class="form-card">
+            <div class="icon-plantita">
+                <i class="fas fa-envelope" style="font-size: 3rem; color: #0B5345;"></i>
+            </div>
+            
+            <h1 class="logo-name">FloraCore</h1>
+            <h2 class="form-title">Revisa tu correo</h2>
+            
+            <div class="form-description">
+                <p>Te enviamos un enlace para activar tu cuenta.</p>
+                <p>Revisa tu bandeja de entrada y la carpeta de spam.</p>
+            </div>
+            
+            <a href="{% url 'signin' %}" class="btn-submit" style="text-decoration: none; text-align: center; display: block;">Ir al inicio de sesión</a>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

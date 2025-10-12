@@ -1,10 +1,9 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Equipos - FloraCore</title>
+
+{% block title %}Equipos - FloraCore{% endblock %}
+
+{% block extra_head %}
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/equipos.css' %}">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
@@ -30,8 +29,9 @@
     .card-description { color: #333; line-height: 1.6; font-size: 1rem; font-weight: 500; }
 
   </style>
-</head>
-<body>
+{% endblock %}
+
+{% block content %}
 
   <header class="navbar animate-fade-in-down animate-duration-1000">
   <section class="spbt">
@@ -169,5 +169,4 @@
         });
     });
 </script>
-</body>
-</html>
+{% endblock %}
