@@ -6,8 +6,8 @@ set -o errexit
 echo "Instalando dependencias..."
 pip install -r requirements.txt
 
-echo "Inicializando base de datos..."
-python init_db.py
+echo "Configurando base de datos..."
+python manage.py setup_db
 
 echo "Recopilando archivos estáticos..."
 python manage.py collectstatic --noinput --clear
