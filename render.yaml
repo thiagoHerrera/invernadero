@@ -7,5 +7,3 @@ services:
     envVars:
       - key: DEBUG
         value: "False"
-      - key: PYTHON_VERSION
-        value: "3.13.4"
