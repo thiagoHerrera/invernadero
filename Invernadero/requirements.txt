@@ -4,7 +4,7 @@ django-otp==1.5.4
 django-two-factor-auth==1.17.0
 django-formtools==2.5.1
 django-phonenumber-field==8.0.0
-qrcode==8.0
+qrcode>=7.99,<8.1
 Pillow==10.4.0
 requests==2.32.3
 psycopg2-binary==2.9.9
