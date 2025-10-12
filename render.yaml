@@ -2,8 +2,12 @@ services:
   - type: web
     name: floracore
     env: python
-    buildCommand: "./build.sh"
-    startCommand: "gunicorn invernadero.wsgi:application"
+    buildCommand: "chmod +x build.sh && ./build.sh"
+    startCommand: "gunicorn invernadero.wsgi:application --bind 0.0.0.0:$PORT"
     envVars:
       - key: DEBUG
         value: "False"
+      - key: DJANGO_SETTINGS_MODULE
+        value: "invernadero.settings"
+      - key: PYTHONPATH
+        value: "/opt/render/project/src/Invernadero"
