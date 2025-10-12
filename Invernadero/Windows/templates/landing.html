@@ -42,19 +42,13 @@
       {% if user.is_authenticated %}
       <h1 class="animate-fade-in animate-delay-300" style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">¡Hola {{ user.username }}!</h1>
       <p class="animate-fade-in animate-delay-500" style="color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">Bienvenido de nuevo a tu invernadero inteligente. Aquí puedes controlar y monitorear el estado de tus cultivos.</p>
-      <button onclick="location.href='#estadisticas'" style="background-color: rgba(255,255,255,0.9); color: var(--secondary-green); border: 2px solid white;">Ver estadísticas</button>
+      <button onclick="location.href='{% url 'estadisticas' %}'" style="background-color: rgba(255,255,255,0.9); color: var(--secondary-green); border: 2px solid white;">Ver estadísticas</button>
       {% else %}
       <h1 class="animate-fade-in animate-delay-300" style="color: white; text-shadow: 2px 2px 4px rgba(0,0,0,0.7);">¡Bienvenido a FloraCore!</h1>
       <p class="animate-fade-in animate-delay-500" style="color: white; text-shadow: 1px 1px 2px rgba(0,0,0,0.7);">¿Querés adentrarte al mundo del cultivo y no tenés un espacio adecuado?<br>
       Te presentamos FloraCore, tu invernadero inteligente para cualquier tipo de ambiente.</p>
       <button onclick="window.location.href='{% url 'info' %}'" style="background-color: rgba(255,255,255,0.9); color: var(--secondary-green); border: 2px solid white;">Más información</button>
       {% endif %}
-    </div>
-    <div class="hero-image animate-slide-in-right animate-duration-1000">
-      <div style="background-color: rgba(255,255,255,0.1); backdrop-filter: blur(10px); border-radius: 15px; padding: 20px; border: 1px solid rgba(255,255,255,0.2);">
-        <i class="fas fa-leaf" style="font-size: 3rem; color: white; display: block; text-align: center; margin-bottom: 10px;"></i>
-        <p style="color: white; text-align: center; font-weight: bold;">Tecnología Verde</p>
-      </div>
     </div>
   </section>
 
@@ -64,17 +58,17 @@
     <h2 class="animate-fade-in animate-delay-200"><i class="fas fa-tasks text-blue-500 mr-3"></i>¿Qué puedes hacer hoy?</h2>
     <div class="cards">
       <div class="card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/perfil.jpg' %}" alt="Perfil" class="hover:scale-110 transition-transform duration-300">
+        <img src="{% static 'img/2daimg.png' %}" alt="Perfil" class="hover:scale-110 transition-transform duration-300">
         <h3><i class="fas fa-user-circle text-indigo-500 mr-2"></i>Perfil</h3>
         <p>Consulta y edita tu información personal y tus configuraciones.</p>
       </div>
       <div class="card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/historial.jpg' %}" alt="Historial" class="hover:scale-110 transition-transform duration-300">
+        <img src="{% static 'img/3erimg.jpg' %}" alt="Historial" class="hover:scale-110 transition-transform duration-300">
         <h3><i class="fas fa-history text-green-500 mr-2"></i>Historial de Cultivo</h3>
         <p>Revisa el crecimiento y cuidado de tus plantas a lo largo del tiempo.</p>
       </div>
       <div class="card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/notificaciones.jpg' %}" alt="Notificaciones" class="hover:scale-110 transition-transform duration-300">
+        <img src="{% static 'img/4taimg.jpg' %}" alt="Notificaciones" class="hover:scale-110 transition-transform duration-300">
         <h3><i class="fas fa-bell text-red-500 mr-2"></i>Notificaciones</h3>
         <p>Recibe alertas sobre riego, luz y temperatura.</p>
       </div>

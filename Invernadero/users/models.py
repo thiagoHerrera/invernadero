@@ -13,3 +13,12 @@ class GrenHouse(models.Model):
     nombre = models.CharField(max_length=100)
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)
     id_parameters = models.ForeignKey(Parameters, on_delete=models.CASCADE)
+
+class Configuration(models.Model):
+    temp_min = models.FloatField(default=20.0)
+    temp_max = models.FloatField(default=25.0)
+    hum_min = models.FloatField(default=60.0)
+    hum_max = models.FloatField(default=80.0)
+    light_hours = models.IntegerField(default=12)
+    auto_watering = models.BooleanField(default=True)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)

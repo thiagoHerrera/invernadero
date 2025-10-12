@@ -1,0 +1,112 @@
+/* Importar estilos base */
+@import url('base.css');
+
+body {
+     background-color: var(--light-bg);
+     color: var(--text-primary);
+     line-height: 1.6;
+}
+
+/* Navbar usando base.css */
+.navbar .user-btn {
+     background-color: var(--secondary-green);
+}
+
+.navbar .user-btn:hover {
+     background-color: var(--hover-green);
+}
+
+/* === SECCIÓN DE INFORMACIÓN DEL PROYECTO === */
+.project-info {
+    max-width: 1100px;
+    margin: 3rem auto;
+    padding: 0 1rem;
+}
+
+.project-info h2 {
+     font-size: 2rem;
+     color: var(--secondary-green);
+     margin-bottom: 1rem;
+}
+
+.project-info p {
+     font-size: 1.1rem;
+     color: var(--text-secondary);
+     margin-bottom: 1.5rem;
+     text-align: justify;
+     line-height: 1.8;
+}
+
+/* === FOOTER usando base.css === */
+footer {
+     margin-top: 3rem;
+}
+
+/* === ESTILOS PARA DISPOSITIVOS MÓVILES === */
+@media screen and (max-width: 768px) {
+    .navbar {
+        padding: 1rem 2rem;
+    }
+
+    .navbar .logo {
+        font-size: 1.4rem;
+    }
+
+    .navbar .menu {
+        display: none;
+    }
+
+    .navbar .user-btn {
+        padding: 0.4rem 0.8rem;
+    }
+
+    .project-info {
+        padding: 0 1rem;
+    }
+
+    .project-info h2 {
+        font-size: 1.5rem;
+    }
+
+    .project-info p {
+        font-size: 1rem;
+    }
+}
+
+/* === RESPONSIVE PARA MENÚ MÓVIL === */
+.spbt {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.menu-toggle {
+    display: none;
+}
+
+.navbar .menu.active {
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+     background-color: var(--secondary-green);
+     padding: 0.5rem 0;
+     border-top: 1px solid var(--border-color);
+}
+
+@media screen and (orientation: portrait) {
+    .navbar .menu {
+        display: none;
+    }
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+        color: white;
+    }
+    .navbar {
+        flex-direction: column;
+    }
+}
