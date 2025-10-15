@@ -9,7 +9,7 @@ const char* ssid = "Cereza";
 const char* password = "robotica25";
 
 // API del servidor
-const char* serverUrl = "https://expert-zebra-r4p6p9459qrp2p7v6-8000.app.github.dev/api/parameters/";
+const char* serverUrl = "https://floracore.onrender.com/api/parameters/";
 
 // Pines sensores
 #define DHTPIN 4
@@ -101,42 +101,83 @@ bool enviarDatos(SensorData data) {
   WiFiClientSecure client;
   client.setInsecure();
   HTTPClient http;
+  
+  // Configurar timeout
+  http.setTimeout(10000);
   http.begin(client, serverUrl);
   http.addHeader("Content-Type", "application/json");
+  http.addHeader("Accept", "application/json");
+  http.addHeader("User-Agent", "ESP32-Invernadero/1.0");
 
-  String jsonData = "{\"temperatura\": " + String(data.temperatura, 1) +
-                    ", \"humedad\": " + String(data.humedad, 1) +
-                    ", \"humedad_suelo\": " + String(data.humedad_suelo, 1) +
-                    ", \"luz\": " + String(data.luz, 1) + "}";
+  // Validar datos antes de enviar
+  if (isnan(data.temperatura) || isnan(data.humedad)) {
+    Serial.println("Error: Datos inválidos, no se puede enviar");
+    http.end();
+    return false;
+  }
+
+  // Crear JSON usando ArduinoJson para mayor confiabilidad
+  StaticJsonDocument<200> jsonDoc;
+  jsonDoc["temperatura"] = round(data.temperatura * 10) / 10.0;
+  jsonDoc["humedad"] = round(data.humedad * 10) / 10.0;
+  jsonDoc["humedad_suelo"] = round(data.humedad_suelo * 10) / 10.0;
+  jsonDoc["luz"] = round(data.luz * 10) / 10.0;
+  
+  String jsonData;
+  serializeJson(jsonDoc, jsonData);
 
   Serial.println("Enviando datos: " + jsonData);
 
   int httpResponseCode = http.POST(jsonData);
   bool success = false;
 
+  Serial.println("Código de respuesta: " + String(httpResponseCode));
+  
   if (httpResponseCode > 0) {
     String response = http.getString();
-    Serial.println("Código de respuesta: " + String(httpResponseCode));
-    Serial.println("Respuesta del servidor: " + response);
+    Serial.println("Respuesta del servidor (primeros 200 chars): " + response.substring(0, min(200, (int)response.length())));
 
-    StaticJsonDocument<512> doc;
-    DeserializationError error = deserializeJson(doc, response);
+    if (httpResponseCode == 201 || httpResponseCode == 200) {
+      // Verificar si la respuesta parece ser JSON
+      if (response.startsWith("{") && response.endsWith("}")) {
+        StaticJsonDocument<1024> doc;
+        DeserializationError error = deserializeJson(doc, response);
 
-    if (error) {
-      Serial.print("Error al deserializar JSON de respuesta: ");
-      Serial.println(error.f_str());
-    } else {
-      int riego = doc["acciones"]["riego"];
-      int ventiladores = doc["acciones"]["ventiladores"];
+        if (error) {
+          Serial.print("Error al deserializar JSON: ");
+          Serial.println(error.f_str());
+          Serial.println("Respuesta completa: " + response);
+          // Consideramos exitoso si el HTTP es correcto
+          success = true;
+        } else {
+          Serial.println("JSON parseado correctamente");
+          // Verificar estructura de respuesta
+          if (doc.containsKey("acciones")) {
+            int riego = doc["acciones"]["riego"];
+            int ventiladores = doc["acciones"]["ventiladores"];
 
-      Serial.println("Riego: " + String(riego ? "ON" : "OFF"));
-      Serial.println("Ventiladores: " + String(ventiladores ? "ON" : "OFF"));
+            Serial.println("Riego: " + String(riego ? "ON" : "OFF"));
+            Serial.println("Ventiladores: " + String(ventiladores ? "ON" : "OFF"));
 
-      aplicarAcciones(riego, ventiladores);
-      success = true;
+            aplicarAcciones(riego, ventiladores);
+          } else {
+            Serial.println("Advertencia: Respuesta sin campo 'acciones'");
+          }
+          success = true;
+        }
+      } else {
+        Serial.println("Error: Respuesta no es JSON válido");
+        Serial.println("Respuesta completa: " + response);
+        // Si recibimos HTML, probablemente hay un error del servidor
+        if (response.indexOf("<html>") >= 0 || response.indexOf("<HTML>") >= 0) {
+          Serial.println("El servidor devolvió HTML en lugar de JSON - posible error 500");
+        }
+      }
+    } else if (httpResponseCode >= 400) {
+      Serial.println("Error HTTP " + String(httpResponseCode) + ": " + response);
     }
   } else {
-    Serial.print("Error en POST: ");
+    Serial.print("Error de conexión: ");
     Serial.println(http.errorToString(httpResponseCode));
   }
 
