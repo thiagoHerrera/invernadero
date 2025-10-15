@@ -8,7 +8,10 @@ from rest_framework.permissions import AllowAny
 from django.shortcuts import render             # (No se utiliza en este archivo pero se importa por defecto)
 from django.utils import timezone
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.http import require_http_methods
+from django.http import JsonResponse
 import logging
+import json
 from datetime import datetime
 
 # Importación del modelo Parameters desde la app users
@@ -17,93 +20,110 @@ from .serializers import ParametersSerializer, ConfigurationSerializer
 
 
 @csrf_exempt
+@api_view(['POST'])
 @permission_classes([AllowAny])
-@api_view(['POST'])  # Solo permite solicitudes HTTP POST
 def sensors(request):
     """
-    Vista que recibe datos de sensores desde un cliente (por ejemplo, un microcontrolador o app móvil),
+    Vista que recibe datos de sensores desde un cliente (por ejemplo, un microcontrolador),
     los guarda en la base de datos y devuelve acciones sugeridas como respuesta.
-
-    Datos esperados en el cuerpo del POST:
-    - temperatura
-    - humedad
-    - humedad_suelo
-    - luz
-    - comando_riego (opcional)
-    - comando_ventiladores (opcional)
-
-    Respuesta:
-    JSON completo con sensores, acciones, mensaje y timestamp.
     """
-    logger = logging.getLogger(__name__)
-
-    # Se extraen los valores enviados desde el cliente
-    temperatura = request.data.get('temperatura')
-    humedad = request.data.get('humedad')
-    humedad_suelo = request.data.get('humedad_suelo')
-    luz = request.data.get('luz')
-
-    # Validación: verificar que todos los valores requeridos estén presentes
-    if temperatura is None or humedad is None or humedad_suelo is None or luz is None:
-        return Response({'error': 'Faltan datos'}, status=status.HTTP_400_BAD_REQUEST)
-
-    # Obtener configuración de umbrales
-    config = Configuration.objects.first()
-    if not config:
-        config = Configuration.objects.create()
-
-    # Lógica automática: activar ventiladores si la temperatura supera el umbral
-    riego = False
-    ventiladores = False
-
-    if float(temperatura) > config.temp_threshold:
-        ventiladores = True
-
-    if float(humedad_suelo) < config.hume_floor_threshold:
-        riego = True
-
-    # Comandos manuales enviados desde el frontend (sobrescriben lógica automática)
-    comando_riego = request.data.get('comando_riego')
-    comando_ventiladores = request.data.get('comando_ventiladores')
-
-    if comando_riego is not None:
-        riego = bool(int(comando_riego))
-        logger.info("Se accionó el riego manualmente")
-
-    if comando_ventiladores is not None:
-        ventiladores = bool(int(comando_ventiladores))
-        logger.info("Se accionó el ventilador manualmente")
-
-    # Guardar los datos en la base de datos usando el modelo Parameters
-    param = Parameters.objects.create(
-        hume=float(humedad),
-        hume_floor=float(humedad_suelo),
-        temperature=float(temperatura),
-        light=float(luz),
-        riego=riego,
-        ventiladores=ventiladores,
-        timestamp=timezone.now()
-    )
-
-    # Respuesta JSON completa
-    response_data = {
-        "sensores": {
-            "temperatura": float(temperatura),
-            "humedad": float(humedad),
-            "humedad_suelo": float(humedad_suelo),
-            "luz": float(luz)
-        },
-        "acciones": {
-            "riego": int(riego),
-            "ventiladores": int(ventiladores),
-            "tiempo": 5000
-        },
-        "mensaje": "Datos guardados correctamente",
-        "timestamp": param.timestamp.isoformat() + 'Z'
-    }
-
-    # Se devuelve la respuesta con las acciones a realizar
-    return Response(response_data, status=status.HTTP_201_CREATED)
+    try:
+        # Parsear datos JSON del cuerpo de la solicitud
+        if hasattr(request, 'data') and request.data:
+            data = request.data
+        else:
+            # Fallback para datos raw
+            try:
+                data = json.loads(request.body.decode('utf-8'))
+            except (json.JSONDecodeError, UnicodeDecodeError):
+                return JsonResponse({
+                    'error': 'Formato de datos inválido. Se esperaba JSON.'
+                }, status=400)
+        
+        # Extraer y validar datos requeridos
+        required_fields = ['temperatura', 'humedad', 'humedad_suelo', 'luz']
+        missing_fields = [field for field in required_fields if field not in data or data[field] is None]
+        
+        if missing_fields:
+            return JsonResponse({
+                'error': f'Faltan campos requeridos: {", ".join(missing_fields)}'
+            }, status=400)
+        
+        # Convertir y validar tipos de datos
+        try:
+            temperatura = float(data['temperatura'])
+            humedad = float(data['humedad'])
+            humedad_suelo = float(data['humedad_suelo'])
+            luz = float(data['luz'])
+        except (ValueError, TypeError):
+            return JsonResponse({
+                'error': 'Los valores deben ser numéricos'
+            }, status=400)
+        
+        # Validar rangos lógicos
+        if not (-50 <= temperatura <= 100):
+            return JsonResponse({'error': 'Temperatura fuera de rango (-50 a 100°C)'}, status=400)
+        if not (0 <= humedad <= 100):
+            return JsonResponse({'error': 'Humedad fuera de rango (0 a 100%)'}, status=400)
+        if not (0 <= humedad_suelo <= 100):
+            return JsonResponse({'error': 'Humedad del suelo fuera de rango (0 a 100%)'}, status=400)
+        if not (0 <= luz <= 100):
+            return JsonResponse({'error': 'Luz fuera de rango (0 a 100%)'}, status=400)
+        
+        # Obtener o crear configuración
+        config, created = Configuration.objects.get_or_create(
+            defaults={
+                'temp_threshold': 28.0,
+                'hume_floor_threshold': 40.0,
+                'light_threshold': 500.0
+            }
+        )
+        
+        # Lógica de control automático
+        riego = humedad_suelo < config.hume_floor_threshold
+        ventiladores = temperatura > config.temp_threshold
+        
+        # Comandos manuales (opcional)
+        if 'comando_riego' in data and data['comando_riego'] is not None:
+            riego = bool(int(data['comando_riego']))
+        if 'comando_ventiladores' in data and data['comando_ventiladores'] is not None:
+            ventiladores = bool(int(data['comando_ventiladores']))
+        
+        # Guardar en base de datos
+        param = Parameters.objects.create(
+            hume=humedad,
+            hume_floor=humedad_suelo,
+            temperature=temperatura,
+            light=luz,
+            riego=riego,
+            ventiladores=ventiladores,
+            timestamp=timezone.now()
+        )
+        
+        # Respuesta estructurada
+        response_data = {
+            "sensores": {
+                "temperatura": temperatura,
+                "humedad": humedad,
+                "humedad_suelo": humedad_suelo,
+                "luz": luz
+            },
+            "acciones": {
+                "riego": int(riego),
+                "ventiladores": int(ventiladores),
+                "tiempo": 5000
+            },
+            "mensaje": "Datos guardados correctamente",
+            "timestamp": param.timestamp.isoformat() + 'Z'
+        }
+        
+        return JsonResponse(response_data, status=201)
+        
+    except Exception as e:
+        return JsonResponse({
+            'error': 'Error interno del servidor',
+            'details': str(e)
+        }, status=500)
 
 
 @permission_classes([AllowAny])
