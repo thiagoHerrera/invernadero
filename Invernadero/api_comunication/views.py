@@ -70,18 +70,14 @@ def sensors(request):
         if not (0 <= luz <= 100):
             return JsonResponse({'error': 'Luz fuera de rango (0 a 100%)'}, status=400)
         
-        # Obtener o crear configuración
-        config, created = Configuration.objects.get_or_create(
-            defaults={
-                'temp_threshold': 28.0,
-                'hume_floor_threshold': 40.0,
-                'light_threshold': 500.0
-            }
-        )
+        # Obtener configuración o usar valores por defecto
+        config = Configuration.objects.first()
+        temp_threshold = config.temp_max if config else 28.0
+        hume_floor_threshold = config.hum_min if config else 40.0
         
         # Lógica de control automático
-        riego = humedad_suelo < config.hume_floor_threshold
-        ventiladores = temperatura > config.temp_threshold
+        riego = humedad_suelo < hume_floor_threshold
+        ventiladores = temperatura > temp_threshold
         
         # Comandos manuales (opcional)
         if 'comando_riego' in data and data['comando_riego'] is not None:
@@ -200,7 +196,7 @@ def configuracion(request):
     """
     config = Configuration.objects.first()
     if not config:
-        config = Configuration.objects.create()
+        return Response({'error': 'No hay configuración disponible'}, status=status.HTTP_404_NOT_FOUND)
 
     if request.method == 'GET':
         serializer = ConfigurationSerializer(config)

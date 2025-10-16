@@ -7,6 +7,9 @@ class Parameters(models.Model):
     hume_floor = models.CharField(max_length=20)
     temperature = models.CharField(max_length=20)
     light = models.CharField(max_length=20, default="0")
+    riego = models.BooleanField(default=False)
+    ventiladores = models.BooleanField(default=False)
+    timestamp = models.DateTimeField(auto_now_add=True)
 
     
 class GrenHouse(models.Model):
