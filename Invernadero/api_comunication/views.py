@@ -70,10 +70,9 @@ def sensors(request):
         if not (0 <= luz <= 100):
             return JsonResponse({'error': 'Luz fuera de rango (0 a 100%)'}, status=400)
         
-        # Obtener configuración o usar valores por defecto
-        config = Configuration.objects.first()
-        temp_threshold = config.temp_max if config else 28.0
-        hume_floor_threshold = config.hum_min if config else 40.0
+        # Valores por defecto para control automático
+        temp_threshold = 28.0
+        hume_floor_threshold = 40.0
         
         # Lógica de control automático
         riego = humedad_suelo < hume_floor_threshold
