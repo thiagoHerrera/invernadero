@@ -1,5 +1,5 @@
 /* Importar estilos base */
-@import url('base.css');
+@import url('/static/css/base.css');
 
 /* === BASE BODY STYLES === */
 body {
