@@ -38,7 +38,7 @@ body {
     position: relative;
     
     /* Imagen de fondo (mantener tu ruta) */
-    background: url('../img/fondologin.png') no-repeat center center;
+    background: url('../img/fondo3.png') no-repeat center center;
     background-size: cover; 
     
     /* CAMBIOS CLAVE: Flexbox para centrar y distribuir el contenido */
@@ -55,12 +55,22 @@ body {
     width: 100%; 
     align-self: flex-start; 
 }
-
 .logo-text {
     font-size: 1.8rem; /* Un poco más pequeño y sutil */
     font-weight: 700;
     color: var(--color-forest);
     opacity: 0.9;
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+.logo-text:hover {
+       /* Mueve el logo ligeramente hacia arriba (efecto de "flotación") */
+    transform: translateY(-5px) scale(1.02); 
+    
+    /* Aumenta un poco la sombra para darle más profundidad */
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+    
+    /* El efecto es leve (scale 1.02, solo -5px de movimiento) y el 
+       ease-in-out lo hace suave y profesional. */
 }
 
 /* 1.2 Contenido Central (Logo y Slogan) */
@@ -75,10 +85,27 @@ body {
 }
 
 .logo-center {
-    width: 150px; 
+    width: 150px; /* Tamaño del logo/imagen central */
     height: auto;
     margin-bottom: 20px;
+    
+    /* === 1. AÑADIDO CLAVE: Transición === */
+    /* Aplica transición a las propiedades que queremos animar (transform y filter) */
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; 
+    /* ==================================== */
+    
+    /* Efecto sutil para que se destaque del fondo (estado base) */
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+}
+.logo-center:hover {
+    /* Mueve el logo ligeramente hacia arriba (efecto de "flotación") */
+    transform: translateY(-5px) scale(1.02); 
+    
+    /* Aumenta un poco la sombra para darle más profundidad */
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+    
+    /* El efecto es leve (scale 1.02, solo -5px de movimiento) y el 
+       ease-in-out lo hace suave y profesional. */
 }
 
 .slogan {
@@ -88,6 +115,17 @@ body {
     opacity: 0.85;
     max-width: 80%;
     line-height: 1.3;
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+.slogan:hover {
+       /* Mueve el logo ligeramente hacia arriba (efecto de "flotación") */
+    transform: translateY(-5px) scale(1.02); 
+    
+    /* Aumenta un poco la sombra para darle más profundidad */
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+    
+    /* El efecto es leve (scale 1.02, solo -5px de movimiento) y el 
+       ease-in-out lo hace suave y profesional. */
 }
 
 /* ------------------------------------------------------------------- */
