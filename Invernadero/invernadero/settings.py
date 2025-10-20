@@ -227,6 +227,17 @@ EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', 'floracoreai@gmail.com')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', 'mtxo staa smjz hgav')
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
-# Forzar envío real de emails (no console)
-if DEBUG:
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# Configuración temporal para debug
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Configuración para Render (comentado temporalmente)
+# if not DEBUG:  # En producción (Render)
+#     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+#     EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+#     EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+#     
+#     # Si no hay configuración de email, usar console backend
+#     if not EMAIL_HOST_USER or not EMAIL_HOST_PASSWORD:
+#         EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+# else:
+#     EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
