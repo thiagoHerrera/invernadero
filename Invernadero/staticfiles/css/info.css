@@ -1,0 +1,57 @@
+ true;
+    case "undefined":
+        return !InjectedScriptHost.isHTMLAllCollection(value);
+    default:
+        return false;
+    }
+}
+    
+function createIterableWithoutPrototypeFromArguments(argumentsObject) {
+    let iteratorFunction = argumentsObject.@@iterator;
+    return @wrappedIterator(iteratorFunction.@call(argumentsObject));
+}
+
+function max(a, b) {
+    return a > b ? a : b;
+}
+
+//
+
+let InjectedScript = class InjectedScript extends PrototypelessObjectBase
+{
+    constructor()
+    {
+        super();
+
+        this._lastBoundObjectId = 1;
+        this._idToWrappedObject = @createObjectWithoutPrototype();
+        this._idToObjectGroupName = @createObjectWithoutPrototype();
+        this._objectGroups = @createObjectWithoutPrototype();
+        this._modules = @createObjectWithoutPrototype();
+        this._nextSavedResultIndex = 1;
+        this._savedResults = @createArrayWithoutPrototype();
+    }
+
+    //
+
+    execute(functionString, objectGroup, includeCommandLineAPI, returnByValue, generatePreview, saveResult, args)
+    {
+        return this._wrapAndSaveCall(objectGroup, returnByValue, generatePreview, saveResult, () => {
+            const isEvalOnCallFrame = false;
+            return this._evaluateOn(InjectedScriptHost.evaluateWithScopeExtension, InjectedScriptHost, functionString, isEvalOnCallFrame, includeCommandLineAPI).@apply(@undefined, args);
+        });
+    }
+
+    evaluate(expression, objectGroup, includeCommandLineAPI, returnByValue, generatePreview, saveResult)
+    {
+        const isEvalOnCallFrame = false;
+        return this._evaluateAndWrap(InjectedScriptHost.evaluateWithScopeExtension, InjectedScriptHost, expression, objectGroup, isEvalOnCallFrame, includeCommandLineAPI, returnByValue, generatePreview, saveResult);
+    }
+
+    awaitPromise(promiseObjectId, returnByValue, generatePreview, saveResult, callback)
+    {
+        let parsedPromiseObjectId = this._parseObjectId(promiseObjectId);
+        let promiseObject = this._objectForId(parsedPromiseObjectId);
+        let promiseObjectGroupName = this._idToObjectGroupName[parsedPromiseObjectId.id];
+
+      

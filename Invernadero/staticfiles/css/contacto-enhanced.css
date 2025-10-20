@@ -1,0 +1,311 @@
+/* Contacto Enhanced Styles */
+
+/* Base Styles */
+body {
+  background: linear-gradient(135deg, #f4faf5 0%, #d7ded7 100%);
+}
+
+/* Hero Section */
+.hero-contact {
+  background: linear-gradient(135deg, #036b0c, #2a7e56);
+  padding: 4rem 2rem;
+  text-align: center;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-contact::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path d="M20,20 Q30,10 40,20 T60,20" stroke="rgba(255,255,255,0.1)" fill="none"/><circle cx="80" cy="30" r="3" fill="rgba(255,255,255,0.1)"/></svg>');
+}
+
+.hero-contact h1 {
+  font-size: 3.5rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.hero-contact p {
+  font-size: 1.2rem;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+/* Team Showcase */
+.team-showcase {
+  background: white;
+  margin: -3rem 2rem 3rem;
+  border-radius: 30px;
+  padding: 3rem;
+  box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+}
+
+.team-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #036b0c;
+  margin-bottom: 1rem;
+}
+
+.team-subtitle {
+  text-align: center;
+  color: #555;
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+}
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 2.5rem;
+  margin-top: 2rem;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.team-member {
+  background: linear-gradient(145deg, #f4faf5, white);
+  border-radius: 20px;
+  padding: 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+}
+
+.team-member::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, #036b0c, #2a7e56);
+}
+
+.member-avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #036b0c, #2a7e56);
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: white;
+  position: relative;
+}
+
+.member-avatar::after {
+  content: '';
+  position: absolute;
+  inset: -3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #2a7e56, #036b0c);
+  z-index: -1;
+}
+
+.member-name {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #036b0c;
+  margin-bottom: 0.5rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.member-role {
+  color: #2a7e56;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+}
+
+.member-description {
+  color: #333;
+  font-size: 1rem;
+  line-height: 1.6;
+  font-weight: 500;
+}
+
+/* Contact Section */
+.contact-section {
+  padding: 3rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.contact-title {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #036b0c;
+  margin-bottom: 3rem;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.contact-method {
+  background: white;
+  border-radius: 25px;
+  padding: 3rem 2rem;
+  text-align: center;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+  position: relative;
+  overflow: hidden;
+}
+
+.contact-method::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #036b0c, #2a7e56);
+}
+
+.contact-icon {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #036b0c, #2a7e56);
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  color: white;
+}
+
+.contact-method-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #036b0c;
+  margin-bottom: 1rem;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+.contact-info {
+  color: #2a7e56;
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.contact-info a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+.contact-description {
+  color: #333;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+/* Social Section */
+.social-section {
+  background: linear-gradient(135deg, #d7ded7, #f4faf5);
+  padding: 3rem 2rem;
+  margin: 2rem;
+  border-radius: 25px;
+  text-align: center;
+}
+
+.social-title {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #036b0c;
+  margin-bottom: 1rem;
+}
+
+.social-subtitle {
+  color: #555;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.social-link {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #036b0c, #2a7e56);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-size: 1.5rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .hero-contact h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-contact p {
+    font-size: 1rem;
+  }
+  
+  .team-showcase {
+    margin: -2rem 1rem 2rem;
+    padding: 2rem 1rem;
+  }
+  
+  .team-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .social-section {
+    margin: 2rem 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-contact h1 {
+    font-size: 2rem;
+  }
+  
+  .social-links {
+    flex-wrap: wrap;
+  }
+}

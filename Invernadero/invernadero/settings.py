@@ -12,11 +12,19 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 
 from pathlib import Path
 import os
-import dj_database_url
-from dotenv import load_dotenv
 
-# Cargar variables de entorno desde .env
-load_dotenv()
+# Intentar cargar dotenv si está disponible
+try:
+    from dotenv import load_dotenv
+    load_dotenv()
+except ImportError:
+    pass
+
+# Intentar importar dj_database_url si está disponible
+try:
+    import dj_database_url
+except ImportError:
+    dj_database_url = None
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -44,25 +52,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'corsheaders',
-    'rest_framework',
     'users',
     'Verificacion2FA',
     'Authentication',
     'api_comunication',
-    'django_otp',
-    'django_otp.plugins.otp_totp',
-    'django_otp.plugins.otp_static',
-    'two_factor',
-    'qrcode',
     'Windows',
     'diagnostico',
 ]
 
 MIDDLEWARE = [
-    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -96,7 +95,7 @@ WSGI_APPLICATION = 'invernadero.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 # Base de datos - PostgreSQL para producción, SQLite para desarrollo
-if os.environ.get('DATABASE_URL'):
+if os.environ.get('DATABASE_URL') and dj_database_url:
     DATABASES = {
         'default': dj_database_url.parse(
             os.environ.get('DATABASE_URL'),
@@ -153,8 +152,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# WhiteNoise configuration
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+# STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

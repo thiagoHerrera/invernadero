@@ -1,0 +1,201 @@
+/* Importar estilos base */
+@import url('base.css');
+
+body {
+     background-color: var(--light-green);
+     color: var(--text-primary);
+}
+
+/* Navbar usando base.css */
+.navbar .user-btn {
+     background-color: var(--secondary-green);
+}
+
+.navbar .user-btn:hover {
+     background-color: var(--hover-green);
+}
+
+/* === SECCIÓN EQUIPOS === */
+.main-section {
+     padding: 3rem 2rem;
+     max-width: 1200px;
+     margin: auto;
+}
+
+.main-section h1 {
+     font-size: 2rem;
+     margin-bottom: 1rem;
+     color: var(--primary-green);
+     text-align: center;
+}
+
+.main-section p {
+     margin-bottom: 2rem;
+     text-align: center;
+     line-height: 1.5;
+     color: var(--text-secondary);
+}
+
+.equipment-grid {
+     display: flex;
+     flex-wrap: wrap;
+     gap: 2rem;
+     justify-content: center;
+}
+
+.equipment-card {
+     background-color: var(--white);
+     border-radius: 12px;
+     box-shadow: 0 2px 8px var(--shadow);
+     padding: 1.5rem;
+     width: 280px;
+     text-align: center;
+}
+
+.equipment-card img {
+     width: 100%;
+     height: 180px;
+     object-fit: cover;
+     border-radius: 10px;
+     margin-bottom: 1rem;
+}
+
+.equipment-card h3 {
+     color: var(--primary-green);
+     font-size: 1.1rem;
+     margin-bottom: 0.5rem;
+}
+
+.equipment-card p {
+     font-size: 0.95rem;
+     color: var(--text-secondary);
+}
+
+/* === FOOTER usando base.css === */
+footer {
+     margin-top: 4rem;
+}
+
+/* === NUEVAS ANIMACIONES ÚNICAS PARA EQUIPOS === */
+
+/* Animación de entrada escalonada */
+.equipment-card {
+     opacity: 0;
+     transform: translateX(-50px) rotate(-5deg);
+     transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.equipment-card.card-1 { animation: slideInLeftRotate 0.8s ease-out 0.1s forwards; }
+.equipment-card.card-2 { animation: slideInLeftRotate 0.8s ease-out 0.3s forwards; }
+.equipment-card.card-3 { animation: slideInLeftRotate 0.8s ease-out 0.5s forwards; }
+.equipment-card.card-4 { animation: slideInRightRotate 0.8s ease-out 0.1s forwards; }
+.equipment-card.card-5 { animation: slideInRightRotate 0.8s ease-out 0.3s forwards; }
+.equipment-card.card-6 { animation: slideInRightRotate 0.8s ease-out 0.5s forwards; }
+
+/* Hover effect con borde verde */
+.equipment-card:hover {
+     transform: translateY(-5px);
+     box-shadow: 0 15px 35px rgba(42, 126, 86, 0.3), 0 0 20px rgba(42, 126, 86, 0.1);
+     border: 2px solid var(--primary-green);
+}
+
+/* Imagen sin overlays */
+.card-image-container img {
+     /* Sin overlays ni efectos adicionales */
+}
+
+/* === RESPONSIVE PARA MENÚ MÓVIL === */
+.spbt {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     width: 100%;
+}
+
+.menu-toggle {
+     display: none;
+}
+
+.navbar .menu.active {
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+     background-color: var(--white);
+     padding: 0.5rem 0;
+     border-top: 1px solid var(--border-color);
+}
+
+@media screen and (orientation: portrait) {
+     .navbar .menu {
+         display: none;
+     }
+
+     .menu-toggle {
+         display: block;
+         background: none;
+         border: none;
+         font-size: 1.5rem;
+         cursor: pointer;
+     }
+
+     .navbar {
+         flex-direction: column;
+     }
+}
+
+/* === DEFINICIONES DE ANIMACIONES ÚNICAS === */
+@keyframes slideInLeftRotate {
+    from {
+         opacity: 0;
+         transform: translateX(-100px) rotate(-10deg) scale(0.8);
+    }
+    to {
+         opacity: 1;
+         transform: translateX(0) rotate(0deg) scale(1);
+    }
+}
+
+@keyframes slideInRightRotate {
+    from {
+         opacity: 0;
+         transform: translateX(100px) rotate(10deg) scale(0.8);
+    }
+    to {
+         opacity: 1;
+         transform: translateX(0) rotate(0deg) scale(1);
+    }
+}
+
+@keyframes borderGlow {
+    0% { box-shadow: 0 0 5px rgba(42, 126, 86, 0.2); }
+    50% { box-shadow: 0 0 20px rgba(42, 126, 86, 0.4), 0 0 30px rgba(42, 126, 86, 0.2); }
+    100% { box-shadow: 0 0 5px rgba(42, 126, 86, 0.2); }
+}
+
+/* Estilos adicionales para mejor UX */
+.equipment-title {
+    font-size: 2.5rem;
+    color: var(--primary-green);
+    text-align: center;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.equipment-description {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+    margin-bottom: 3rem;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.6;
+}
+
+.card-image-container {
+    position: relative;
+    overflow: hidden;
+    border-radius: 10px;
+    margin-bottom: 1.5rem;
+}
+
