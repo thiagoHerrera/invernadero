@@ -1,9 +1,14 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.models import User
 from django.db import IntegrityError
 from users.forms import RegisterForm
 from django.core.exceptions import ValidationError
+import logging
+
+# Configurar logging
+logger = logging.getLogger(__name__)
 
 
 def signup(request):
@@ -52,18 +57,38 @@ def signup(request):
 def signin(request):
     if request.method == 'POST':
         form = AuthenticationForm(request, data=request.POST)
+        username = request.POST.get('username', '')
+        
+        # Debug: verificar si el usuario existe
+        try:
+            user_exists = User.objects.filter(username=username).exists()
+            user_count = User.objects.count()
+            print(f"[DEBUG] Usuario '{username}' existe: {user_exists}")
+            print(f"[DEBUG] Total usuarios en DB: {user_count}")
+        except Exception as e:
+            print(f"[ERROR] Error verificando usuario: {e}")
+        
         if form.is_valid():
             user = form.get_user()
+            print(f"[DEBUG] Login exitoso para: {user.username}")
             login(request, user)
             return redirect('home')
         else:
-            # Mensaje corto y común
-            error_msg = "Usuario o contraseña incorrecta"
+            # Mensaje más específico para debugging
+            if not User.objects.filter(username=username).exists():
+                error_msg = f"El usuario '{username}' no existe. Verifica el nombre o regístrate."
+            else:
+                error_msg = "Contraseña incorrecta"
+            
+            print(f"[DEBUG] Error de login: {error_msg}")
             return render(request, 'signin.html', {
                 'form': form,
                 'error': error_msg
             })
     else:
+        # Mostrar estadísticas de usuarios en la página
+        user_count = User.objects.count()
+        print(f"[DEBUG] Mostrando página de login. Usuarios en DB: {user_count}")
         form = AuthenticationForm()
         return render(request, 'signin.html', {'form': form})
 
