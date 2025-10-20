@@ -1,127 +1,71 @@
-/* Importar estilos base */
-@import url('base.css');
+      @appendMemcpy(result, currentElement, resultIndex);
+                resultIndex += length;
+            } else {
+                for (var i = 0; i < length; i++) {
+                    if (i in currentElement)
+                        @putByValDirect(result, resultIndex, currentElement[i]);
+                    resultIndex++;
+                }
+            }
+        } else {
+            if (resultIndex >= @MAX_SAFE_INTEGER)
+                @throwTypeError("Length exceeded the maximum array length");
+            @putByValDirect(result, resultIndex++, currentElement);
+        }
+        currentElement = arguments[argIndex];
+    } while (argIndex++ < argCount);
 
-body {
-   background-color: var(--light-green);
-   color: var(--text-primary);
-}
+    result.length = resultIndex;
+    return result;
+})
+(function (target, start )
+{
+    "use strict";
 
-/* Navbar usando base.css */
-.navbar .user-btn {
-     background-color: var(--secondary-green);
-}
+    var array = @toObject(this, "Array.prototype.copyWithin requires that |this| not be null or undefined");
+    var length = @toLength(array.length);
 
-.navbar .user-btn:hover {
-     background-color: var(--hover-green);
-}
+    var relativeTarget = @toIntegerOrInfinity(target);
+    var to = (relativeTarget < 0) ? @maxWithPositives(length + relativeTarget, 0) : @minWithMaybeNegativeZeroAndPositive(relativeTarget, length);
 
-/* === FUNCIONES === */
-.funciones {
-   padding: 4rem 2rem;
-   max-width: 1100px;
-   margin: auto;
-   text-align: center;
-}
+    var relativeStart = @toIntegerOrInfinity(start);
+    var from = (relativeStart < 0) ? @maxWithPositives(length + relativeStart, 0) : @minWithMaybeNegativeZeroAndPositive(relativeStart, length);
 
-.funciones h1 {
-   font-size: 2.5rem;
-   color: var(--primary-green);
-   margin-bottom: 1rem;
-}
+    var relativeEnd;
+    var end = @argument(2);
+    if (end === @undefined)
+        relativeEnd = length;
+    else
+        relativeEnd = @toIntegerOrInfinity(end);
 
-.funciones .intro {
-   font-size: 1.1rem;
-   margin-bottom: 2.5rem;
-   color: var(--text-secondary);
-}
+    var finalValue = (relativeEnd < 0) ? @maxWithPositives(length + relativeEnd, 0) : @minWithMaybeNegativeZeroAndPositive(relativeEnd, length);
 
-.funciones-grid {
-   display: grid;
-   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-   gap: 2rem;
-}
+    var count = @minWithMaybeNegativeZeroAndPositive(finalValue - from, length - to);
 
-.bloque {
-   background: var(--white);
-   border-radius: 16px;
-   padding: 2rem;
-   box-shadow: 0 6px 20px var(--shadow);
-   text-align: left;
-   transition: all 0.3s ease;
-}
+    var direction = 1;
+    if (from < to && to < from + count) {
+        direction = -1;
+        from = from + count - 1;
+        to = to + count - 1;
+    }
 
-.bloque:hover {
-   transform: translateY(-6px);
-   box-shadow: 0 12px 28px var(--shadow-hover);
-}
+    for (var i = 0; i < count; ++i, from += direction, to += direction) {
+        if (from in array)
+            array[to] = array[from];
+        else
+            delete array[to];
+    }
 
-.bloque h2 {
-   color: var(--primary-green);
-   margin-bottom: 1rem;
-}
-
-.bloque p {
-   color: var(--text-primary);
-   margin-bottom: 1rem;
-   line-height: 1.6;
-}
-
-.bloque ul {
-   list-style: none;
-   padding-left: 1rem;
-}
-
-.bloque ul li::before {
-   content: "🌿 ";
-}
-
-.icono {
-   font-size: 2rem;
-   color: var(--primary-green);
-   margin-bottom: 0.5rem;
-   display: inline-block;
-}
-
-/* === FOOTER usando base.css === */
-footer {
-   margin-top: 4rem;
-}
-
-/* === RESPONSIVE PARA MENÚ MÓVIL === */
-.spbt {
-     display: flex;
-     justify-content: space-between;
-     align-items: center;
-     width: 100%;
-}
-
-.menu-toggle {
-     display: none;
-}
-
-.navbar .menu.active {
-     display: flex;
-     flex-direction: column;
-     width: 100%;
-     background-color: var(--white);
-     padding: 0.5rem 0;
-     border-top: 1px solid var(--border-color);
-}
-
-@media screen and (orientation: portrait) {
-     .navbar .menu {
-         display: none;
-     }
-
-     .menu-toggle {
-         display: block;
-         background: none;
-         border: none;
-         font-size: 1.5rem;
-         cursor: pointer;
-     }
-
-     .navbar {
-         flex-direction: column;
-     }
-}
+    return array;
+})
+(function ()
+{
+    let array = new @Array(arguments.length);
+    array.__proto__ = null;
+    
+    for (let i = 0; i < arguments.length; ++i)
+        @arrayPush(array, arguments[i]);
+    
+    return array;
+})
+(function (syncIt
