@@ -17,10 +17,11 @@
 
 body {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
     font-family: 'Poppins', sans-serif;
     background-color: var(--color-off-white); 
     display: flex;
+    overflow: hidden;
 }
 
 .container {
@@ -36,7 +37,7 @@ body {
     position: relative;
     
     /* Imagen de fondo (mantener tu ruta) */
-    background: url('../img/fondologin.png') no-repeat center center;
+    background: url('../img/fondo3.png') no-repeat center center;
     background-size: cover; 
     
     /* CAMBIOS CLAVE: Flexbox para centrar y distribuir el contenido */
@@ -53,8 +54,18 @@ body {
     font-weight: 700;
     color: var(--color-forest);
     opacity: 0.9;
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
 }
-
+.logo-text:hover {
+       /* Mueve el logo ligeramente hacia arriba (efecto de "flotación") */
+    transform: translateY(-5px) scale(1.02); 
+    
+    /* Aumenta un poco la sombra para darle más profundidad */
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+    
+    /* El efecto es leve (scale 1.02, solo -5px de movimiento) y el 
+       ease-in-out lo hace suave y profesional. */
+}
 /* Formulario de Login (40%) */
 .form-login {
     flex: 0 0 40%;
@@ -168,22 +179,30 @@ body {
 /* Opciones Secundarias */
 .opciones {
     margin-top: 25px;
-    font-size: 0.8rem; /* Un poco más pequeño */
+    font-size: 0.9rem;
     display: flex;
     gap: 10px;
     color: var(--color-gray);
     justify-content: center;
+    align-items: center;
 }
 
 .link-opcion {
-    color: var(--color-gray);
+    color: var(--color-forest);
     text-decoration: none;
-    font-weight: 400;
+    font-weight: 500;
     transition: color 0.3s;
+    cursor: pointer;
 }
 
 .link-opcion:hover {
-    color: var(--color-moss); 
+    color: var(--color-moss);
+    text-decoration: underline;
+}
+
+.separator {
+    color: var(--color-gray);
+    margin: 0 5px;
 }
 
 /* Estilo para la liana decorativa (tal como la proporcionaste) */
@@ -228,17 +247,45 @@ body {
     width: 150px; /* Tamaño del logo/imagen central */
     height: auto;
     margin-bottom: 20px;
-    /* Efecto sutil para que se destaque del fondo */
+    
+    /* === 1. AÑADIDO CLAVE: Transición === */
+    /* Aplica transición a las propiedades que queremos animar (transform y filter) */
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; 
+    /* ==================================== */
+    
+    /* Efecto sutil para que se destaque del fondo (estado base) */
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
+.logo-center:hover {
+    /* Mueve el logo ligeramente hacia arriba (efecto de "flotación") */
+    transform: translateY(-5px) scale(1.02); 
+    
+    /* Aumenta un poco la sombra para darle más profundidad */
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+    
+    /* El efecto es leve (scale 1.02, solo -5px de movimiento) y el 
+       ease-in-out lo hace suave y profesional. */
+}
+
 
 .slogan {
     font-size: 1.8rem;
-    font-weight: 400; /* Más delgado para ser un slogan */
-    color: var(--color-forest); /* Usando el color definido en :root */
+    font-weight: 400; 
+    color: var(--color-forest);
     opacity: 0.85;
     max-width: 80%;
     line-height: 1.3;
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
+}
+.slogan:hover {
+       /* Mueve el logo ligeramente hacia arriba (efecto de "flotación") */
+    transform: translateY(-5px) scale(1.02); 
+    
+    /* Aumenta un poco la sombra para darle más profundidad */
+    filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
+    
+    /* El efecto es leve (scale 1.02, solo -5px de movimiento) y el 
+       ease-in-out lo hace suave y profesional. */
 }
 
 
@@ -246,28 +293,29 @@ body {
 /* 7. MEDIA QUERIES (Adaptabilidad para Dispositivos) */
 /* ------------------------------------------------------------------- */
 
-/* Media Query para pantallas medianas (tabletas, hasta 992px de ancho) */
+/* Media Query para pantallas medianas (tabletas y algunos portátiles, hasta 992px de ancho) */
 @media (max-width: 992px) {
+    /* Ajusta la proporción de las dos columnas para pantallas medianas. */
     .panel-decorativo {
-        flex: 0 0 45%;
+        flex: 0 0 55%; /* El panel izquierdo ocupa el 55% del ancho. */
     }
     .form-login {
-        flex: 0 0 55%;
+        flex: 0 0 45%; /* El formulario derecho ocupa el 45% del ancho. */
     }
-    
+    /* Reposiciona la liana debido al cambio en la división de las columnas. */
     .flora {
-        left: 350px;
-        width: 1100px;
+        left: 400px; /* Ajusta la posición horizontal de la liana. */
+        width: 1200px; /* Puede que necesite un ligero ajuste para mantener la proporción. */
     }
-    
+    /* Reduce el tamaño de los textos de la marca y el eslogan para que encajen mejor. */
     .logo-text, .slogan {
         font-size: 1.5rem;
     }
-    
+    /* Reduce el tamaño del logo central. */
     .logo-center {
         width: 120px;
     }
-    
+    /* Reduce el tamaño del título principal del formulario. */
     .titulo-principal {
         font-size: 2.0rem;
     }
@@ -275,101 +323,58 @@ body {
 
 /* Media Query para pantallas pequeñas (teléfonos móviles, hasta 768px de ancho) */
 @media (max-width: 768px) {
+    /* Cambia la dirección del contenedor principal para apilar las secciones verticalmente. */
     .container {
-        flex-direction: row; /* Mantener horizontal */
-        height: 100vh;
+        flex-direction: column;
+        height: auto; /* Permite que el contenedor crezca verticalmente según el contenido. */
+        min-height: 100vh; /* Asegura que ocupe al menos toda la altura de la ventana. */
+        overflow-y: auto; /* Permite el desplazamiento vertical si el contenido es demasiado largo. */
     }
     
-    /* Ajustar proporciones para móvil */
+    /* Ambos paneles (decorativo y formulario) ahora ocupan el 100% del ancho. */
+    .panel-decorativo, .form-login {
+        flex: 0 0 100%;
+        width: 100%;
+    }
+    
+    /* El panel decorativo se convierte en una cabecera más corta para móviles. */
     .panel-decorativo {
-        flex: 0 0 35%; /* Panel más pequeño */
-        padding: 20px 15px;
-        justify-content: center;
-        align-items: center;
+        height: 25vh; /* Altura fija para la cabecera móvil. */
+        min-height: 180px; /* Altura mínima para asegurar visibilidad. */
+        padding: 20px 30px;
+        /* Alinea el texto de la marca al inicio (arriba/izquierda). */
+        justify-content: flex-start; 
+        align-items: flex-start;
+        text-align: left;
     }
     
-    .form-login {
-        flex: 0 0 65%; /* Formulario más grande */
-        padding: 30px 20px;
-    }
-    
-    /* Ocultar elementos decorativos pero mantener estructura */
+    /* Oculta el logo central y el eslogan en pantallas pequeñas para ahorrar espacio. */
     .content-center {
-        display: none;
+        display: none; 
     }
     
+    /* Oculta la liana decorativa, ya que no es funcional ni estética en un layout apilado. */
     .flora {
-        display: none;
+        display: none; 
     }
     
-    .logo-text {
-        font-size: 1.4rem;
-        text-align: center;
+    /* Ajusta el padding del formulario para móviles. */
+    .form-login {
+        padding: 40px 20px;
+        /* Puedes ajustar el color de fondo si deseas que sea diferente en móvil, 
+           pero lo mantengo según tu solicitud de no cambiar nada si no se especifica. */
+        /* background-color: var(--color-off-white); */
     }
-    
+    /* Reduce el margen inferior del título principal para optimizar el espacio. */
     .titulo-principal {
-        font-size: 1.8rem;
         margin-bottom: 20px;
     }
-    
+    /* Reduce el espacio entre los grupos de formulario para una vista más compacta. */
     .form-content {
-        gap: 18px;
-        max-width: 100%;
+        gap: 15px; 
     }
-    
+    /* Ajusta el tamaño de fuente de las opciones para mayor legibilidad en pantallas pequeñas. */
     .opciones {
-        font-size: 0.85rem;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 5px 15px;
-    }
-}
-
-/* Media Query para pantallas muy pequeñas (hasta 480px) */
-@media (max-width: 480px) {
-    .container {
-        flex-direction: column;
-        height: auto;
-        min-height: 100vh;
-    }
-    
-    .panel-decorativo {
-        flex: 0 0 auto;
-        height: 120px;
-        padding: 20px;
-        justify-content: center;
-        align-items: center;
-    }
-    
-    .form-login {
-        flex: 1;
-        padding: 30px 20px;
-        justify-content: center;
-    }
-    
-    .titulo-principal {
-        font-size: 1.6rem;
-        margin-bottom: 25px;
-    }
-    
-    .form-content input[type="text"],
-    .form-content input[type="password"] {
-        height: 48px;
-        font-size: 1rem;
-    }
-    
-    .btn-login {
-        height: 50px;
-        font-size: 1.1rem;
-    }
-    
-    .opciones {
-        flex-direction: column;
-        gap: 10px;
-        text-align: center;
-    }
-    
-    .separator {
-        display: none;
+        font-size: 0.9rem;
     }
 }
