@@ -1,14 +1,14 @@
-{% extends 'base.html' %}
 {% load static %}
-
-{% block title %}Información del Proyecto - FloraCore{% endblock %}
-
-{% block extra_head %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Información del Proyecto - FloraCore</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/info.css' %}">
-{% endblock %}
-
-{% block content %}
+</head>
+<body>
 
   <header class="navbar">
   <section class="spbt">
@@ -16,10 +16,10 @@
     <div class="logo">FloraCore</div>
     </section>
     <nav class="menu" id="navMenu">
-      <a href="{% url 'landing' %}" class="hover:scale-105 transition-all duration-300">Inicio</a>
-      <a href="{% url 'funciones' %}" class="hover:scale-105 transition-all duration-300">Funciones</a>
-
-      <a href="{% url 'contacto' %}" class="hover:scale-105 transition-all duration-300">Contáctanos</a>
+      <a href="{% url 'landing' %}">Inicio</a>
+      <a href="{% url 'funciones' %}">Funciones</a>
+      <a href="{% url 'equipos' %}">Equipos</a>
+      <a href="{% url 'contacto' %}">Contáctanos</a>
       <a href="{% url 'estadisticas' %}">Estadisticas</a>
       <hr >
        {% if not user.is_authenticated %}
@@ -58,4 +58,5 @@
         });
     });
 </script>
-{% endblock %}
+</body>
+</html>

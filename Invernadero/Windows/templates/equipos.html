@@ -1,161 +1,96 @@
-{% extends 'base.html' %}
 {% load static %}
-
-{% block title %}Equipos - FloraCore{% endblock %}
-
-{% block extra_head %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Equipos - FloraCore</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/equipos.css' %}">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-  <style>
-    body { background: linear-gradient(135deg, #f4faf5 0%, #d7ded7 100%); }
-    .hero-equipos { background: linear-gradient(135deg, #036b0c, #2a7e56); padding: 4rem 2rem; text-align: center; color: white; position: relative; overflow: hidden; }
-    .hero-equipos::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="20" cy="20" r="2" fill="rgba(255,255,255,0.1)"/><circle cx="80" cy="40" r="1" fill="rgba(255,255,255,0.1)"/><circle cx="40" cy="80" r="1.5" fill="rgba(255,255,255,0.1)"/></svg>'); }
-    .hero-equipos h1 { font-size: 3.5rem; font-weight: 800; margin-bottom: 1rem; position: relative; z-index: 1; }
-    .hero-equipos p { font-size: 1.2rem; max-width: 800px; margin: 0 auto; position: relative; z-index: 1; }
-    .stats-banner { background: white; margin: -2rem 2rem 2rem; border-radius: 20px; padding: 2rem; box-shadow: 0 20px 40px rgba(0,0,0,0.1); display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; max-width: 800px; margin-left: auto; margin-right: auto; margin-top: -2rem; margin-bottom: 2rem; } @media (max-width: 768px) { .stats-banner { grid-template-columns: repeat(2, 1fr); } }
-    .stat-item { text-align: center; }
-    .stat-number { font-size: 2.5rem; font-weight: 800; color: #036b0c; }
-    .stat-label { color: #2a7e56; font-weight: 600; }
-    .equipment-showcase { padding: 3rem 2rem; max-width: 1400px; margin: 0 auto; }
-    .equipment-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: 3rem; max-width: 1200px; margin: 0 auto; }
-    .equipment-card { background: white; border-radius: 25px; box-shadow: 0 15px 35px rgba(0,0,0,0.1); }
+</head>
+<body>
 
-    .card-image { height: 250px; }
-    .card-image img { width: 100%; height: 250px; object-fit: cover; display: block; border-radius: 25px 25px 0 0; }
-
-    .card-content { padding: 2rem; }
-    .card-title { font-size: 1.4rem; font-weight: 700; color: #036b0c; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
-    .card-description { color: #333; line-height: 1.6; font-size: 1rem; font-weight: 500; }
-
-  </style>
-{% endblock %}
-
-{% block content %}
-
-  <header class="navbar animate-fade-in-down animate-duration-1000">
+  <!-- NAVBAR -->
+  <header class="navbar">
   <section class="spbt">
-  <button class="menu-toggle hover:scale-110 transition-transform duration-300" id="menuToggle">&#9776;</button>
-    <div class="logo hover:text-green-600 transition-colors duration-300">FloraCore</div>
+  <button class="menu-toggle" id="menuToggle">&#9776;</button>
+    <div class="logo">FloraCore</div>
     </section>
     <nav class="menu" id="navMenu">
-      <a href="{% url 'landing' %}" class="hover:scale-105 transition-all duration-300">Inicio</a>
-      <a href="{% url 'funciones' %}" class="hover:scale-105 transition-all duration-300">Funciones</a>
-      <a href="{% url 'equipos' %}" class="hover:scale-105 transition-all duration-300">Equipos</a>
-      <a href="{% url 'contacto' %}" class="hover:scale-105 transition-all duration-300">Contáctanos</a>
-      {% if user.is_authenticated %}
-      <a href="{% url 'estadisticas' %}" class="hover:scale-105 transition-all duration-300">Estadísticas</a>
-      <a href="{% url 'subir_imagen'%}" class="hover:scale-105 transition-all duration-300">Diagnóstico IA</a>
-      <form action="{% url 'logout' %}" method="post" style="display: inline;">
-        {% csrf_token %}
-        <button class="user-btn hover:scale-105 transition-all duration-300" type="submit">Cerrar sesión</button>
-      </form>
-      {% else %}
-      <button class="user-btn hover:scale-105 transition-all duration-300" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
-      <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
-      {% endif %}
+      <a href="{% url 'landing' %}">Inicio</a>
+      <a href="{% url 'funciones' %}">Funciones</a>
+      <a href="{% url 'equipos' %}">Equipos</a>
+      <a href="{% url 'contacto' %}">Contáctanos</a>
+      <a href="{% url 'estadisticas' %}">Estadisticas</a>
+      <hr >
+       {% if not user.is_authenticated %}
+       <button class="user-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+       {% endif %}
     </nav>
+
+
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero-equipos animate-fade-in animate-duration-1500">
-    <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-cogs mr-4"></i>Tecnología Avanzada</h1>
-    <p class="animate-fade-in animate-delay-400">Descubre los componentes de alta tecnología que hacen posible el futuro de la agricultura inteligente</p>
-  </section>
+  <!-- SECCIÓN EQUIPOS -->
+  <section class="main-section">
+    <h1 class="equipment-title"><i class="fas fa-microchip text-blue-600 mr-3"></i>Conocé nuestros Equipos</h1>
+    <p class="equipment-description">FloraCore cuenta con una variedad de dispositivos diseñados para automatizar y facilitar el cuidado de tus cultivos. A continuación, te mostramos algunos de nuestros equipos principales:</p>
 
-  <!-- STATS BANNER -->
-  <div class="stats-banner animate-on-scroll">
-    <div class="stat-item">
-      <div class="stat-number">6</div>
-      <div class="stat-label">Componentes</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">24/7</div>
-      <div class="stat-label">Monitoreo</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">95%</div>
-      <div class="stat-label">Eficiencia</div>
-    </div>
-    <div class="stat-item">
-      <div class="stat-number">IoT</div>
-      <div class="stat-label">Conectividad</div>
-    </div>
-  </div>
-
-  <!-- EQUIPMENT SHOWCASE -->
-  <section class="equipment-showcase">
     <div class="equipment-grid">
-      <div class="equipment-card animate-on-scroll">
-        <div class="card-image">
-          <img src="{% static 'img/sensor de humedad.jpeg' %}" alt="Sensor de humedad" loading="eager">
-
+      <div class="equipment-card card-1">
+        <div class="card-image-container">
+          <img src="{% static 'img/sensor de humedad.jpeg' %}" alt="Sensor de humedad">
         </div>
-        <div class="card-content">
-          <h3 class="card-title"><i class="fas fa-tint text-blue-500"></i>Sensor de Humedad del Suelo</h3>
-          <p class="card-description">Tecnología capacitiva de alta precisión que detecta niveles microscópicos de humedad en el sustrato, activando sistemas de riego inteligente para un cuidado óptimo de las raíces y maximizando la absorción de nutrientes.</p>
-        </div>
+        <h3>Sensor de Humedad del Suelo</h3>
+        <p>Detecta el nivel de humedad de la tierra y activa el sistema de riego cuando es necesario, asegurando un riego óptimo.</p>
       </div>
 
-      <div class="equipment-card animate-on-scroll">
-        <div class="card-image">
-          <img src="{% static 'img/sensortemperatura.jpeg' %}" alt="Sensor de temperatura" loading="eager">
-
+      <div class="equipment-card card-2">
+        <div class="card-image-container">
+          <img src="{% static 'img/sensortemperatura.jpeg' %}" alt="Sensor de temperatura">
         </div>
-        <div class="card-content">
-          <h3 class="card-title"><i class="fas fa-thermometer-half text-red-500"></i>Sensor Climático Avanzado</h3>
-          <p class="card-description">Monitoreo dual de temperatura y humedad ambiental con precisión de ±0.5°C y ±2% RH. Incluye algoritmos predictivos que anticipan cambios climáticos y ajustan automáticamente las condiciones del microclima.</p>
-        </div>
+        <h3>Sensor de Temperatura y Humedad Ambiental</h3>
+        <p>Monitorea el entorno y activa la ventilación o calefacción según el tipo de planta y sus necesidades.</p>
       </div>
 
-      <div class="equipment-card animate-on-scroll">
-        <div class="card-image">
-          <img src="{% static 'img/esp32.jpg' %}" alt="Microcontrolador ESP32" loading="eager">
-
+      <div class="equipment-card card-3">
+        <div class="card-image-container">
+          <img src="{% static 'img/esp32.jpg' %}" alt="Microcontrolador ESP32">
         </div>
-        <div class="card-content">
-          <h3 class="card-title"><i class="fas fa-microchip text-purple-500"></i>Cerebro Inteligente ESP32</h3>
-          <p class="card-description">Procesador dual-core de 240MHz con WiFi y Bluetooth integrados. Ejecuta algoritmos de machine learning para decisiones autónomas en tiempo real, procesando datos de múltiples sensores simultáneamente.</p>
-        </div>
+        <h3>Microcontrolador ESP32</h3>
+        <p>El cerebro del invernadero. Ejecuta nuestro software programado con Arduino IDE, gestionando todos los sensores y actuadores.</p>
       </div>
 
-      <div class="equipment-card animate-on-scroll">
-        <div class="card-image">
-          <img src="{% static 'img/Ventilador.jpg' %}" alt="Ventilador de extracción" loading="eager">
-
+      <div class="equipment-card card-4">
+        <div class="card-image-container">
+          <img src="{% static 'img/Ventilador.jpg' %}" alt="Ventilador de extracción">
         </div>
-        <div class="card-content">
-          <h3 class="card-title"><i class="fas fa-wind text-cyan-500"></i>Ventilación Inteligente</h3>
-          <p class="card-description">Sistema de ventilación adaptativa con sensores de CO2 y calidad del aire. Regula automáticamente el flujo de aire creando microclimas perfectos para cada tipo de cultivo específico.</p>
-        </div>
+        <h3>Ventilación Inteligente</h3>
+        <p>Sistema de ventilación automática que regula el flujo de aire para mantener condiciones óptimas.</p>
       </div>
 
-      <div class="equipment-card animate-on-scroll">
-        <div class="card-image">
-          <img src="{% static 'img/led.jpeg' %}" alt="Luces LED para cultivo" loading="eager">
-
+      <div class="equipment-card card-5">
+        <div class="card-image-container">
+          <img src="{% static 'img/led.jpeg' %}" alt="Luces LED para cultivo">
         </div>
-        <div class="card-content">
-          <h3 class="card-title"><i class="fas fa-sun text-yellow-500"></i>Iluminación LED Espectral</h3>
-          <p class="card-description">Luces LED de espectro completo (380-800nm) que simulan perfectamente la luz solar natural. Ajuste automático de intensidad y temperatura de color según las fases de crecimiento y fotoperíodos.</p>
-        </div>
+        <h3>Iluminación LED</h3>
+        <p>Luces LED reguladas automáticamente para compensar la falta de luz solar, ideal para espacios cerrados.</p>
       </div>
 
-      <div class="equipment-card animate-on-scroll">
-        <div class="card-image">
-          <img src="{% static 'img/bombadeagua.jpg' %}" alt="Sistema de riego" loading="eager">
-
+      <div class="equipment-card card-6">
+        <div class="card-image-container">
+          <img src="{% static 'img/bombadeagua.jpg' %}" alt="Sistema de riego">
         </div>
-        <div class="card-content">
-          <h3 class="card-title"><i class="fas fa-shower text-green-500"></i>Sistema de Riego Precision</h3>
-          <p class="card-description">Distribución de agua con precisión milimétrica mediante bombas peristálticas y válvulas solenoides. Optimiza cada gota usando sensores IoT y algoritmos de conservación hídrica avanzados.</p>
-        </div>
+        <h3>Sistema de Riego</h3>
+        <p>Distribuye agua en función de los datos de los sensores, ahorrando agua y cuidando tu cultivo.</p>
       </div>
     </div>
   </section>
 
-  <footer id="contact" class="animate-on-scroll">
-    <p><i class="fas fa-envelope text-blue-500 mr-2"></i>¿Tenés dudas? <a href="mailto:FloraCore2025@gmail.com" class="hover:text-green-600 transition-colors duration-300">Contactanos aquí</a></p>
+  <!-- FOOTER -->
+  <footer id="contact">
+    <p>¿Tenés dudas? <a href="mailto:FloraCore2025@gmail.com">Contactanos aquí</a></p>
     <p>Copyright © 2025 FloraCore</p>
   </footer>
 
@@ -164,9 +99,11 @@
     document.addEventListener('DOMContentLoaded', function() {
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.getElementById('navMenu');
+
         menuToggle.addEventListener('click', function() {
             navMenu.classList.toggle('active');
         });
     });
 </script>
-{% endblock %}
+</body>
+</html>

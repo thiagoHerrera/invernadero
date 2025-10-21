@@ -1,39 +1,35 @@
-{% extends 'base.html' %}
 {% load static %}
-
-{% block title %}FloraCore - Inicio{% endblock %}
-
-{% block extra_head %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FloraCore - Inicio</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/landing.css' %}">
   <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-{% endblock %}
-
-{% block content %}
+</head>
+<body>
   <!-- NAVBAR -->
-  <header class="navbar animate-fade-in-down animate-duration-1000">
-  <section class="spbt">
-  <button class="menu-toggle hover:scale-110 transition-transform duration-300" id="menuToggle">&#9776;</button>
-    <div class="logo hover:text-green-600 transition-colors duration-300">FloraCore</div>
-    </section>
-    <nav class="menu" id="navMenu">
-      <a href="{% url 'landing' %}" class="hover:scale-105 transition-all duration-300">Inicio</a>
-      <a href="{% url 'funciones' %}" class="hover:scale-105 transition-all duration-300">Funciones</a>
-      <a href="{% url 'equipos' %}" class="hover:scale-105 transition-all duration-300">Equipos</a>
-      <a href="{% url 'contacto' %}" class="hover:scale-105 transition-all duration-300">Contáctanos</a>
-      {% if user.is_authenticated %}
-      <a href="{% url 'estadisticas' %}" class="hover:scale-105 transition-all duration-300">Estadísticas</a>
-      <a href="{% url 'subir_imagen'%}" class="hover:scale-105 transition-all duration-300">Diagnóstico IA</a>
-      <form action="{% url 'logout' %}" method="post" style="display: inline;">
-        {% csrf_token %}
-        <button class="user-btn hover:scale-105 transition-all duration-300" type="submit">Cerrar sesión</button>
-      </form>
-      {% else %}
-      <button class="user-btn hover:scale-105 transition-all duration-300" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
-      <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
-      {% endif %}
-    </nav>
-  </header>
+  <nav class="navbar animate-fade-in-down animate-duration-1000">
+    <a href="#" class="logo hover:text-green-600 transition-colors duration-300">FloraCore</a>
+    <div class="menu">
+      <a href="#" class="hover:scale-105 transition-all duration-300"><i class="fas fa-user"></i> Perfil</a>
+      <a href="#" class="hover:scale-105 transition-all duration-300"><i class="fas fa-image"></i> Histo. de Cultivo</a>
+      <a href="#" class="hover:scale-105 transition-all duration-300"><i class="fas fa-bell"></i> Notificaciones</a>
+      <a href="#" class="hover:scale-105 transition-all duration-300"><i class="fas fa-chart-line"></i> Estadísticas</a>
+      <a href="#" class="hover:scale-105 transition-all duration-300"><i class="fas fa-question-circle"></i> Ayuda/Soporte</a>
+    </div>
+    {% if user.is_authenticated %}
+    <form action="{% url 'logout' %}" method="post">
+      {% csrf_token %}
+      <button class="user-btn hover:scale-105 transition-all duration-300" type="submit">Cerrar sesión</button>
+    </form>
+    {% else %}
+    <button class="user-btn hover:scale-105 transition-all duration-300" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+    <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+    {% endif %}
+  </nav>
 
   <!-- HERO INICIO -->
   <section class="hero animate-fade-in animate-duration-1500">
@@ -42,7 +38,7 @@
       <p class="animate-fade-in animate-delay-500">Bienvenido de nuevo a tu invernadero inteligente. Aquí puedes controlar y monitorear el estado de tus cultivos.</p>
       <button onclick="location.href='#estadisticas'" class="hover:scale-110 transition-all duration-300 animate-bounce">Ver estadísticas</button>
     </div>
-    <img src="{% static 'img/invernadero-home.png' %}" alt="Ilustración invernadero" loading="lazy" class="animate-slide-in-right animate-duration-1000 hover:scale-105 transition-transform duration-300">
+    <img src="{% static 'img/invernadero-home.png' %}" alt="Ilustración invernadero" class="animate-slide-in-right animate-duration-1000 hover:scale-105 transition-transform duration-300">
   </section>
 
   <!-- SECCIÓN INFO -->
@@ -50,19 +46,19 @@
     <h2 class="animate-fade-in animate-delay-200"><i class="fas fa-tasks text-blue-500 mr-3"></i>¿Qué puedes hacer hoy?</h2>
     <div class="cards">
       <div class="card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/ia.jpg' %}" alt="Perfil" class="hover:scale-110 transition-transform duration-300">
-        <h3><i class="fas fa-user-circle text-indigo-500 mr-2"></i>Cambio Climatico</h3>
-        <p>La planta que se cultive no se va a ver afectada por el cambio climatico.</p>
+        <img src="{% static 'img/perfil.jpg' %}" alt="Perfil" class="hover:scale-110 transition-transform duration-300">
+        <h3><i class="fas fa-user-circle text-indigo-500 mr-2"></i>Perfil</h3>
+        <p>Consulta y edita tu información personal y tus configuraciones.</p>
       </div>
       <div class="card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/ia3.jpg' %}" alt="IA" class="hover:scale-110 transition-transform duration-300">
-        <h3><i class="fas fa-history text-green-500 mr-2"></i>IA</h3>
-        <p>Envie una foto a la IA integrada para ver si la planta esta en optimas condiciones.</p>
+        <img src="{% static 'img/historial.jpg' %}" alt="Historial" class="hover:scale-110 transition-transform duration-300">
+        <h3><i class="fas fa-history text-green-500 mr-2"></i>Historial de Cultivo</h3>
+        <p>Revisa el crecimiento y cuidado de tus plantas a lo largo del tiempo.</p>
       </div>
       <div class="card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
         <img src="{% static 'img/notificaciones.jpg' %}" alt="Notificaciones" class="hover:scale-110 transition-transform duration-300">
-        <h3><i class="fas fa-bell text-red-500 mr-2"></i>Autonomia</h3>
-        <p>No va a haber preocupacion al olvidarse de hacerle mantenimiento a la planta.</p>
+        <h3><i class="fas fa-bell text-red-500 mr-2"></i>Notificaciones</h3>
+        <p>Recibe alertas sobre riego, luz y temperatura.</p>
       </div>
     </div>
   </section>
@@ -72,4 +68,6 @@
     &copy; 2025 FloraCore. Todos los derechos reservados.
   </footer>
   <script src="{% static 'js/animaciones.js' %}"></script>
-{% endblock %}
+</body>
+</html>
+

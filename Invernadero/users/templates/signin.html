@@ -1,13 +1,14 @@
-{% extends 'base.html' %}
 {% load static %}
-
-{% block title %}FloraCore - Inicio de Sesión{% endblock %}
-
-{% block extra_head %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenHouse - Inicio de Sesión</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/login.css' %}">
-{% endblock %}
-{% block content %}
+</head>
+<body>
     <div class="container">
         <section class="panel-decorativo">
             <div class="brand-header">
@@ -15,23 +16,21 @@
             </div>
     
             <div class="content-center">
-            <img src="{% static 'img/nashe.png' %}" class="logo-center" alt="Logo central de FloraCore">
+            <img src="{% static 'img/logo.png' %}" class="logo-center" alt="Logo central de FloraCore">
         
                 <h2 class="slogan">La mejor opción para tus plantas</h2>
             </div>
         </section>
 
-        <form action="{% url 'signin' %}" method="POST" class="form-login" novalidate>
+        <form action="{% url 'signin' %}" method="POST" class="form-login">
             
             {% csrf_token %}
             
             <h1 class="titulo-principal">Inicio de Sesión</h1>
-
-            <img src="{% static 'img/nashe.png' %}" class="flora" alt="Liana decorativa" loading="lazy">
             
             <div class="form-content">
                 {% if error %}
-                    <div class="error-general" role="alert">{{ error }}</div>
+                    <p class="error-general">{{ error }}</p>
                 {% endif %}
 
                 <div class="form-group">
@@ -40,7 +39,7 @@
                     </svg>Nombre De Usuario:</label>
                     {{ form.username }}
                     {% if form.username.errors %}
-                        <div class="error" role="alert">{{ form.username.errors.0 }}</div>
+                        <p class="error">{{ form.username.errors.0 }}</p>
                     {% endif %}
                 </div>
 
@@ -50,7 +49,7 @@
                                                                 </svg>Contraseña:</label>
                     {{ form.password }}
                     {% if form.password.errors %}
-                        <div class="error" role="alert">{{ form.password.errors.0 }}</div>
+                        <p class="error">{{ form.password.errors.0 }}</p>
                     {% endif %}
                 </div>
 
@@ -59,9 +58,11 @@
 
             <div class="opciones">
                 <a href="{% url 'password_reset' %}" class="link-opcion">¿Olvidaste tu contraseña?</a>
-                <span class="separator" aria-hidden="true">|</span>
+                <span>|</span>
                 <a href="{% url 'signup' %}" class="link-opcion">Crear una cuenta</a>
             </div>
         </form>
     </div>
-{% endblock %}
+    <img src="{% static 'img/nashe.png' %}" class="flora" alt="Liana decorativa">
+</body>
+</html>

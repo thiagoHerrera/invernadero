@@ -12,11 +12,6 @@ document.addEventListener('DOMContentLoaded', function() {
             if (entry.isIntersecting) {
                 const element = entry.target;
 
-                // Verificar si ya se ha animado
-                if (element.classList.contains('has-animated')) {
-                    return; // Ya animado, no hacer nada
-                }
-
                 // Agregar clases de animación basadas en data attributes
                 const animationType = element.dataset.animation || 'animate-fade-in';
                 const delay = element.dataset.delay || '0';
@@ -27,16 +22,15 @@ document.addEventListener('DOMContentLoaded', function() {
                         element.classList.add(animationType);
                         element.classList.add('animate-duration-1000');
                         element.classList.remove('opacity-0');
-                        element.classList.add('has-animated'); // Marcar como animado
                     }, delay);
                 } else {
                     element.classList.add(animationType);
                     element.classList.add('animate-duration-1000');
                     element.classList.remove('opacity-0');
-                    element.classList.add('has-animated'); // Marcar como animado
                 }
 
-                // No dejar de observar, para que se anime si no se animó antes
+                // Dejar de observar el elemento después de animarlo
+                observer.unobserve(element);
             }
         });
     }
@@ -52,12 +46,12 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(element);
     });
 
-    // Animaciones específicas para cards con stagger reducido
+    // Animaciones específicas para cards con stagger
     const cards = document.querySelectorAll('.card, .equipment-card');
     cards.forEach((card, index) => {
         card.classList.add('animate-on-scroll');
         card.dataset.animation = 'animate-fade-in-up';
-        card.dataset.delay = index * 100; // Delay escalonado reducido
+        card.dataset.delay = index * 200; // Delay escalonado
     });
 
     // Animaciones para secciones
@@ -76,10 +70,10 @@ document.addEventListener('DOMContentLoaded', function() {
         footer.dataset.animation = 'animate-fade-in-up';
     }
 
-    // Animaciones para iconos (removido bounce contraproducente)
+    // Animaciones para iconos (bounce on hover)
     const icons = document.querySelectorAll('.icono, .fas, .far, .fab');
     icons.forEach(icon => {
-        icon.classList.add('transition-transform', 'duration-300');
+        icon.classList.add('transition-transform', 'duration-300', 'hover:animate-bounce');
     });
 
 
@@ -111,7 +105,34 @@ document.addEventListener('DOMContentLoaded', function() {
     // Ejecutar animaciones iniciales
     initialAnimations();
 
-    // Parallax removido por ser contraproducente para rendimiento
+    // Función para parallax en backgrounds
+    function parallaxEffect() {
+        const parallaxElements = document.querySelectorAll('.parallax-bg');
+
+        if (parallaxElements.length > 0) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * 0.5;
+
+                parallaxElements.forEach(element => {
+                    element.style.transform = `translateY(${rate}px)`;
+                });
+            });
+        }
+
+        // Parallax para imágenes hero
+        const heroImage = document.querySelector('.hero img');
+        if (heroImage) {
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const rate = scrolled * -0.3;
+                heroImage.style.transform = `translateY(${rate}px)`;
+            });
+        }
+    }
+
+    // Activar parallax
+    parallaxEffect();
 });
 
 // Función para animaciones de carga de página

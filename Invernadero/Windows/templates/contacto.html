@@ -1,183 +1,118 @@
-{% extends 'base.html' %}
 {% load static %}
-
-{% block title %}Contáctanos - FloraCore{% endblock %}
-
-{% block extra_head %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contáctanos - FloraCore</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/contacto.css' %}">
-  <link rel="stylesheet" href="{% static 'css/contacto-enhanced.css' %}">
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-{% endblock %}
-{% block content %}
+</head>
+<body>
 
-  <header class="navbar animate-fade-in-down animate-duration-1000">
+  <header class="navbar">
   <section class="spbt">
-  <button class="menu-toggle hover:scale-110 transition-transform duration-300" id="menuToggle">&#9776;</button>
-    <div class="logo hover:text-green-600 transition-colors duration-300">FloraCore</div>
+  <button class="menu-toggle" id="menuToggle">&#9776;</button>
+    <div class="logo">FloraCore</div>
     </section>
     <nav class="menu" id="navMenu">
-      <a href="{% url 'landing' %}" class="hover:scale-105 transition-all duration-300">Inicio</a>
-      <a href="{% url 'funciones' %}" class="hover:scale-105 transition-all duration-300">Funciones</a>
-
-      <a href="{% url 'contacto' %}" class="hover:scale-105 transition-all duration-300">Contáctanos</a>
-      {% if user.is_authenticated %}
-      <a href="{% url 'estadisticas' %}" class="hover:scale-105 transition-all duration-300">Estadísticas</a>
-      <a href="{% url 'subir_imagen'%}" class="hover:scale-105 transition-all duration-300">Diagnóstico IA</a>
-      <form action="{% url 'logout' %}" method="post" style="display: inline;">
-        {% csrf_token %}
-        <button class="user-btn hover:scale-105 transition-all duration-300" type="submit">Cerrar sesión</button>
-      </form>
-      {% else %}
-      <button class="user-btn hover:scale-105 transition-all duration-300" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
-      <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
-      {% endif %}
+      <a href="{% url 'landing' %}"><i class="fas fa-home mr-2"></i>Inicio</a>
+      <a href="{% url 'funciones' %}"><i class="fas fa-cog mr-2"></i>Funciones</a>
+      <a href="{% url 'equipos' %}"><i class="fas fa-microchip mr-2"></i>Equipos</a>
+      <a href="{% url 'contacto' %}"><i class="fas fa-envelope mr-2"></i>Contáctanos</a>
+      <a href="{% url 'estadisticas' %}"><i class="fas fa-chart-bar mr-2"></i>Estadisticas</a>
+       {% if not user.is_authenticated %}
+       <button class="user-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+       {% endif %}
     </nav>
+
+
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero-contact animate-fade-in animate-duration-1500">
-    <h1 class="animate-fade-in animate-delay-200">
-      <i class="fas fa-users" aria-hidden="true"></i>
-      Nuestro Equipo
-    </h1>
-    <p class="animate-fade-in animate-delay-400">
-      Conoce a los estudiantes visionarios de la Escuela Técnica N°3 Roberto Arlt que están revolucionando la agricultura con tecnología inteligente
-    </p>
-  </section>
-
-  <!-- TEAM SHOWCASE -->
-  <section class="team-showcase animate-on-scroll">
-    <h2 class="team-title">
-      <i class="fas fa-rocket" aria-hidden="true"></i>
-      Los Innovadores
-    </h2>
-    <p class="team-subtitle">
-      Cada miembro aporta su expertise única para crear el futuro de la agricultura
-    </p>
-    
-    <div class="team-grid">
-      <article class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="member-avatar" aria-hidden="true">
-          <i class="fas fa-code"></i>
-        </div>
-        <h3 class="member-name">Walter Casarino</h3>
-        <p class="member-role">Frontend y Hardware</p>
-        <p class="member-description">
-          Encargado de realizar todo lo visible de la aplicacion web y estetico, tambien realizar la construccion de la estructura del invernadero.
-        </p>
-      </article>
-
-      <article class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="member-avatar" aria-hidden="true">
-          <i class="fas fa-server"></i>
-        </div>
-        <h3 class="member-name">Bautista Insaurralde</h3>
-        <p class="member-role">Backend y Frontend</p>
-        <p class="member-description">
-         Encargado de realizar todo lo funcional de la aplicacion web , tambien  lo visible y estetico.
-        </p>
-      </article>
-
-      <article class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="member-avatar" aria-hidden="true">
-          <i class="fas fa-brain"></i>
-        </div>
-        <h3 class="member-name">Thiago Herrera</h3>
-        <p class="member-role">Backend y AI</p>
-        <p class="member-description">
-          Encargado de conectar la IA con el proyecto y realizar todo lo funcional de la aplicacion web.
-        </p>
-      </article>
-
-      <article class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="member-avatar" aria-hidden="true">
-          <i class="fas fa-database"></i>
-        </div>
-        <h3 class="member-name">Manuel Gonzales</h3>
-        <p class="member-role">Backend y Hardware</p>
-        <p class="member-description">
-          Encargado de realizar codigo para la esctructura y  todo el codigo funcional para la aplicacion web
-        </p>
-      </article>
-
-      <article class="team-member animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="member-avatar" aria-hidden="true">
-          <i class="fas fa-cogs"></i>
-        </div>
-        <h3 class="member-name">Santiago Gómez</h3>
-        <p class="member-role">Hardware</p>
-        <p class="member-description">
-          Encargado de Construir la estructura para el invernadero y realizar codigo para el funcionamiento del mismo.
-        </p>
-      </article>
+  <main class="contacto animate-on-scroll">
+    <div class="contacto-header">
+      <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-envelope text-blue-600 mr-3"></i>Contáctanos</h1>
+      <p class="animate-fade-in animate-delay-400">¡Gracias por tu interés en nuestro proyecto! Somos un grupo de estudiantes apasionados de la Escuela Técnica N°3 Roberto Arlt, trabajando en <strong>FloraCore</strong>, un invernadero inteligente que revoluciona el cuidado de plantas.</p>
     </div>
-  </section>
 
-  <!-- CONTACT METHODS -->
-  <section class="contact-section">
-    <h2 class="contact-title">
-      <i class="fas fa-paper-plane" aria-hidden="true"></i>
-      Conecta con Nosotros
-    </h2>
-    
-    <div class="contact-grid">
-      <article class="contact-method animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="contact-icon" aria-hidden="true">
-          <i class="fas fa-envelope"></i>
+    <section class="equipo animate-on-scroll">
+      <h2 class="animate-fade-in animate-delay-600"><i class="fas fa-users text-green-600 mr-3"></i>Conoce a nuestro equipo</h2>
+      <div class="equipo-grid">
+        <div class="equipo-card animate-on-scroll">
+          <div class="equipo-icon">
+            <i class="fas fa-code text-blue-500"></i>
+          </div>
+          <h3>Walter Casarino</h3>
+          <p>Frontend Developer</p>
+          <span>Maquetación y diseño de interfaz</span>
         </div>
-        <h3 class="contact-method-title">Email Directo</h3>
-        <p class="contact-info">
-          <a href="mailto:FloraCore2025@gmail.com">FloraCore2025@gmail.com</a>
-        </p>
-        <p class="contact-description">
-          Respuesta garantizada en menos de 24 horas. Ideal para consultas técnicas y colaboraciones.
-        </p>
-      </article>
-
-      <article class="contact-method animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="contact-icon" aria-hidden="true">
-          <i class="fab fa-instagram"></i>
+        <div class="equipo-card animate-on-scroll">
+          <div class="equipo-icon">
+            <i class="fas fa-server text-purple-500"></i>
+          </div>
+          <h3>Bautista Insaurralde</h3>
+          <p>Backend Developer</p>
+          <span>Funcionalidades y seguridad</span>
         </div>
-        <h3 class="contact-method-title">Síguenos</h3>
-        <p class="contact-info">
-          <a href="https://www.instagram.com/floracore_off/" target="_blank" rel="noopener noreferrer">@floracore_off</a>
-        </p>
-        <p class="contact-description">
-          Contenido exclusivo, actualizaciones del proyecto y behind-the-scenes de nuestro desarrollo.
-        </p>
-      </article>
-
-      <article class="contact-method animate-on-scroll hover:scale-105 transition-all duration-500">
-        <div class="contact-icon" aria-hidden="true">
-          <i class="fas fa-map-marker-alt"></i>
+        <div class="equipo-card animate-on-scroll">
+          <div class="equipo-icon">
+            <i class="fas fa-brain text-orange-500"></i>
+          </div>
+          <h3>Thiago Herrera</h3>
+          <p>AI Developer</p>
+          <span>Inteligencia artificial y base de datos</span>
         </div>
-        <h3 class="contact-method-title">Nuestra Base</h3>
-        <p class="contact-info">E.T. N°3 Roberto Arlt</p>
-        <p class="contact-description">
-          Tortuguitas, Buenos Aires, Argentina. Donde la innovación educativa se encuentra con la tecnología.
-        </p>
-      </article>
-    </div>
-  </section>
+        <div class="equipo-card animate-on-scroll">
+          <div class="equipo-icon">
+            <i class="fas fa-database text-red-500"></i>
+          </div>
+          <h3>Manuel Gonzales</h3>
+          <p>Backend Developer</p>
+          <span>APIs y código de sensores</span>
+        </div>
+        <div class="equipo-card animate-on-scroll">
+          <div class="equipo-icon">
+            <i class="fas fa-cogs text-green-500"></i>
+          </div>
+          <h3>Santiago Gómez</h3>
+          <p>Hardware Engineer</p>
+          <span>Armado del invernadero y sensores</span>
+        </div>
+      </div>
+    </section>
 
-  <!-- SOCIAL SECTION -->
-  <section class="social-section animate-on-scroll">
-    <h3 class="social-title">¡Únete a la Revolución Verde!</h3>
-    <p class="social-subtitle">
-      Síguenos en nuestras redes sociales para estar al día con las últimas innovaciones
-    </p>
-    <div class="social-links">
-      <a href="mailto:FloraCore2025@gmail.com" class="social-link"><i class="fas fa-envelope"></i></a>
-      <a href="https://www.instagram.com/floracore_off/" class="social-link" target="_blank"><i class="fab fa-instagram"></i></a>
-      <a href="#" class="social-link"><i class="fab fa-github"></i></a>
-      <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-    </div>
-  </section>
+    <section class="contacto-info animate-on-scroll">
+      <h2 class="animate-fade-in animate-delay-1200"><i class="fas fa-paper-plane text-green-600 mr-3"></i>¿Cómo contactarnos?</h2>
+      <div class="contacto-grid">
+        <div class="contacto-card animate-on-scroll">
+          <div class="contacto-icon">
+            <i class="fas fa-envelope text-blue-500"></i>
+          </div>
+          <h3>Email</h3>
+          <a href="mailto:FloraCore2025@gmail.com" class="contacto-link">FloraCore2025@gmail.com</a>
+        </div>
+        <div class="contacto-card animate-on-scroll">
+          <div class="contacto-icon">
+            <i class="fab fa-instagram text-pink-500"></i>
+          </div>
+          <h3>Instagram</h3>
+          <a href="https://www.instagram.com/floracore_off/" class="contacto-link" target="_blank">@floracore_off</a>
+        </div>
+        <div class="contacto-card animate-on-scroll">
+          <div class="contacto-icon">
+            <i class="fas fa-map-marker-alt text-red-500"></i>
+          </div>
+          <h3>Ubicación</h3>
+          <p>Escuela Técnica N°3 Roberto Arlt<br>Tortuguitas, Buenos Aires, Argentina</p>
+        </div>
+      </div>
+    </section>
+  </main>
 
-  <footer id="contact" class="animate-on-scroll">
-    <p><i class="fas fa-heart text-red-500 mr-2"></i>Hecho con pasión por el futuro verde</p>
-    <p>Copyright © 2025 FloraCore - Donde la tecnología florece</p>
+  <footer id="contact">
+    <p>¿Tenés dudas? <a href="mailto:FloraCore2025@gmail.com">Contactanos aquí</a></p>
+    <p>Copyright © 2025 FloraCore</p>
   </footer>
 
     <script src="{% static 'js/animaciones.js' %}"></script>
@@ -185,9 +120,12 @@
     document.addEventListener('DOMContentLoaded', function() {
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.getElementById('navMenu');
+
         menuToggle.addEventListener('click', function() {
             navMenu.classList.toggle('active');
         });
     });
 </script>
-{% endblock %}
+</body>
+</html>
+

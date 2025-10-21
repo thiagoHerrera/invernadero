@@ -1,183 +1,99 @@
-{% extends 'base.html' %}
 {% load static %}
-
-{% block title %}Estadísticas - FloraCore{% endblock %}
-
-{% block extra_head %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estadísticas - FloraCore</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="{% static 'css/estadisticas.css' %}" />
-  <link rel="stylesheet" href="{% static 'css/estadisticas-enhanced.css' %}" />
-  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
-{% endblock %}
-
-{% block content %}
-  <header class="navbar animate-fade-in-down animate-duration-1000">
+</head>
+<body>
+  <!-- NAVBAR -->
+  <header class="navbar">
   <section class="spbt">
-  <button class="menu-toggle hover:scale-110 transition-transform duration-300" id="menuToggle">&#9776;</button>
-    <div class="logo hover:text-green-600 transition-colors duration-300">FloraCore</div>
+  <button class="menu-toggle" id="menuToggle">&#9776;</button>
+    <div class="logo">FloraCore</div>
     </section>
     <nav class="menu" id="navMenu">
-      <a href="{% url 'landing' %}" class="hover:scale-105 transition-all duration-300">Inicio</a>
-      <a href="{% url 'funciones' %}" class="hover:scale-105 transition-all duration-300">Funciones</a>
-
-      <a href="{% url 'contacto' %}" class="hover:scale-105 transition-all duration-300">Contáctanos</a>
-      {% if user.is_authenticated %}
-      <a href="{% url 'estadisticas' %}" class="hover:scale-105 transition-all duration-300">Estadísticas</a>
-      <a href="{% url 'subir_imagen'%}" class="hover:scale-105 transition-all duration-300">Diagnóstico IA</a>
-      <form action="{% url 'logout' %}" method="post" style="display: inline;">
-        {% csrf_token %}
-        <button class="user-btn hover:scale-105 transition-all duration-300" type="submit">Cerrar sesión</button>
-      </form>
-      {% else %}
-      <button class="user-btn hover:scale-105 transition-all duration-300" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
-      <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
-      {% endif %}
+      <a href="{% url 'landing' %}"><i class="fas fa-home mr-2"></i>Inicio</a>
+      <a href="{% url 'funciones' %}"><i class="fas fa-cog mr-2"></i>Funciones</a>
+      <a href="{% url 'equipos' %}"><i class="fas fa-microchip mr-2"></i>Equipos</a>
+      <a href="{% url 'contacto' %}"><i class="fas fa-envelope mr-2"></i>Contáctanos</a>
+      <a href="{% url 'estadisticas' %}"><i class="fas fa-chart-bar mr-2"></i>Estadisticas</a>
+      <hr >
+       {% if not user.is_authenticated %}
+       <button class="user-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+       <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+       {% endif %}
     </nav>
+
+
   </header>
 
-  <!-- HERO SECTION -->
-  <section class="hero-stats animate-fade-in animate-duration-1500">
-    <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-chart-line mr-4"></i>Centro de Control</h1>
-    <p class="animate-fade-in animate-delay-400">Monitoreo inteligente en tiempo real de tu ecosistema agrícola - Datos precisos para decisiones perfectas</p>
-    <div class="live-indicator animate-fade-in animate-delay-600">
-      <div class="live-dot"></div>
-      <span style="font-weight: 600;">SISTEMA ACTIVO</span>
+  <!-- CONTENIDO PRINCIPAL -->
+  <section class="dashboard-section animate-on-scroll">
+    <div class="dashboard-header">
+      <h1 class="animate-fade-in animate-delay-200"><i class="fas fa-chart-bar text-green-600 mr-3"></i>Estadísticas de Cultivo</h1>
+      <p class="subtitulo animate-fade-in animate-delay-400">Visualizá en tiempo real los datos de tus sensores en el invernadero inteligente</p>
     </div>
-  </section>
 
-  <!-- DASHBOARD -->
-  <div class="dashboard-container">
-    <!-- METRICS OVERVIEW -->
-    <section class="metrics-overview animate-on-scroll">
-      <h2 class="metrics-title">
-      <i class="fas fa-tachometer-alt" aria-hidden="true"></i>
-      Métricas del Sistema
-    </h2>
-      <div class="metrics-grid">
-        <div class="metric-card animate-on-scroll hover:scale-105 transition-all duration-300">
-          <div class="metric-number">98%</div>
-          <div class="metric-label">Eficiencia del Sistema</div>
-        </div>
-        <div class="metric-card animate-on-scroll hover:scale-105 transition-all duration-300">
-          <div class="metric-number">24h</div>
-          <div class="metric-label">Tiempo Activo</div>
-        </div>
-        <div class="metric-card animate-on-scroll hover:scale-105 transition-all duration-300">
-          <div class="metric-number">6</div>
-          <div class="metric-label">Sensores Activos</div>
-        </div>
-        <div class="metric-card animate-on-scroll hover:scale-105 transition-all duration-300">
-          <div class="metric-number">∞</div>
-          <div class="metric-label">Datos Procesados</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- SENSORS SECTION -->
-    <section class="sensors-section animate-on-scroll">
-      <h2 class="sensors-title">
-      <i class="fas fa-sensors" aria-hidden="true"></i>
-      Monitoreo en Tiempo Real
-    </h2>
-      <div class="sensors-grid">
-        <div class="sensor-card animate-on-scroll hover:scale-105 transition-all duration-500">
-          <div class="sensor-header">
+    <div class="dashboard-container">
+      <div class="datos-sensores animate-on-scroll">
+        <h2 class="animate-fade-in animate-delay-600"><i class="fas fa-tachometer-alt text-blue-500 mr-2"></i>Últimos datos de sensores</h2>
+        <div class="sensores-grid">
+          <div class="sensor-card animate-on-scroll">
             <div class="sensor-icon">
-              <i class="fas fa-thermometer-half"></i>
+              <i class="fas fa-thermometer-half text-red-500"></i>
             </div>
             <div class="sensor-info">
-              <h3>Temperatura Ambiental</h3>
-              <p>Rango óptimo: 18-25°C</p>
+              <h3>Temperatura</h3>
+              <p class="sensor-value">{{ temperatura }} °C</p>
+              <span class="sensor-status">Óptima</span>
             </div>
           </div>
-          <div class="sensor-value">{{ temperatura }}°C</div>
-          <div style="text-align: center;">
-            <span class="sensor-status status-optimal">Óptima</span>
-          </div>
-        </div>
-
-        <div class="sensor-card animate-on-scroll hover:scale-105 transition-all duration-500">
-          <div class="sensor-header">
+          <div class="sensor-card animate-on-scroll">
             <div class="sensor-icon">
-              <i class="fas fa-tint"></i>
+              <i class="fas fa-tint text-blue-500"></i>
             </div>
             <div class="sensor-info">
               <h3>Humedad Ambiente</h3>
-              <p>Rango óptimo: 60-70%</p>
+              <p class="sensor-value">{{ humedad }} %</p>
+              <span class="sensor-status">Buena</span>
             </div>
           </div>
-          <div class="sensor-value">{{ humedad }}%</div>
-          <div style="text-align: center;">
-            <span class="sensor-status status-good">Buena</span>
-          </div>
-        </div>
-
-        <div class="sensor-card animate-on-scroll hover:scale-105 transition-all duration-500">
-          <div class="sensor-header">
+          <div class="sensor-card animate-on-scroll">
             <div class="sensor-icon">
-              <i class="fas fa-seedling"></i>
+              <i class="fas fa-seedling text-green-500"></i>
             </div>
             <div class="sensor-info">
               <h3>Humedad del Suelo</h3>
-              <p>Rango óptimo: 40-60%</p>
+              <p class="sensor-value">{{ humedad_suelo }} %</p>
+              <span class="sensor-status">Excelente</span>
             </div>
           </div>
-          <div class="sensor-value">{{ humedad_suelo }}%</div>
-          <div style="text-align: center;">
-            <span class="sensor-status status-excellent">Excelente</span>
-          </div>
         </div>
-      </div>
-    </section>
-
-    <!-- CHARTS SECTION -->
-    <section class="chart-section animate-on-scroll">
-      <div class="chart-header">
-        <h2 class="chart-title">
-          <i class="fas fa-chart-area" aria-hidden="true"></i>
-          Análisis Histórico Avanzado
-        </h2>
-        <p class="chart-subtitle">
-          Visualización interactiva de tendencias y patrones de crecimiento
-        </p>
-      </div>
-      
-      <div class="chart-container animate-on-scroll hover:shadow-2xl transition-all duration-300">
-        <iframe
-          src="https://lookerstudio.google.com/embed/reporting/b4d86fe6-7883-4739-a1a0-ddf6cc9398e5/page/knUKF"
-          allowfullscreen
-          sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
-        </iframe>
       </div>
 
-      <div class="data-insights">
-        <div class="insight-card animate-on-scroll">
-          <div class="insight-icon"><i class="fas fa-trending-up"></i></div>
-          <div class="insight-title">Crecimiento</div>
-          <div class="insight-value">+15%</div>
-        </div>
-        <div class="insight-card animate-on-scroll">
-          <div class="insight-icon"><i class="fas fa-leaf"></i></div>
-          <div class="insight-title">Salud</div>
-          <div class="insight-value">95%</div>
-        </div>
-        <div class="insight-card animate-on-scroll">
-          <div class="insight-icon"><i class="fas fa-water"></i></div>
-          <div class="insight-title">Ahorro H2O</div>
-          <div class="insight-value">30%</div>
-        </div>
-        <div class="insight-card animate-on-scroll">
-          <div class="insight-icon"><i class="fas fa-bolt"></i></div>
-          <div class="insight-title">Eficiencia</div>
-          <div class="insight-value">98%</div>
+      <div class="iframe-wrapper animate-on-scroll">
+        <h2 class="animate-fade-in animate-delay-800"><i class="fas fa-chart-line text-purple-500 mr-2"></i>Registros históricos</h2>
+        <p class="iframe-descripcion animate-fade-in animate-delay-1000">Visualizá los últimos registros de tus sensores de tu invernadero inteligente.</p>
+        <div class="iframe-card animate-on-scroll">
+          <iframe
+            src="https://lookerstudio.google.com/embed/reporting/b4d86fe6-7883-4739-a1a0-ddf6cc9398e5/page/knUKF"
+            frameborder="0"
+            allowfullscreen
+            sandbox="allow-storage-access-by-user-activation allow-scripts allow-same-origin allow-popups allow-popups-to-escape-sandbox">
+          </iframe>
         </div>
       </div>
-    </section>
-  </div>
+    </div>
+  </section>
 
-  <footer id="contact" class="animate-on-scroll">
-    <p><i class="fas fa-chart-line text-green-500 mr-2"></i>Datos que impulsan el crecimiento inteligente</p>
-    <p>Copyright © 2025 FloraCore - Inteligencia que florece</p>
+  <!-- FOOTER -->
+  <footer id="contact">
+    <p>¿Tenés dudas? <a href="mailto:FloraCore2025@gmail.com">Contactanos aquí</a></p>
+    <p>Copyright © 2025 FloraCore</p>
   </footer>
 
     <script src="{% static 'js/animaciones.js' %}"></script>
@@ -185,14 +101,13 @@
     document.addEventListener('DOMContentLoaded', function() {
         const menuToggle = document.getElementById('menuToggle');
         const navMenu = document.getElementById('navMenu');
+
         menuToggle.addEventListener('click', function() {
             navMenu.classList.toggle('active');
         });
-        
-        // Auto-refresh cada 30 segundos
-        setInterval(() => {
-            location.reload();
-        }, 30000);
     });
 </script>
-{% endblock %}
+</body>
+</html>
+
+
