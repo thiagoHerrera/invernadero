@@ -26,8 +26,6 @@
             {% csrf_token %}
             
             <h1 class="titulo-principal">Inicio de Sesión</h1>
-
-            <img src="{% static 'img/nashe.png' %}" class="flora" alt="Liana decorativa" loading="lazy">
             
             <div class="form-content">
                 {% if error %}
@@ -64,4 +62,5 @@
             </div>
         </form>
     </div>
+    <img src="{% static 'img/nashe.png' %}" class="flora" alt="Liana decorativa">
 {% endblock %}
