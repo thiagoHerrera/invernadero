@@ -49,15 +49,26 @@ def sensors(request):
                 'error': f'Faltan campos requeridos: {", ".join(missing_fields)}'
             }, status=400)
         
-        # Convertir y validar tipos de datos
+        # Convertir y validar tipos de datos (acepta números y cadenas)
+        def convert_to_float(value, field_name):
+            if isinstance(value, (int, float)):
+                return float(value)
+            elif isinstance(value, str):
+                try:
+                    return float(value.strip())
+                except ValueError:
+                    raise ValueError(f"El campo '{field_name}' debe ser un número válido")
+            else:
+                raise ValueError(f"El campo '{field_name}' debe ser un número o cadena numérica")
+        
         try:
-            temperatura = float(data['temperatura'])
-            humedad = float(data['humedad'])
-            humedad_suelo = float(data['humedad_suelo'])
-            luz = float(data['luz'])
-        except (ValueError, TypeError):
+            temperatura = convert_to_float(data['temperatura'], 'temperatura')
+            humedad = convert_to_float(data['humedad'], 'humedad')
+            humedad_suelo = convert_to_float(data['humedad_suelo'], 'humedad_suelo')
+            luz = convert_to_float(data['luz'], 'luz')
+        except ValueError as e:
             return JsonResponse({
-                'error': 'Los valores deben ser numéricos'
+                'error': str(e)
             }, status=400)
         
         # Validar rangos lógicos
@@ -78,11 +89,33 @@ def sensors(request):
         riego = humedad_suelo < hume_floor_threshold
         ventiladores = temperatura > temp_threshold
         
-        # Comandos manuales (opcional)
+        # Comandos manuales (opcional) - acepta números y cadenas
+        def convert_to_bool(value):
+            if isinstance(value, bool):
+                return value
+            elif isinstance(value, (int, float)):
+                return bool(int(value))
+            elif isinstance(value, str):
+                value = value.strip().lower()
+                if value in ['true', '1', 'on', 'yes']:
+                    return True
+                elif value in ['false', '0', 'off', 'no']:
+                    return False
+                else:
+                    return bool(int(value))  # Intenta convertir a int y luego a bool
+            return bool(value)
+        
         if 'comando_riego' in data and data['comando_riego'] is not None:
-            riego = bool(int(data['comando_riego']))
+            try:
+                riego = convert_to_bool(data['comando_riego'])
+            except (ValueError, TypeError):
+                pass  # Mantiene el valor automático si hay error
+        
         if 'comando_ventiladores' in data and data['comando_ventiladores'] is not None:
-            ventiladores = bool(int(data['comando_ventiladores']))
+            try:
+                ventiladores = convert_to_bool(data['comando_ventiladores'])
+            except (ValueError, TypeError):
+                pass  # Mantiene el valor automático si hay error
         
         # Guardar en base de datos
         param = Parameters.objects.create(
@@ -217,11 +250,32 @@ def actuadores_manual(request):
     """
     logger = logging.getLogger(__name__)
 
+    def convert_to_bool(value):
+        if isinstance(value, bool):
+            return value
+        elif isinstance(value, (int, float)):
+            return bool(int(value))
+        elif isinstance(value, str):
+            value = value.strip().lower()
+            if value in ['true', '1', 'on', 'yes']:
+                return True
+            elif value in ['false', '0', 'off', 'no']:
+                return False
+            else:
+                return bool(int(value))
+        return bool(value)
+    
     riego = request.data.get('riego')
     ventiladores = request.data.get('ventiladores')
 
     if riego is None or ventiladores is None:
         return Response({'error': 'Faltan datos: riego y ventiladores requeridos'}, status=status.HTTP_400_BAD_REQUEST)
+
+    try:
+        riego_bool = convert_to_bool(riego)
+        ventiladores_bool = convert_to_bool(ventiladores)
+    except (ValueError, TypeError):
+        return Response({'error': 'Los valores de riego y ventiladores deben ser booleanos válidos'}, status=status.HTTP_400_BAD_REQUEST)
 
     # Obtener el último registro para copiar sensores
     ultimo = Parameters.objects.order_by('-id').first()
@@ -234,11 +288,17 @@ def actuadores_manual(request):
         hume_floor=ultimo.hume_floor,
         temperature=ultimo.temperature,
         light=ultimo.light,
-        riego=bool(int(riego)),
-        ventiladores=bool(int(ventiladores)),
+        riego=riego_bool,
+        ventiladores=ventiladores_bool,
         timestamp=timezone.now()
     )
 
     logger.info(f"Acciones manuales: riego={param.riego}, ventiladores={param.ventiladores}")
+    
+    response_data = {
+        'mensaje': 'Acciones manuales aplicadas',
+        'riego': param.riego,
+        'ventiladores': param.ventiladores
+    }
 
-    return Response({'mensaje': 'Acciones manuales aplicadas'}, status=status.HTTP_201_CREATED)
+    return Response(response_data, status=status.HTTP_201_CREATED)
