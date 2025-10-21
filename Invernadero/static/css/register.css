@@ -208,9 +208,13 @@ body {
 }
 
 /* Mensajes de Error */
-.error-general {
+.error, .error-general {
     color: #c93d3d; 
     font-size: 0.85rem;
+    margin-top: 5px;
+}
+
+.error-general {
     text-align: center;
     padding: 10px;
     background-color: rgba(201, 61, 61, 0.1);
