@@ -18,6 +18,8 @@ from datetime import datetime
 from users.models import Parameters, Configuration
 from .serializers import ParametersSerializer, ConfigurationSerializer
 
+# Variable global para comandos manuales
+comandos_manuales = {'riego': None, 'ventiladores': None}
 
 @csrf_exempt
 @api_view(['POST'])
@@ -27,6 +29,8 @@ def sensors(request):
     Vista que recibe datos de sensores desde un cliente (por ejemplo, un microcontrolador),
     los guarda en la base de datos y devuelve acciones sugeridas como respuesta.
     """
+    global comandos_manuales
+    
     try:
         # Parsear datos JSON del cuerpo de la solicitud
         if hasattr(request, 'data') and request.data:
@@ -89,33 +93,14 @@ def sensors(request):
         riego = humedad_suelo < hume_floor_threshold
         ventiladores = temperatura > temp_threshold
         
-        # Comandos manuales (opcional) - acepta números y cadenas
-        def convert_to_bool(value):
-            if isinstance(value, bool):
-                return value
-            elif isinstance(value, (int, float)):
-                return bool(int(value))
-            elif isinstance(value, str):
-                value = value.strip().lower()
-                if value in ['true', '1', 'on', 'yes']:
-                    return True
-                elif value in ['false', '0', 'off', 'no']:
-                    return False
-                else:
-                    return bool(int(value))  # Intenta convertir a int y luego a bool
-            return bool(value)
-        
-        if 'comando_riego' in data and data['comando_riego'] is not None:
-            try:
-                riego = convert_to_bool(data['comando_riego'])
-            except (ValueError, TypeError):
-                pass  # Mantiene el valor automático si hay error
-        
-        if 'comando_ventiladores' in data and data['comando_ventiladores'] is not None:
-            try:
-                ventiladores = convert_to_bool(data['comando_ventiladores'])
-            except (ValueError, TypeError):
-                pass  # Mantiene el valor automático si hay error
+        # Aplicar comandos manuales si existen
+        if comandos_manuales['riego'] is not None:
+            riego = comandos_manuales['riego']
+            comandos_manuales['riego'] = None  # Limpiar después de usar
+            
+        if comandos_manuales['ventiladores'] is not None:
+            ventiladores = comandos_manuales['ventiladores']
+            comandos_manuales['ventiladores'] = None  # Limpiar después de usar
         
         # Guardar en base de datos
         param = Parameters.objects.create(
@@ -128,7 +113,7 @@ def sensors(request):
             timestamp=timezone.now()
         )
         
-        # Respuesta estructurada
+        # Respuesta estructurada compatible con el microcontrolador
         response_data = {
             "sensores": {
                 "temperatura": temperatura,
@@ -234,71 +219,58 @@ def configuracion(request):
         serializer = ConfigurationSerializer(config)
         return Response(serializer.data, status=status.HTTP_200_OK)
     elif request.method == 'PUT':
-        serializer = ConfigurationSerializer(config, data=request.data, partial=True)
+        serializer = ConfigurationSerializer(config, data=request.data)
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_200_OK)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-@permission_classes([AllowAny])
+@csrf_exempt
 @api_view(['POST'])
+@permission_classes([AllowAny])
 def actuadores_manual(request):
     """
-    Vista para forzar encendido/apagado manual de riego o ventiladores.
-    Crea un nuevo registro con las acciones especificadas.
+    Vista para establecer comandos manuales que serán aplicados
+    en la próxima respuesta al microcontrolador.
     """
-    logger = logging.getLogger(__name__)
-
-    def convert_to_bool(value):
-        if isinstance(value, bool):
-            return value
-        elif isinstance(value, (int, float)):
-            return bool(int(value))
-        elif isinstance(value, str):
-            value = value.strip().lower()
-            if value in ['true', '1', 'on', 'yes']:
-                return True
-            elif value in ['false', '0', 'off', 'no']:
-                return False
-            else:
-                return bool(int(value))
-        return bool(value)
+    global comandos_manuales
     
-    riego = request.data.get('riego')
-    ventiladores = request.data.get('ventiladores')
-
-    if riego is None or ventiladores is None:
-        return Response({'error': 'Faltan datos: riego y ventiladores requeridos'}, status=status.HTTP_400_BAD_REQUEST)
-
     try:
-        riego_bool = convert_to_bool(riego)
-        ventiladores_bool = convert_to_bool(ventiladores)
-    except (ValueError, TypeError):
-        return Response({'error': 'Los valores de riego y ventiladores deben ser booleanos válidos'}, status=status.HTTP_400_BAD_REQUEST)
+        data = request.data if hasattr(request, 'data') and request.data else json.loads(request.body.decode('utf-8'))
+        
+        def convert_to_bool(value):
+            if isinstance(value, bool):
+                return value
+            elif isinstance(value, (int, float)):
+                return bool(int(value))
+            elif isinstance(value, str):
+                value = value.strip().lower()
+                return value in ['true', '1', 'on', 'yes', 'activar']
+            return False
+        
+        # Establecer comandos manuales
+        if 'riego' in data:
+            comandos_manuales['riego'] = convert_to_bool(data['riego'])
+        if 'ventiladores' in data:
+            comandos_manuales['ventiladores'] = convert_to_bool(data['ventiladores'])
+        
+        return JsonResponse({
+            'mensaje': 'Comandos manuales establecidos',
+            'comandos': comandos_manuales,
+            'timestamp': timezone.now().isoformat() + 'Z'
+        }, status=200)
+        
+    except Exception as e:
+        return JsonResponse({
+            'error': 'Error procesando comandos',
+            'details': str(e)
+        }, status=500)
 
-    # Obtener el último registro para copiar sensores
-    ultimo = Parameters.objects.order_by('-id').first()
-    if not ultimo:
-        return Response({'error': 'No hay datos previos'}, status=status.HTTP_400_BAD_REQUEST)
 
-    # Crear nuevo registro con acciones manuales
-    param = Parameters.objects.create(
-        hume=ultimo.hume,
-        hume_floor=ultimo.hume_floor,
-        temperature=ultimo.temperature,
-        light=ultimo.light,
-        riego=riego_bool,
-        ventiladores=ventiladores_bool,
-        timestamp=timezone.now()
-    )
-
-    logger.info(f"Acciones manuales: riego={param.riego}, ventiladores={param.ventiladores}")
-    
-    response_data = {
-        'mensaje': 'Acciones manuales aplicadas',
-        'riego': param.riego,
-        'ventiladores': param.ventiladores
-    }
-
-    return Response(response_data, status=status.HTTP_201_CREATED)
+@permission_classes([AllowAny])
+def comandos_manual_view(request):
+    """
+    Vista para mostrar la interfaz web de comandos manuales.
+    """
+    return render(request, 'comandos_manual.html')

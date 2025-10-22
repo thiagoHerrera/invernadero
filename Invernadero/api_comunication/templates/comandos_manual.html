@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Control Manual - Invernadero</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 50px auto; padding: 20px; }
+        .control-panel { background: #f5f5f5; padding: 20px; border-radius: 8px; margin-bottom: 20px; }
+        .info-panel { background: #e7f3ff; padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 4px solid #2196F3; }
+        .control-group { margin-bottom: 15px; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        button { padding: 10px 20px; margin: 5px; border: none; border-radius: 4px; cursor: pointer; }
+        .btn-on { background: #4CAF50; color: white; }
+        .btn-off { background: #f44336; color: white; }
+        .btn-send { background: #2196F3; color: white; font-size: 16px; }
+        .status { padding: 10px; margin: 10px 0; border-radius: 4px; }
+        .success { background: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .error { background: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
+        .pending { background: #fff3cd; color: #856404; border: 1px solid #ffeaa7; }
+    </style>
+</head>
+<body>
+    <h1>Control Manual del Invernadero</h1>
+    
+    <div class="info-panel">
+        <h4>ℹ️ Cómo funciona:</h4>
+        <p>Los comandos manuales se aplicarán cuando el microcontrolador envíe su próxima lectura de sensores. Cada comando se ejecuta una sola vez y luego vuelve al modo automático.</p>
+    </div>
+    
+    <div class="control-panel">
+        <h3>Comandos de Actuadores</h3>
+        
+        <div class="control-group">
+            <label>Sistema de Riego:</label>
+            <button type="button" class="btn-on" onclick="setCommand('riego', true)">Activar</button>
+            <button type="button" class="btn-off" onclick="setCommand('riego', false)">Desactivar</button>
+            <span id="riego-status">No seleccionado</span>
+        </div>
+        
+        <div class="control-group">
+            <label>Ventiladores:</label>
+            <button type="button" class="btn-on" onclick="setCommand('ventiladores', true)">Activar</button>
+            <button type="button" class="btn-off" onclick="setCommand('ventiladores', false)">Desactivar</button>
+            <span id="ventiladores-status">No seleccionado</span>
+        </div>
+        
+        <button type="button" class="btn-send" onclick="enviarComandos()">Establecer Comandos</button>
+    </div>
+    
+    <div id="response-status"></div>
+
+    <script>
+        let comandos = {};
+        
+        function setCommand(actuador, estado) {
+            comandos[actuador] = estado;
+            document.getElementById(actuador + '-status').textContent = estado ? 'Activar' : 'Desactivar';
+            document.getElementById(actuador + '-status').style.color = estado ? 'green' : 'red';
+        }
+        
+        async function enviarComandos() {
+            if (Object.keys(comandos).length === 0) {
+                showStatus('Debe seleccionar al menos un comando', 'error');
+                return;
+            }
+            
+            try {
+                const response = await fetch('/api/actuadores/manual/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify(comandos)
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showStatus('✅ Comandos establecidos. Se aplicarán en la próxima comunicación del microcontrolador.', 'pending');
+                    comandos = {};
+                    document.getElementById('riego-status').textContent = 'No seleccionado';
+                    document.getElementById('ventiladores-status').textContent = 'No seleccionado';
+                    document.getElementById('riego-status').style.color = '';
+                    document.getElementById('ventiladores-status').style.color = '';
+                } else {
+                    showStatus('❌ Error: ' + data.error, 'error');
+                }
+            } catch (error) {
+                showStatus('❌ Error de conexión: ' + error.message, 'error');
+            }
+        }
+        
+        function showStatus(message, type) {
+            const statusDiv = document.getElementById('response-status');
+            statusDiv.textContent = message;
+            statusDiv.className = 'status ' + type;
+            
+            if (type === 'pending') {
+                setTimeout(() => {
+                    statusDiv.textContent = '';
+                    statusDiv.className = '';
+                }, 10000); // 10 segundos para comandos pendientes
+            } else {
+                setTimeout(() => {
+                    statusDiv.textContent = '';
+                    statusDiv.className = '';
+                }, 5000);
+            }
+        }
+        
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+    </script>
+</body>
+</html>
