@@ -4,58 +4,120 @@
 {% block title %}Información del Proyecto - FloraCore{% endblock %}
 
 {% block extra_head %}
+  <!-- Enlace a Font Awesome para los iconos -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="{% static 'css/info.css' %}">
+  <!-- Usamos v=2.0 para forzar la recarga del CSS y arreglar problemas de caché -->
+  <link rel="stylesheet" href="{% static 'css/info.css' %}?v=2.0"> 
 {% endblock %}
 
 {% block content %}
 
   <header class="navbar">
-  <section class="spbt">
-  <button class="menu-toggle" id="menuToggle">&#9776;</button>
-    <div class="logo">FloraCore</div>
+    <section class="spbt">
+      <button class="menu-toggle" id="menuToggle">&#9776;</button>
+      <div class="logo">FloraCore</div>
     </section>
     <nav class="menu" id="navMenu">
       <a href="{% url 'landing' %}" class="hover:scale-105 transition-all duration-300">Inicio</a>
       <a href="{% url 'funciones' %}" class="hover:scale-105 transition-all duration-300">Funciones</a>
-
       <a href="{% url 'contacto' %}" class="hover:scale-105 transition-all duration-300">Contáctanos</a>
-      <a href="{% url 'estadisticas' %}">Estadisticas</a>
-      <hr >
-       {% if not user.is_authenticated %}
-       <button class="user-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
-       <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
-       {% endif %}
+      <hr>
+      {% if not user.is_authenticated %}
+      <button class="user-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signin' %}'">Iniciar Sesión</button>
+      <button class="register-btn hover:scale-105 transition-all duration-300 whitespace-nowrap" onclick="window.location.href='{% url 'signup' %}'">Registrarse</button>
+      {% endif %}
     </nav>
-
-
   </header>
 
-  <main class="project-info animate-on-scroll">
-    <h2 class="animate-fade-in animate-delay-200"><i class="fas fa-leaf text-green-500 mr-3"></i>¿Qué es FloraCore?</h2>
-    <p class="animate-fade-in animate-delay-400">FloraCore es un innovador invernadero inteligente que utiliza sensores avanzados y un microcontrolador ESP32 para automatizar el cuidado de plantas. Ideal para quienes no tienen tiempo o experiencia en jardinería, FloraCore permite que cualquier persona pueda cuidar sus plantas de manera eficiente, incluso en entornos cerrados o urbanos.</p>
+  <main class="project-info max-w-7xl mx-auto p-4 md:p-8 pt-10 min-h-[calc(100vh-150px)]">
+    
+    <!-- Sección 1: Definición de FloraCore -->
+    <section class="mb-12 border-l-4 border-moss-light pl-4 animate-fade-in animate-delay-200">
+      <h1 class="text-3xl md:text-4xl text-forest-dark font-extrabold mb-4 flex items-center">
+        <i class="fas fa-seedling mr-3 text-moss-light"></i> ¿Qué es FloraCore?
+      </h1>
+      <p class="text-lg text-text-secondary">
+        FloraCore es un innovador invernadero inteligente que utiliza sensores avanzados y un microcontrolador ESP32 para automatizar el cuidado de plantas. Ideal para quienes no tienen tiempo o experiencia en jardinería, FloraCore permite que cualquier persona pueda cuidar sus plantas de manera eficiente, incluso en entornos cerrados o urbanos.
+      </p>
+    </section>
 
-    <h2 class="animate-fade-in animate-delay-600"><i class="fas fa-question-circle text-blue-500 mr-3"></i>¿Cómo Funciona?</h2>
-    <p class="animate-fade-in animate-delay-800">FloraCore utiliza una red de sensores que monitorean las condiciones del aire, la temperatura, la humedad y la luz, así como el estado del suelo. Estos datos son procesados por un microcontrolador ESP32, que toma decisiones automáticas, como activar el riego, la ventilación o la iluminación, según sea necesario.</p>
+    <!-- Sección 2: Componentes Clave (3 Tarjetas) -->
+    <h2 class="text-2xl font-bold text-center mb-8 text-secondary-green animate-fade-in animate-delay-400">Componentes Clave y Funcionamiento</h2>
+    
+    <div class="grid md:grid-cols-3 gap-6 mb-12">
+      
+      <!-- Tarjeta 1: Sensores -->
+      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border-t-4 border-moss-light animate-fade-in-up animate-delay-600">
+        <i class="fas fa-tachometer-alt text-4xl text-forest-dark mb-4"></i>
+        <h3 class="text-xl font-semibold text-text-primary mb-3">Monitoreo con Sensores</h3>
+        <p class="text-text-secondary text-sm">
+          Una red de sensores monitorea constantemente condiciones críticas: humedad del suelo, temperatura ambiente, intensidad lumínica y calidad del aire. Los datos son la base de la automatización.
+        </p>
+      </div>
 
-    <h2 class="animate-fade-in animate-delay-1000"><i class="fas fa-bullseye text-purple-500 mr-3"></i>Objetivo</h2>
-    <p class="animate-fade-in animate-delay-1200">El principal objetivo de FloraCore es facilitar el cultivo autónomo de plantas en cualquier ambiente, asegurando que se mantengan en condiciones óptimas. Esto hace posible que personas sin tiempo o conocimiento en jardinería puedan cuidar plantas, incluso árboles, sin esfuerzo.</p>
+      <!-- Tarjeta 2: ESP32 -->
+      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border-t-4 border-moss-light animate-fade-in-up animate-delay-800">
+        <i class="fas fa-microchip text-4xl text-forest-dark mb-4"></i>
+        <h3 class="text-xl font-semibold text-text-primary mb-3">El Cerebro: ESP32</h3>
+        <p class="text-text-secondary text-sm">
+          El microcontrolador ESP32 procesa todos los datos recopilados en tiempo real. Actúa como el centro de control, tomando decisiones instantáneas para el bienestar de la planta.
+        </p>
+      </div>
+
+      <!-- Tarjeta 3: Automatización -->
+      <div class="bg-white rounded-xl shadow-lg p-6 hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] border-t-4 border-moss-light animate-fade-in-up animate-delay-1000">
+        <i class="fas fa-robot text-4xl text-forest-dark mb-4"></i>
+        <h3 class="text-xl font-semibold text-text-primary mb-3">Acciones Inteligentes</h3>
+        <p class="text-text-secondary text-sm">
+          El ESP32 activa automáticamente el riego por goteo, enciende la iluminación LED o ajusta la ventilación del invernadero según las necesidades detectadas, garantizando el ambiente óptimo.
+        </p>
+      </div>
+    </div>
+    
+    <!-- Sección 3: Objetivo y Beneficio (2 Tarjetas) -->
+    <div class="grid md:grid-cols-2 gap-6">
+      
+      <!-- Tarjeta 4: Objetivo -->
+      <div class="bg-medium-green rounded-xl shadow-md p-6 border border-border-color animate-fade-in animate-delay-1200">
+        <h3 class="text-2xl font-bold text-dark-green mb-3 flex items-center">
+          <i class="fas fa-bullseye mr-3"></i> Objetivo Principal
+        </h3>
+        <p class="text-text-primary">
+          Facilitar el cultivo autónomo de plantas en cualquier ambiente, asegurando que se mantengan en condiciones óptimas. Esto hace posible que personas sin tiempo o conocimiento en jardinería puedan cuidar plantas, incluso árboles, sin esfuerzo.
+        </p>
+      </div>
+
+      <!-- Tarjeta 5: Beneficio -->
+      <div class="bg-medium-green rounded-xl shadow-md p-6 border border-border-color animate-fade-in animate-delay-1400">
+        <h3 class="text-2xl font-bold text-dark-green mb-3 flex items-center">
+          <i class="fas fa-hand-holding-heart mr-3"></i> El Beneficio para Ti
+        </h3>
+        <p class="text-text-primary">
+          Olvídate del estrés de olvidar regar. FloraCore te da la tranquilidad de que tus plantas reciben exactamente lo que necesitan, cuando lo necesitan, maximizando su crecimiento y salud con mínimo esfuerzo humano.
+        </p>
+      </div>
+
+    </div>
+
   </main>
 
-  <footer id="contact">
-    <p>¿Tenés dudas? <a href="mailto:FloraCore2025@gmail.com">Contactanos aquí</a></p>
-    <p>Copyright © 2025 FloraCore</p>
+  <footer id="contact" class="sticky bottom-0 z-50">
+    <div class="max-w-7xl mx-auto flex justify-between items-center text-center">
+      <p class="w-full">¿Tenés dudas? <a href="mailto:FloraCore2025@gmail.com">Contactanos aquí</a></p>
+      <p class="w-full">Copyright © 2025 FloraCore</p>
+    </div>
   </footer>
 
-    <script src="{% static 'js/animaciones.js' %}"></script>
-    <script>
+  <script src="{% static 'js/animaciones.js' %}"></script>
+  <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const menuToggle = document.getElementById('menuToggle');
-        const navMenu = document.getElementById('navMenu');
+      const menuToggle = document.getElementById('menuToggle');
+      const navMenu = document.getElementById('navMenu');
 
-        menuToggle.addEventListener('click', function() {
-            navMenu.classList.toggle('active');
-        });
+      menuToggle.addEventListener('click', function() {
+        navMenu.classList.toggle('active');
+      });
     });
-</script>
+  </script>
 {% endblock %}

@@ -1,112 +1,133 @@
 /* Importar estilos base */
 @import url('base.css');
 
+/* Definición de colores (Solo para referencia, ya que Tailwind las gestiona o están en base.css) */
+:root {
+--color-forest: #0B5345;
+--color-moss: #34A853;
+--color-off-white: #FAFAFA;
+}
+
 body {
-     background-color: var(--light-bg);
-     color: var(--text-primary);
-     line-height: 1.6;
+background-color: var(--light-bg, #FAFAFA); 
+color: var(--text-primary, #333333);
+line-height: 1.6;
+}
+
+/* === ANULACIÓN DE ESTILOS DE BASE.CSS PARA ESTA PÁGINA === */
+
+/* Hacemos la barra más pequeña anulando el padding del base.css */
+.navbar {
+padding: 0.75rem 3rem; /* Reducimos el padding vertical de 1rem a 0.75rem para achicar la barra */
+}
+
+/* Footer más compacto y pegado al fondo (Usamos !important para asegurar que anule a base.css) */
+footer {
+margin-top: 0 !important; /* Elimina cualquier margen superior */
+padding: 0.5rem 1rem !important; /* Reducimos el padding vertical al mínimo para achicar la zona de copyright */
+position: sticky; /* Sticky para que se pegue al fondo si el contenido es corto */
+bottom: 0;
+width: 100%;
+z-index: 90;
 }
 
 /* Navbar usando base.css */
 .navbar .user-btn {
-     background-color: var(--secondary-green);
+background-color: var(--secondary-green, #34A853);
 }
 
 .navbar .user-btn:hover {
-     background-color: var(--hover-green);
+background-color: var(--hover-green, #2b8c45);
 }
 
-/* === SECCIÓN DE INFORMACIÓN DEL PROYECTO === */
+/* Estilo de tarjeta base (solo si Tailwind no aplica bien las clases) */
+.card-feature {
+transition: all 0.3s ease;
+}
+
+.card-feature:hover {
+transform: translateY(-5px); /* Efecto sutil al pasar el ratón */
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Sombra al pasar el ratón */
+}
+
+/* === SECCIÓN DE INFORMACIÓN DEL PROYECTO (Custom Styles) === */
 .project-info {
-    max-width: 1100px;
-    margin: 3rem auto;
-    padding: 0 1rem;
+/* Asegura que el contenido empuje al footer si es corto. */
+min-height: calc(100vh - 150px); 
 }
 
-.project-info h2 {
-     font-size: 2rem;
-     color: var(--secondary-green);
-     margin-bottom: 1rem;
+/* Definiciones de color forzadas para clases específicas de Tailwind */
+.text-forest-dark {
+color: var(--color-forest, #0B5345);
+}
+.text-moss-light {
+color: var(--color-moss, #34A853);
+}
+.border-moss-light {
+border-color: var(--color-moss, #34A853);
+}
+.border-forest-dark {
+border-color: var(--color-forest, #0B5345);
 }
 
-.project-info p {
-     font-size: 1.1rem;
-     color: var(--text-secondary);
-     margin-bottom: 1.5rem;
-     text-align: justify;
-     line-height: 1.8;
-}
-
-/* === FOOTER usando base.css === */
-footer {
-     margin-top: 3rem;
+/* Estilos específicos para animaciones (si estás usando animaciones.js) */
+.animate-on-scroll {
+opacity: 1; 
 }
 
 /* === ESTILOS PARA DISPOSITIVOS MÓVILES === */
 @media screen and (max-width: 768px) {
-    .navbar {
-        padding: 1rem 2rem;
-    }
+.navbar {
+padding: 0.5rem 2rem; /* Achicamiento extra para móviles */
+}
 
-    .navbar .logo {
-        font-size: 1.4rem;
-    }
+.navbar .logo {
+font-size: 1.4rem;
+}
 
-    .navbar .menu {
-        display: none;
-    }
+.navbar .menu {
+display: none;
+}
 
-    .navbar .user-btn {
-        padding: 0.4rem 0.8rem;
-    }
-
-    .project-info {
-        padding: 0 1rem;
-    }
-
-    .project-info h2 {
-        font-size: 1.5rem;
-    }
-
-    .project-info p {
-        font-size: 1rem;
-    }
+.navbar .user-btn {
+padding: 0.4rem 0.8rem;
+}
 }
 
 /* === RESPONSIVE PARA MENÚ MÓVIL === */
 .spbt {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+display: flex;
+justify-content: space-between;
+align-items: center;
+width: 100%;
 }
 
 .menu-toggle {
-    display: none;
+display: none;
 }
 
 .navbar .menu.active {
-     display: flex;
-     flex-direction: column;
-     width: 100%;
-     background-color: var(--secondary-green);
-     padding: 0.5rem 0;
-     border-top: 1px solid var(--border-color);
+display: flex;
+flex-direction: column;
+width: 100%;
+background-color: var(--secondary-green, #34A853);
+padding: 0.5rem 0;
+border-top: 1px solid var(--border-color);
 }
 
 @media screen and (orientation: portrait) {
-    .navbar .menu {
-        display: none;
-    }
-    .menu-toggle {
-        display: block;
-        background: none;
-        border: none;
-        font-size: 1.5rem;
-        cursor: pointer;
-        color: white;
-    }
-    .navbar {
-        flex-direction: column;
-    }
+.navbar .menu {
+display: none;
+}
+.menu-toggle {
+display: block;
+background: none;
+border: none;
+font-size: 1.5rem;
+cursor: pointer;
+color: white;
+}
+.navbar {
+flex-direction: column;
+}
 }

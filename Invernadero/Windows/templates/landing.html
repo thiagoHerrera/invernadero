@@ -54,26 +54,6 @@
 
   <!-- FUNCIONES -->
   <section class="features animate-on-scroll" id="features">
-    {% if user.is_authenticated %}
-    <h2 class="animate-fade-in animate-delay-200"><i class="fas fa-tasks text-blue-500 mr-3"></i>¿Qué puedes hacer hoy?</h2>
-    <div class="cards">
-      <div class="card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/2daimg.png' %}" alt="Perfil" class="hover:scale-110 transition-transform duration-300">
-        <h3><i class="fas fa-user-circle text-indigo-500 mr-2"></i>Perfil</h3>
-        <p>Consulta y edita tu información personal y tus configuraciones.</p>
-      </div>
-      <div class="card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/3erimg.jpg' %}" alt="Historial" class="hover:scale-110 transition-transform duration-300">
-        <h3><i class="fas fa-history text-green-500 mr-2"></i>Historial de Cultivo</h3>
-        <p>Revisa el crecimiento y cuidado de tus plantas a lo largo del tiempo.</p>
-      </div>
-      <div class="card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
-        <img src="{% static 'img/4taimg.jpg' %}" alt="Notificaciones" class="hover:scale-110 transition-transform duration-300">
-        <h3><i class="fas fa-bell text-red-500 mr-2"></i>Notificaciones</h3>
-        <p>Recibe alertas sobre riego, luz y temperatura.</p>
-      </div>
-    </div>
-    {% else %}
     <h2 class="animate-fade-in animate-delay-200"><i class="fas fa-tasks text-blue-500 mr-3"></i>¿Qué puedes hacer hoy?</h2>
     <div class="cards">
       <div class="card animate-on-scroll hover:scale-105 transition-all duration-300 hover:shadow-xl">
@@ -92,7 +72,7 @@
         <p>No va a haber preocupacion al olvidarse de hacerle mantenimiento a la planta.</p>
       </div>
     </div>
-    {% endif %}
+  
   </section>
 
   {% if not user.is_authenticated %}

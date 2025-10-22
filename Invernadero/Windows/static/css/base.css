@@ -1,284 +1,131 @@
-/* === CSS BASE - VARIABLES Y ESTILOS COMUNES === */
 
-/* Variables de colores */
+
+/* Definición de colores (Solo para referencia, ya que Tailwind las gestiona o están en base.css) */
 :root {
-  --primary-green: #2a7e56;
-  --secondary-green: #036b0c;
-  --hover-green: #1e5c3e;
-  --light-green: #f4faf5;
-  --medium-green: #d7ded7;
-  --dark-green: #256440;
-  --accent-green: #3f8c5d;
-  --text-primary: #2c2c2c;
-  --text-secondary: #555;
-  --text-muted: #666;
-  --white: #ffffff;
-  --light-bg: #f6f7f5;
-  --border-color: #bcd9c7;
-  --shadow: rgba(0, 0, 0, 0.1);
-  --shadow-hover: rgba(0, 0, 0, 0.15);
+--color-forest: #0B5345;
+--color-moss: #34A853;
+--color-off-white: #FAFAFA;
 }
 
-/* Reset general */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-/* Base body */
 body {
-  background-color: var(--light-green);
-  color: var(--text-primary);
-  line-height: 1.6;
-  overflow-x: hidden;
+background-color: var(--light-bg, #FAFAFA); 
+color: var(--text-primary, #333333);
+line-height: 1.6;
 }
 
-/* Tipografía */
-h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-  line-height: 1.2;
-  margin-bottom: 1rem;
-}
+/* === ANULACIÓN DE ESTILOS DE BASE.CSS PARA ESTA PÁGINA === */
 
-h1 {
-  font-size: 2.5rem;
-  color: var(--primary-green);
-}
-
-h2 {
-  font-size: 2rem;
-  color: var(--secondary-green);
-}
-
-h3 {
-  font-size: 1.5rem;
-  color: var(--primary-green);
-}
-
-p {
-  margin-bottom: 1rem;
-  color: var(--text-secondary);
-}
-
-/* Navbar común */
+/* Hacemos la barra más pequeña anulando el padding del base.css */
 .navbar {
-  background-color: var(--white);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 1rem 3rem;
-  box-shadow: 0 2px 8px var(--shadow);
-  position: sticky;
-  top: 0;
-  z-index: 100;
+padding: 0.75rem 3rem; /* Reducimos el padding vertical de 1rem a 0.75rem para achicar la barra */
 }
 
-.navbar .logo {
-  font-weight: bold;
-  color: var(--primary-green);
-  font-size: 1.6rem;
-  transition: color 0.3s ease;
-  text-decoration: none;
-  flex-shrink: 0;
+/* Footer más compacto y pegado al final del contenido (QUITAMOS POSITION: STICKY) */
+footer {
+margin-top: 0 !important; /* Elimina cualquier margen superior */
+padding: 0.5rem 1rem !important; /* Reducimos el padding vertical al mínimo para achicar la zona de copyright */
+/* Eliminado: position: sticky; bottom: 0; */
+width: 100%;
+z-index: 90;
 }
 
-.navbar .logo:hover {
-  color: var(--hover-green);
-}
-
-.navbar .menu {
-  flex: 1;
-  display: flex;
-  gap: 2rem;
-  flex-wrap: nowrap;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-.navbar .menu a {
-  text-decoration: none;
-  color: var(--text-primary);
-  font-weight: 500;
-  position: relative;
-  transition: color 0.3s ease;
-}
-
-.navbar .menu a:hover {
-  color: var(--primary-green);
-}
-
-.navbar .menu a::after {
-  content: '';
-  position: absolute;
-  bottom: -5px;
-  left: 0;
-  height: 2px;
-  width: 100%;
-  background-color: var(--primary-green);
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform 0.3s ease;
-}
-
-.navbar .menu a:hover::after {
-  transform: scaleX(1);
-}
-
+/* Navbar usando base.css */
 .navbar .user-btn {
-  background-color: var(--primary-green);
-  color: var(--white);
-  padding: 0.5rem 1rem;
-  border: none;
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  flex-shrink: 0;
+background-color: var(--secondary-green, #34A853);
 }
 
 .navbar .user-btn:hover {
-  background-color: var(--hover-green);
-  transform: scale(1.05);
+background-color: var(--hover-green, #2b8c45);
 }
 
-.navbar .register-btn {
-  background-color: transparent;
-  color: var(--primary-green);
-  padding: 0.5rem 1rem;
-  border: 2px solid var(--primary-green);
-  border-radius: 10px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  flex-shrink: 0;
-  margin-left: 0.5rem;
+/* Estilo de tarjeta base (solo si Tailwind no aplica bien las clases) */
+.card-feature {
+transition: all 0.3s ease;
 }
 
-.navbar .register-btn:hover {
-  background-color: var(--primary-green);
-  color: var(--white);
-  transform: scale(1.05);
-  border-color: var(--hover-green);
+.card-feature:hover {
+transform: translateY(-5px); /* Efecto sutil al pasar el ratón */
+box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Sombra al pasar el ratón */
 }
 
-/* Botones generales */
-button {
-  cursor: pointer;
-  transition: all 0.3s ease;
-  border: none;
-  font-weight: 600;
+/* === SECCIÓN DE INFORMACIÓN DEL PROYECTO (Custom Styles) === */
+.project-info {
+/* Mantenemos una altura mínima para que, incluso con poco contenido, el footer se vea abajo */
+min-height: calc(100vh - 150px); 
 }
 
-button:hover {
-  transform: scale(1.05);
+/* Definiciones de color forzadas para clases específicas de Tailwind */
+.text-forest-dark {
+color: var(--color-forest, #0B5345);
+}
+.text-moss-light {
+color: var(--color-moss, #34A853);
+}
+.border-moss-light {
+border-color: var(--color-moss, #34A853);
+}
+.border-forest-dark {
+border-color: var(--color-forest, #0B5345);
 }
 
-/* Cards comunes */
-.card, .equipment-card {
-  background-color: var(--white);
-  border-radius: 12px;
-  padding: 1.5rem;
-  box-shadow: 0 2px 8px var(--shadow);
-  transition: all 0.3s ease;
+/* Estilos específicos para animaciones (si estás usando animaciones.js) */
+.animate-on-scroll {
+opacity: 1; 
 }
 
-.card:hover, .equipment-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px var(--shadow-hover);
+/* === ESTILOS PARA DISPOSITIVOS MÓVILES === */
+@media screen and (max-width: 768px) {
+.navbar {
+padding: 0.5rem 2rem; /* Achicamiento extra para móviles */
 }
 
-/* Formularios */
-.form-group input,
-input {
-  width: 100%;
-  padding: 0.75rem;
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  background-color: #eaf4ed;
-  font-size: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+.navbar .logo {
+font-size: 1.4rem;
 }
 
-.form-group input:focus,
-input:focus {
-  outline: none;
-  border-color: var(--primary-green);
-  box-shadow: 0 0 5px rgba(42, 126, 86, 0.2);
+.navbar .menu {
+display: none;
 }
 
-/* Footer común */
-footer {
-  background-color: var(--white);
-  text-align: center;
-  padding: 1rem;
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  border-top: 1px solid var(--border-color);
+.navbar .user-btn {
+padding: 0.4rem 0.8rem;
+}
 }
 
-footer a {
-  color: var(--primary-green);
-  text-decoration: none;
+/* === RESPONSIVE PARA MENÚ MÓVIL === */
+.spbt {
+display: flex;
+justify-content: space-between;
+align-items: center;
+width: 100%;
 }
 
-footer a:hover {
-  text-decoration: underline;
+.menu-toggle {
+display: none;
 }
 
-/* Utilidades */
-.text-center { text-align: center; }
-.mb-1 { margin-bottom: 1rem; }
-.mb-2 { margin-bottom: 2rem; }
-.mt-1 { margin-top: 1rem; }
-.mt-2 { margin-top: 2rem; }
-
-/* Animaciones base */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+.navbar .menu.active {
+display: flex;
+flex-direction: column;
+width: 100%;
+background-color: var(--secondary-green, #34A853);
+padding: 0.5rem 0;
+border-top: 1px solid var(--border-color);
 }
 
-@keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to { opacity: 1; transform: translateY(0); }
+@media screen and (orientation: portrait) {
+.navbar .menu {
+display: none;
 }
-
-.animate-fade-in { animation: fadeIn 1s ease-out; }
-.animate-fade-in-up { animation: fadeInUp 0.8s ease-out; }
-
-/* Responsive base */
-@media (max-width: 768px) {
-  .navbar {
-    padding: 1rem;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .navbar .logo {
-    margin-bottom: 1rem;
-  }
-
-  .navbar .menu {
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-  }
-
-  h1 { font-size: 2rem; }
-  h2 { font-size: 1.5rem; }
-  h3 { font-size: 1.25rem; }
+.menu-toggle {
+display: block;
+background: none;
+border: none;
+font-size: 1.5rem;
+cursor: pointer;
+color: white;
 }
-
-@media (max-width: 480px) {
-  .navbar {
-    padding: 0.5rem;
-  }
-
-  h1 { font-size: 1.75rem; }
-  h2 { font-size: 1.25rem; }
-  h3 { font-size: 1.1rem; }
+.navbar {
+flex-direction: column;
+}
 }
