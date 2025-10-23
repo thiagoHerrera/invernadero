@@ -23,6 +23,9 @@ comandos_manuales = {'riego': None, 'ventiladores': None, 'foco': None}
 modo_manual = {'riego': False, 'ventiladores': False, 'foco': False}
 estados_manuales = {'riego': False, 'ventiladores': True, 'foco': True}  # Estados cuando están en manual
 
+# Variable para control de riego cada 12 horas
+ultimo_riego = None
+
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -107,8 +110,28 @@ def sensors(request):
             estados_manuales['foco'] = comandos_manuales['foco']
             comandos_manuales['foco'] = None
         
+        # Lógica de riego cada 12 horas
+        global ultimo_riego
+        ahora = timezone.now()
+        
+        if not modo_manual['riego']:
+            if ultimo_riego is None:
+                # Primera vez, activar riego
+                riego_automatico = True
+                ultimo_riego = ahora
+            else:
+                # Verificar si han pasado 12 horas
+                diferencia = ahora - ultimo_riego
+                if diferencia.total_seconds() >= 43200:  # 12 horas = 43200 segundos
+                    riego_automatico = True
+                    ultimo_riego = ahora
+                else:
+                    riego_automatico = False
+        else:
+            riego_automatico = estados_manuales['riego']
+        
         # Determinar estados finales
-        riego = estados_manuales['riego'] if modo_manual['riego'] else (humedad_suelo < hume_floor_threshold)
+        riego = riego_automatico
         ventiladores = estados_manuales['ventiladores'] if modo_manual['ventiladores'] else (temperatura > 24.0)
         foco = estados_manuales['foco'] if modo_manual['foco'] else True
         
