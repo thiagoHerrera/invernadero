@@ -1,47 +1,37 @@
-# API de Comandos Manuales - Invernadero
+# Sistema Optimizado de Control de Invernadero
 
 ## Descripción
-Esta API permite enviar comandos manuales que serán aplicados al microcontrolador en su próxima comunicación con el endpoint `/api/parameters/`.
+Sistema centralizado que controla riego, ventiladores y foco desde el servidor. El microcontrolador recibe comandos cada 10 segundos.
 
-## Cómo funciona
-1. El microcontrolador envía datos de sensores a `/api/parameters/` (POST)
-2. El servidor responde con acciones automáticas O comandos manuales pendientes
-3. Los comandos manuales se aplican una sola vez y luego se limpian
-4. El microcontrolador lee la respuesta y aplica las acciones
+## Arquitectura Optimizada
+
+### Microcontrolador (ESP32)
+- Envía datos de sensores cada 10 segundos
+- Recibe y ejecuta comandos del servidor
+- Control completamente centralizado
+
+### Servidor (Django)
+- Lógica automática basada en sensores
+- Comandos manuales con prioridad
+- Estado persistente en base de datos
 
 ## Endpoints
 
-### 1. Establecer Comandos Manuales
-**URL:** `/api/actuadores/manual/`  
-**Método:** `POST`  
-**Content-Type:** `application/json`
-
-#### Parámetros de entrada:
-```json
-{
-    "riego": true/false,           // Opcional: activar/desactivar riego
-    "ventiladores": true/false     // Opcional: activar/desactivar ventiladores
-}
-```
-
-#### Respuesta exitosa (200):
-```json
-{
-    "mensaje": "Comandos manuales establecidos",
-    "comandos": {
-        "riego": true,
-        "ventiladores": false
-    },
-    "timestamp": "2024-01-15T10:30:00.000Z"
-}
-```
-
-### 2. Respuesta del Microcontrolador (automática)
-**URL:** `/api/parameters/` (usado por el microcontrolador)  
+### 1. Datos de Sensores (usado por microcontrolador)
+**URL:** `/api/parameters/`  
 **Método:** `POST`
 
-El microcontrolador recibe esta respuesta que incluye comandos manuales si están pendientes:
+**Entrada:**
+```json
+{
+    "temperatura": 25.5,
+    "humedad": 60.0,
+    "humedad_suelo": 35.0,
+    "luz": 80.0
+}
+```
 
+**Respuesta:**
 ```json
 {
     "sensores": {
@@ -51,8 +41,9 @@ El microcontrolador recibe esta respuesta que incluye comandos manuales si está
         "luz": 80.0
     },
     "acciones": {
-        "riego": 1,        // 1 = ON, 0 = OFF
+        "riego": 1,
         "ventiladores": 0,
+        "foco": 1,
         "tiempo": 5000
     },
     "mensaje": "Datos guardados correctamente",
@@ -60,58 +51,63 @@ El microcontrolador recibe esta respuesta que incluye comandos manuales si está
 }
 ```
 
-### 3. Interfaz Web
+### 2. Comandos Manuales
+**URL:** `/api/actuadores/manual/`  
+**Método:** `POST`
+
+```json
+{
+    "riego": true,
+    "ventiladores": false,
+    "foco": true
+}
+```
+
+### 3. Estado Actual
+**URL:** `/api/parameters/latest/`  
+**Método:** `GET`
+
+### 4. Interfaz Web
 **URL:** `/api/comandos/`  
 **Método:** `GET`
 
-Interfaz web para enviar comandos manuales desde el navegador.
+## Lógica Automática
+- **Riego**: ON si humedad_suelo < 40%
+- **Ventiladores**: ON si temperatura > 28°C  
+- **Foco**: ON si luz < 50%
 
-## Ejemplos de uso
+## Comandos Manuales
+- Tienen prioridad sobre lógica automática
+- Se aplican una sola vez
+- Luego vuelve al modo automático
 
-### Activar riego manualmente:
-```bash
-curl -X POST http://localhost:8000/api/actuadores/manual/ \
-  -H "Content-Type: application/json" \
-  -d '{"riego": true}'
+## Código Arduino Optimizado
+```cpp
+// Función principal que recibe comandos del servidor
+void aplicarAcciones(int riego, int ventiladores, int foco) {
+  digitalWrite(PIN_RIEGO, riego ? HIGH : LOW);
+  digitalWrite(PIN_VENTILADORES, ventiladores ? HIGH : LOW);
+  digitalWrite(PIN_FOCO, foco ? HIGH : LOW);
+}
+
+// Loop optimizado - envío cada 10 segundos
+static unsigned long lastSend = 0;
+if (millis() - lastSend > 10000 || datosCambiaron(currentData, lastSentData)) {
+  enviarDatos(currentData);
+  lastSend = millis();
+}
 ```
 
-### Desactivar ventiladores:
-```bash
-curl -X POST http://localhost:8000/api/actuadores/manual/ \
-  -H "Content-Type: application/json" \
-  -d '{"ventiladores": false}'
-```
+## Características
+- ✅ Control centralizado desde servidor
+- ✅ Estado en tiempo real en interfaz web
+- ✅ Persistencia en base de datos
+- ✅ Lógica automática inteligente
+- ✅ Comandos manuales prioritarios
+- ✅ Comunicación optimizada cada 10s
+- ✅ Interfaz web responsiva
 
-### Desde JavaScript:
-```javascript
-const response = await fetch('/api/actuadores/manual/', {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-        riego: true,
-        ventiladores: false
-    })
-});
-
-const data = await response.json();
-console.log(data);
-```
-
-## Flujo de trabajo
-1. **Usuario envía comando manual** → `/api/actuadores/manual/`
-2. **Comando se almacena** en memoria del servidor
-3. **Microcontrolador envía datos** → `/api/parameters/`
-4. **Servidor responde** con comando manual (si existe) o lógica automática
-5. **Microcontrolador aplica** las acciones recibidas
-6. **Comando manual se limpia** automáticamente
-
-## Notas importantes
-- Los comandos manuales tienen **prioridad** sobre la lógica automática
-- Cada comando manual se aplica **una sola vez**
-- Si no hay comandos manuales, se aplica la lógica automática:
-  - Riego: ON si humedad_suelo < 40%
-  - Ventiladores: ON si temperatura > 28°C
-- Compatible con el código Arduino existente
-- Los valores booleanos aceptan: `true/false`, `1/0`, `"on"/"off"`, `"yes"/"no"`, `"activar"`
+## Uso
+1. **Automático**: El sistema funciona solo basado en sensores
+2. **Manual**: Usar `/api/comandos/` para control directo
+3. **Monitoreo**: Estado en tiempo real en la interfaz web

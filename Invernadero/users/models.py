@@ -9,6 +9,7 @@ class Parameters(models.Model):
     light = models.CharField(max_length=20, default="0")
     riego = models.BooleanField(default=False)
     ventiladores = models.BooleanField(default=False)
+    foco = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
 
     

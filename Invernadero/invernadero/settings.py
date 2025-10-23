@@ -31,7 +31,7 @@ SECRET_KEY = 'django-insecure-2rgb#azfn7l30a=437$mj7s!4=o$1_(d9#da6d4#!lzzppg*yi
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*', 'floracore.onrender.com', 'localhost', '127.0.0.1', 'expert-zebra-r4p6p9459qrp2p7v6-8000.app.github.dev']
+ALLOWED_HOSTS = ['*', 'floracore.onrender.com', 'localhost', '127.0.0.1', 'expert-zebra-r4p6p9459qrp2p7v6-8000.app.github.dev', 'https://fantastic-xylophone-4jwvw4jpxj792q66v-8000.app.github.dev']
 
 
 
@@ -173,7 +173,8 @@ CSRF_TRUSTED_ORIGINS = [
     "http://127.0.0.1:8000",
     "https://localhost:8000",
     "https://127.0.0.1:8000",
-    "https://floracore.onrender.com"
+    "https://floracore.onrender.com",
+    "https://fantastic-xylophone-4jwvw4jpxj792q66v-8000.app.github.dev"
 ]
 
 REST_FRAMEWORK = {

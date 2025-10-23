@@ -1,5 +1,4 @@
 #include <WiFi.h>
-#include <WiFiClientSecure.h>
 #include <HTTPClient.h>
 #include <ArduinoJson.h>
 #include "DHT.h"
@@ -8,8 +7,8 @@
 const char* ssid = "Cereza";
 const char* password = "robotica25";
 
-// API del servidor - usar servidor de producción que funciona
-const char* serverUrl = "https://floracore.onrender.com/api/parameters/";
+// API del servidor (HTTP para testing local)
+const char* serverUrl = "http://localhost:8000/api/parameters/";
 
 // Pines sensores
 #define DHTPIN 4
@@ -20,7 +19,7 @@ const char* serverUrl = "https://floracore.onrender.com/api/parameters/";
 // Pines reles
 #define PIN_RIEGO 26
 #define PIN_VENTILADORES 27
-#define PIN_FOCO 25   // Relé para el foco
+#define PIN_FOCO 25
 
 // Instancia sensor DHT
 DHT dht(DHTPIN, DHTTYPE);
@@ -33,7 +32,7 @@ struct SensorData {
   float luz;
 };
 
-// Variables para optimización (últimos valores enviados)
+// Variables para optimización
 SensorData lastSentData = {0, 0, 0, 0};
 
 // Umbrales para cambio significativo
@@ -45,10 +44,6 @@ const float LIGHT_THRESHOLD = 5.0;
 // Variables para reconexión WiFi
 unsigned long lastWiFiCheck = 0;
 const unsigned long WIFI_CHECK_INTERVAL = 10000;
-
-
-
-// ---------------- FUNCIONES ----------------
 
 void connectWiFi() {
   if (WiFi.status() != WL_CONNECTED) {
@@ -89,27 +84,20 @@ bool datosCambiaron(SensorData current, SensorData last) {
 }
 
 bool enviarDatos(SensorData data) {
-  WiFiClientSecure client;
-  client.setInsecure();
   HTTPClient http;
   
-  // Configurar timeout
   http.setTimeout(10000);
-  http.begin(client, serverUrl);
+  http.begin(serverUrl);
   http.addHeader("Content-Type", "application/json");
   http.addHeader("Accept", "application/json");
   http.addHeader("User-Agent", "ESP32-Invernadero/1.0");
-  http.addHeader("X-Requested-With", "XMLHttpRequest");
-  http.addHeader("Cache-Control", "no-cache");
 
-  // Validar datos antes de enviar
   if (isnan(data.temperatura) || isnan(data.humedad)) {
     Serial.println("Error: Datos inválidos, no se puede enviar");
     http.end();
     return false;
   }
 
-  // Crear JSON usando ArduinoJson para mayor confiabilidad
   StaticJsonDocument<200> jsonDoc;
   jsonDoc["temperatura"] = round(data.temperatura * 10) / 10.0;
   jsonDoc["humedad"] = round(data.humedad * 10) / 10.0;
@@ -128,10 +116,9 @@ bool enviarDatos(SensorData data) {
   
   if (httpResponseCode > 0) {
     String response = http.getString();
-    Serial.println("Respuesta del servidor (primeros 200 chars): " + response.substring(0, min(200, (int)response.length())));
+    Serial.println("Respuesta completa: " + response);
 
     if (httpResponseCode == 201 || httpResponseCode == 200) {
-      // Verificar si la respuesta parece ser JSON
       if (response.startsWith("{") && response.endsWith("}")) {
         StaticJsonDocument<1024> doc;
         DeserializationError error = deserializeJson(doc, response);
@@ -139,36 +126,24 @@ bool enviarDatos(SensorData data) {
         if (error) {
           Serial.print("Error al deserializar JSON: ");
           Serial.println(error.f_str());
-          Serial.println("Respuesta completa: " + response);
-          // Consideramos exitoso si el HTTP es correcto
           success = true;
         } else {
           Serial.println("JSON parseado correctamente");
-          // Verificar estructura de respuesta
           if (doc.containsKey("acciones")) {
             int riego = doc["acciones"]["riego"];
             int ventiladores = doc["acciones"]["ventiladores"];
-            int foco = doc["acciones"].containsKey("foco") ? doc["acciones"]["foco"] : 0;
+            int foco = doc["acciones"]["foco"];
 
             Serial.println("Riego: " + String(riego ? "ON" : "OFF"));
             Serial.println("Ventiladores: " + String(ventiladores ? "ON" : "OFF"));
             Serial.println("Foco: " + String(foco ? "ON" : "OFF"));
 
             aplicarAcciones(riego, ventiladores, foco);
-          } else {
-            Serial.println("Advertencia: Respuesta sin campo 'acciones'");
           }
           success = true;
         }
-      } else {
-        Serial.println("Error: Respuesta no es JSON válido");
-        Serial.println("Respuesta completa: " + response);
-        // Si recibimos HTML, probablemente hay un error del servidor
-        if (response.indexOf("<html>") >= 0 || response.indexOf("<HTML>") >= 0) {
-          Serial.println("El servidor devolvió HTML en lugar de JSON - posible error 500");
-        }
       }
-    } else if (httpResponseCode >= 400) {
+    } else {
       Serial.println("Error HTTP " + String(httpResponseCode) + ": " + response);
     }
   } else {
@@ -186,9 +161,6 @@ void aplicarAcciones(int riego, int ventiladores, int foco) {
   digitalWrite(PIN_FOCO, foco ? HIGH : LOW);
 }
 
-
-
-// ---------------- SETUP ----------------
 void setup() {
   Serial.begin(115200);
   dht.begin();
@@ -209,11 +181,8 @@ void setup() {
   Serial.println("\nConectado a Wi-Fi");
 }
 
-// ---------------- LOOP ----------------
 void loop() {
   connectWiFi();
-
-  // Control centralizado desde servidor - eliminamos funciones locales
 
   if (WiFi.status() == WL_CONNECTED) {
     SensorData currentData = leerSensores();
@@ -227,7 +196,6 @@ void loop() {
     Serial.println("Humedad suelo: " + String(currentData.humedad_suelo, 1) + " %");
     Serial.println("Luminosidad: " + String(currentData.luz, 1) + " %");
 
-    // Enviar datos cada 10 segundos para recibir comandos del servidor
     static unsigned long lastSend = 0;
     if (millis() - lastSend > 10000 || datosCambiaron(currentData, lastSentData)) {
       Serial.println("Enviando datos al servidor...");
@@ -241,5 +209,5 @@ void loop() {
     Serial.println("WiFi no conectado, intentando reconectar...");
   }
 
-  delay(1000); // 1 segundo entre lecturas
+  delay(1000);
 }

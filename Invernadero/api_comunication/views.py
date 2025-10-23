@@ -19,7 +19,7 @@ from users.models import Parameters, Configuration
 from .serializers import ParametersSerializer, ConfigurationSerializer
 
 # Variable global para comandos manuales
-comandos_manuales = {'riego': None, 'ventiladores': None}
+comandos_manuales = {'riego': None, 'ventiladores': None, 'foco': None}
 
 @csrf_exempt
 @api_view(['POST'])
@@ -92,15 +92,20 @@ def sensors(request):
         # Lógica de control automático
         riego = humedad_suelo < hume_floor_threshold
         ventiladores = temperatura > temp_threshold
+        foco = luz < 50.0
         
         # Aplicar comandos manuales si existen
         if comandos_manuales['riego'] is not None:
             riego = comandos_manuales['riego']
-            comandos_manuales['riego'] = None  # Limpiar después de usar
+            comandos_manuales['riego'] = None
             
         if comandos_manuales['ventiladores'] is not None:
             ventiladores = comandos_manuales['ventiladores']
-            comandos_manuales['ventiladores'] = None  # Limpiar después de usar
+            comandos_manuales['ventiladores'] = None
+            
+        if comandos_manuales['foco'] is not None:
+            foco = comandos_manuales['foco']
+            comandos_manuales['foco'] = None
         
         # Guardar en base de datos
         param = Parameters.objects.create(
@@ -110,6 +115,7 @@ def sensors(request):
             light=luz,
             riego=riego,
             ventiladores=ventiladores,
+            foco=foco,
             timestamp=timezone.now()
         )
         
@@ -124,6 +130,7 @@ def sensors(request):
             "acciones": {
                 "riego": int(riego),
                 "ventiladores": int(ventiladores),
+                "foco": int(foco),
                 "tiempo": 5000
             },
             "mensaje": "Datos guardados correctamente",
@@ -166,6 +173,7 @@ def get_latest_parameters(request):
         'luz': ultimo.light,
         'riego': ultimo.riego,
         'ventiladores': ultimo.ventiladores,
+        'foco': ultimo.foco,
     }
 
     # Devolver los datos como respuesta HTTP
@@ -254,6 +262,8 @@ def actuadores_manual(request):
             comandos_manuales['riego'] = convert_to_bool(data['riego'])
         if 'ventiladores' in data:
             comandos_manuales['ventiladores'] = convert_to_bool(data['ventiladores'])
+        if 'foco' in data:
+            comandos_manuales['foco'] = convert_to_bool(data['foco'])
         
         return JsonResponse({
             'mensaje': 'Comandos manuales establecidos',
