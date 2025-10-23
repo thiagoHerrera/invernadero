@@ -109,7 +109,7 @@ def sensors(request):
         
         # Determinar estados finales
         riego = estados_manuales['riego'] if modo_manual['riego'] else (humedad_suelo < hume_floor_threshold)
-        ventiladores = estados_manuales['ventiladores'] if modo_manual['ventiladores'] else True
+        ventiladores = estados_manuales['ventiladores'] if modo_manual['ventiladores'] else (temperatura > 24.0)
         foco = estados_manuales['foco'] if modo_manual['foco'] else True
         
         # Guardar en base de datos
