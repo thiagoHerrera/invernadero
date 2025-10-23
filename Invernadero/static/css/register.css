@@ -19,7 +19,7 @@ body {
     width: 100%;
     height: 100vh;
     font-family: 'Poppins', sans-serif;
-    background-color: var(--color-off-white); 
+    background-color: var(--color-off-white);
     display: flex;
     overflow: hidden;
 }
@@ -27,91 +27,64 @@ body {
 .container {
     display: flex;
     width: 100%;
-    height: 100vh; 
-    overflow: hidden; 
+    height: 100vh;
+    overflow: hidden;
 }
 
-/* ------------------------------------------------------------------- */
-/* 1. Panel Decorativo Izquierdo (60%) - FloraCore */
-/* ------------------------------------------------------------------- */
+/* Panel Decorativo Izquierdo (60%) */
 .panel-decorativo {
     flex: 0 0 60%;
     position: relative;
-    
-    /* Imagen de fondo (mantener tu ruta) */
     background: url('../img/fondo3.png') no-repeat center center;
-    background-size: cover; 
-    
-    /* CAMBIOS CLAVE: Flexbox para centrar y distribuir el contenido */
-    display: flex; 
-    flex-direction: column; /* Apila el contenido verticalmente */
-    justify-content: space-between; /* Empuja el header arriba y el contenido al centro */
-    align-items: center; /* Centra horizontalmente el contenido */
-    
-    padding: 30px 40px; /* Padding general */
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 30px 40px;
 }
 
-/* 1.1 Encabezado de la marca (esquina superior izquierda) */
 .brand-header {
-    width: 100%; 
-    align-self: flex-start; 
+    width: 100%;
+    align-self: flex-start;
 }
 .logo-text {
-    font-size: 1.8rem; /* Un poco más pequeño y sutil */
+    font-size: 1.8rem;
     font-weight: 700;
     color: var(--color-forest);
     opacity: 0.9;
     transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
 }
 .logo-text:hover {
-       /* Mueve el logo ligeramente hacia arriba (efecto de "flotación") */
-    transform: translateY(-5px) scale(1.02); 
-    
-    /* Aumenta un poco la sombra para darle más profundidad */
+    transform: translateY(-5px) scale(1.02);
     filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
-    
-    /* El efecto es leve (scale 1.02, solo -5px de movimiento) y el 
-       ease-in-out lo hace suave y profesional. */
 }
 
-/* 1.2 Contenido Central (Logo y Slogan) */
 .content-center {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-grow: 1; 
+    flex-grow: 1;
     text-align: center;
-    padding-bottom: 50px; 
+    padding-bottom: 50px;
 }
 
 .logo-center {
-    width: 150px; /* Tamaño del logo/imagen central */
+    width: 150px;
     height: auto;
     margin-bottom: 20px;
-    
-    /* === 1. AÑADIDO CLAVE: Transición === */
-    /* Aplica transición a las propiedades que queremos animar (transform y filter) */
-    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out; 
-    /* ==================================== */
-    
-    /* Efecto sutil para que se destaque del fondo (estado base) */
+    transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
     filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
 }
 .logo-center:hover {
-    /* Mueve el logo ligeramente hacia arriba (efecto de "flotación") */
-    transform: translateY(-5px) scale(1.02); 
-    
-    /* Aumenta un poco la sombra para darle más profundidad */
+    transform: translateY(-5px) scale(1.02);
     filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
-    
-    /* El efecto es leve (scale 1.02, solo -5px de movimiento) y el 
-       ease-in-out lo hace suave y profesional. */
 }
 
 .slogan {
     font-size: 1.8rem;
-    font-weight: 400; 
+    font-weight: 400;
     color: var(--color-forest);
     opacity: 0.85;
     max-width: 80%;
@@ -119,41 +92,11 @@ body {
     transition: transform 0.3s ease-in-out, filter 0.3s ease-in-out;
 }
 .slogan:hover {
-       /* Mueve el logo ligeramente hacia arriba (efecto de "flotación") */
-    transform: translateY(-5px) scale(1.02); 
-    
-    /* Aumenta un poco la sombra para darle más profundidad */
+    transform: translateY(-5px) scale(1.02);
     filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.2));
-    
-    /* El efecto es leve (scale 1.02, solo -5px de movimiento) y el 
-       ease-in-out lo hace suave y profesional. */
 }
 
-/* ------------------------------------------------------------------- */
-/* 2. Liana Divisoria (.flora) */
-/* ------------------------------------------------------------------- */
-.flora {
-    position: absolute; 
-    /* Quitamos todas las transformaciones que distorsionaban */
-    
-    /* Restauramos el tamaño natural de la imagen */
-    height: 250px; 
-    
-    margin-top: -65px;
-    /* Posicionamiento para que se vea perfectamente en el borde */
-    left: 452px; 
-    top: 50%; /* Centrado verticalmente */
-    
-    mix-blend-mode: multiply; 
-    z-index: 10;
-    
-    transform: rotate(91deg);
-    width: 1350px;
-}
-
-/* ------------------------------------------------------------------- */
-/* 3. Formulario de Registro (40%) - Flotante sobre Fondo Crema */
-/* ------------------------------------------------------------------- */
+/* Formulario de Registro (40%) */
 .form-register {
     flex: 0 0 40%;
     display: flex;
@@ -161,10 +104,7 @@ body {
     justify-content: center;
     align-items: center;
     padding: 20px;
-    
-    /* Fondo Cremoso */
     background-color: var(--color-cream);
-    
     position: relative;
     z-index: 10;
 }
@@ -173,20 +113,19 @@ body {
     font-size: 2.2rem;
     font-weight: 600;
     color: var(--color-forest);
-    margin-bottom: 20px; /* Reducimos el margen para más espacio */
+    margin-bottom: 20px;
     text-align: center;
 }
 
-/* Contenido del Formulario */
 .form-content {
     width: 100%;
-    max-width: 380px; 
-    padding: 0; 
-    background-color: transparent; 
-    box-shadow: none; 
+    max-width: 380px;
+    padding: 0;
+    background-color: transparent;
+    box-shadow: none;
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Reducimos el gap para que quepan más campos */
+    gap: 15px;
 }
 
 .form-group {
@@ -195,23 +134,18 @@ body {
     gap: 5px;
 }
 
-/* Labels */
 .form-group label {
     font-size: 0.9rem;
     font-weight: 600;
     color: var(--color-forest);
 }
 
-/* Campos de Input */
 .form-content input {
     width: 100%;
-    height: 40px; /* Campos un poco más pequeños para registro */
+    height: 40px;
     padding: 0 15px;
     border-radius: 8px;
-    
-    /* Borde inicial verde claro */
-    border: 1px solid var(--color-light-border); 
-    
+    border: 1px solid var(--color-light-border);
     background-color: #ffffff;
     font-size: 1rem;
     transition: border-color 0.3s, box-shadow 0.3s;
@@ -219,11 +153,10 @@ body {
 
 .form-content input:focus {
     outline: none;
-    border-color: var(--color-moss); 
+    border-color: var(--color-moss);
     box-shadow: 0 0 5px rgba(52, 168, 83, 0.5);
 }
 
-/* Botón de Registro */
 .btn-register {
     width: 100%;
     height: 45px;
@@ -239,16 +172,15 @@ body {
 }
 
 .btn-register:hover {
-    background-color: #1e8069; 
+    background-color: #1e8069;
 }
 
 .btn-register:active {
     transform: scale(0.99);
 }
 
-/* Mensajes de Error */
 .error-general {
-    color: #c93d3d; 
+    color: #c93d3d;
     font-size: 0.85rem;
     text-align: center;
     padding: 10px;
@@ -257,7 +189,6 @@ body {
     margin-bottom: 10px;
 }
 
-/* Opciones Secundarias (Link a Login) */
 .opciones {
     margin-top: 25px;
     font-size: 0.9rem;
@@ -286,25 +217,14 @@ body {
     text-decoration: underline;
 }
 
-/* ------------------------------------------------------------------- */
-/* 4. MEDIA QUERIES (Adaptabilidad para Dispositivos) */
-/* ------------------------------------------------------------------- */
-
 /* Media Query para pantallas medianas (tabletas grandes, hasta 1100px) */
-/* Ajusta la proporción de las dos columnas a 55/45 y reposiciona la liana. */
 @media (max-width: 1100px) {
     .panel-decorativo {
-        flex: 0 0 55%; /* Panel izquierdo ocupa el 55% del ancho. */
+        flex: 0 0 55%;
     }
     .form-register {
-        flex: 0 0 45%; /* Formulario ocupa el 45% del ancho. */
+        flex: 0 0 45%;
     }
-    /* Reposiciona la liana para que quede en el nuevo borde (55%). */
-    .flora {
-        left: 400px; /* Ajuste para el nuevo punto de división. */
-        width: 1200px; 
-    }
-    /* Reducción sutil de elementos grandes. */
     .logo-text, .slogan {
         font-size: 1.5rem;
     }
@@ -315,71 +235,38 @@ body {
 
 /* Media Query para tabletas pequeñas y móviles horizontales (hasta 900px) */
 @media (max-width: 900px) {
-    /* Nueva proporción 50/50. */
     .panel-decorativo {
         flex: 0 0 50%;
     }
     .form-register {
         flex: 0 0 50%;
-    }
-    /* Ajuste de la liana para la nueva división 50/50. */
-    .flora {
-        left: 300px; /* Se acerca al borde central. */
-        width: 1100px;
     }
 }
 
-
 /* Media Query para pantallas pequeñas (teléfonos móviles, hasta 768px de ancho) */
 @media (max-width: 768px) {
-    /* El contenedor principal apila las secciones verticalmente. */
     .container {
         flex-direction: column;
-        height: auto; 
+        height: auto;
         min-height: 100vh;
-        overflow-y: auto; /* Habilita el scroll vertical si el formulario es muy largo. */
+        overflow-y: auto;
     }
-    
-    /* Ambos paneles ocupan el 100% del ancho. */
-    .panel-decorativo, .form-register {
+    .panel-decorativo {
+        display: none; /* Oculta el panel decorativo en pantallas pequeñas */
+    }
+    .form-register {
         flex: 0 0 100%;
         width: 100%;
-    }
-    
-    /* El panel decorativo se convierte en una cabecera más corta para móviles. */
-    .panel-decorativo {
-        height: 25vh; /* Altura fija para el encabezado móvil. */
-        min-height: 180px; 
-        padding: 20px 30px;
-        /* Alinea la marca al inicio. */
-        justify-content: flex-start; 
-        align-items: flex-start;
-    }
-    
-    /* Oculta el logo central y el eslogan para ahorrar espacio vital en móvil. */
-    .content-center {
-        display: none; 
-    }
-    
-    /* Oculta la liana decorativa. */
-    .flora {
-        display: none; 
-    }
-    
-    /* Ajusta el padding del formulario para móviles. */
-    .form-register {
         padding: 40px 20px;
     }
-
-    /* Optimiza el espacio dentro del formulario. */
     .titulo-principal {
         font-size: 2.0rem;
     }
     .form-content {
-        gap: 12px; 
+        gap: 12px;
     }
     .btn-register {
-        margin-top: 10px; 
+        margin-top: 10px;
     }
     .opciones {
         margin-top: 20px;

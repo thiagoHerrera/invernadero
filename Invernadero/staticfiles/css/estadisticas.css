@@ -1,0 +1,283 @@
+
+/* Importar estilos base */
+@import url('base.css');
+
+body {
+   background-color: var(--light-bg);
+   color: var(--text-primary);
+}
+
+/* Navbar usando base.css */
+.navbar .user-btn {
+    background-color: var(--secondary-green);
+}
+
+.navbar .user-btn:hover {
+    background-color: var(--hover-green);
+}
+/* Menu usando base.css */
+.menu a:hover {
+  color: var(--secondary-green);
+}
+
+/* DASHBOARD SECTION */
+.dashboard-section {
+   max-width: 1200px;
+   margin: auto;
+   padding: 4rem 2rem;
+}
+
+.dashboard-section h1 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-green);
+}
+
+.subtitulo {
+    text-align: center;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    font-size: 1.1rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* DASHBOARD CONTAINER SIEMPRE EN COLUMNA */
+.dashboard-container {
+   display: flex;
+   flex-direction: column;
+   gap: 2rem;
+   min-height: 65vh;
+   padding: 2rem 1rem;
+   background-color: var(--light-bg);
+   align-items: center;
+}
+
+.datos-sensores {
+   background-color: var(--white);
+   padding: 1.5rem;
+   border-radius: 12px;
+   box-shadow: 0 8px 16px var(--shadow);
+   max-width: 320px;
+   width: 100%;
+}
+
+.datos-sensores h2 {
+   margin-bottom: 1rem;
+   font-size: 1.2rem;
+   color: var(--primary-green);
+   text-align: center;
+}
+
+.sensor-card p {
+   font-size: 1rem;
+   margin-bottom: 0.8rem;
+   color: var(--text-primary);
+}
+
+.sensor-card strong {
+   color: var(--dark-green);
+}
+
+/* CONTENEDOR DEL IFRAME Y DESCRIPCIÓN */
+.iframe-contenedor {
+  max-width: 960px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.iframe-descripcion {
+   font-size: 1rem;
+   color: var(--text-secondary);
+   text-align: center;
+   margin-bottom: 0.5rem;
+}
+
+.iframe-contenedor iframe {
+   width: 100%;
+   height: 500px;
+   border: none;
+   border-radius: 12px;
+   box-shadow: 0 8px 16px var(--shadow);
+   background-color: var(--white);
+}
+
+/* FOOTER usando base.css */
+footer a {
+   color: var(--secondary-green);
+}
+
+.iframe-wrapper {
+   max-width: 960px;
+   width: 100%;
+   display: flex;
+   flex-direction: column;
+   gap: 1rem;
+   background-color: var(--white);
+   padding: 1.5rem;
+   border-radius: 12px;
+   box-shadow: 0 8px 16px var(--shadow);
+   margin-top: 2rem;
+}
+
+.iframe-wrapper h2 {
+   color: var(--primary-green);
+   font-size: 1.3rem;
+   text-align: center;
+   margin-bottom: 0.3rem;
+}
+
+.iframe-card iframe {
+   width: 100%;
+   height: 500px;
+   border: none;
+   border-radius: 12px;
+   box-shadow: 0 8px 16px var(--shadow);
+   background-color: var(--white);
+}
+
+/* === RESPONSIVE PARA MENÚ MÓVIL === */
+.spbt {
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     width: 100%;
+}
+
+.menu-toggle {
+     display: none;
+}
+
+.navbar .menu.active {
+     display: flex;
+     flex-direction: column;
+     width: 100%;
+     background-color: var(--white);
+     padding: 0.5rem 0;
+     border-top: 1px solid var(--border-color);
+}
+
+@media screen and (orientation: portrait) {
+     .navbar .menu {
+         display: none;
+     }
+
+     .menu-toggle {
+         display: block;
+         background: none;
+         border: none;
+         font-size: 1.5rem;
+         cursor: pointer;
+     }
+.navbar {
+    flex-direction: column;
+}
+}
+
+/* === NUEVOS ESTILOS PARA ESTADÍSTICAS === */
+.dashboard-header {
+text-align: center;
+margin-bottom: 4rem;
+}
+
+/* === SENSORES GRID === */
+.sensores-grid {
+display: grid;
+grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+gap: 2rem;
+margin-top: 2rem;
+}
+
+.sensor-card {
+background: var(--white);
+border-radius: 15px;
+padding: 2rem;
+box-shadow: 0 8px 25px var(--shadow);
+text-align: center;
+transition: all 0.3s ease;
+border: 1px solid var(--border-color);
+display: flex;
+align-items: center;
+gap: 1.5rem;
+}
+
+.sensor-card:hover {
+transform: translateY(-10px);
+box-shadow: 0 15px 35px var(--shadow-hover);
+}
+
+.sensor-icon {
+width: 70px;
+height: 70px;
+background: linear-gradient(135deg, var(--primary-green), var(--secondary-green));
+border-radius: 50%;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 1.8rem;
+color: var(--white);
+flex-shrink: 0;
+}
+
+.sensor-info {
+text-align: left;
+flex: 1;
+}
+
+.sensor-info h3 {
+color: var(--primary-green);
+margin-bottom: 0.5rem;
+font-size: 1.2rem;
+}
+
+.sensor-value {
+font-size: 1.8rem;
+font-weight: bold;
+color: var(--text-primary);
+margin-bottom: 0.5rem;
+}
+
+.sensor-status {
+display: inline-block;
+padding: 0.25rem 0.75rem;
+background: var(--light-green);
+color: var(--secondary-green);
+border-radius: 20px;
+font-size: 0.8rem;
+font-weight: 600;
+text-transform: uppercase;
+}
+
+/* === IFRAME STYLES === */
+.iframe-wrapper h2 {
+color: var(--primary-green);
+font-size: 1.8rem;
+text-align: center;
+margin-bottom: 1rem;
+}
+
+.iframe-descripcion {
+color: var(--text-secondary);
+text-align: center;
+margin-bottom: 2rem;
+font-size: 1rem;
+}
+
+.iframe-card {
+border-radius: 15px;
+overflow: hidden;
+box-shadow: 0 8px 25px var(--shadow);
+border: 1px solid var(--border-color);
+}
+
+.iframe-card iframe {
+width: 100%;
+height: 500px;
+border: none;
+background-color: var(--white);
+}
+

@@ -196,24 +196,44 @@ body {
     color: var(--color-moss); 
 }
 
-/* Estilo para la liana decorativa (tal como la proporcionaste) */
+/* Contenedor para la planta */
+.flora-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden; /* Evita que la planta se desborde */
+}
+
+/* Estilo de la planta */
 .flora {
-    position: absolute; 
-    /* Quitamos todas las transformaciones que distorsionaban */
-    
-    /* Restauramos el tamaño natural de la imagen */
-    height: 250px; 
-    
-    margin-top: -65px;
-    /* Posicionamiento para que se vea perfectamente en el borde */
-    left: 365px; 
-    top: 50%; /* Centrado verticalmente */
-    
-    mix-blend-mode: multiply; 
-    z-index: 10;
-    
-    transform: rotate(91deg);
-    width: 1350px;
+    position: absolute;
+    height: 30vh; /* Altura inicial relativa */
+    width: auto; /* Ancho ajustado automáticamente */
+    max-height: 300px; /* Límite máximo para evitar que crezca demasiado */
+    left: 60%; /* Comienza al final del panel decorativo */
+    top: 50%;
+    transform: translateY(-50%) rotate(91deg); /* Centrado vertical y rotación */
+    mix-blend-mode: multiply;
+    z-index: 5; /* Menor que el formulario (z-index: 10) */
+    object-fit: contain; /* Escala la imagen manteniendo proporciones */
+}
+
+/* Media Query para pantallas medianas (hasta 992px) */
+@media (max-width: 992px) {
+    .flora {
+        left: 55%;
+        height: 25vh;
+        max-height: 250px;
+    }
+}
+
+/* Media Query para pantallas pequeñas (hasta 768px) */
+@media (max-width: 768px) {
+    .flora {
+        display: none; /* Ocultar en móviles */
+    }
 }
 /* Estilos para el nuevo contenido del panel decorativo */
 

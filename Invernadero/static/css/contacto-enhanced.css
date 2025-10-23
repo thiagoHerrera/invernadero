@@ -272,6 +272,9 @@ body {
   transform: scale(1.1) rotate(5deg);
 }
 
+
+
+
 /* Responsive Design */
 @media (max-width: 768px) {
   .hero-contact h1 {

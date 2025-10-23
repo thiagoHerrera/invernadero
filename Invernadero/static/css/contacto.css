@@ -300,6 +300,24 @@ footer {
     width: 100%;
 }
 
+/* FOTO DE MIEMBROS DEL EQUIPO */
+.member-photo {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin: 0 auto 1.5rem;
+    object-fit: cover;
+    border: 4px solid var(--primary-green);
+    box-shadow: 0 4px 15px rgba(42, 126, 86, 0.3);
+    transition: all 0.3s ease;
+}
+
+.team-member:hover .member-photo {
+    transform: scale(1.05);
+    border-color: var(--secondary-green);
+    box-shadow: 0 6px 20px rgba(42, 126, 86, 0.4);
+}
+
 .menu-toggle {
     display: none;
 }

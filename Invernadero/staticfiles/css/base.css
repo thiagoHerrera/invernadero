@@ -1,0 +1,284 @@
+/* === CSS BASE - VARIABLES Y ESTILOS COMUNES === */
+
+/* Variables de colores */
+:root {
+  --primary-green: #2a7e56;
+  --secondary-green: #036b0c;
+  --hover-green: #1e5c3e;
+  --light-green: #f4faf5;
+  --medium-green: #d7ded7;
+  --dark-green: #256440;
+  --accent-green: #3f8c5d;
+  --text-primary: #2c2c2c;
+  --text-secondary: #555;
+  --text-muted: #666;
+  --white: #ffffff;
+  --light-bg: #f6f7f5;
+  --border-color: #bcd9c7;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --shadow-hover: rgba(0, 0, 0, 0.15);
+}
+
+/* Reset general */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Base body */
+body {
+  background-color: var(--light-green);
+  color: var(--text-primary);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Tipografía */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 2.5rem;
+  color: var(--primary-green);
+}
+
+h2 {
+  font-size: 2rem;
+  color: var(--secondary-green);
+}
+
+h3 {
+  font-size: 1.5rem;
+  color: var(--primary-green);
+}
+
+p {
+  margin-bottom: 1rem;
+  color: var(--text-secondary);
+}
+
+/* Navbar común */
+.navbar {
+  background-color: var(--white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 3rem;
+  box-shadow: 0 2px 8px var(--shadow);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.navbar .logo {
+  font-weight: bold;
+  color: var(--primary-green);
+  font-size: 1.6rem;
+  transition: color 0.3s ease;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.navbar .logo:hover {
+  color: var(--hover-green);
+}
+
+.navbar .menu {
+  flex: 1;
+  display: flex;
+  gap: 2rem;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.navbar .menu a {
+  text-decoration: none;
+  color: var(--text-primary);
+  font-weight: 500;
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+.navbar .menu a:hover {
+  color: var(--primary-green);
+}
+
+.navbar .menu a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  background-color: var(--primary-green);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
+.navbar .menu a:hover::after {
+  transform: scaleX(1);
+}
+
+.navbar .user-btn {
+  background-color: var(--primary-green);
+  color: var(--white);
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.navbar .user-btn:hover {
+  background-color: var(--hover-green);
+  transform: scale(1.05);
+}
+
+.navbar .register-btn {
+  background-color: transparent;
+  color: var(--primary-green);
+  padding: 0.5rem 1rem;
+  border: 2px solid var(--primary-green);
+  border-radius: 10px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+.navbar .register-btn:hover {
+  background-color: var(--primary-green);
+  color: var(--white);
+  transform: scale(1.05);
+  border-color: var(--hover-green);
+}
+
+/* Botones generales */
+button {
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  font-weight: 600;
+}
+
+button:hover {
+  transform: scale(1.05);
+}
+
+/* Cards comunes */
+.card, .equipment-card {
+  background-color: var(--white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.card:hover, .equipment-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px var(--shadow-hover);
+}
+
+/* Formularios */
+.form-group input,
+input {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  background-color: #eaf4ed;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input:focus,
+input:focus {
+  outline: none;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 5px rgba(42, 126, 86, 0.2);
+}
+
+/* Footer común */
+footer {
+  background-color: var(--white);
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  border-top: 1px solid var(--border-color);
+}
+
+footer a {
+  color: var(--primary-green);
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+/* Utilidades */
+.text-center { text-align: center; }
+.mb-1 { margin-bottom: 1rem; }
+.mb-2 { margin-bottom: 2rem; }
+.mt-1 { margin-top: 1rem; }
+.mt-2 { margin-top: 2rem; }
+
+/* Animaciones base */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in { animation: fadeIn 1s ease-out; }
+.animate-fade-in-up { animation: fadeInUp 0.8s ease-out; }
+
+/* Responsive base */
+@media (max-width: 768px) {
+  .navbar {
+    padding: 1rem;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .navbar .logo {
+    margin-bottom: 1rem;
+  }
+
+  .navbar .menu {
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  h1 { font-size: 2rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+}
+
+@media (max-width: 480px) {
+  .navbar {
+    padding: 0.5rem;
+  }
+
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.25rem; }
+  h3 { font-size: 1.1rem; }
+}

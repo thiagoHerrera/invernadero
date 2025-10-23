@@ -63,11 +63,11 @@
           <div class="metric-label">Tiempo Activo</div>
         </div>
         <div class="metric-card animate-on-scroll hover:scale-105 transition-all duration-300">
-          <div class="metric-number">6</div>
+          <div class="metric-number">3</div>
           <div class="metric-label">Sensores Activos</div>
         </div>
         <div class="metric-card animate-on-scroll hover:scale-105 transition-all duration-300">
-          <div class="metric-number">∞</div>
+          <div class="metric-number">{{ history_data|length|default:"0" }}</div>
           <div class="metric-label">Datos Procesados</div>
         </div>
       </div>
@@ -87,10 +87,10 @@
             </div>
             <div class="sensor-info">
               <h3>Temperatura Ambiental</h3>
-              <p>Rango óptimo: 18-25°C</p>
+              {% if temperatura != 'No disponible' %}<p>Rango óptimo: 18-25°C</p>{% endif %}
             </div>
           </div>
-          <div class="sensor-value">{{ temperatura }}°C</div>
+          <div class="sensor-value">{% if temperatura != 'No disponible' %}{{ temperatura }}°C{% else %}<strong>No disponible</strong>{% endif %}</div>
           <div style="text-align: center;">
             <span class="sensor-status status-optimal">Óptima</span>
           </div>
@@ -103,10 +103,10 @@
             </div>
             <div class="sensor-info">
               <h3>Humedad Ambiente</h3>
-              <p>Rango óptimo: 60-70%</p>
+              {% if humedad != 'No disponible' %}<p>Rango óptimo: 60-70%</p>{% endif %}
             </div>
           </div>
-          <div class="sensor-value">{{ humedad }}%</div>
+          <div class="sensor-value">{% if humedad != 'No disponible' %}{{ humedad }}%{% else %}<strong>No disponible</strong>{% endif %}</div>
           <div style="text-align: center;">
             <span class="sensor-status status-good">Buena</span>
           </div>
@@ -119,14 +119,146 @@
             </div>
             <div class="sensor-info">
               <h3>Humedad del Suelo</h3>
-              <p>Rango óptimo: 40-60%</p>
+              {% if humedad_suelo != 'No disponible' %}<p>Rango óptimo: 40-60%</p>{% endif %}
             </div>
           </div>
-          <div class="sensor-value">{{ humedad_suelo }}%</div>
+          <div class="sensor-value">{% if humedad_suelo != 'No disponible' %}{{ humedad_suelo }}%{% else %}<strong>No disponible</strong>{% endif %}</div>
           <div style="text-align: center;">
             <span class="sensor-status status-excellent">Excelente</span>
           </div>
         </div>
+
+
+      </div>
+    </section>
+
+    <!-- ACTUATORS SECTION -->
+    <section class="sensors-section animate-on-scroll">
+      <h2 class="sensors-title">
+        <i class="fas fa-cogs" aria-hidden="true"></i>
+        Estado de Actuadores
+      </h2>
+      <div class="sensors-grid">
+        <div class="sensor-card animate-on-scroll hover:scale-105 transition-all duration-500">
+          <div class="sensor-header">
+            <div class="sensor-icon">
+              <i class="fas fa-tint"></i>
+            </div>
+            <div class="sensor-info">
+              <h3>Sistema de Riego</h3>
+              <p>Control automático</p>
+            </div>
+          </div>
+          <div class="sensor-value">{{ riego }}</div>
+          <div style="text-align: center;">
+            <span class="sensor-status {% if riego == 'Activo' %}status-optimal{% else %}status-warning{% endif %}">{{ riego }}</span>
+          </div>
+        </div>
+
+        <div class="sensor-card animate-on-scroll hover:scale-105 transition-all duration-500">
+          <div class="sensor-header">
+            <div class="sensor-icon">
+              <i class="fas fa-fan"></i>
+            </div>
+            <div class="sensor-info">
+              <h3>Ventiladores</h3>
+              <p>Control de temperatura</p>
+            </div>
+          </div>
+          <div class="sensor-value">{{ ventiladores }}</div>
+          <div style="text-align: center;">
+            <span class="sensor-status {% if ventiladores == 'Activo' %}status-optimal{% else %}status-warning{% endif %}">{{ ventiladores }}</span>
+          </div>
+        </div>
+
+        <div class="sensor-card animate-on-scroll hover:scale-105 transition-all duration-500">
+          <div class="sensor-header">
+            <div class="sensor-icon">
+              <i class="fas fa-lightbulb"></i>
+            </div>
+            <div class="sensor-info">
+              <h3>Iluminación LED</h3>
+              <p>Suplemento lumínico</p>
+            </div>
+          </div>
+          <div class="sensor-value">{{ foco }}</div>
+          <div style="text-align: center;">
+            <span class="sensor-status {% if foco == 'Activo' %}status-optimal{% else %}status-warning{% endif %}">{{ foco }}</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HISTORICAL DATA SECTION -->
+    <section class="sensors-section animate-on-scroll">
+      <h2 class="sensors-title">
+        <i class="fas fa-history" aria-hidden="true"></i>
+        Historial Reciente (Últimas 10 mediciones)
+      </h2>
+      <div class="history-container">
+        {% if history_data %}
+          <div class="history-table">
+            <table>
+              <thead>
+                <tr>
+                  <th>Fecha/Hora</th>
+                  <th>Temperatura</th>
+                  <th>Humedad</th>
+                  <th>Hum. Suelo</th>
+                </tr>
+              </thead>
+              <tbody>
+                {% for record in history_data %}
+                <tr>
+                  <td>{{ record.timestamp|date:"d/m/Y H:i" }}</td>
+                  <td>{{ record.temperature }}°C</td>
+                  <td>{{ record.hume }}%</td>
+                  <td>{{ record.hume_floor }}%</td>
+                </tr>
+                {% empty %}
+                <tr>
+                  <td colspan="4" class="no-data"><strong>Datos no disponibles</strong></td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          </div>
+        {% else %}
+          <div class="no-data">Datos no disponibles</div>
+        {% endif %}
+      </div>
+    </section>
+
+    <!-- DAILY STATS SECTION -->
+    <section class="sensors-section animate-on-scroll">
+      <h2 class="sensors-title">
+        <i class="fas fa-chart-bar" aria-hidden="true"></i>
+        Promedios Diarios
+      </h2>
+      <div class="stats-container">
+        {% if stats_data %}
+          <div class="stats-grid">
+            {% for stat in stats_data %}
+            <div class="stat-card animate-on-scroll hover:scale-105 transition-all duration-300">
+              <div class="stat-date">{{ stat.date|date:"d/m/Y" }}</div>
+              <div class="stat-values">
+                <div class="stat-item">
+                  <span class="stat-label">Temp. Promedio:</span>
+                  <span class="stat-value">{{ stat.avg_temperature|floatformat:1 }}°C</span>
+                </div>
+                <div class="stat-item">
+                  <span class="stat-label">Hum. Promedio:</span>
+                  <span class="stat-value">{{ stat.avg_humidity|floatformat:1 }}%</span>
+                </div>
+              </div>
+            </div>
+            {% empty %}
+            <div class="no-data"><strong>Datos no disponibles</strong></div>
+            {% endfor %}
+          </div>
+        {% else %}
+          <div class="no-data">Datos no disponibles</div>
+        {% endif %}
       </div>
     </section>
 
@@ -181,6 +313,82 @@
   </footer>
 
     <script src="{% static 'js/animaciones.js' %}"></script>
+    <style>
+    .history-container, .stats-container {
+        background: rgba(30, 102, 1, 1);
+        border-radius: 15px;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(0, 0, 0, 1);
+    }
+    
+    .history-table {
+        overflow-x: auto;
+    }
+    
+    .history-table table {
+        width: 100%;
+        border-collapse: collapse;
+        color: white;
+    }
+    
+    .history-table th, .history-table td {
+        padding: 12px;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+    
+    .history-table th {
+        background: rgba(34, 197, 94, 0.2);
+        font-weight: 600;
+    }
+    
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+        margin-top: 20px;
+    }
+    
+    .stat-card {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 10px;
+        padding: 20px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: white;
+    }
+    
+    .stat-date {
+        font-size: 1.2em;
+        font-weight: 600;
+        color: #22c55e;
+        margin-bottom: 15px;
+    }
+    
+    .stat-item {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+    }
+    
+    .stat-label {
+        color: rgba(255, 255, 255, 0.7);
+    }
+    
+    .stat-value {
+        font-weight: 600;
+        color: #22c55e;
+    }
+    
+    .no-data {
+        text-align: center;
+        color: rgba(255, 255, 255, 0.6);
+        font-style: italic;
+        padding: 40px;
+        font-weight: bold;
+    }
+    </style>
+    
     <script>
     document.addEventListener('DOMContentLoaded', function() {
         const menuToggle = document.getElementById('menuToggle');
