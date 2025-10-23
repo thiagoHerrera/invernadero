@@ -46,6 +46,10 @@ const float LIGHT_THRESHOLD = 5.0;
 unsigned long lastWiFiCheck = 0;
 const unsigned long WIFI_CHECK_INTERVAL = 10000;
 
+// Estados por defecto de actuadores
+bool focoState = true;  // Foco siempre encendido por defecto
+bool ventiladoresState = true;  // Ventiladores siempre encendidos por defecto
+
 
 
 // ---------------- FUNCIONES ----------------
@@ -182,8 +186,18 @@ bool enviarDatos(SensorData data) {
 
 void aplicarAcciones(int riego, int ventiladores, int foco) {
   digitalWrite(PIN_RIEGO, riego ? HIGH : LOW);
-  digitalWrite(PIN_VENTILADORES, ventiladores ? HIGH : LOW);
-  digitalWrite(PIN_FOCO, foco ? HIGH : LOW);
+  
+  // Solo cambiar ventiladores si se recibió comando específico
+  if (ventiladores != ventiladoresState) {
+    ventiladoresState = ventiladores;
+    digitalWrite(PIN_VENTILADORES, ventiladores ? HIGH : LOW);
+  }
+  
+  // Solo cambiar foco si se recibió comando específico
+  if (foco != focoState) {
+    focoState = foco;
+    digitalWrite(PIN_FOCO, foco ? HIGH : LOW);
+  }
 }
 
 
@@ -197,8 +211,8 @@ void setup() {
   pinMode(PIN_VENTILADORES, OUTPUT);
   pinMode(PIN_FOCO, OUTPUT);
   digitalWrite(PIN_RIEGO, LOW);
-  digitalWrite(PIN_VENTILADORES, LOW);
-  digitalWrite(PIN_FOCO, LOW);
+  digitalWrite(PIN_VENTILADORES, HIGH);  // Ventiladores encendidos por defecto
+  digitalWrite(PIN_FOCO, HIGH);          // Foco encendido por defecto
 
   WiFi.begin(ssid, password);
   Serial.print("Conectando a Wi-Fi");

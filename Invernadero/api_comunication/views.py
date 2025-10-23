@@ -89,10 +89,12 @@ def sensors(request):
         temp_threshold = 28.0
         hume_floor_threshold = 40.0
         
-        # Lógica de control automático
+        # Lógica de control automático solo para riego
         riego = humedad_suelo < hume_floor_threshold
-        ventiladores = temperatura > temp_threshold
-        foco = luz < 50.0
+        
+        # Estados por defecto (sin cambios a menos que haya comando manual)
+        ventiladores = True  # Siempre encendidos por defecto
+        foco = True          # Siempre encendido por defecto
         
         # Aplicar comandos manuales si existen
         if comandos_manuales['riego'] is not None:
