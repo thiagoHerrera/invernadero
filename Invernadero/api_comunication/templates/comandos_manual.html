@@ -56,6 +56,7 @@
         </div>
         
         <button type="button" class="btn-send" onclick="enviarComandos()">Establecer Comandos</button>
+        <button type="button" class="btn-send" onclick="volverAutomatico()" style="background: #FF9800; margin-left: 10px;">Volver a Modo Automático</button>
     </div>
     
     <div id="response-status"></div>
@@ -85,10 +86,36 @@
                         <div class="estado-item ${data.foco ? 'estado-on' : 'estado-off'}">
                             💡 Foco: ${data.foco ? 'ACTIVO' : 'INACTIVO'}
                         </div>
+                        <div style="margin-top: 10px; font-weight: bold; color: #2196F3;">
+                            ⚙️ Modo: Manual Persistente (usar botón para volver a automático)
+                        </div>
                     `;
                 }
             } catch (error) {
                 console.error('Error cargando estado:', error);
+            }
+        }
+        
+        async function volverAutomatico() {
+            try {
+                const response = await fetch('/api/modo-automatico/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    }
+                });
+                
+                const data = await response.json();
+                
+                if (response.ok) {
+                    showStatus('✅ Modo automático activado. Todos los actuadores volverán a su lógica automática.', 'success');
+                    setTimeout(cargarEstadoActual, 1000);
+                } else {
+                    showStatus('❌ Error: ' + data.error, 'error');
+                }
+            } catch (error) {
+                showStatus('❌ Error de conexión: ' + error.message, 'error');
             }
         }
         

@@ -2,7 +2,7 @@
 from django.urls import path
 
 # Importación de las vistas que se van a asociar a las rutas
-from .views import sensors, get_latest_parameters, parameters_history, parameters_stats, configuracion, actuadores_manual, comandos_manual_view
+from .views import sensors, get_latest_parameters, parameters_history, parameters_stats, configuracion, actuadores_manual, comandos_manual_view, modo_automatico
 
 # Endpoints de la API
 urlpatterns = [
@@ -30,4 +30,7 @@ urlpatterns = [
     
     # Ruta para la interfaz web de comandos manuales
     path('comandos/', comandos_manual_view, name='comandos_manual_view'),
+    
+    # Ruta para volver al modo automático
+    path('modo-automatico/', modo_automatico, name='modo_automatico'),
 ]

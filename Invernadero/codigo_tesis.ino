@@ -185,19 +185,14 @@ bool enviarDatos(SensorData data) {
 }
 
 void aplicarAcciones(int riego, int ventiladores, int foco) {
+  // Aplicar directamente los comandos recibidos del servidor
   digitalWrite(PIN_RIEGO, riego ? HIGH : LOW);
+  digitalWrite(PIN_VENTILADORES, ventiladores ? HIGH : LOW);
+  digitalWrite(PIN_FOCO, foco ? HIGH : LOW);
   
-  // Solo cambiar ventiladores si se recibió comando específico
-  if (ventiladores != ventiladoresState) {
-    ventiladoresState = ventiladores;
-    digitalWrite(PIN_VENTILADORES, ventiladores ? HIGH : LOW);
-  }
-  
-  // Solo cambiar foco si se recibió comando específico
-  if (foco != focoState) {
-    focoState = foco;
-    digitalWrite(PIN_FOCO, foco ? HIGH : LOW);
-  }
+  // Actualizar estados locales
+  ventiladoresState = ventiladores;
+  focoState = foco;
 }
 
 

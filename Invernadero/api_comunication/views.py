@@ -18,8 +18,10 @@ from datetime import datetime
 from users.models import Parameters, Configuration
 from .serializers import ParametersSerializer, ConfigurationSerializer
 
-# Variable global para comandos manuales
+# Variables globales para control manual persistente
 comandos_manuales = {'riego': None, 'ventiladores': None, 'foco': None}
+modo_manual = {'riego': False, 'ventiladores': False, 'foco': False}
+estados_manuales = {'riego': False, 'ventiladores': True, 'foco': True}  # Estados cuando están en manual
 
 @csrf_exempt
 @api_view(['POST'])
@@ -89,25 +91,26 @@ def sensors(request):
         temp_threshold = 28.0
         hume_floor_threshold = 40.0
         
-        # Lógica de control automático solo para riego
-        riego = humedad_suelo < hume_floor_threshold
-        
-        # Estados por defecto (sin cambios a menos que haya comando manual)
-        ventiladores = True  # Siempre encendidos por defecto
-        foco = True          # Siempre encendido por defecto
-        
-        # Aplicar comandos manuales si existen
+        # Aplicar comandos manuales y activar modo manual persistente
         if comandos_manuales['riego'] is not None:
-            riego = comandos_manuales['riego']
+            modo_manual['riego'] = True
+            estados_manuales['riego'] = comandos_manuales['riego']
             comandos_manuales['riego'] = None
             
         if comandos_manuales['ventiladores'] is not None:
-            ventiladores = comandos_manuales['ventiladores']
+            modo_manual['ventiladores'] = True
+            estados_manuales['ventiladores'] = comandos_manuales['ventiladores']
             comandos_manuales['ventiladores'] = None
             
         if comandos_manuales['foco'] is not None:
-            foco = comandos_manuales['foco']
+            modo_manual['foco'] = True
+            estados_manuales['foco'] = comandos_manuales['foco']
             comandos_manuales['foco'] = None
+        
+        # Determinar estados finales
+        riego = estados_manuales['riego'] if modo_manual['riego'] else (humedad_suelo < hume_floor_threshold)
+        ventiladores = estados_manuales['ventiladores'] if modo_manual['ventiladores'] else True
+        foco = estados_manuales['foco'] if modo_manual['foco'] else True
         
         # Guardar en base de datos
         param = Parameters.objects.create(
@@ -278,6 +281,23 @@ def actuadores_manual(request):
             'error': 'Error procesando comandos',
             'details': str(e)
         }, status=500)
+
+
+@csrf_exempt
+@api_view(['POST'])
+@permission_classes([AllowAny])
+def modo_automatico(request):
+    """
+    Vista para volver al modo automático.
+    """
+    global modo_manual
+    
+    modo_manual = {'riego': False, 'ventiladores': False, 'foco': False}
+    
+    return JsonResponse({
+        'mensaje': 'Modo automático activado',
+        'timestamp': timezone.now().isoformat() + 'Z'
+    }, status=200)
 
 
 @permission_classes([AllowAny])
