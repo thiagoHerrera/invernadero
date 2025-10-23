@@ -1,8 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from api_comunication.views import get_latest_parameters as api_latest, parameters_history as api_history, parameters_stats as api_stats
-from django.http import HttpRequest
-from django.http.request import QueryDict
+from users.models import Parameters
+from django.db.models import Avg
+from django.db.models.functions import TruncDate
 
 def home(request):
     return render(request, 'landing.html')
@@ -24,23 +24,6 @@ def info(request):
 
 @login_required
 def get_latest_parameters(request):
-    # Obtener datos del endpoint latest
-    latest_request = HttpRequest()
-    latest_request.method = 'GET'
-    latest_response = api_latest(latest_request)
-    
-    # Obtener historial (últimas 10 mediciones)
-    history_request = HttpRequest()
-    history_request.method = 'GET'
-    history_request.GET = QueryDict('limit=10')
-    history_response = api_history(history_request)
-    
-    # Obtener estadísticas diarias
-    stats_request = HttpRequest()
-    stats_request.method = 'GET'
-    stats_response = api_stats(stats_request)
-    
-    # Procesar datos
     context = {
         'temperatura': 'No disponible',
         'humedad': 'No disponible',
@@ -53,25 +36,47 @@ def get_latest_parameters(request):
         'stats_data': []
     }
     
-    # Procesar datos del latest
-    if latest_response.status_code == 200:
-        latest_data = latest_response.data
-        context.update({
-            'temperatura': latest_data.get('temperatura', 'No disponible'),
-            'humedad': latest_data.get('humedad', 'No disponible'),
-            'humedad_suelo': latest_data.get('humedad_suelo', 'No disponible'),
-            'luz': latest_data.get('luz', 'No disponible'),
-            'riego': 'Activo' if latest_data.get('riego') else 'Inactivo',
-            'ventiladores': 'Activo' if latest_data.get('ventiladores') else 'Inactivo',
-            'foco': 'Activo' if latest_data.get('foco') else 'Inactivo'
-        })
-    
-    # Procesar datos del historial
-    if history_response.status_code == 200:
-        context['history_data'] = history_response.data
-    
-    # Procesar datos de estadísticas
-    if stats_response.status_code == 200:
-        context['stats_data'] = stats_response.data
+    try:
+        # Obtener el último registro
+        latest = Parameters.objects.order_by('-id').first()
+        if latest:
+            context.update({
+                'temperatura': latest.temperature,
+                'humedad': latest.hume,
+                'humedad_suelo': latest.hume_floor,
+                'luz': latest.light,
+                'riego': 'Activo' if latest.riego else 'Inactivo',
+                'ventiladores': 'Activo' if latest.ventiladores else 'Inactivo',
+                'foco': 'Activo' if latest.foco else 'Inactivo'
+            })
+        
+        # Obtener historial (últimas 10 mediciones)
+        history_data = Parameters.objects.order_by('-id')[:10]
+        context['history_data'] = history_data
+        
+
+        
+        # Obtener estadísticas diarias (convertir CharField a Float para promedios)
+        from django.db.models import Case, When, FloatField
+        from django.db.models.functions import Cast
+        
+        try:
+            stats = Parameters.objects.annotate(
+                date=TruncDate('timestamp'),
+                temp_float=Cast('temperature', FloatField()),
+                hume_float=Cast('hume', FloatField())
+            ).values('date').annotate(
+                avg_temperature=Avg('temp_float'),
+                avg_humidity=Avg('hume_float')
+            ).order_by('-date')[:7]  # Últimos 7 días
+            
+            context['stats_data'] = list(stats)
+        except Exception:
+            # Si hay error con la conversión, usar lista vacía
+            context['stats_data'] = []
+            
+    except Exception as e:
+        # En caso de error, mantener los valores por defecto
+        pass
     
     return render(request, 'estadisticas.html', context)

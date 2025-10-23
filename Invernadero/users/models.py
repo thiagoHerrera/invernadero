@@ -1,5 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
+from django.utils import timezone
+import pytz
 
 # Create your models here.
 class Parameters(models.Model):
@@ -11,8 +13,20 @@ class Parameters(models.Model):
     ventiladores = models.BooleanField(default=False)
     foco = models.BooleanField(default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
-
     
+    def get_buenos_aires_time(self):
+        """Retorna el timestamp convertido al timezone de Buenos Aires"""
+        buenos_aires_tz = pytz.timezone('America/Argentina/Buenos_Aires')
+        if self.timestamp.tzinfo is None:
+            utc_time = pytz.UTC.localize(self.timestamp)
+        else:
+            utc_time = self.timestamp
+        return utc_time.astimezone(buenos_aires_tz)
+    
+    class Meta:
+        ordering = ['-timestamp']
+
+
 class GrenHouse(models.Model):
     nombre = models.CharField(max_length=100)
     id_user = models.ForeignKey(User, on_delete=models.CASCADE)

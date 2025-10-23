@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load date_filters %}
 
 {% block title %}Estadísticas - FloraCore{% endblock %}
 
@@ -210,7 +211,7 @@
               <tbody>
                 {% for record in history_data %}
                 <tr>
-                  <td>{{ record.timestamp|date:"d/m/Y H:i" }}</td>
+                  <td>{{ record|buenos_aires_time }}</td>
                   <td>{{ record.temperature }}°C</td>
                   <td>{{ record.hume }}%</td>
                   <td>{{ record.hume_floor }}%</td>
